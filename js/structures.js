@@ -224,7 +224,7 @@ var courseArray = [{
 var workArray = [
 {
     title: "Technical Operations Analyst Intern",
-    tools: "Power BI, SQL, Excel", 
+    tools:  ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
     time: "Full - Time",
     description: "Analyze existing inventory to determine optimal usage and demand \
     levels across all locations. Helped build a new process using existing data to determine \
@@ -237,9 +237,9 @@ var workArray = [
 },
 {
     title: "Material Operations Analyst",
-    tools: "Python (Pandas & NumPy), SQL, Power BI, PowerApps",
+    tools:  ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"],
     time: "Full - Time", 
-    description: "•	Lead Power BI/Power Apps developer for Frontier’s maintenance department consisting \
+    description: "Lead Power BI/Power Apps developer for Frontier’s maintenance department consisting \
     of seven teams. Responsible for building automated reporting catered to demand planning, scheduled \
     maintenance, changing aircraft events, and other processes. Also collaborate with business intelligence \
     in writing new SQL scripts for querying data, and database management. Have seen projects through Palantir’s \
@@ -247,8 +247,8 @@ var workArray = [
     span: "7 Months"
 },
 {
-    title: "Material Operations Analyst",
-    tools: "Python (Pandas & NumPy), SQL, Power BI, PowerApps",
+    label: "Material Operations Analyst",
+    tools: ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"],
     time: "Contractor", 
     description: "Lead Power BI/Power Apps developer for Frontier’s maintenance department consisting \
     of seven teams. Responsible for building automated reporting catered to demand planning, scheduled \
