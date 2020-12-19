@@ -65,17 +65,6 @@ function init() {
             educationToggle = true;
         }
     }, false);
-
-    document.getElementById('work').addEventListener('click', function(x) {
-        if (educationToggle) {
-            transform(courseObjects, alignState[0].courseMainView, 1000);
-
-            educationToggle = false;
-        } else {
-            transform(courseObjects, alignState[0].courseView, 1000);
-            educationToggle = true;
-        }
-    }, false);
     
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
@@ -108,16 +97,13 @@ function initViewCoordinates() {
     // courses and education 
     for (var i = 0; i < courseArray.length; i += 1) {
 
-        var workViewCoordinate = new THREE.Object3D();
-        workViewCoordinate.position.x = courseArray[i].position[0] * 385;
-        workViewCoordinate.position.y = ( courseArray[i].position[1] ) * 155;
-        workViewCoordinate.position.z = 3000;
-
-        if (alignState[1].workView[i]) alignState[1].workView[i] = workViewCoordinate;
-        var vector = new THREE.Vector3();
-        vector = camera.getWorldDirection();
-        // alignState[0].courseView[i] = workViewCoordinate;
-        alignState[0].courseView[i] = vector;
+        var initViewCoordinates = new THREE.Object3D();
+        initViewCoordinates.position.x = courseArray[i].position[0] * 385;
+        initViewCoordinates.position.y = ( courseArray[i].position[1] ) * 155;
+        initViewCoordinates.position.z = 3000;
+   
+        alignState[0].courseView[i] = initViewCoordinates;
+        
     }
 }
 

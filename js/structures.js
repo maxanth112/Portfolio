@@ -221,39 +221,46 @@ var courseArray = [{
 ////////                           work history                          ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var workArray = [ "Technical Operations Analyst Intern",
-    ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
-    "Full - Time",
-    "Analyze existing inventory to determine optimal usage and demand \
-    levels across all locations. Helped build a new process using existing data to determine \
-    new requisitions and part levels. Helped identify out of date materials and their locations, \
-    purged these in the system and from the database to improve overall accuracy. Implemented \
-    automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
-    phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-    uploading new requisitions derived from the new process created. ",
-    "January 1019 - May 2019",
-    "Technical Operations Analyst Intern",
-    ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
-    "Full - Time",
-    "Analyze existing inventory to determine optimal usage and demand \
-    levels across all locations. Helped build a new process using existing data to determine \
-    new requisitions and part levels. Helped identify out of date materials and their locations, \
-    purged these in the system and from the database to improve overall accuracy. Implemented \
-    automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
-    phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-    uploading new requisitions derived from the new process created. ",
-    "January 1019 - May 2019",
-    "Technical Operations Analyst Intern",
-    ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
-    "Full - Time",
-    "Analyze existing inventory to determine optimal usage and demand \
-    levels across all locations. Helped build a new process using existing data to determine \
-    new requisitions and part levels. Helped identify out of date materials and their locations, \
-    purged these in the system and from the database to improve overall accuracy. Implemented \
-    automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
-    phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-    uploading new requisitions derived from the new process created. ",
-    "January 1019 - May 2019"
+var workArray = [ 
+    { 
+        title: "Technical Operations Analyst Intern",
+        tools: ["SQL", "Power BI", "Excel"], 
+        timeline: "January 1019 - May 2019",
+        img: "",
+        description: "Analyze existing inventory to determine optimal usage and demand \
+            levels across all locations. Helped build a new process using existing data to determine \
+            new requisitions and part levels. Helped identify out of date materials and their locations, \
+            purged these in the system and from the database to improve overall accuracy. Implemented \
+            automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
+            phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
+            uploading new requisitions derived from the new process created. "
+    },
+    { 
+        title: "Material Operations Analyst",
+        tools: ["Python - Pandas & NumPy", "SQL", "Power BI"], 
+        timeline: "June 2019 - January 2020",
+        img: "",
+        description: "Analyze existing inventory to determine optimal usage and demand \
+            levels across all locations. Helped build a new process using existing data to determine \
+            new requisitions and part levels. Helped identify out of date materials and their locations, \
+            purged these in the system and from the database to improve overall accuracy. Implemented \
+            automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
+            phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
+            uploading new requisitions derived from the new process created. "
+    },
+    { 
+        title: "Data Analyst - Contractor",
+        tools: ["Python - Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
+        timeline: "January 2020 - Presant",
+        img: "",
+        description: "Analyze existing inventory to determine optimal usage and demand \
+            levels across all locations. Helped build a new process using existing data to determine \
+            new requisitions and part levels. Helped identify out of date materials and their locations, \
+            purged these in the system and from the database to improve overall accuracy. Implemented \
+            automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
+            phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
+            uploading new requisitions derived from the new process created. "
+    },
 ]
 
 
