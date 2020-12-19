@@ -233,7 +233,7 @@ var workArray = [
     automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
     phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
     uploading new requisitions derived from the new process created. ",
-    span: "5 Months"
+    span: "January 1019 - May 2019"
 },
 {
     title: "Material Operations Analyst",
@@ -244,10 +244,10 @@ var workArray = [
     maintenance, changing aircraft events, and other processes. Also collaborate with business intelligence \
     in writing new SQL scripts for querying data, and database management. Have seen projects through Palantir’s \
     Skywise platform, which includes python data munging, cleaning, and creating dashboards with HTML/CSS",
-    span: "7 Months"
+    span: "June 2019 - January 2020"
 },
 {
-    label: "Material Operations Analyst",
+    label: "Data Analyst (Contractor)",
     tools: ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"],
     time: "Contractor", 
     description: "Lead Power BI/Power Apps developer for Frontier’s maintenance department consisting \
@@ -255,7 +255,7 @@ var workArray = [
     maintenance, changing aircraft events, and other processes. Also collaborate with business intelligence \
     in writing new SQL scripts for querying data, and database management. Have seen projects through Palantir’s \
     Skywise platform, which includes python data munging, cleaning, and creating dashboards with HTML/CSS",
-    span: "1 Year"
+    span: "January 2020 - Presant"
 }
 ];
 

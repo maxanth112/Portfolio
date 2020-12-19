@@ -4,42 +4,26 @@
 
 
 var courseObjects = [];
-var workObjects = [];
+
 var alignState = {
     table: [],
     spinning: [],
     twirling: []
 };
 
-var controls, camera, scene, glRenderer, cssRenderer, root, mesh1;
+var controls, camera, scene, renderer;
 
 init();
 
 
-
-
-function createCssRenderer() {
-
-    var cssRenderer = new THREE.CSS3DRenderer();
-    cssRenderer.setSize(window.innerWidth, window.innerHeight);
-
-    cssRenderer.domElement.style.position = 'relative';
-    // glRenderer.domElement.style.zIndex = 1;
-    cssRenderer.domElement.style.top = 0;
-    
-
-    return cssRenderer;
-}
-
 function createGlRenderer() {
 
     var glRenderer = new THREE.WebGLRenderer({alpha: true});
-    // glRenderer.setClearColor(0xECF8FF);
+    glRenderer.setClearColor(0xECF8FF);
     glRenderer.setPixelRatio(window.devicePixelRatio);
     glRenderer.setSize(window.innerWidth, window.innerHeight);
     
-
-    glRenderer.domElement.style.position = 'absolute';
+    // glRenderer.domElement.style.position = 'absolute';
     glRenderer.domElement.style.zIndex = 1;
     glRenderer.domElement.style.top = 0;
 
@@ -48,16 +32,12 @@ function createGlRenderer() {
 
 function init() {
 
-    glRenderer = createGlRenderer();
-    cssRenderer = createCssRenderer();
+    renderer = createGlRenderer();
     
-    document.body.appendChild(cssRenderer.domElement);
-    cssRenderer.domElement.appendChild(glRenderer.domElement);
+    document.body.appendChild(renderer.domElement);
     
     mouse = new THREE.Vector2();
-    root = new THREE.Object3D();
     scene = new THREE.Scene();
-    scene.add(root);
 
     camera = new THREE.PerspectiveCamera(
         75,
@@ -66,31 +46,21 @@ function init() {
         10000);
     camera.position.set(0, 100, 3000);
 
-    controls = new THREE.TrackballControls(camera, cssRenderer.domElement);
+    controls = new THREE.TrackballControls(camera, renderer.domElement);
     controls.rotateSpeed = 0.5;
     controls.minDistance = 500;
     controls.maxDistance = 6000;
     controls.addEventListener('change', render);
-
-    initTableObjects();
-    initSphereObjects(1);
-    
-    var tableButton = document.getElementById('table');
-    tableButton.addEventListener('click', function (something) {
-        transform(alignState.table, 2000);
-    }, false);
-    
-    var sphereButton = document.getElementById('sphere');
-    sphereButton.addEventListener('click', function (something) {
-        transform(alignState.spinning, 2000);
-    }, false);
     
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     
     create3dGeometry();
+    createTextMesh();
     animate();
 }
+
+
 
 function create3dGeometry() {
 
@@ -119,9 +89,30 @@ function create3dGeometry() {
     mesh3.position.z = 400;
     // mesh2.position.zIndex  = 0;
 
-    root.add(mesh1);
-    root.add(mesh2);
-    root.add(mesh3);
+    scene.add(mesh1);
+    scene.add(mesh2);
+    scene.add(mesh3);
+}
+
+function createTextMesh() {
+    const loader = new THREE.FontLoader();
+
+loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+	const geometry = new THREE.TextGeometry( 'Hello three.js!', {
+		font: font,
+		size: 80,
+		height: 5,
+		curveSegments: 12,
+		bevelEnabled: true,
+		bevelThickness: 10,
+		bevelSize: 8,
+		bevelOffset: 0,
+		bevelSegments: 5
+	} );
+} );
+
+    scene.add(mesh);
 }
 
 
@@ -129,65 +120,12 @@ function createColoredMaterial() {
 
     var material = new THREE.MeshBasicMaterial();
     material.color.set('red');
-    material.opacity = 0;
+    material.opacity = 0.5;
     material.transparent = true;
     material.blending = THREE.NoBlending;
 
     return material;
 }
-
-function initSphereObjects() {
-
-    var vector = new THREE.Vector3();
-    var len = courseArray.length;
-    alignState.spinning = [];
-
-    for (var i = 0; i < len; i += 1) {
-
-        var object = new THREE.Object3D();
-        var n = 2 * Math.PI *  i  / len;
-        
-        object.position.x = ( 900 * Math.cos(n) );
-        object.position.y = ( 900 * Math.sin(n) );
-        object.position.z = 0;
-
-        vector.copy( object.position ).multiplyScalar( 2 );
-        object.lookAt(vector);
-        alignState.spinning.push(object);
-    }
-}
-
-
-function initTableObjects() {
-
-    for (var i = 0; i < courseArray.length; i += 1) {
-
-        var courseElement = document.createElement('div');
-        courseElement.className = 'element';
-
-        var contents = '<div class="header">' +
-            courseArray[i].type + ' ' + courseArray[i].number +
-            '</div>' +
-            '<div>' +
-            '<h5 class="name">' + courseArray[i].name + '</h5>' +
-            '<p class="details">' + courseArray[i].description + '</p>'
-            '</div>';
-
-        courseElement.innerHTML = contents;
-        var courseObj = new THREE.CSS3DObject(courseElement);
-
-        // courseObj.zIndex = 1;
-        root.add(courseObj);
-        courseObjects.push(courseObj);
-
-        var tableObj = new THREE.Object3D();
-        tableObj.position.x = courseArray[i].position[0] * 385;
-        tableObj.position.y = ( courseArray[i].position[1] ) * 155;
-        tableObj.position.z = 3000;
-        alignState.table.push(tableObj);
-    }
-}
-
 
 function transform(sendTo, duration) {
     TWEEN.removeAll();
@@ -224,15 +162,13 @@ function transform(sendTo, duration) {
 
 function render() {
     
-    glRenderer.render(scene, camera);
-    cssRenderer.render(scene, camera);
+    renderer.render(scene, camera);
 }
 
 
 function animate() {
-    mesh1.rotation.x += 0.006;
+    
     scene.updateMatrixWorld();
-
     controls.update();
     TWEEN.update();
     render();

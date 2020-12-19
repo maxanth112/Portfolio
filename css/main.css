@@ -3,22 +3,9 @@ html, body {
 }
 
 body {
-  background-color: #000000;
   margin: 0;
   font-family: Helvetica, sans-serif;;
   overflow: hidden;
-}
-
-#info {
-  position: absolute;
-  width: 100%;
-  color: #ffffff;
-  padding: 5px;
-  font-family: Monospace;
-  font-size: 13px;
-  font-weight: bold;
-  text-align: center;
-  z-index: 1;
 }
 
 #menu {
@@ -36,17 +23,18 @@ body {
   height: 140px;
   box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
   border: 2px solid rgba(127,255,255,0.25);
+  color: rgba(127,255,255,0.75);
   text-align: left;
   cursor: default;
   position: absolute;
+  background-color: blue;
   top: 2px;
   right: 2px;
   font-size: 12px;
-  color: rgba(127,255,255,0.75);
 }
 
 .element:hover {
-  box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+  box-shadow: 0px 0px 12px #ad2797bf;
   border: 3px solid rgba(127,255,255,0.75);
 }
 
@@ -89,8 +77,8 @@ body {
 }
 
 button {
-  color: rgba(127,255,255,0.75);
   background: transparent;
+  color: rgba(127,255,255,0.75);
   outline: 1px solid rgba(127,255,255,0.75);
   border: 5px;
   padding: 5px 10px;

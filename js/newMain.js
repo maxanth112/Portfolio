@@ -1,8 +1,6 @@
 // author: max wiesner
 // personal website portfolio
 
-
-
 var courseObjects = [];
 var workObjects = [];
 var alignState = {
@@ -11,20 +9,17 @@ var alignState = {
     twirling: []
 };
 
-var controls, camera, scene, glRenderer, cssRenderer, root, mesh1;
+var controls, camera, scene, glRenderer, cssRenderer, root;
 
 init();
 
-
-
-
 function createCssRenderer() {
 
-    var cssRenderer = new THREE.CSS3DRenderer();
+    var cssRenderer = new THREE.CSS3DRenderer({alpha: true});
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
 
-    cssRenderer.domElement.style.position = 'relative';
-    // glRenderer.domElement.style.zIndex = 1;
+    // cssRenderer.domElement.style.position = 'absolute';
+    // glRenderer.domElement.style.zIndex = 0;
     cssRenderer.domElement.style.top = 0;
     
 
@@ -33,13 +28,13 @@ function createCssRenderer() {
 
 function createGlRenderer() {
 
-    var glRenderer = new THREE.WebGLRenderer({alpha: true});
+    var glRenderer = new THREE.WebGLRenderer();
     // glRenderer.setClearColor(0xECF8FF);
     glRenderer.setPixelRatio(window.devicePixelRatio);
     glRenderer.setSize(window.innerWidth, window.innerHeight);
     
 
-    glRenderer.domElement.style.position = 'absolute';
+    // glRenderer.domElement.style.position = 'absolute';
     glRenderer.domElement.style.zIndex = 1;
     glRenderer.domElement.style.top = 0;
 
@@ -94,7 +89,7 @@ function init() {
 
 function create3dGeometry() {
 
-    mesh1 = new THREE.Mesh(
+    var mesh1 = new THREE.Mesh(
         new THREE.CylinderGeometry(0, 200, 300, 20, 4),
         createColoredMaterial());
 
@@ -117,7 +112,6 @@ function create3dGeometry() {
     mesh3.position.x = 500;
     mesh3.position.y = -300;
     mesh3.position.z = 400;
-    // mesh2.position.zIndex  = 0;
 
     root.add(mesh1);
     root.add(mesh2);
@@ -127,11 +121,11 @@ function create3dGeometry() {
 
 function createColoredMaterial() {
 
-    var material = new THREE.MeshBasicMaterial();
-    material.color.set('red');
-    material.opacity = 0;
-    material.transparent = true;
-    material.blending = THREE.NoBlending;
+    var material = new THREE.MeshBasicMaterial({
+        color: Math.floor(Math.random() * 16777215),
+       
+        side: THREE.DoubleSide
+    });
 
     return material;
 }
@@ -176,7 +170,6 @@ function initTableObjects() {
         courseElement.innerHTML = contents;
         var courseObj = new THREE.CSS3DObject(courseElement);
 
-        // courseObj.zIndex = 1;
         root.add(courseObj);
         courseObjects.push(courseObj);
 
@@ -223,14 +216,14 @@ function transform(sendTo, duration) {
 
 
 function render() {
-    
+
     glRenderer.render(scene, camera);
     cssRenderer.render(scene, camera);
 }
 
 
 function animate() {
-    mesh1.rotation.x += 0.006;
+
     scene.updateMatrixWorld();
 
     controls.update();
