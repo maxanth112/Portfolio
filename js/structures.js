@@ -221,43 +221,40 @@ var courseArray = [{
 ////////                           work history                          ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var workArray = [
-{
-    title: "Technical Operations Analyst Intern",
-    tools:  ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
-    time: "Full - Time",
-    description: "Analyze existing inventory to determine optimal usage and demand \
+var workArray = [ "Technical Operations Analyst Intern",
+    ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
+    "Full - Time",
+    "Analyze existing inventory to determine optimal usage and demand \
     levels across all locations. Helped build a new process using existing data to determine \
     new requisitions and part levels. Helped identify out of date materials and their locations, \
     purged these in the system and from the database to improve overall accuracy. Implemented \
     automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
     phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
     uploading new requisitions derived from the new process created. ",
-    span: "January 1019 - May 2019"
-},
-{
-    title: "Material Operations Analyst",
-    tools:  ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"],
-    time: "Full - Time", 
-    description: "Lead Power BI/Power Apps developer for Frontier’s maintenance department consisting \
-    of seven teams. Responsible for building automated reporting catered to demand planning, scheduled \
-    maintenance, changing aircraft events, and other processes. Also collaborate with business intelligence \
-    in writing new SQL scripts for querying data, and database management. Have seen projects through Palantir’s \
-    Skywise platform, which includes python data munging, cleaning, and creating dashboards with HTML/CSS",
-    span: "June 2019 - January 2020"
-},
-{
-    label: "Data Analyst (Contractor)",
-    tools: ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"],
-    time: "Contractor", 
-    description: "Lead Power BI/Power Apps developer for Frontier’s maintenance department consisting \
-    of seven teams. Responsible for building automated reporting catered to demand planning, scheduled \
-    maintenance, changing aircraft events, and other processes. Also collaborate with business intelligence \
-    in writing new SQL scripts for querying data, and database management. Have seen projects through Palantir’s \
-    Skywise platform, which includes python data munging, cleaning, and creating dashboards with HTML/CSS",
-    span: "January 2020 - Presant"
-}
-];
+    "January 1019 - May 2019",
+    "Technical Operations Analyst Intern",
+    ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
+    "Full - Time",
+    "Analyze existing inventory to determine optimal usage and demand \
+    levels across all locations. Helped build a new process using existing data to determine \
+    new requisitions and part levels. Helped identify out of date materials and their locations, \
+    purged these in the system and from the database to improve overall accuracy. Implemented \
+    automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
+    phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
+    uploading new requisitions derived from the new process created. ",
+    "January 1019 - May 2019",
+    "Technical Operations Analyst Intern",
+    ["Python (Pandas & NumPy)", "SQL", "Power BI", "PowerApps"], 
+    "Full - Time",
+    "Analyze existing inventory to determine optimal usage and demand \
+    levels across all locations. Helped build a new process using existing data to determine \
+    new requisitions and part levels. Helped identify out of date materials and their locations, \
+    purged these in the system and from the database to improve overall accuracy. Implemented \
+    automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
+    phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
+    uploading new requisitions derived from the new process created. ",
+    "January 1019 - May 2019"
+]
 
 
 /////////////////////////////////////////////////////////////////////////////////

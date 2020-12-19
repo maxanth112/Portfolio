@@ -1,63 +1,39 @@
 // author: max wiesner
 // personal website portfolio
 
-
-
 var courseObjects = [];
 var workObjects = [];
-var alignState = {
-    table: [],
-    spinning: [],
-    twirling: []
-};
 
-var controls, camera, scene, glRenderer, cssRenderer, root, mesh1;
+var alignState = [
+    {
+        courseView: [],
+        courseMainView: []
+    },
+    {
+        workView: [],
+        workMainView: []
+    }
+];
+
+var controls, camera, scene, cssRenderer, root, root2;
+var educationToggle = false;
+var workToggle = false;
 
 init();
 
 
 
-
-function createCssRenderer() {
-
-    var cssRenderer = new THREE.CSS3DRenderer();
-    cssRenderer.setSize(window.innerWidth, window.innerHeight);
-
-    cssRenderer.domElement.style.position = 'relative';
-    // glRenderer.domElement.style.zIndex = 1;
-    cssRenderer.domElement.style.top = 0;
-    
-
-    return cssRenderer;
-}
-
-function createGlRenderer() {
-
-    var glRenderer = new THREE.WebGLRenderer({alpha: true});
-    // glRenderer.setClearColor(0xECF8FF);
-    glRenderer.setPixelRatio(window.devicePixelRatio);
-    glRenderer.setSize(window.innerWidth, window.innerHeight);
-    
-
-    glRenderer.domElement.style.position = 'absolute';
-    glRenderer.domElement.style.zIndex = 1;
-    glRenderer.domElement.style.top = 0;
-
-    return glRenderer;
-}
-
 function init() {
 
-    glRenderer = createGlRenderer();
     cssRenderer = createCssRenderer();
-    
     document.body.appendChild(cssRenderer.domElement);
-    cssRenderer.domElement.appendChild(glRenderer.domElement);
+    root = new THREE.Object3D();
+    root2 = new THREE.Object3D();
     
     mouse = new THREE.Vector2();
-    root = new THREE.Object3D();
     scene = new THREE.Scene();
     scene.add(root);
+    scene.add(root2);
 
     camera = new THREE.PerspectiveCamera(
         75,
@@ -72,100 +48,89 @@ function init() {
     controls.maxDistance = 6000;
     controls.addEventListener('change', render);
 
-    initTableObjects();
-    initSphereObjects(1);
+    populateContentArrays();
+    initViewCoordinates();
+    initEducMainCoordinates();
+
+
+    transform(courseObjects, alignState[0].courseMainView, 500);
     
-    var tableButton = document.getElementById('table');
-    tableButton.addEventListener('click', function (something) {
-        transform(alignState.table, 2000);
+    document.getElementById('education').addEventListener('click', function(x) {
+        if (educationToggle) {
+            transform(courseObjects, alignState[0].courseMainView, 1000);
+
+            educationToggle = false;
+        } else {
+            transform(courseObjects, alignState[0].courseView, 1000);
+            educationToggle = true;
+        }
     }, false);
-    
-    var sphereButton = document.getElementById('sphere');
-    sphereButton.addEventListener('click', function (something) {
-        transform(alignState.spinning, 2000);
+
+    document.getElementById('work').addEventListener('click', function(x) {
+        if (educationToggle) {
+            transform(courseObjects, alignState[0].courseMainView, 1000);
+
+            educationToggle = false;
+        } else {
+            transform(courseObjects, alignState[0].courseView, 1000);
+            educationToggle = true;
+        }
     }, false);
     
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     
-    create3dGeometry();
     animate();
 }
 
-function create3dGeometry() {
-
-    mesh1 = new THREE.Mesh(
-        new THREE.CylinderGeometry(0, 200, 300, 20, 4),
-        createColoredMaterial());
-
-    mesh1.position.x = 0;
-    mesh1.position.y = -30;
-    mesh1.position.z = 400;
-
-    var mesh2 = new THREE.Mesh(
-        new THREE.BoxGeometry(200, 200, 200),
-        createColoredMaterial());
-
-    mesh2.position.x = -300;
-    mesh2.position.y = -300;
-    mesh2.position.z = 400;
-
-    var mesh3 = new THREE.Mesh(
-        new THREE.SphereGeometry(100, 128, 128),
-        createColoredMaterial());
-
-    mesh3.position.x = 500;
-    mesh3.position.y = -300;
-    mesh3.position.z = 400;
-    // mesh2.position.zIndex  = 0;
-
-    root.add(mesh1);
-    root.add(mesh2);
-    root.add(mesh3);
-}
-
-
-function createColoredMaterial() {
-
-    var material = new THREE.MeshBasicMaterial();
-    material.color.set('red');
-    material.opacity = 0;
-    material.transparent = true;
-    material.blending = THREE.NoBlending;
-
-    return material;
-}
-
-function initSphereObjects() {
+function initEducMainCoordinates() {
 
     var vector = new THREE.Vector3();
-    var len = courseArray.length;
-    alignState.spinning = [];
+    var l = courseArray.length;
 
-    for (var i = 0; i < len; i += 1) {
+    for (var i = 0; i < l; i += 1) {
 
-        var object = new THREE.Object3D();
-        var n = 2 * Math.PI *  i  / len;
+        var obj = new THREE.Object3D();
+        var n = 2 * Math.PI *  i  / l;
         
-        object.position.x = ( 900 * Math.cos(n) );
-        object.position.y = ( 900 * Math.sin(n) );
-        object.position.z = 0;
+        obj.position.x = ( 900 * Math.cos(n) );
+        obj.position.y = ( 900 * Math.sin(n) );
+        obj.position.z = 0;
 
-        vector.copy( object.position ).multiplyScalar( 2 );
-        object.lookAt(vector);
-        alignState.spinning.push(object);
+        vector.copy( obj.position ).multiplyScalar( 2 );
+        obj.lookAt(vector);
+        alignState[0].courseMainView[i] = obj;
+    }
+}
+
+function initViewCoordinates() {
+
+    // courses and education 
+    for (var i = 0; i < courseArray.length; i += 1) {
+
+        var workViewCoordinate = new THREE.Object3D();
+        workViewCoordinate.position.x = courseArray[i].position[0] * 385;
+        workViewCoordinate.position.y = ( courseArray[i].position[1] ) * 155;
+        workViewCoordinate.position.z = 3000;
+
+        if (alignState[1].workView[i]) alignState[1].workView[i] = workViewCoordinate;
+        var vector = new THREE.Vector3();
+        vector = camera.getWorldDirection();
+        // alignState[0].courseView[i] = workViewCoordinate;
+        alignState[0].courseView[i] = vector;
     }
 }
 
 
-function initTableObjects() {
+function populateContentArrays() {
 
+    // courses and education 
     for (var i = 0; i < courseArray.length; i += 1) {
 
-        var courseElement = document.createElement('div');
-        courseElement.className = 'element';
+        var courseDiv = document.createElement('div');
+        courseDiv.className = 'element';
 
-        var contents = '<div class="header">' +
+        courseDiv.innerHTML = '<div class="header">' +
             courseArray[i].type + ' ' + courseArray[i].number +
             '</div>' +
             '<div>' +
@@ -173,44 +138,83 @@ function initTableObjects() {
             '<p class="details">' + courseArray[i].description + '</p>'
             '</div>';
 
-        courseElement.innerHTML = contents;
-        var courseObj = new THREE.CSS3DObject(courseElement);
-
-        // courseObj.zIndex = 1;
+        var courseObj = new THREE.CSS3DObject(courseDiv);
+        // scene.add(courseObj);
         root.add(courseObj);
-        courseObjects.push(courseObj);
+        courseObjects[i] = courseObj;
+    }
 
-        var tableObj = new THREE.Object3D();
-        tableObj.position.x = courseArray[i].position[0] * 385;
-        tableObj.position.y = ( courseArray[i].position[1] ) * 155;
-        tableObj.position.z = 3000;
-        alignState.table.push(tableObj);
+    // courses and education 
+    for (var i = 0; i < workArray.length; i += 5) {
+
+        var workDiv = document.createElement('div');
+        workDiv.className = 'element';
+
+        var workTitle = document.createElement('div');
+        workTitle.className = 'details';
+
+        var workTools = document.createElement('div');
+        workTools.className = 'details';
+
+        var workdates = document.createElement('div');
+        workdates.className = 'details';
+
+        workdates.innerHTML = '<div class="header">' +
+        workArray[i] + ' ' + workArray[i + 2] +
+        '</div>';
+
+        workTools.innerHTML = '<div class="header">' +
+        workArray[i] + ' ' + workArray[i + 2] +
+        '</div>';
+
+        workTitle.innerHTML = '<div class="header">' +
+        workArray[i] + ' ' + workArray[i + 2] +
+        '</div>';
+
+        workDiv.innerHTML = '<div class="header">' +
+            workArray[i] + ' ' + workArray[i + 2] +
+            '</div>' +
+            '<div>' +
+            '<h5 class="name">' + workArray[i+ 1] + '</h5>' +
+            '<p class="details">' + workArray[i+4] + '</p>'
+            '</div>';
+
+        var workObj = new THREE.CSS3DObject(workDiv);
+        var workObj1 = new THREE.CSS3DObject(workTools);
+        var workObj2 = new THREE.CSS3DObject(workdates);
+        var workObj3 = new THREE.CSS3DObject(workTitle);
+
+        // scene.add(courseObj);
+        root2.add(workObj1);
+        root2.add(workObj2);
+        root2.add(workObj3);
+        root2.add(workObj);
+
+        workObjects[i] = workObj;
+        workObjects[i+1] = workObj1;
+        workObjects[i+2] = workObj2;
+        workObjects[i+3] = workObj3;
+
     }
 }
 
 
-function transform(sendTo, duration) {
+function transform(start, end, duration) {
     TWEEN.removeAll();
-    for (var i = 0; i < courseObjects.length; i++) {
+    for (var i = 0; i < start.length; i++) {
 
-        var object = courseObjects[i];
-        var target = sendTo[i];
+        var object = start[i];
+        var target = end[i];
 
         new TWEEN.Tween(object.position)
-            .to({
-                x: target.position.x,
-                y: target.position.y,
-                z: target.position.z
-            }, Math.random() * duration + duration)
+            .to({ x: target.position.x, y: target.position.y, z: target.position.z }, 
+                Math.random() * duration + duration)
             .easing(TWEEN.Easing.Exponential.InOut)
             .start();
 
         new TWEEN.Tween(object.rotation)
-            .to({
-                x: target.rotation.x,
-                y: target.rotation.y,
-                z: target.rotation.z
-            }, Math.random() * duration + duration)
+            .to({ x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, 
+                Math.random() * duration + duration)
             .easing(TWEEN.Easing.Exponential.InOut)
             .start();
     }
@@ -221,16 +225,33 @@ function transform(sendTo, duration) {
         .start();
 }
 
+function createCssRenderer() {
+
+    var cssRenderer = new THREE.CSS3DRenderer();
+    cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    cssRenderer.domElement.style.top = 0;
+
+    return cssRenderer;
+}
+
 
 function render() {
     
-    glRenderer.render(scene, camera);
     cssRenderer.render(scene, camera);
 }
 
 
 function animate() {
-    mesh1.rotation.x += 0.006;
+    
+    const time = Date.now() * 0.0004;
+    if (!educationToggle) {
+        root.rotation.x = time;
+        root.rotation.y = time * 0.6;
+
+        root2.rotation.x = time * 0.7;
+        root2.rotation.y = time;
+    }
+
     scene.updateMatrixWorld();
 
     controls.update();
