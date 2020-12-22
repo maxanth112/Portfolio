@@ -3,17 +3,53 @@
 ////////                      course list/ education                     ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-const m = -1.2;
-const c = 0;
-const e = 1.2;
+var educationHeaders = [
+{
+    major: "Bachelor of Arts, Computer Science",
+    college: "University of Colorado Boulder",
+    subcollege: "College of Engineering and Applied Science",
+    GPA: "4.0"
+}, 
+{
+    major: "Bachelor of Arts, Mathematics",
+    focus: "Computational Mathematics",
+    college: "University of Colorado Boulder",
+    subcollege: "College of Arts and Sciences",
+    GPA: "3.2"
+},
+{
+    major: "Bachelor of Arts, Economics",
+    focus: "International Economics",
+    college: "University of Colorado Boulder",
+    subcollege: "College of Arts and Sciences",
+    GPA: "3.2"
+}
+];
 
-var courseArray = [{
+
+const m1 = -2.55;
+const m2 = -1.55;
+
+const c1 = 0.5;
+const c2 = -0.5;
+
+const e1 = 1.55;
+const e2 = 2.55;
+
+var firstRow = 1.4;
+var secondRow = 0.4;
+var thirdRow = -0.6;
+var fourthRow = -1.6;
+var fifthRow = -2.6;
+
+var courseArray = [
+{
     type: "APPM",
     number: "4650",
     name: "Intermediate Numerical Analysis",
     description: "",
     language: "",   
-    position: [m, 5]
+    position: [m1, firstRow]
 },
 {
     type: "APPM",
@@ -21,7 +57,7 @@ var courseArray = [{
     name: "Introduction to Operations Research",
     language: "",   
     description: "",
-    position: [m, 3]
+    position: [m2, secondRow]
 },
 {
     type: "APPM",
@@ -29,7 +65,7 @@ var courseArray = [{
     name: "Calculus 3 for Engineers",
     description: "Multivariable calculus, vector fields, Guass, Green, and Stokes",
     language: "",   
-    position: [m, 0]
+    position: [m1, fourthRow]
 },
 {
     type: "MATH",
@@ -37,7 +73,7 @@ var courseArray = [{
     name: "Discrete Mathematics",
     description: "",
     language: "LaTeX",   
-    position: [m, -2]
+    position: [m1, thirdRow]
 },
 {
     type: "MATH",
@@ -45,7 +81,7 @@ var courseArray = [{
     name: "Linear Algebra for Math Majors",
     description: "",
     language: "LaTeX",   
-    position: [m, -1]
+    position: [m2, fourthRow]
 },
 {
     type: "MATH",
@@ -53,7 +89,7 @@ var courseArray = [{
     name: "Analysis 1",
     description: "",
     language: "LaTeX",   
-    position: [m, 1]
+    position: [m2, thirdRow]
 },
 {
     type: "MATH",
@@ -61,7 +97,7 @@ var courseArray = [{
     name: "Ordinary Differential Equations",
     description: "",
     language: "LaTeX",   
-    position: [m, 2]
+    position: [m1, secondRow]
 },
 {
     type: "APPM",
@@ -69,7 +105,7 @@ var courseArray = [{
     name: "Mathematics of Coding and Cryptography",
     description: "",
     language: "Python, Sage",   
-    position: [m, 4]
+    position: [m2, firstRow]
 },
 {
     type: "CSCI",
@@ -77,7 +113,7 @@ var courseArray = [{
     name: "Data Structures",
     description: "",
     language: "C++",   
-    position: [c, -3]
+    position: [c1, fifthRow]
 },
 {
     type: "CSCI",
@@ -85,7 +121,7 @@ var courseArray = [{
     name: "Computer Systems",
     description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture, machine level representation of programs, and representing and manipulating information.",
     language: "C, C++",    
-    position: [c, -2]
+    position: [c1, fourthRow]
 },
 {
     type: "CSCI",
@@ -93,7 +129,7 @@ var courseArray = [{
     name: "Software Development Methods and Tools",
     description: "",
     language: "JavaScript, HTML, CSS, Linux, SQL",   
-    position: [c, 0]
+    position: [c2, fourthRow]
 },
 {
     type: "CSCI",
@@ -101,7 +137,7 @@ var courseArray = [{
     name: "Descrete Structures",
     description: "",
     language: "Python",   
-    position: [c, -4]
+    position: [c2, fifthRow]
 },
 {
     type: "CSCI",
@@ -109,7 +145,7 @@ var courseArray = [{
     name: "Principals of Programming Languages",
     description: "",
     language: "Stata",   
-    position: [c, -1]
+    position: [c1, thirdRow]
 },
 {
     type: "CSCI",
@@ -117,7 +153,7 @@ var courseArray = [{
     name: "Algorithms",
     description: "",
     language: "C++, Python",   
-    position: [c, 1]
+    position: [c2, thirdRow]
 },
 {
     type: "CSCI",
@@ -125,7 +161,7 @@ var courseArray = [{
     name: "Artificial Intelligence",
     description: "",
     language: "Python",   
-    position: [c, 3]
+    position: [c1, secondRow]
 },
 {
     type: "CSCI",
@@ -133,7 +169,7 @@ var courseArray = [{
     name: "Computer Organization",
     description: "",
     language: "C, Linux",   
-    position: [c, 4]
+    position: [c2, firstRow]
 },
 {
     type: "CSCI",
@@ -141,7 +177,7 @@ var courseArray = [{
     name: "Design and Analysis of Operating Systems",
     description: "",
     language: "C, Linux",   
-    position: [c, 2]
+    position: [c2, secondRow]
 },
 {
     type: "CSCI",
@@ -149,7 +185,7 @@ var courseArray = [{
     name: "Object Oriented Analysis and Design",
     description: "",
     language: "",   
-    position: [c, 5]
+    position: [c1, firstRow]
 },
 {
     type: "ECON",
@@ -157,7 +193,7 @@ var courseArray = [{
     name: "Statistics with Computer Applications",
     description: "",
     language: "R",   
-    position: [e, 2]
+    position: [e2, secondRow]
 },
 {
     type: "ECON",
@@ -165,7 +201,7 @@ var courseArray = [{
     name: "Applied Econometrics",
     description: "",
     language: "Stata",   
-    position: [e, 5]
+    position: [e2, firstRow]
 },
 {
     type: "ECON",
@@ -173,7 +209,7 @@ var courseArray = [{
     name: "Intermediate Macroeconomic Theory",
     description: "",
     language: "",   
-    position: [e, 1]
+    position: [e1, thirdRow]
 },
 {
     type: "ECON",
@@ -181,7 +217,7 @@ var courseArray = [{
     name: "Intermediate Microeconomic Theory",
     description: "",
     language: "",   
-    position: [e, 0]
+    position: [e2, thirdRow]
 },
 {
     type: "ECON",
@@ -189,7 +225,7 @@ var courseArray = [{
     name: "Principles of Macroeconomics",
     description: "",
     language: "",   
-    position: [e, -1]
+    position: [e1, fourthRow]
 },
 {
     type: "ECON",
@@ -197,7 +233,7 @@ var courseArray = [{
     name: "Principles of Microeconomics",
     description: "",
     language: "",   
-    position: [e, -2]
+    position: [e2, fourthRow]
 },
 {
     type: "ECON",
@@ -205,7 +241,7 @@ var courseArray = [{
     name: "Industrial Organization/Regulation Economics",
     description: "",
     language: "",   
-    position: [e, 4]
+    position: [e1, firstRow]
 },
 {
     type: "ECON",
@@ -213,9 +249,11 @@ var courseArray = [{
     name: "International Finance",
     description: "",
     language: "",   
-    position: [e, 3]
+    position: [e1, secondRow]
 }
 ];
+
+
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                           work history                          ////////
@@ -234,7 +272,7 @@ var workArray = [
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. ",
-        headerPos: [-1, 5],
+        headerPos: [-1, 1],
         contentPos: [-1, 3]
     },
     { 
@@ -249,7 +287,7 @@ var workArray = [
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. ",
-        headerPos: [0, 5],
+        headerPos: [0, 1],
         contentPos: [0, 3]
     },
     { 
@@ -264,7 +302,7 @@ var workArray = [
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. ",
-        headerPos: [1, 5],
+        headerPos: [1, 1],
         contentPos: [1, 3]
     }
 ]

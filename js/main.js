@@ -5,16 +5,15 @@ var courseObjects = [];
 var workObjects = [];
 var allObjects = [];
 
-var alignState =
-{
-        courseDisplayView: [],  // course display + work twirling
-        courseTwirlingView: [], // course twirling
-        mainTwirlingView: [],   // course twirling + work twirling 
-        workDisplayView: [],    // course twirling + work display
-        workTwirlingView: []    // work twirling 
+var alignState = {
+    courseDisplayView: [], // course display + work twirling
+    courseTwirlingView: [], // course twirling
+    mainTwirlingView: [], // course twirling + work twirling 
+    workDisplayView: [], // course twirling + work display
+    workTwirlingView: [] // work twirling 
 };
 
-var controls, camera, scene, cssRenderer, educationRoot, workRoot;
+var controls, camera, scene, cssRenderer, educationRoot, workRoot, staleRoot;
 var educationToggle = false;
 var workToggle = false;
 
@@ -26,38 +25,40 @@ function init() {
     document.body.appendChild(cssRenderer.domElement);
     educationRoot = new THREE.Object3D();
     workRoot = new THREE.Object3D();
-    
+    staleRoot = new THREE.Object3D();
+
     mouse = new THREE.Vector2();
     scene = new THREE.Scene();
     scene.add(educationRoot);
     scene.add(workRoot);
+    scene.add(staleRoot);
 
     camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
         1,
         10000);
-    camera.position.set(0, 100, 3000);
+    camera.position.set(0, 100, 4000);
 
     controls = new THREE.TrackballControls(camera, cssRenderer.domElement);
     controls.rotateSpeed = 0.5;
-    controls.minDistance = 500;
-    controls.maxDistance = 6000;
+    controls.minDistance = 2000;
+    controls.maxDistance = 4500;
     controls.addEventListener('change', render);
 
-    populateEducationObjectArray();
+    populateCourseObjectArray();
     populateWorkObjectArray();
 
-    initTwirlingEducationCoordinates();
+    initTwirlingCourseCoordinates();
     initTwirlingWorkCoordinates();
 
-    initEducationViewCoordinates();
+    initCourseViewCoordinates();
     initWorkDisplayViewCoordinates();
-    
+
 
     transform(allObjects, alignState.mainTwirlingView, 500);
-    
-    document.getElementById('education').addEventListener('click', function(x) {
+
+    document.getElementById('education').addEventListener('click', function (x) {
         if (educationToggle) {
             transform(allObjects, alignState.mainTwirlingView, 1000);
             educationToggle = false;
@@ -65,9 +66,10 @@ function init() {
             transform(allObjects, alignState.courseDisplayView, 1000);
             educationToggle = true;
         }
+        workToggle = false;
     }, false);
-    
-    document.getElementById('work').addEventListener('click', function(x) {
+
+    document.getElementById('work').addEventListener('click', function (x) {
         if (workToggle) {
             transform(allObjects, alignState.mainTwirlingView, 1000);
             workToggle = false;
@@ -75,16 +77,17 @@ function init() {
             transform(allObjects, alignState.workDisplayView, 1000);
             workToggle = true;
         }
+        educationToggle = false;
     }, false);
-    
+
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    
+
     animate();
 }
 
 
-function initTwirlingEducationCoordinates() {
+function initTwirlingCourseCoordinates() {
 
     var vector = new THREE.Vector3();
     var courseLength = courseArray.length;
@@ -92,19 +95,19 @@ function initTwirlingEducationCoordinates() {
     for (var i = 0; i < courseLength; i += 1) {
 
         var obj = new THREE.Object3D();
-        var courseFormula = 2 * Math.PI *  i  / courseLength;
-        
-        obj.position.x = ( 900 * Math.cos(courseFormula) );
-        obj.position.y = ( 900 * Math.sin(courseFormula) );
+        var courseFormula = 2 * Math.PI * i / courseLength;
+
+        obj.position.x = (900 * Math.cos(courseFormula));
+        obj.position.y = (900 * Math.sin(courseFormula));
         obj.position.z = 0;
-    
-        vector.copy( obj.position ).multiplyScalar( 2 );
+
+        vector.copy(obj.position).multiplyScalar(2);
         obj.lookAt(vector);
         // course twirling 
         alignState.courseTwirlingView[i] = obj;
 
         // main twirling = course twirling 
-        alignState.mainTwirlingView[i] = obj; 
+        alignState.mainTwirlingView[i] = obj;
     }
 }
 
@@ -116,31 +119,31 @@ function initTwirlingWorkCoordinates() {
     for (var i = 0; i < workLength; i += 1) {
 
         var obj = new THREE.Object3D();
-        var workFormula = 2 * Math.PI * i  / workLength;
+        var workFormula = 2 * Math.PI * i / workLength;
 
-        obj.position.x = ( 900 * Math.cos(workFormula) );
+        obj.position.x = (900 * Math.cos(workFormula));
         obj.position.y = 0;
-        obj.position.z = ( 900 * Math.sin(workFormula) );
+        obj.position.z = (900 * Math.sin(workFormula));
 
-        vector.copy( obj.position ).multiplyScalar( 2 );
+        vector.copy(obj.position).multiplyScalar(2);
         obj.lookAt(vector);
+
         // work twirling 
         alignState.workTwirlingView[i] = obj;
     }
     // main twirling = course twirling + work twirling 
-    alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView); 
+    alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView);
 }
 
-function initEducationViewCoordinates() {
+function initCourseViewCoordinates() {
 
-    // courses and education 
     for (var i = 0; i < courseArray.length; i += 1) {
 
         var educCoord = new THREE.Object3D();
-        educCoord.position.x = courseArray[i].position[0] * 385;
-        educCoord.position.y = ( courseArray[i].position[1] ) * 155;
+        educCoord.position.x = courseArray[i].position[0] * 420;
+        educCoord.position.y = (courseArray[i].position[1]) * 170;
         educCoord.position.z = 3000;
-   
+
         alignState.courseDisplayView[i] = educCoord;
     }
 }
@@ -156,7 +159,7 @@ function initWorkDisplayViewCoordinates() {
         workContentCoord.position.x = workArray[i].contentPos[0] * 700;
         workContentCoord.position.y = workArray[i].contentPos[1] * 155;
         workContentCoord.position.z = 3000;
-        
+
         workHeaderCoord.position.x = workArray[i].headerPos[0] * 700;
         workHeaderCoord.position.y = workArray[i].headerPos[1] * 155;
         workHeaderCoord.position.z = 3000;
@@ -170,21 +173,20 @@ function initWorkDisplayViewCoordinates() {
     alignState.courseDisplayView = alignState.courseDisplayView.concat(alignState.workTwirlingView);
 }
 
-function populateEducationObjectArray() {
+function populateCourseObjectArray() {
 
-    // courses and education 
     for (var i = 0; i < courseArray.length; i += 1) {
 
         var courseDiv = document.createElement('div');
-        courseDiv.className = 'element';
+        courseDiv.className = 'course-element';
 
-        courseDiv.innerHTML = '<div class="header">' +
+        courseDiv.innerHTML = '<div class="course-header">' +
             courseArray[i].type + ' ' + courseArray[i].number +
             '</div>' +
             '<div>' +
-            '<h5 class="name">' + courseArray[i].name + '</h5>' +
-            '<p class="details">' + courseArray[i].description + '</p>'
-            '</div>';
+            '<h5 class="course-name">' + courseArray[i].name + '</h5>' +
+            '<p class="course-details">' + courseArray[i].description + 
+            '</p>' + '</div>';
 
         var courseObj = new THREE.CSS3DObject(courseDiv);
         educationRoot.add(courseObj);
@@ -206,14 +208,14 @@ function populateWorkObjectArray() {
         for (var j = 0; j < workArray[i].tools.length; j += 1) {
             tools += '<li>' + workArray[i].tools[j] + '</li>';
         }
-    
+
         workHeaderDiv.innerHTML = '<div class="header">' +
-            '<h5 class="name">' + workArray[i].title + '</h5>' + 
+            '<h5 class="name">' + workArray[i].title + '</h5>' +
             workArray[i].timeline + '<div>';
 
-        workDiv.innerHTML = '<div class="header">' + '<h5 class="name">' + 
-            workArray[i].timeline + '</h5>' + '<p class="details">' + 
-            workArray[i].description + '</p>' + '<ol class="work-tools">' + 
+        workDiv.innerHTML = '<div class="header">' + '<h5 class="name">' +
+            workArray[i].timeline + '</h5>' + '<p class="details">' +
+            workArray[i].description + '</p>' + '<ol class="work-tools">' +
             tools + '</ol>' + '</div>';
 
         var workObj = new THREE.CSS3DObject(workDiv);
@@ -223,13 +225,11 @@ function populateWorkObjectArray() {
         workRoot.add(workObj2);
 
         workObjects[i * 2] = workObj;
-        workObjects[i * 2 + 1] = workObj2; 
+        workObjects[i * 2 + 1] = workObj2;
     }
     // all objects = course objects + work objects 
-    allObjects = courseObjects.concat(workObjects); 
+    allObjects = courseObjects.concat(workObjects);
 }
-
-
 
 function transform(start, end, duration) {
     TWEEN.removeAll();
@@ -239,13 +239,21 @@ function transform(start, end, duration) {
         var target = end[i];
 
         new TWEEN.Tween(object.position)
-            .to({ x: target.position.x, y: target.position.y, z: target.position.z }, 
+            .to({
+                    x: target.position.x,
+                    y: target.position.y,
+                    z: target.position.z
+                },
                 Math.random() * duration + duration)
             .easing(TWEEN.Easing.Exponential.InOut)
             .start();
 
         new TWEEN.Tween(object.rotation)
-            .to({ x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, 
+            .to({
+                    x: target.rotation.x,
+                    y: target.rotation.y,
+                    z: target.rotation.z
+                },
                 Math.random() * duration + duration)
             .easing(TWEEN.Easing.Exponential.InOut)
             .start();
@@ -268,23 +276,23 @@ function createCssRenderer() {
 
 
 function render() {
-    
+
     cssRenderer.render(scene, camera);
 }
 
 
 function animate() {
-    
+
     const time = Date.now() * 0.0004;
 
-    if (!educationToggle) {
+    // if (!educationToggle) {
 
-        educationRoot.rotation.x = time;
-        educationRoot.rotation.y = time * 0.6;
-    }
+    //     educationRoot.rotation.x = time;
+    //     educationRoot.rotation.y = time * 0.6;
+    // }
 
     if (!workToggle) {
-        
+
         workRoot.rotation.x = time * 0.6;
         workRoot.rotation.y = time;
     }

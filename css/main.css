@@ -15,67 +15,6 @@ body {
   text-align: center;
 }
 
-
-/* COURSE LIST AND EDUCATION */
-
-.element {
-  width: 370px;
-  height: 140px;
-  box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
-  border: 2px solid rgba(127,255,255,0.25);
-  color: rgba(127,255,255,0.75);
-  text-align: left;
-  cursor: default;
-  position: absolute;
-  background-color: blue;
-  top: 2px;
-  right: 2px;
-  font-size: 12px;
-}
-
-.element:hover {
-  box-shadow: 0px 0px 12px #ad2797bf;
-  border: 3px solid rgba(127,255,255,0.75);
-}
-
-.name {
-  position: absolute;
-  top: 30px;
-  left: 5px;
-  right: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  color: rgba(255,255,255,0.75);
-  text-shadow: 0 0 10px rgba(0,255,255,0.95);
-}
-
-.header {
-    top: 10px;
-    left: 5px;
-    right: 5px;
-    position: absolute;
-    font-size: 11px;
-    color: rgba(127,255,255,0.75);
-}
-  
-.element, .details {
-  position: absolute;
-  left: 4px;
-  right: 4px;
-  font-size: 10px;
-  color: rgba(127,255,255,0.75);
-}
-
-.details {
-    top: 55px;
-}
-.name, .details, .header{
-    padding: 3px;
-    margin: 3px;
-    border: 3px;
-    right: 3px;
-}
-
 button {
   background: transparent;
   color: rgba(127,255,255,0.75);
@@ -94,8 +33,78 @@ button:active {
   background-color: rgba(0,255,255,0.75);
 }
 
+/* COURSE LIST AND EDUCATION */
+
+.course-element {
+  cursor: default;
+  position: absolute;
+  background-color: blue;
+  box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
+  border: 2px solid rgba(127,255,255,0.25);
+  color: rgba(127,255,255,0.75);
+  width: 400px;
+  height: 150px;
+  text-align: center;
+}
+
+.course-name {
+  position: relative;
+  padding: 30px 0;
+  text-align:center;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(255,255,255,0.75);
+  text-shadow: 0 0 10px rgba(0,255,255,0.95);
+}
 
 /* WORK HISTORY TIMELINE */
+
+.name {
+  position: absolute;
+  top: 30px;
+  left: 5px;
+  right: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgba(255,255,255,0.75);
+  text-shadow: 0 0 10px rgba(0,255,255,0.95);
+}
+
+.header {
+  top: 10px;
+  left: 5px;
+  right: 5px;
+  position: absolute;
+  font-size: 11px;
+  color: rgba(127,255,255,0.75);
+}
+
+.details {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  font-size: 10px;
+  color: rgba(127,255,255,0.75);
+}
+
+.course-front, .course-back {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.name, .details, .header{
+    padding: 3px;
+    margin: 3px;
+    border: 3px;
+    right: 3px;
+}
+
+.details {
+  top: 55px;
+}
 
 .work-header-element {
   width: 600px;
