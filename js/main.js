@@ -3,14 +3,15 @@
 
 var courseObjects = [];
 var workObjects = [];
+var allObjects = [];
 
 var alignState =
 {
-        courseView: [],
-        courseMainView: [],
-        mainView: [],
-        workView: [],
-        workMainView: []
+        courseDisplayView: [],
+        courseTwirlingView: [],
+        mainTwirlingView: [],
+        workDisplayView: [],
+        workTwirlingView: []
 };
 
 var controls, camera, scene, cssRenderer, root, root2;
@@ -46,29 +47,32 @@ function init() {
     controls.maxDistance = 6000;
     controls.addEventListener('change', render);
 
-    populateContentArrays();
-    initViewCoordinates();
-    initTwirlingCoordinates();
+    populateEducationObjectArray();
+    populateWorkObjectArray();
+    initEducationViewCoordinates();
+    initworkDisplayViewCoordinates();
+    initTwirlingEducationCoordinates();
+    initTwirlingWorkCoordinates();
 
-    transform(courseObjects.concat(workObjects), alignState.mainView, 500);
+    transform(allObjects, alignState.mainTwirlingView, 500);
     
     document.getElementById('education').addEventListener('click', function(x) {
         if (educationToggle) {
-            transform(courseObjects, alignState.courseMainView, 1000);
+            transform(courseObjects, alignState.courseTwirlingView, 1000);
 
             educationToggle = false;
         } else {
-            transform(courseObjects, alignState.courseView, 1000);
+            transform(courseObjects, alignState.courseDisplayView, 1000);
             educationToggle = true;
         }
     }, false);
     
     document.getElementById('work').addEventListener('click', function(x) {
         if (educationToggle) {
-            transform(workObjects, alignState.workMainView, 1000);
+            transform(workObjects, alignState.workTwirlingView, 1000);
             workToggle = false;
         } else {
-            transform(workObjects, alignState.workView, 1000);
+            transform(workObjects, alignState.workDisplayView, 1000);
             workToggle = true;
         }
     }, false);
@@ -79,36 +83,52 @@ function init() {
     animate();
 }
 
-function initTwirlingCoordinates() {
+
+function initTwirlingEducationCoordinates() {
 
     var vector = new THREE.Vector3();
     var courseLength = courseArray.length;
-    var workLength = workObjects.length;
-    var totalLength = courseLength + workLength;
 
-    for (var i = 0; i < totalLength; i += 1) {
+    for (var i = 0; i < courseLength; i += 1) {
 
         var obj = new THREE.Object3D();
         var courseFormula = 2 * Math.PI *  i  / courseLength;
-        var workFormula = 2 * Math.PI * i  / workLength;
-
-        if (i < courseLength) {
-            obj.position.x = ( 900 * Math.cos(courseFormula) );
-            obj.position.y = ( 900 * Math.sin(courseFormula) );
-            obj.position.z = 0;
-        } else {
-            obj.position.x = ( 900 * Math.cos(workFormula) );
-            obj.position.y = 0;
-            obj.position.z = ( 900 * Math.sin(workFormula) );
-        }
-
+        
+        obj.position.x = ( 900 * Math.cos(courseFormula) );
+        obj.position.y = ( 900 * Math.sin(courseFormula) );
+        obj.position.z = 0;
+    
         vector.copy( obj.position ).multiplyScalar( 2 );
         obj.lookAt(vector);
-        alignState.mainView[i] = obj;
+        alignState.courseTwirlingView[i] = obj;
+        alignState.mainTwirlingView[i] = obj; // add to main twirling view 
     }
 }
 
-function initViewCoordinates() {
+function initTwirlingWorkCoordinates() {
+
+    var vector = new THREE.Vector3();
+    var workLength = workObjects.length;
+
+    for (var i = 0; i < workLength; i += 1) {
+
+        var obj = new THREE.Object3D();
+        var workFormula = 2 * Math.PI * i  / workLength;
+
+        obj.position.x = ( 900 * Math.cos(workFormula) );
+        obj.position.y = 0;
+        obj.position.z = ( 900 * Math.sin(workFormula) );
+
+        vector.copy( obj.position ).multiplyScalar( 2 );
+        obj.lookAt(vector);
+        alignState.workTwirlingView[i] = obj;
+    }
+
+    alignState.courseDisplayView = alignState.courseDisplayView.concat(alignState.workTwirlingView);
+    alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView); // update main twirling view 
+}
+
+function initEducationViewCoordinates() {
 
     // courses and education 
     for (var i = 0; i < courseArray.length; i += 1) {
@@ -118,29 +138,34 @@ function initViewCoordinates() {
         educCoord.position.y = ( courseArray[i].position[1] ) * 155;
         educCoord.position.z = 3000;
    
-        alignState.courseView[i] = educCoord;
+        alignState.courseDisplayView[i] = educCoord;
     }
-    // work history
+}
+
+
+function initworkDisplayViewCoordinates() {
+
     for (var i = 0; i < workArray.length; i += 1) {
 
         var workContentCoord = new THREE.Object3D();
         var workHeaderCoord = new THREE.Object3D();
 
-        workContentCoord.position.x = workArray[i].contentPos[0] * 385;
+        workContentCoord.position.x = workArray[i].contentPos[0] * 155;
         workContentCoord.position.y = workArray[i].contentPos[1] * 385;
         workContentCoord.position.z = 3000;
         
-        workHeaderCoord.position.x = workArray[i].headerPos[0] * 385;
+        workHeaderCoord.position.x = workArray[i].headerPos[0] * 155;
         workHeaderCoord.position.y = workArray[i].headerPos[1] * 385;
         workHeaderCoord.position.z = 3000;
 
-        alignState.workView[i * 2] = workHeaderCoord;
-        alignState.workView[i * 2 + 1] = workContentCoord;
+        alignState.workDisplayView[i * 2] = workHeaderCoord;
+        alignState.workDisplayView[i * 2 + 1] = workContentCoord;
     }
+
+    alignState.workDisplayView = alignState.courseTwirlingView.concat(alignState.workDisplayView);
 }
 
-
-function populateContentArrays() {
+function populateEducationObjectArray() {
 
     // courses and education 
     for (var i = 0; i < courseArray.length; i += 1) {
@@ -157,12 +182,14 @@ function populateContentArrays() {
             '</div>';
 
         var courseObj = new THREE.CSS3DObject(courseDiv);
-        // scene.add(courseObj);
         root.add(courseObj);
         courseObjects[i] = courseObj;
+        allObjects[i] = courseObj; // add to all objects 
     }
+}
 
-    // work history
+function populateWorkObjectArray() {
+
     for (var i = 0; i < workArray.length; i += 1) {
 
         var workDiv = document.createElement('div');
@@ -194,7 +221,10 @@ function populateContentArrays() {
         workObjects[i * 2] = workObj;
         workObjects[i * 2 + 1] = workObj2; 
     }
+
+    allObjects = allObjects.concat(workObjects); // add to all objects 
 }
+
 
 
 function transform(start, end, duration) {
