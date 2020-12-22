@@ -4,16 +4,14 @@
 var courseObjects = [];
 var workObjects = [];
 
-var alignState = [
-    {
+var alignState =
+{
         courseView: [],
-        courseMainView: []
-    },
-    {
+        courseMainView: [],
+        mainView: [],
         workView: [],
         workMainView: []
-    }
-];
+};
 
 var controls, camera, scene, cssRenderer, root, root2;
 var educationToggle = false;
@@ -50,19 +48,28 @@ function init() {
 
     populateContentArrays();
     initViewCoordinates();
-    initEducMainCoordinates();
+    initTwirlingCoordinates();
 
-
-    transform(courseObjects, alignState[0].courseMainView, 500);
+    transform(courseObjects.concat(workObjects), alignState.mainView, 500);
     
     document.getElementById('education').addEventListener('click', function(x) {
         if (educationToggle) {
-            transform(courseObjects, alignState[0].courseMainView, 1000);
+            transform(courseObjects, alignState.courseMainView, 1000);
 
             educationToggle = false;
         } else {
-            transform(courseObjects, alignState[0].courseView, 1000);
+            transform(courseObjects, alignState.courseView, 1000);
             educationToggle = true;
+        }
+    }, false);
+    
+    document.getElementById('work').addEventListener('click', function(x) {
+        if (educationToggle) {
+            transform(workObjects, alignState.workMainView, 1000);
+            workToggle = false;
+        } else {
+            transform(workObjects, alignState.workView, 1000);
+            workToggle = true;
         }
     }, false);
     
@@ -72,23 +79,32 @@ function init() {
     animate();
 }
 
-function initEducMainCoordinates() {
+function initTwirlingCoordinates() {
 
     var vector = new THREE.Vector3();
-    var l = courseArray.length;
+    var courseLength = courseArray.length;
+    var workLength = workObjects.length;
+    var totalLength = courseLength + workLength;
 
-    for (var i = 0; i < l; i += 1) {
+    for (var i = 0; i < totalLength; i += 1) {
 
         var obj = new THREE.Object3D();
-        var n = 2 * Math.PI *  i  / l;
-        
-        obj.position.x = ( 900 * Math.cos(n) );
-        obj.position.y = ( 900 * Math.sin(n) );
-        obj.position.z = 0;
+        var courseFormula = 2 * Math.PI *  i  / courseLength;
+        var workFormula = 2 * Math.PI * i  / workLength;
+
+        if (i < courseLength) {
+            obj.position.x = ( 900 * Math.cos(courseFormula) );
+            obj.position.y = ( 900 * Math.sin(courseFormula) );
+            obj.position.z = 0;
+        } else {
+            obj.position.x = ( 900 * Math.cos(workFormula) );
+            obj.position.y = 0;
+            obj.position.z = ( 900 * Math.sin(workFormula) );
+        }
 
         vector.copy( obj.position ).multiplyScalar( 2 );
         obj.lookAt(vector);
-        alignState[0].courseMainView[i] = obj;
+        alignState.mainView[i] = obj;
     }
 }
 
@@ -97,13 +113,29 @@ function initViewCoordinates() {
     // courses and education 
     for (var i = 0; i < courseArray.length; i += 1) {
 
-        var initViewCoordinates = new THREE.Object3D();
-        initViewCoordinates.position.x = courseArray[i].position[0] * 385;
-        initViewCoordinates.position.y = ( courseArray[i].position[1] ) * 155;
-        initViewCoordinates.position.z = 3000;
+        var educCoord = new THREE.Object3D();
+        educCoord.position.x = courseArray[i].position[0] * 385;
+        educCoord.position.y = ( courseArray[i].position[1] ) * 155;
+        educCoord.position.z = 3000;
    
-        alignState[0].courseView[i] = initViewCoordinates;
+        alignState.courseView[i] = educCoord;
+    }
+    // work history
+    for (var i = 0; i < workArray.length; i += 1) {
+
+        var workContentCoord = new THREE.Object3D();
+        var workHeaderCoord = new THREE.Object3D();
+
+        workContentCoord.position.x = workArray[i].contentPos[0] * 385;
+        workContentCoord.position.y = workArray[i].contentPos[1] * 385;
+        workContentCoord.position.z = 3000;
         
+        workHeaderCoord.position.x = workArray[i].headerPos[0] * 385;
+        workHeaderCoord.position.y = workArray[i].headerPos[1] * 385;
+        workHeaderCoord.position.z = 3000;
+
+        alignState.workView[i * 2] = workHeaderCoord;
+        alignState.workView[i * 2 + 1] = workContentCoord;
     }
 }
 
@@ -130,57 +162,37 @@ function populateContentArrays() {
         courseObjects[i] = courseObj;
     }
 
-    // courses and education 
-    for (var i = 0; i < workArray.length; i += 5) {
+    // work history
+    for (var i = 0; i < workArray.length; i += 1) {
 
         var workDiv = document.createElement('div');
-        workDiv.className = 'element';
+        workDiv.className = 'work-element';
 
-        var workTitle = document.createElement('div');
-        workTitle.className = 'details';
+        var workHeaderDiv = document.createElement('div');
+        workHeaderDiv.className = 'work-header-element';
 
-        var workTools = document.createElement('div');
-        workTools.className = 'details';
+        var tools = '';
+        for (var j = 0; j < workArray[i].tools.length; j += 1) {
+            tools += '<li>' + workArray[i].tools[j] + '</li>';
+        }
+    
+        workHeaderDiv.innerHTML = '<div class="header">' +
+            '<h5 class="name">' + workArray[i].title + '</h5>' + 
+            workArray[i].timeline + '<div>';
 
-        var workdates = document.createElement('div');
-        workdates.className = 'details';
-
-        workdates.innerHTML = '<div class="header">' +
-        workArray[i] + ' ' + workArray[i + 2] +
-        '</div>';
-
-        workTools.innerHTML = '<div class="header">' +
-        workArray[i] + ' ' + workArray[i + 2] +
-        '</div>';
-
-        workTitle.innerHTML = '<div class="header">' +
-        workArray[i] + ' ' + workArray[i + 2] +
-        '</div>';
-
-        workDiv.innerHTML = '<div class="header">' +
-            workArray[i] + ' ' + workArray[i + 2] +
-            '</div>' +
-            '<div>' +
-            '<h5 class="name">' + workArray[i+ 1] + '</h5>' +
-            '<p class="details">' + workArray[i+4] + '</p>'
-            '</div>';
+        workDiv.innerHTML = '<div class="header">' + '<h5 class="name">' + 
+            workArray[i].timeline + '</h5>' + '<p class="details">' + 
+            workArray[i].description + '</p>' + '<ol class="work-tools">' + 
+            tools + '</ol>' + '</div>';
 
         var workObj = new THREE.CSS3DObject(workDiv);
-        var workObj1 = new THREE.CSS3DObject(workTools);
-        var workObj2 = new THREE.CSS3DObject(workdates);
-        var workObj3 = new THREE.CSS3DObject(workTitle);
+        var workObj2 = new THREE.CSS3DObject(workHeaderDiv);
 
-        // scene.add(courseObj);
-        root2.add(workObj1);
-        root2.add(workObj2);
-        root2.add(workObj3);
         root2.add(workObj);
+        root2.add(workObj2);
 
-        workObjects[i] = workObj;
-        workObjects[i+1] = workObj1;
-        workObjects[i+2] = workObj2;
-        workObjects[i+3] = workObj3;
-
+        workObjects[i * 2] = workObj;
+        workObjects[i * 2 + 1] = workObj2; 
     }
 }
 
@@ -230,16 +242,16 @@ function render() {
 function animate() {
     
     const time = Date.now() * 0.0004;
+
     if (!educationToggle) {
         root.rotation.x = time;
         root.rotation.y = time * 0.6;
 
-        root2.rotation.x = time * 0.7;
+        root2.rotation.x = time * 0.6;
         root2.rotation.y = time;
     }
 
     scene.updateMatrixWorld();
-
     controls.update();
     TWEEN.update();
     render();

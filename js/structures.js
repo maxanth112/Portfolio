@@ -233,7 +233,9 @@ var workArray = [
             purged these in the system and from the database to improve overall accuracy. Implemented \
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-            uploading new requisitions derived from the new process created. "
+            uploading new requisitions derived from the new process created. ",
+        headerPos: [-1, 5],
+        contentPos: [-1, 3]
     },
     { 
         title: "Material Operations Analyst",
@@ -246,7 +248,9 @@ var workArray = [
             purged these in the system and from the database to improve overall accuracy. Implemented \
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-            uploading new requisitions derived from the new process created. "
+            uploading new requisitions derived from the new process created. ",
+        headerPos: [0, 5],
+        contentPos: [0, 3]
     },
     { 
         title: "Data Analyst - Contractor",
@@ -259,8 +263,10 @@ var workArray = [
             purged these in the system and from the database to improve overall accuracy. Implemented \
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-            uploading new requisitions derived from the new process created. "
-    },
+            uploading new requisitions derived from the new process created. ",
+        headerPos: [1, 5],
+        contentPos: [1, 3]
+    }
 ]
 
 
