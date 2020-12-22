@@ -7,32 +7,30 @@ var allObjects = [];
 
 var alignState =
 {
-        courseDisplayView: [],
-        courseTwirlingView: [],
-        mainTwirlingView: [],
-        workDisplayView: [],
-        workTwirlingView: []
+        courseDisplayView: [],  // course display + work twirling
+        courseTwirlingView: [], // course twirling
+        mainTwirlingView: [],   // course twirling + work twirling 
+        workDisplayView: [],    // course twirling + work display
+        workTwirlingView: []    // work twirling 
 };
 
-var controls, camera, scene, cssRenderer, root, root2;
+var controls, camera, scene, cssRenderer, educationRoot, workRoot;
 var educationToggle = false;
 var workToggle = false;
 
 init();
 
-
-
 function init() {
 
     cssRenderer = createCssRenderer();
     document.body.appendChild(cssRenderer.domElement);
-    root = new THREE.Object3D();
-    root2 = new THREE.Object3D();
+    educationRoot = new THREE.Object3D();
+    workRoot = new THREE.Object3D();
     
     mouse = new THREE.Vector2();
     scene = new THREE.Scene();
-    scene.add(root);
-    scene.add(root2);
+    scene.add(educationRoot);
+    scene.add(workRoot);
 
     camera = new THREE.PerspectiveCamera(
         75,
@@ -49,30 +47,32 @@ function init() {
 
     populateEducationObjectArray();
     populateWorkObjectArray();
-    initEducationViewCoordinates();
-    initworkDisplayViewCoordinates();
+
     initTwirlingEducationCoordinates();
     initTwirlingWorkCoordinates();
+
+    initEducationViewCoordinates();
+    initWorkDisplayViewCoordinates();
+    
 
     transform(allObjects, alignState.mainTwirlingView, 500);
     
     document.getElementById('education').addEventListener('click', function(x) {
         if (educationToggle) {
-            transform(courseObjects, alignState.courseTwirlingView, 1000);
-
+            transform(allObjects, alignState.mainTwirlingView, 1000);
             educationToggle = false;
         } else {
-            transform(courseObjects, alignState.courseDisplayView, 1000);
+            transform(allObjects, alignState.courseDisplayView, 1000);
             educationToggle = true;
         }
     }, false);
     
     document.getElementById('work').addEventListener('click', function(x) {
-        if (educationToggle) {
-            transform(workObjects, alignState.workTwirlingView, 1000);
+        if (workToggle) {
+            transform(allObjects, alignState.mainTwirlingView, 1000);
             workToggle = false;
         } else {
-            transform(workObjects, alignState.workDisplayView, 1000);
+            transform(allObjects, alignState.workDisplayView, 1000);
             workToggle = true;
         }
     }, false);
@@ -100,8 +100,11 @@ function initTwirlingEducationCoordinates() {
     
         vector.copy( obj.position ).multiplyScalar( 2 );
         obj.lookAt(vector);
+        // course twirling 
         alignState.courseTwirlingView[i] = obj;
-        alignState.mainTwirlingView[i] = obj; // add to main twirling view 
+
+        // main twirling = course twirling 
+        alignState.mainTwirlingView[i] = obj; 
     }
 }
 
@@ -121,11 +124,11 @@ function initTwirlingWorkCoordinates() {
 
         vector.copy( obj.position ).multiplyScalar( 2 );
         obj.lookAt(vector);
+        // work twirling 
         alignState.workTwirlingView[i] = obj;
     }
-
-    alignState.courseDisplayView = alignState.courseDisplayView.concat(alignState.workTwirlingView);
-    alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView); // update main twirling view 
+    // main twirling = course twirling + work twirling 
+    alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView); 
 }
 
 function initEducationViewCoordinates() {
@@ -143,26 +146,28 @@ function initEducationViewCoordinates() {
 }
 
 
-function initworkDisplayViewCoordinates() {
+function initWorkDisplayViewCoordinates() {
 
     for (var i = 0; i < workArray.length; i += 1) {
 
         var workContentCoord = new THREE.Object3D();
         var workHeaderCoord = new THREE.Object3D();
 
-        workContentCoord.position.x = workArray[i].contentPos[0] * 155;
-        workContentCoord.position.y = workArray[i].contentPos[1] * 385;
+        workContentCoord.position.x = workArray[i].contentPos[0] * 700;
+        workContentCoord.position.y = workArray[i].contentPos[1] * 155;
         workContentCoord.position.z = 3000;
         
-        workHeaderCoord.position.x = workArray[i].headerPos[0] * 155;
-        workHeaderCoord.position.y = workArray[i].headerPos[1] * 385;
+        workHeaderCoord.position.x = workArray[i].headerPos[0] * 700;
+        workHeaderCoord.position.y = workArray[i].headerPos[1] * 155;
         workHeaderCoord.position.z = 3000;
 
         alignState.workDisplayView[i * 2] = workHeaderCoord;
         alignState.workDisplayView[i * 2 + 1] = workContentCoord;
     }
-
+    // work display = course twirling + work display 
     alignState.workDisplayView = alignState.courseTwirlingView.concat(alignState.workDisplayView);
+    // course display = course display + work twirling
+    alignState.courseDisplayView = alignState.courseDisplayView.concat(alignState.workTwirlingView);
 }
 
 function populateEducationObjectArray() {
@@ -182,9 +187,8 @@ function populateEducationObjectArray() {
             '</div>';
 
         var courseObj = new THREE.CSS3DObject(courseDiv);
-        root.add(courseObj);
+        educationRoot.add(courseObj);
         courseObjects[i] = courseObj;
-        allObjects[i] = courseObj; // add to all objects 
     }
 }
 
@@ -215,14 +219,14 @@ function populateWorkObjectArray() {
         var workObj = new THREE.CSS3DObject(workDiv);
         var workObj2 = new THREE.CSS3DObject(workHeaderDiv);
 
-        root2.add(workObj);
-        root2.add(workObj2);
+        workRoot.add(workObj);
+        workRoot.add(workObj2);
 
         workObjects[i * 2] = workObj;
         workObjects[i * 2 + 1] = workObj2; 
     }
-
-    allObjects = allObjects.concat(workObjects); // add to all objects 
+    // all objects = course objects + work objects 
+    allObjects = courseObjects.concat(workObjects); 
 }
 
 
@@ -274,11 +278,15 @@ function animate() {
     const time = Date.now() * 0.0004;
 
     if (!educationToggle) {
-        root.rotation.x = time;
-        root.rotation.y = time * 0.6;
 
-        root2.rotation.x = time * 0.6;
-        root2.rotation.y = time;
+        educationRoot.rotation.x = time;
+        educationRoot.rotation.y = time * 0.6;
+    }
+
+    if (!workToggle) {
+        
+        workRoot.rotation.x = time * 0.6;
+        workRoot.rotation.y = time;
     }
 
     scene.updateMatrixWorld();
