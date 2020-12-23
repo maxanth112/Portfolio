@@ -60,9 +60,11 @@ function init() {
 
     document.getElementById('education').addEventListener('click', function (x) {
         if (educationToggle) {
+            eliminateCourseFlipClass();
             transform(allObjects, alignState.mainTwirlingView, 1000);
             educationToggle = false;
         } else {
+            eliminateCourseFlipClass();
             transform(allObjects, alignState.courseDisplayView, 1000);
             educationToggle = true;
         }
@@ -71,9 +73,11 @@ function init() {
 
     document.getElementById('work').addEventListener('click', function (x) {
         if (workToggle) {
+            eliminateCourseFlipClass();
             transform(allObjects, alignState.mainTwirlingView, 1000);
             workToggle = false;
         } else {
+            eliminateCourseFlipClass();
             transform(allObjects, alignState.workDisplayView, 1000);
             workToggle = true;
         }
@@ -141,7 +145,7 @@ function initCourseViewCoordinates() {
 
         var educCoord = new THREE.Object3D();
         educCoord.position.x = courseArray[i].position[0] * 420;
-        educCoord.position.y = (courseArray[i].position[1]) * 170;
+        educCoord.position.y = (courseArray[i].position[1]) * 200;
         educCoord.position.z = 3000;
 
         alignState.courseDisplayView[i] = educCoord;
@@ -180,13 +184,27 @@ function populateCourseObjectArray() {
         var courseDiv = document.createElement('div');
         courseDiv.className = 'course-element';
 
-        courseDiv.innerHTML = '<div class="course-header">' +
-            courseArray[i].type + ' ' + courseArray[i].number +
-            '</div>' +
-            '<div>' +
-            '<h5 class="course-name">' + courseArray[i].name + '</h5>' +
-            '<p class="course-details">' + courseArray[i].description + 
-            '</p>' + '</div>';
+        courseDiv.innerHTML = 
+            '<div class="course-card ' + courseArray[i].number + '" onclick="flip(' + courseArray[i].number + ')">' + 
+                '<div class="front">' + 
+                    '<h5 class="front-header">' + 
+                        courseArray[i].name + 
+                    '</h5>' + 
+                '</div>' + 
+                '<div class="back">' + 
+                    '<div class="align-me">' +
+                        '<p class="course-header">' + 
+                            courseArray[i].type + courseArray[i].number + 
+                        '</p>' + 
+                        '<p class="languages">' +
+                        courseArray[i].language + 
+                        '</p>' +  
+                    '</div>' +
+                    '<p class="course-description">' + 
+                        courseArray[i].description + 
+                    '</p>' + 
+                '</div>' + 
+            '</div>';
 
         var courseObj = new THREE.CSS3DObject(courseDiv);
         educationRoot.add(courseObj);
@@ -291,11 +309,11 @@ function animate() {
     //     educationRoot.rotation.y = time * 0.6;
     // }
 
-    if (!workToggle) {
+    // if (!workToggle) {
 
-        workRoot.rotation.x = time * 0.6;
-        workRoot.rotation.y = time;
-    }
+    //     workRoot.rotation.x = time * 0.6;
+    //     workRoot.rotation.y = time;
+    // }
 
     scene.updateMatrixWorld();
     controls.update();
@@ -304,6 +322,13 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+function flip(element) {
+    $('.' + element).toggleClass('flipped');
+}
+
+function eliminateCourseFlipClass() {
+    $('.course-card').removeClass('flipped');
+}
 
 function onWindowResize() {
 

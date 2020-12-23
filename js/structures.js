@@ -8,33 +8,36 @@ var educationHeaders = [
     major: "Bachelor of Arts, Computer Science",
     college: "University of Colorado Boulder",
     subcollege: "College of Engineering and Applied Science",
-    GPA: "4.0"
+    GPA: "4.0", 
+    img: ""
 }, 
 {
     major: "Bachelor of Arts, Mathematics",
     focus: "Computational Mathematics",
     college: "University of Colorado Boulder",
     subcollege: "College of Arts and Sciences",
-    GPA: "3.2"
+    GPA: "3.2",
+    img: ""
 },
 {
     major: "Bachelor of Arts, Economics",
     focus: "International Economics",
     college: "University of Colorado Boulder",
     subcollege: "College of Arts and Sciences",
-    GPA: "3.2"
+    GPA: "3.2", 
+    img: ""
 }
 ];
 
 
-const m1 = -2.55;
-const m2 = -1.55;
+const leftMath = -2.55;
+const rightMath = -1.55;
 
-const c1 = 0.5;
-const c2 = -0.5;
+const rightComputer = 0.5;
+const leftComputer = -0.5;
 
-const e1 = 1.55;
-const e2 = 2.55;
+const leftEconomics = 1.55;
+const rightEconomics = 2.55;
 
 var firstRow = 1.4;
 var secondRow = 0.4;
@@ -49,7 +52,7 @@ var courseArray = [
     name: "Intermediate Numerical Analysis",
     description: "",
     language: "",   
-    position: [m1, firstRow]
+    position: [leftMath, firstRow]
 },
 {
     type: "APPM",
@@ -57,7 +60,7 @@ var courseArray = [
     name: "Introduction to Operations Research",
     language: "",   
     description: "",
-    position: [m2, secondRow]
+    position: [rightMath, secondRow]
 },
 {
     type: "APPM",
@@ -65,7 +68,7 @@ var courseArray = [
     name: "Calculus 3 for Engineers",
     description: "Multivariable calculus, vector fields, Guass, Green, and Stokes",
     language: "",   
-    position: [m1, fourthRow]
+    position: [leftMath, fourthRow]
 },
 {
     type: "MATH",
@@ -73,7 +76,7 @@ var courseArray = [
     name: "Discrete Mathematics",
     description: "",
     language: "LaTeX",   
-    position: [m1, thirdRow]
+    position: [leftMath, thirdRow]
 },
 {
     type: "MATH",
@@ -81,7 +84,7 @@ var courseArray = [
     name: "Linear Algebra for Math Majors",
     description: "",
     language: "LaTeX",   
-    position: [m2, fourthRow]
+    position: [rightMath, fourthRow]
 },
 {
     type: "MATH",
@@ -89,7 +92,7 @@ var courseArray = [
     name: "Analysis 1",
     description: "",
     language: "LaTeX",   
-    position: [m2, thirdRow]
+    position: [rightMath, thirdRow]
 },
 {
     type: "MATH",
@@ -97,7 +100,7 @@ var courseArray = [
     name: "Ordinary Differential Equations",
     description: "",
     language: "LaTeX",   
-    position: [m1, secondRow]
+    position: [leftMath, secondRow]
 },
 {
     type: "APPM",
@@ -105,7 +108,7 @@ var courseArray = [
     name: "Mathematics of Coding and Cryptography",
     description: "",
     language: "Python, Sage",   
-    position: [m2, firstRow]
+    position: [rightMath, firstRow]
 },
 {
     type: "CSCI",
@@ -113,15 +116,15 @@ var courseArray = [
     name: "Data Structures",
     description: "",
     language: "C++",   
-    position: [c1, fifthRow]
+    position: [rightComputer, fifthRow]
 },
 {
     type: "CSCI",
     number: "2400",
     name: "Computer Systems",
-    description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture, machine level representation of programs, and representing and manipulating information.",
+    description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture, and machine level representation of programs.",
     language: "C, C++",    
-    position: [c1, fourthRow]
+    position: [rightComputer, fourthRow]
 },
 {
     type: "CSCI",
@@ -129,7 +132,7 @@ var courseArray = [
     name: "Software Development Methods and Tools",
     description: "",
     language: "JavaScript, HTML, CSS, Linux, SQL",   
-    position: [c2, fourthRow]
+    position: [leftComputer, fourthRow]
 },
 {
     type: "CSCI",
@@ -137,7 +140,7 @@ var courseArray = [
     name: "Descrete Structures",
     description: "",
     language: "Python",   
-    position: [c2, fifthRow]
+    position: [leftComputer, fifthRow]
 },
 {
     type: "CSCI",
@@ -145,7 +148,7 @@ var courseArray = [
     name: "Principals of Programming Languages",
     description: "",
     language: "Stata",   
-    position: [c1, thirdRow]
+    position: [rightComputer, thirdRow]
 },
 {
     type: "CSCI",
@@ -153,7 +156,7 @@ var courseArray = [
     name: "Algorithms",
     description: "",
     language: "C++, Python",   
-    position: [c2, thirdRow]
+    position: [leftComputer, thirdRow]
 },
 {
     type: "CSCI",
@@ -161,7 +164,7 @@ var courseArray = [
     name: "Artificial Intelligence",
     description: "",
     language: "Python",   
-    position: [c1, secondRow]
+    position: [rightComputer, secondRow]
 },
 {
     type: "CSCI",
@@ -169,7 +172,7 @@ var courseArray = [
     name: "Computer Organization",
     description: "",
     language: "C, Linux",   
-    position: [c2, firstRow]
+    position: [leftComputer, firstRow]
 },
 {
     type: "CSCI",
@@ -177,7 +180,7 @@ var courseArray = [
     name: "Design and Analysis of Operating Systems",
     description: "",
     language: "C, Linux",   
-    position: [c2, secondRow]
+    position: [leftComputer, secondRow]
 },
 {
     type: "CSCI",
@@ -185,7 +188,7 @@ var courseArray = [
     name: "Object Oriented Analysis and Design",
     description: "",
     language: "",   
-    position: [c1, firstRow]
+    position: [rightComputer, firstRow]
 },
 {
     type: "ECON",
@@ -193,7 +196,7 @@ var courseArray = [
     name: "Statistics with Computer Applications",
     description: "",
     language: "R",   
-    position: [e2, secondRow]
+    position: [rightEconomics, secondRow]
 },
 {
     type: "ECON",
@@ -201,7 +204,7 @@ var courseArray = [
     name: "Applied Econometrics",
     description: "",
     language: "Stata",   
-    position: [e2, firstRow]
+    position: [rightEconomics, firstRow]
 },
 {
     type: "ECON",
@@ -209,7 +212,7 @@ var courseArray = [
     name: "Intermediate Macroeconomic Theory",
     description: "",
     language: "",   
-    position: [e1, thirdRow]
+    position: [leftEconomics, thirdRow]
 },
 {
     type: "ECON",
@@ -217,7 +220,7 @@ var courseArray = [
     name: "Intermediate Microeconomic Theory",
     description: "",
     language: "",   
-    position: [e2, thirdRow]
+    position: [rightEconomics, thirdRow]
 },
 {
     type: "ECON",
@@ -225,7 +228,7 @@ var courseArray = [
     name: "Principles of Macroeconomics",
     description: "",
     language: "",   
-    position: [e1, fourthRow]
+    position: [leftEconomics, fourthRow]
 },
 {
     type: "ECON",
@@ -233,15 +236,15 @@ var courseArray = [
     name: "Principles of Microeconomics",
     description: "",
     language: "",   
-    position: [e2, fourthRow]
+    position: [rightEconomics, fourthRow]
 },
 {
     type: "ECON",
     number: "4697",
-    name: "Industrial Organization/Regulation Economics",
+    name: "Industrial Organization Economics",
     description: "",
     language: "",   
-    position: [e1, firstRow]
+    position: [leftEconomics, firstRow]
 },
 {
     type: "ECON",
@@ -249,7 +252,7 @@ var courseArray = [
     name: "International Finance",
     description: "",
     language: "",   
-    position: [e1, secondRow]
+    position: [leftEconomics, secondRow]
 }
 ];
 
