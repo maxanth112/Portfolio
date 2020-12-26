@@ -14,6 +14,7 @@ var alignState = {
 };
 
 var controls, camera, scene, cssRenderer, educationRoot, workRoot, staleRoot;
+var welcomeRoot, welcomeObject, menu;
 var educationToggle = false;
 var workToggle = false;
 
@@ -22,16 +23,20 @@ init();
 function init() {
 
     cssRenderer = createCssRenderer();
-    document.body.appendChild(cssRenderer.domElement);
+    document.getElementById('container').appendChild(cssRenderer.domElement);
     educationRoot = new THREE.Object3D();
     workRoot = new THREE.Object3D();
     staleRoot = new THREE.Object3D();
+    welcomeRoot = new THREE.Object3D();
 
     mouse = new THREE.Vector2();
     scene = new THREE.Scene();
+    menu = document.getElementById('menu');
+
     scene.add(educationRoot);
     scene.add(workRoot);
     scene.add(staleRoot);
+    scene.add(welcomeRoot);
 
     camera = new THREE.PerspectiveCamera(
         75,
@@ -42,7 +47,7 @@ function init() {
 
     controls = new THREE.TrackballControls(camera, cssRenderer.domElement);
     controls.rotateSpeed = 0.5;
-    controls.minDistance = 2000;
+    controls.minDistance = 1;
     controls.maxDistance = 4500;
     controls.addEventListener('change', render);
 
@@ -55,41 +60,103 @@ function init() {
     initCourseViewCoordinates();
     initWorkDisplayViewCoordinates();
 
-
     transform(allObjects, alignState.mainTwirlingView, 500);
 
-    document.getElementById('education').addEventListener('click', function (x) {
-        if (educationToggle) {
-            eliminateCourseFlipClass();
-            transform(allObjects, alignState.mainTwirlingView, 1000);
-            educationToggle = false;
-        } else {
-            eliminateCourseFlipClass();
-            transform(allObjects, alignState.courseDisplayView, 1000);
-            educationToggle = true;
-        }
-        workToggle = false;
-    }, false);
-
-    document.getElementById('work').addEventListener('click', function (x) {
-        if (workToggle) {
-            eliminateCourseFlipClass();
-            transform(allObjects, alignState.mainTwirlingView, 1000);
-            workToggle = false;
-        } else {
-            eliminateCourseFlipClass();
-            transform(allObjects, alignState.workDisplayView, 1000);
-            workToggle = true;
-        }
-        educationToggle = false;
-    }, false);
+    createMenu();
 
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
 
+    welcomeIntro();
+
     animate();
 }
 
+function welcomeIntro() {
+
+    var welcomeDiv = document.createElement('div');
+    welcomeDiv.className = 'welcomeDiv';
+
+    welcomeDiv.innerHTML = 
+        '<div class="welcome">' + 
+            '<p class="pintro">Welcome to my website.</p>' +
+        '</div>' + 
+        '<div class="name">' +
+            '<p class="pintro">Maximillian Wiesner</p>' +
+        '</div>' + 
+        '<div class="controls">' +
+            '<p class="pintro">Use this to help you navigate. </p>' +
+        '</div>';
+
+    welcomeObject = new THREE.CSS3DObject(welcomeDiv);
+    welcomeRoot.add(welcomeObject);
+}
+
+function createMenu() {
+
+    for ( var i = 0; i < buttonArray.length; i += 1 ) {
+
+        var buttonElement = document.createElement('button');
+        buttonElement.id = buttonArray[i].id;
+        buttonElement.innerHTML = buttonArray[i].label;
+
+        if ( buttonElement.id == 'work_button') {
+
+            buttonElement.addEventListener('click', function (x) {
+                if (workToggle) {
+                    eliminateCourseFlipClass();
+                    transform(allObjects, alignState.mainTwirlingView, 1000);
+                    workToggle = false;
+                } else {
+                    eliminateCourseFlipClass();
+                    transform(allObjects, alignState.workDisplayView, 1000);
+                    workToggle = true;
+                }
+                educationToggle = false;
+            }, false);
+
+        } else if ( buttonElement.id == 'education_button') {
+
+            buttonElement.addEventListener('click', function (x) {
+                if (educationToggle) {
+                    eliminateCourseFlipClass();
+                    transform(allObjects, alignState.mainTwirlingView, 1000);
+                    educationToggle = false;
+                } else {
+                    eliminateCourseFlipClass();
+                    transform(allObjects, alignState.courseDisplayView, 1000);
+                    educationToggle = true;
+                }
+                workToggle = false;
+            }, false);
+        }
+
+        menu.appendChild(buttonElement);
+    }   
+
+}
+
+function toScreenXY(pos3D) {
+
+    var vector = obj.clone();
+    var windowWidth = window.innerWidth;
+    var minWidth = 1280;
+
+  if(windowWidth < minWidth) {
+    windowWidth = minWidth;
+  }
+
+  var widthHalf = (windowWidth/2);
+  var heightHalf = (window.innerHeight/2);
+
+  vector.project(camera);
+
+  vector.x = ( vector.x * widthHalf ) + widthHalf;
+  vector.y = - ( vector.y * heightHalf ) + heightHalf;
+  vector.z = 0;
+
+  return vector;
+}
 
 function initTwirlingCourseCoordinates() {
 
@@ -125,9 +192,9 @@ function initTwirlingWorkCoordinates() {
         var obj = new THREE.Object3D();
         var workFormula = 2 * Math.PI * i / workLength;
 
-        obj.position.x = (900 * Math.cos(workFormula));
+        obj.position.x = (700 * Math.cos(workFormula));
         obj.position.y = 0;
-        obj.position.z = (900 * Math.sin(workFormula));
+        obj.position.z = (700 * Math.sin(workFormula));
 
         vector.copy(obj.position).multiplyScalar(2);
         obj.lookAt(vector);
@@ -210,6 +277,11 @@ function populateCourseObjectArray() {
         educationRoot.add(courseObj);
         courseObjects[i] = courseObj;
     }
+}
+
+function populateEducationHeadersArray() {
+
+
 }
 
 function populateWorkObjectArray() {

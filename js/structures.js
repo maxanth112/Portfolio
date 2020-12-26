@@ -1,18 +1,37 @@
 
+var buttonArray = 
+[
+    {
+        label: "Education", 
+        id: "education_button"
+    },
+    {
+        label: "Professional", 
+        id: "work_button"
+    },
+    {
+        label: "Bio", 
+        id: "bio_button"
+    }
+];
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////
 ////////                      course list/ education                     ////////
 /////////////////////////////////////////////////////////////////////////////////
 
 var educationHeaders = [
 {
-    major: "Bachelor of Arts, Computer Science",
+    major: "Computer Science",
     college: "University of Colorado Boulder",
     subcollege: "College of Engineering and Applied Science",
     GPA: "4.0", 
     img: ""
 }, 
 {
-    major: "Bachelor of Arts, Mathematics",
+    major: "Mathematics",
     focus: "Computational Mathematics",
     college: "University of Colorado Boulder",
     subcollege: "College of Arts and Sciences",
@@ -20,7 +39,7 @@ var educationHeaders = [
     img: ""
 },
 {
-    major: "Bachelor of Arts, Economics",
+    major: "Economics",
     focus: "International Economics",
     college: "University of Colorado Boulder",
     subcollege: "College of Arts and Sciences",
@@ -39,6 +58,7 @@ const leftComputer = -0.5;
 const leftEconomics = 1.55;
 const rightEconomics = 2.55;
 
+var differenceCompSci = 0.2; 
 var firstRow = 1.4;
 var secondRow = 0.4;
 var thirdRow = -0.6;
@@ -116,15 +136,15 @@ var courseArray = [
     name: "Data Structures",
     description: "",
     language: "C++",   
-    position: [rightComputer, fifthRow]
+    position: [rightComputer, fifthRow + differenceCompSci]
 },
 {
     type: "CSCI",
     number: "2400",
     name: "Computer Systems",
-    description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture, and machine level representation of programs.",
+    description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture.",
     language: "C, C++",    
-    position: [rightComputer, fourthRow]
+    position: [rightComputer, fourthRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -132,7 +152,7 @@ var courseArray = [
     name: "Software Development Methods and Tools",
     description: "",
     language: "JavaScript, HTML, CSS, Linux, SQL",   
-    position: [leftComputer, fourthRow]
+    position: [leftComputer, fourthRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -140,7 +160,7 @@ var courseArray = [
     name: "Descrete Structures",
     description: "",
     language: "Python",   
-    position: [leftComputer, fifthRow]
+    position: [leftComputer, fifthRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -148,7 +168,7 @@ var courseArray = [
     name: "Principals of Programming Languages",
     description: "",
     language: "Stata",   
-    position: [rightComputer, thirdRow]
+    position: [rightComputer, thirdRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -156,7 +176,7 @@ var courseArray = [
     name: "Algorithms",
     description: "",
     language: "C++, Python",   
-    position: [leftComputer, thirdRow]
+    position: [leftComputer, thirdRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -164,7 +184,7 @@ var courseArray = [
     name: "Artificial Intelligence",
     description: "",
     language: "Python",   
-    position: [rightComputer, secondRow]
+    position: [rightComputer, secondRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -172,7 +192,7 @@ var courseArray = [
     name: "Computer Organization",
     description: "",
     language: "C, Linux",   
-    position: [leftComputer, firstRow]
+    position: [leftComputer, firstRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -180,7 +200,7 @@ var courseArray = [
     name: "Design and Analysis of Operating Systems",
     description: "",
     language: "C, Linux",   
-    position: [leftComputer, secondRow]
+    position: [leftComputer, secondRow + differenceCompSci]
 },
 {
     type: "CSCI",
@@ -188,7 +208,7 @@ var courseArray = [
     name: "Object Oriented Analysis and Design",
     description: "",
     language: "",   
-    position: [rightComputer, firstRow]
+    position: [rightComputer, firstRow + differenceCompSci]
 },
 {
     type: "ECON",
