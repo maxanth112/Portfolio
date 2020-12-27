@@ -1,31 +1,15 @@
 // author: max wiesner
 // personal website portfolio
 
-var courseObjects = [];
-var workObjects = [];
-var allObjects = [];
-var educationHeaderObjects = [];
-
-var alignState = {
-    courseDisplayView: [], // course display + work twirling
-    courseTwirlingView: [], // course twirling
-    mainTwirlingView: [], // course twirling + work twirling 
-    workDisplayView: [], // course twirling + work display
-    workTwirlingView: [] // work twirling 
-};
-
-var controls, camera, scene, cssRenderer, educationRoot, workRoot, staleRoot;
-var welcomeRoot, welcomeObject, menu;
-var educationToggle = false;
-var workToggle = false;
-
 init();
 
 function init() {
 
     cssRenderer = createCssRenderer();
     document.getElementById('container').appendChild(cssRenderer.domElement);
+
     educationRoot = new THREE.Object3D();
+    educationHeaderRoot = new THREE.Object3D();
     workRoot = new THREE.Object3D();
     staleRoot = new THREE.Object3D();
     welcomeRoot = new THREE.Object3D();
@@ -35,6 +19,7 @@ function init() {
     menu = document.getElementById('menu');
 
     scene.add(educationRoot);
+    scene.add(educationHeaderRoot);
     scene.add(workRoot);
     scene.add(staleRoot);
     scene.add(welcomeRoot);
@@ -56,8 +41,15 @@ function init() {
     populateWorkObjectArray();
     populateEducationHeadersArray();
 
-    initTwirlingCourseCoordinates();
-    initTwirlingWorkCoordinates();
+    // init course twirling
+    // main twirling = course twirling
+    initTwirlingCoordinates(courseArray.length, alignState.courseTwirlingView, 900, 900, 0);
+    alignState.mainTwirlingView = alignState.courseTwirlingView;
+
+    // init twirling work coorginates
+    // main twirling = course twirling + work twirling 
+    initTwirlingCoordinates(workObjects.length, alignState.workTwirlingView, 700, 0, 700);
+    alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView);
 
     initCourseViewCoordinates();
     initWorkDisplayViewCoordinates();
@@ -138,56 +130,25 @@ function createMenu() {
 
 }
 
-function initTwirlingCourseCoordinates() {
+function initTwirlingCoordinates(len, save, x, y, z) {
 
     var vector = new THREE.Vector3();
-    var courseLength = courseArray.length;
 
-    for (var i = 0; i < courseLength; i += 1) {
-
+    for (var i = 0; i < len; i += 1) {
+        
         var obj = new THREE.Object3D();
-        var courseFormula = 2 * Math.PI * i / courseLength;
+        var formula = 2 * Math.PI * i / len;
 
-        obj.position.x = (900 * Math.cos(courseFormula));
-        obj.position.y = (900 * Math.sin(courseFormula));
-        obj.position.z = 0;
-
-        vector.copy(obj.position).multiplyScalar(2);
-        obj.lookAt(vector);
-        // course twirling 
-        alignState.courseTwirlingView[i] = obj;
-
-        // main twirling = course twirling 
-        alignState.mainTwirlingView[i] = obj;
-    }
-}
-
-function initTwirlingWorkCoordinates() {
-
-    var vector = new THREE.Vector3();
-    var workLength = workObjects.length;
-
-    for (var i = 0; i < workLength; i += 1) {
-
-        var obj = new THREE.Object3D();
-        var workFormula = 2 * Math.PI * i / workLength;
-
-        obj.position.x = (700 * Math.cos(workFormula));
-        obj.position.y = 0;
-        obj.position.z = (700 * Math.sin(workFormula));
+        obj.position.x = (x * Math.cos(formula));
+        obj.position.y = (y * Math.sin(formula));
+        obj.position.z = (z * Math.sin(formula));
 
         vector.copy(obj.position).multiplyScalar(2);
         obj.lookAt(vector);
 
-        // work twirling 
-        alignState.workTwirlingView[i] = obj;
+        // save to location 
+        save[i] = obj;
     }
-    // main twirling = course twirling + work twirling 
-    alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView);
-}
-
-function initTwirlingEducationHeadersCoordinates() {
-    
 }
 
 function initCourseViewCoordinates() {
@@ -265,11 +226,12 @@ function populateCourseObjectArray() {
 
 function populateEducationHeadersArray() {
     for (var i = 0; i < educationHeaders; i += 1) {
+
         var educationDiv = document.createElement('div');
         educationDiv.className = 'education-header';
 
         educationDiv.innerHTML = 
-            '<div class="education=card">' +
+            '<div class="education-card">' +
                 '<h3 class="major">' + 
                     educationHeaders[i].major + 
                 '</h3>' + 
@@ -282,7 +244,7 @@ function populateEducationHeadersArray() {
             '</div>';
 
         var educationObj = new THREE.CSS3DObject(educationDiv);
-        educationRoot.add(educationObj);
+        educationHeaderRoot.add(educationObj);
         educationHeaderObjects[i] = educationObj;
     }
 }
@@ -376,7 +338,7 @@ function render() {
 
 function animate() {
 
-    const time = Date.now() * 0.0004;
+    // const time = Date.now() * 0.0004;
 
     // if (!educationToggle) {
 

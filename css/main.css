@@ -41,7 +41,11 @@ button:active {
 
 /* COURSE LIST AND EDUCATION */
 
-.course-element {
+.education-header {
+  color: white;
+}
+
+.course-element, .education-header {
   width: 400px;
   height: 190px;
   position: relative;
