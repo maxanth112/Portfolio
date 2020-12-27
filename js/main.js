@@ -4,6 +4,7 @@
 var courseObjects = [];
 var workObjects = [];
 var allObjects = [];
+var educationHeaderObjects = [];
 
 var alignState = {
     courseDisplayView: [], // course display + work twirling
@@ -53,6 +54,7 @@ function init() {
 
     populateCourseObjectArray();
     populateWorkObjectArray();
+    populateEducationHeadersArray();
 
     initTwirlingCourseCoordinates();
     initTwirlingWorkCoordinates();
@@ -67,7 +69,7 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
 
-    welcomeIntro();
+    // welcomeIntro();
 
     animate();
 }
@@ -136,28 +138,6 @@ function createMenu() {
 
 }
 
-function toScreenXY(pos3D) {
-
-    var vector = obj.clone();
-    var windowWidth = window.innerWidth;
-    var minWidth = 1280;
-
-  if(windowWidth < minWidth) {
-    windowWidth = minWidth;
-  }
-
-  var widthHalf = (windowWidth/2);
-  var heightHalf = (window.innerHeight/2);
-
-  vector.project(camera);
-
-  vector.x = ( vector.x * widthHalf ) + widthHalf;
-  vector.y = - ( vector.y * heightHalf ) + heightHalf;
-  vector.z = 0;
-
-  return vector;
-}
-
 function initTwirlingCourseCoordinates() {
 
     var vector = new THREE.Vector3();
@@ -204,6 +184,10 @@ function initTwirlingWorkCoordinates() {
     }
     // main twirling = course twirling + work twirling 
     alignState.mainTwirlingView = alignState.mainTwirlingView.concat(alignState.workTwirlingView);
+}
+
+function initTwirlingEducationHeadersCoordinates() {
+    
 }
 
 function initCourseViewCoordinates() {
@@ -280,8 +264,27 @@ function populateCourseObjectArray() {
 }
 
 function populateEducationHeadersArray() {
+    for (var i = 0; i < educationHeaders; i += 1) {
+        var educationDiv = document.createElement('div');
+        educationDiv.className = 'education-header';
 
+        educationDiv.innerHTML = 
+            '<div class="education=card">' +
+                '<h3 class="major">' + 
+                    educationHeaders[i].major + 
+                '</h3>' + 
+                '<p>' + 
+                    "Bachelor of Arts" + 
+                '</p>' + 
+                '<h5 class="college">' + 
+                    educationHeaders[i].college + ', ' + educationHeaders[i].subcollege +
+                '</h5>' + 
+            '</div>';
 
+        var educationObj = new THREE.CSS3DObject(educationDiv);
+        educationRoot.add(educationObj);
+        educationHeaderObjects[i] = educationObj;
+    }
 }
 
 function populateWorkObjectArray() {
