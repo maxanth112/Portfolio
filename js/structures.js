@@ -2,41 +2,75 @@
 ////////                         global variables                        ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var courseObjects = [];
-var workObjects = [];
-var allObjects = [];
+var mathObjects = [];
+var computerObjects = [];
+var econObjects = [];
+
 var educationHeaderObjects = [];
+var educationSummaryObjects = [];
+var educationButtonObjects = [];
+
+var allEducationObjects = [];
+
+var menuButtonObjects = [];
+
+
+var workObjects = [];
 
 var alignState = {
-    courseDisplayView: [],             // course display + work twirling
-    courseTwirlingView: [],            // course twirling
-    mainTwirlingView: [],              // course twirling + work twirling 
-    workDisplayView: [],               // course twirling + work display
-    workTwirlingView: [],              // work twirling 
-    educationHeaderTwirlingView: []
+    menuButtonTwirling: [],
+    allEducationTwirling: [],
+    educationHeaderTwirling: [],
+    educationButtonTwirling: [],
+    educationSummaryTwirling: [],
+    mathTwirling: [],
+    econTwirling: [],
+    computerTwirling: [],
+
+    menuButtonView: [],
+    standardEducationView: [],
+    educationHeaderView: [],
+    educationSummaryView: [],
+    educationHeaderSelectedView: [],
+    educationButtonView: [],
+    mathView: [],
+    econView: [],
+    computerView: []
 };
 
-var controls, camera, scene, cssRenderer, educationRoot, workRoot, staleRoot;
-var welcomeRoot, welcomeObject, menu, educationHeaderRoot;
+var controls, camera, scene, cssRenderer, educationRoot, workRoot;
+var welcomeRoot, welcomeObject, menu;
 
 var educationToggle = false;
+var workToggle = false;
+var bioToggle = false;
+
+var computerToggle = false;
+var mathToggle = false;
+var econToggle = false;
+
 var workToggle = false;
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         navigation menu                         ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var buttonArray = [{
+var menuHeight = -110;
+
+var menuButtonArray = [{
         label: "Education",
-        id: "education_button"
+        id: "education-button",
+        position: [-0.3, menuHeight]
     },
     {
         label: "Professional",
-        id: "work_button"
+        id: "work-button",
+        position: [0, menuHeight]
     },
     {
         label: "Bio",
-        id: "bio_button"
+        id: "bio-button",
+        position: [0.3, menuHeight]
     }
 ]
 
@@ -44,28 +78,100 @@ var buttonArray = [{
 ////////                      education headers                          ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var educationHeaders = [{
+var yHeight = 2;
+var selectedX = -1.4;
+
+var EducationHeaderSelectedArray = [{
+        position: [selectedX, 1.5]
+    },
+    {
+        position: [selectedX, -0.2]
+    },
+    {
+        position: [selectedX, -1.9]
+    }
+]
+
+var educationHeaderArray = [{
         major: "Computer Science",
-        college: "University of Colorado Boulder",
+        college: "University of Colorado Boulder,",
+        focus: "",
         subcollege: "College of Engineering and Applied Science",
+        dates: "January 2020 - May 2021",
         GPA: "4.0",
-        img: ""
+        label: "See Courses",
+        cardId: "computer-header",
+        img: "",
+        id: "computer-button",
+        position: [-1.2, yHeight]
     },
     {
         major: "Mathematics",
-        focus: "Computational Mathematics",
-        college: "University of Colorado Boulder",
+        focus: "[ Computational Mathematics Track ]",
+        college: "University of Colorado Boulder,",
         subcollege: "College of Arts and Sciences",
+        dates: "January 2020 - May 2021",
+        cardId: "math-header",
         GPA: "3.2",
-        img: ""
+        id: "math-button",
+        img: "",
+        label: "See Courses",
+        position: [0, yHeight],
     },
     {
         major: "Economics",
-        focus: "International Economics",
-        college: "University of Colorado Boulder",
+        focus: "[ International Economics Track ]",
+        college: "University of Colorado Boulder,",
         subcollege: "College of Arts and Sciences",
+        dates: "August 2015 - May 2019",
         GPA: "3.2",
-        img: ""
+        label: "See Courses",
+        cardId: "econ-header",
+        id: "econ-button",
+        img: "",
+        position: [1.2, yHeight],
+    }
+];
+
+var summaryX = 0;
+var summaryYStart = 0.8;
+
+var educationSummaryArray = [
+    {
+        clubName: "Mens Lacrosse",
+        url: "https://mcla.us/player/41671/max_wiesner.html",
+        dates: "August 2015 - May 2016",
+        role: "Student Athelete",
+        position: [summaryX, summaryYStart],
+        description: "All - Conference Award, MCLA D1 Player of the Week Award. "
+    },
+    {
+        clubName: "Sigma Phi Epsilon, Colorado Alpha Chapter",
+        dates: "August 2016 - July 2018",
+        role: "Brother",
+        position: [summaryX, summaryYStart - 2],
+        description: "Participated in fundraising events like the Jimmy V."
+    },
+    {
+        clubName: "CAPA Florence",
+        dates: "January 2018 - May 2018",
+        role: "Study Abroad",
+        position: [summaryX, summaryYStart - 1],
+        description: "Photo Contest Winner, student farting around in europe. "
+    },
+    {
+        clubName: "Economics Club",
+        dates: "August 2016 - May 2019",
+        role: "Member",
+        position: [summaryX, summaryYStart - 3],
+        description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
+    },
+    {
+        clubName: "Math Club",
+        dates: "August 2020 - May 2021",
+        role: "Member",
+        position: [summaryX, summaryYStart - 4],
+        description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     }
 ];
 
@@ -73,29 +179,24 @@ var educationHeaders = [{
 ////////                          course list                            ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-const leftMath = -2.55;
-const rightMath = -1.55;
+var left = -0.5;
+var mid = 0.6;
+var right = 1.7;
 
-const rightComputer = 0.5;
-const leftComputer = -0.5;
+var midLeft = 0.05;
+var midRight = 1.15;
 
-const leftEconomics = 1.55;
-const rightEconomics = 2.55;
+var firstRow = 1.5;
+var secondRow = -0.2;
+var thirdRow = -1.9;
 
-var differenceCompSci = 0.2;
-var firstRow = 1.4;
-var secondRow = 0.4;
-var thirdRow = -0.6;
-var fourthRow = -1.6;
-var fifthRow = -2.6;
-
-var courseArray = [{
+var mathArray = [{
         type: "APPM",
         number: "4650",
         name: "Intermediate Numerical Analysis",
         description: "",
         language: "",
-        position: [leftMath, firstRow]
+        position: [left, firstRow]
     },
     {
         type: "APPM",
@@ -103,39 +204,7 @@ var courseArray = [{
         name: "Introduction to Operations Research",
         language: "",
         description: "",
-        position: [rightMath, secondRow]
-    },
-    {
-        type: "APPM",
-        number: "2350",
-        name: "Calculus 3 for Engineers",
-        description: "Multivariable calculus, vector fields, Guass, Green, and Stokes",
-        language: "",
-        position: [leftMath, fourthRow]
-    },
-    {
-        type: "MATH",
-        number: "2001",
-        name: "Discrete Mathematics",
-        description: "",
-        language: "LaTeX",
-        position: [leftMath, thirdRow]
-    },
-    {
-        type: "MATH",
-        number: "2135",
-        name: "Linear Algebra for Math Majors",
-        description: "",
-        language: "LaTeX",
-        position: [rightMath, fourthRow]
-    },
-    {
-        type: "MATH",
-        number: "3001",
-        name: "Analysis 1",
-        description: "",
-        language: "LaTeX",
-        position: [rightMath, thirdRow]
+        position: [mid, firstRow]
     },
     {
         type: "MATH",
@@ -143,7 +212,7 @@ var courseArray = [{
         name: "Ordinary Differential Equations",
         description: "",
         language: "LaTeX",
-        position: [leftMath, secondRow]
+        position: [right, firstRow]
     },
     {
         type: "APPM",
@@ -151,79 +220,50 @@ var courseArray = [{
         name: "Mathematics of Coding and Cryptography",
         description: "",
         language: "Python, Sage",
-        position: [rightMath, firstRow]
+        position: [left, secondRow]
     },
     {
-        type: "CSCI",
-        number: "2270",
-        name: "Data Structures",
+        type: "MATH",
+        number: "3001",
+        name: "Analysis 1",
         description: "",
-        language: "C++",
-        position: [rightComputer, fifthRow + differenceCompSci]
+        language: "LaTeX",
+        position: [mid, secondRow]
     },
     {
-        type: "CSCI",
-        number: "2400",
-        name: "Computer Systems",
-        description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture.",
-        language: "C, C++",
-        position: [rightComputer, fourthRow + differenceCompSci]
+        type: "APPM",
+        number: "2350",
+        name: "Calculus 3 for Engineers",
+        description: "Multivariable calculus, vector fields, Guass, Green, and Stokes",
+        language: "",
+        position: [right, secondRow]
     },
     {
-        type: "CSCI",
-        number: "3308",
-        name: "Software Development Methods and Tools",
+        type: "MATH",
+        number: "2135",
+        name: "Linear Algebra for Math Majors",
         description: "",
-        language: "JavaScript, HTML, CSS, Linux, SQL",
-        position: [leftComputer, fourthRow + differenceCompSci]
+        language: "LaTeX",
+        position: [midLeft, thirdRow]
     },
     {
-        type: "CSCI",
-        number: "2824",
-        name: "Descrete Structures",
+        type: "MATH",
+        number: "2001",
+        name: "Discrete Mathematics",
         description: "",
-        language: "Python",
-        position: [leftComputer, fifthRow + differenceCompSci]
-    },
-    {
-        type: "CSCI",
-        number: "3155",
-        name: "Principals of Programming Languages",
-        description: "",
-        language: "Stata",
-        position: [rightComputer, thirdRow + differenceCompSci]
-    },
-    {
-        type: "CSCI",
-        number: "3104",
-        name: "Algorithms",
-        description: "",
-        language: "C++, Python",
-        position: [leftComputer, thirdRow + differenceCompSci]
-    },
-    {
-        type: "CSCI",
-        number: "3202",
-        name: "Artificial Intelligence",
-        description: "",
-        language: "Python",
-        position: [rightComputer, secondRow + differenceCompSci]
-    },
+        language: "LaTeX",
+        position: [midRight, thirdRow]
+    }
+]
+
+var computerArray = [
     {
         type: "CSCI",
         number: "4593",
         name: "Computer Organization",
         description: "",
         language: "C, Linux",
-        position: [leftComputer, firstRow + differenceCompSci]
-    },
-    {
-        type: "CSCI",
-        number: "3753",
-        name: "Design and Analysis of Operating Systems",
-        description: "",
-        language: "C, Linux",
-        position: [leftComputer, secondRow + differenceCompSci]
+        position: [mid, firstRow]
     },
     {
         type: "CSCI",
@@ -231,7 +271,74 @@ var courseArray = [{
         name: "Object Oriented Analysis and Design",
         description: "",
         language: "",
-        position: [rightComputer, firstRow + differenceCompSci]
+        position: [left, firstRow]
+    },
+    {
+        type: "CSCI",
+        number: "3202",
+        name: "Artificial Intelligence",
+        description: "",
+        language: "Python",
+        position: [right, firstRow]
+    },
+    {
+        type: "CSCI",
+        number: "3308",
+        name: "Software Development Methods and Tools",
+        description: "",
+        language: "JavaScript, HTML, CSS, Linux, SQL",
+        position: [left, secondRow]
+    },
+    {
+        type: "CSCI",
+        number: "3753",
+        name: "Design and Analysis of Operating Systems",
+        description: "",
+        language: "C, Linux",
+        position: [mid, secondRow]
+    },
+    {
+        type: "CSCI",
+        number: "3104",
+        name: "Algorithms",
+        description: "",
+        language: "C++, Python",
+        position: [right, secondRow]
+    },
+    {
+        type: "CSCI",
+        number: "3155",
+        name: "Principals of Programming Languages",
+        description: "",
+        language: "Stata",
+        position: [left, thirdRow]
+    },
+    {
+        type: "CSCI",
+        number: "2400",
+        name: "Computer Systems",
+        description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture.",
+        language: "C, C++",
+        position: [mid, thirdRow]
+    },
+    {
+        type: "CSCI",
+        number: "2270",
+        name: "Data Structures",
+        description: "",
+        language: "C, C++",
+        position: [right, thirdRow]
+    },
+]
+
+var econArray = [
+    {
+        type: "ECON",
+        number: "4848",
+        name: "Applied Econometrics",
+        description: "",
+        language: "Stata",
+        position: [left, firstRow]
     },
     {
         type: "ECON",
@@ -239,47 +346,7 @@ var courseArray = [{
         name: "Statistics with Computer Applications",
         description: "",
         language: "R",
-        position: [rightEconomics, secondRow]
-    },
-    {
-        type: "ECON",
-        number: "4848",
-        name: "Applied Econometrics",
-        description: "",
-        language: "Stata",
-        position: [rightEconomics, firstRow]
-    },
-    {
-        type: "ECON",
-        number: "3080",
-        name: "Intermediate Macroeconomic Theory",
-        description: "",
-        language: "",
-        position: [leftEconomics, thirdRow]
-    },
-    {
-        type: "ECON",
-        number: "3070",
-        name: "Intermediate Microeconomic Theory",
-        description: "",
-        language: "",
-        position: [rightEconomics, thirdRow]
-    },
-    {
-        type: "ECON",
-        number: "2020",
-        name: "Principles of Macroeconomics",
-        description: "",
-        language: "",
-        position: [leftEconomics, fourthRow]
-    },
-    {
-        type: "ECON",
-        number: "2010",
-        name: "Principles of Microeconomics",
-        description: "",
-        language: "",
-        position: [rightEconomics, fourthRow]
+        position: [right, firstRow]
     },
     {
         type: "ECON",
@@ -287,7 +354,7 @@ var courseArray = [{
         name: "Industrial Organization Economics",
         description: "",
         language: "",
-        position: [leftEconomics, firstRow]
+        position: [mid, firstRow]
     },
     {
         type: "ECON",
@@ -295,8 +362,40 @@ var courseArray = [{
         name: "International Finance",
         description: "",
         language: "",
-        position: [leftEconomics, secondRow]
-    }
+        position: [left, secondRow]
+    },
+    {
+        type: "ECON",
+        number: "3080",
+        name: "Intermediate Macroeconomic Theory",
+        description: "",
+        language: "",
+        position: [right, secondRow]
+    },
+    {
+        type: "ECON",
+        number: "3070",
+        name: "Intermediate Microeconomic Theory",
+        description: "",
+        language: "",
+        position: [mid, secondRow]
+    },
+    {
+        type: "ECON",
+        number: "2020",
+        name: "Principles of Macroeconomics",
+        description: "",
+        language: "",
+        position: [midLeft, thirdRow]
+    },
+    {
+        type: "ECON",
+        number: "2010",
+        name: "Principles of Microeconomics",
+        description: "",
+        language: "",
+        position: [midRight, thirdRow]
+    },
 ];
 
 

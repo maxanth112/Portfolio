@@ -6,7 +6,6 @@ body {
 body {
   margin: 0;
   font-family: Helvetica, sans-serif;
-  ;
   overflow: hidden;
   background-color: black;
 }
@@ -16,38 +15,65 @@ body {
   bottom: 20px;
   width: 100%;
   text-align: center;
-  padding: 0;
-  margin: 0;
+  align-content: center;
+  margin: 0px;
 }
 
-
-button {
-  color: rgb(255, 255, 255);
+.menu-button {
+	font-weight: 600;
+  width: 170px;
+  height: 40px;
+	font-size: 17px;
+  outline: none !important;
+  margin: 10px 20px;
+	padding: 0px;
+	color: rgb(28, 232, 247) !important;
+	overflow: hidden;
+	position: relative;
+	color: rgb(28, 232, 247);
   background: transparent;
-  border: 0px;
-  padding: 5px 10px;
   cursor: pointer;
+	box-shadow: 0 0 0 0 #22AFCA;
+	border: 1px solid #22AFCA;
+}
+
+.menu-button::after {
+ background: #0de0d6 none repeat scroll 0 0;
+ content: "";
+ height: 155px;
+ left: -75px;
+ opacity: 0.2;
+ position: absolute;
+ top: -50px;
+ transform: rotate(35deg);
+ transition: all 850ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+ width: 50px;
+ z-index: 1;
+}
+
+.menu-button:hover {
+	transition: all 0s ease-in-out 0s;
+  box-shadow: 0 0 5px 0 #0de0d6;
+  filter: brightness(500%);
+  background-color:transparent;
 
 }
 
-button:hover {
-  background-color: rgba(0, 255, 255, 0.5);
+.menu-button:hover::after {
+ left: 120%;
+ background: #0de0d6;
+ transition: all 850ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
 }
 
-button:active {
-  color: #000000;
-  background-color: rgba(0, 255, 255, 0.75);
+.button-active {
+  background-color:rgb(43, 48, 48);
 }
 
-/* COURSE LIST AND EDUCATION */
+/* COURSE LIST  */
 
-.education-header {
-  color: white;
-}
-
-.course-element, .education-header {
-  width: 400px;
-  height: 190px;
+.course-element{
+  width: 500px;
+  height: 300px;
   position: relative;
   box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
   border: 2px solid rgba(127, 255, 255, 0.25);
@@ -131,6 +157,57 @@ button:active {
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+}
+
+/* EDUCATION HEADER, EDUCATION SUMMARY  */
+
+.education-header, .summary-card {
+  width: 550px;
+  max-width: 100%;
+  height: 270px;
+  max-height: 100%;
+  position: relative;
+  box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+  border: 2px solid rgba(127, 255, 255, 0.25);
+  color: rgba(127, 255, 255, 0.75);
+}
+
+.summary-card {
+  width: 1400px;
+  height: 140px;
+}
+
+.major {
+  font-size: 55px;
+  margin: 10px 20px 3px 20px;
+}
+
+.ba, .club-position {
+  margin: 0px 20px 15px 23px;
+  font-style: italic;
+  font-size: 19px;
+}
+
+.college, .club-header {
+  margin: 0px 20px 2px 25px;  
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.subcollege, .club-description, .club-dates {
+  margin: 0px 20px 2px 25px;  
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.track {
+  margin: 10px 20px 5px 25px;
+  font-size: 16px;
+}
+
+.selected-header {
+  width: 600px;
+  height: 300px;
 }
 
 /* WORK HISTORY TIMELINE */
