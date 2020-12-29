@@ -2,6 +2,23 @@
 ////////                         global variables                        ////////
 /////////////////////////////////////////////////////////////////////////////////
 
+var controls, camera, scene, cssRenderer, targetQuaternion;
+
+var educationRoot, workRoot, stationaryRoot;
+
+var mathCourseRoot, computerCourseRoot, econCourseRoot;
+var educHeaderRoot, educSummaryRoot;
+
+var mathRootMotion = false;
+var computerRootMotion = false;
+var econRootMotion = false;
+var educHeaderRootMotion = false;
+var educSummaryRootMotion = false;
+
+var menu;
+
+var allStationaryObjects = [];
+
 var mathObjects = [];
 var computerObjects = [];
 var econObjects = [];
@@ -14,20 +31,24 @@ var allEducationObjects = [];
 
 var menuButtonObjects = [];
 
+var allWorkObjects = [];
 
-var workObjects = [];
+var workHeaderObjects = [];
+var workContentObjects = [];
 
 var alignState = {
     menuButtonTwirling: [],
+    menuButtonView: [],
+
     allEducationTwirling: [],
+
     educationHeaderTwirling: [],
     educationButtonTwirling: [],
     educationSummaryTwirling: [],
     mathTwirling: [],
     econTwirling: [],
     computerTwirling: [],
-
-    menuButtonView: [],
+    
     standardEducationView: [],
     educationHeaderView: [],
     educationSummaryView: [],
@@ -35,11 +56,16 @@ var alignState = {
     educationButtonView: [],
     mathView: [],
     econView: [],
-    computerView: []
-};
+    computerView: [],
 
-var controls, camera, scene, cssRenderer, educationRoot, workRoot;
-var welcomeRoot, welcomeObject, menu;
+    allWorkTwirling: [],
+
+    workContentTwirling: [],
+    workHeaderTwirling: [],
+    
+    workContentView: [],
+    workHeaderView: []
+};
 
 var educationToggle = false;
 var workToggle = false;
@@ -179,16 +205,16 @@ var educationSummaryArray = [
 ////////                          course list                            ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var left = -0.5;
-var mid = 0.6;
-var right = 1.7;
+var left = -0.3;
+var mid = 0.8;
+var right = 1.9;
 
-var midLeft = 0.05;
-var midRight = 1.15;
+var midLeft = 0.25;
+var midRight = 1.35;
 
-var firstRow = 1.5;
-var secondRow = -0.2;
-var thirdRow = -1.9;
+var firstRow = 1.7;
+var secondRow = 0;
+var thirdRow = -1.7;
 
 var mathArray = [{
         type: "APPM",
@@ -405,7 +431,8 @@ var econArray = [
 ////////                           work history                          ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var workArray = [{
+var workContentArray = [
+    {
         title: "Technical Operations Analyst Intern",
         tools: ["SQL", "Power BI", "Excel"],
         timeline: "January 1019 - May 2019",
@@ -417,8 +444,7 @@ var workArray = [{
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. ",
-        headerPos: [-1, 1],
-        contentPos: [-1, 3]
+        position: [-1, 1]
     },
     {
         title: "Material Operations Analyst",
@@ -432,8 +458,7 @@ var workArray = [{
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. ",
-        headerPos: [0, 1],
-        contentPos: [0, 3]
+        position: [0, 1]
     },
     {
         title: "Data Analyst - Contractor",
@@ -447,10 +472,42 @@ var workArray = [{
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. ",
-        headerPos: [1, 1],
-        contentPos: [1, 3]
+        position: [1, 1]
     }
 ]
+
+var workHeaderArrayPosition = [
+    {
+        position: [2, 2]
+    },
+    {
+        position: [1, 2]
+    },
+    {
+        position: [0, 2]
+    }
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,101 @@
+/* WORK HISTORY TIMELINE */
+
+.name {
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    right: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+  }
+  
+  .header {
+    top: 10px;
+    left: 5px;
+    right: 5px;
+    position: absolute;
+    font-size: 11px;
+    color: rgba(127, 255, 255, 0.75);
+  }
+  
+  .details {
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    font-size: 10px;
+    color: rgba(127, 255, 255, 0.75);
+  }
+  
+  .course-front,
+  .course-back {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .name,
+  .details,
+  .header {
+    padding: 3px;
+    margin: 3px;
+    border: 3px;
+    right: 3px;
+  }
+  
+  .details {
+    top: 55px;
+  }
+  
+  .work-header-element {
+    width: 600px;
+    padding: 3px;
+    margin: 3px;
+    border: 3px;
+    height: 90px;
+    box-shadow: 0px 0px 1px rgba(0, 255, 255, 0.5);
+    border: 2px solid rgba(127, 255, 255, 0.25);
+    color: rgba(127, 255, 255, 0.75);
+    text-align: left;
+    cursor: default;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    font-size: 12px;
+  }
+  
+  .work-element {
+    width: 600px;
+    height: 400px;
+    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+    border: 2px solid rgba(127, 255, 255, 0.25);
+    color: rgba(127, 255, 255, 0.75);
+    text-align: left;
+    cursor: default;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    font-size: 12px;
+  }
+  
+  .work-tools {
+    list-style: none;
+    position: absolute;
+    top: 350px;
+    left: -10px;
+  }
+  
+  .work-tools li {
+    display: inline-block;
+    padding: 5px 5px;
+    border-right: 2px solid;
+    padding: 5px 5px;
+    line-height: 4px;
+  }
+  
+  .work-tools li:last-child {
+    border-right: none;
+  }
+  
+  
