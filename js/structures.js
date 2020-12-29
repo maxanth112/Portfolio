@@ -2,16 +2,25 @@
 ////////                         global variables                        ////////
 /////////////////////////////////////////////////////////////////////////////////
 
+// tweening globals 
 var toInterval = 1000;
 var backInterval = 1800;
 
-var controls, camera, scene, cssRenderer, targetQuaternion;
+// renderers, cameras, etc.
+var controls, camera, scene, cssRenderer;
 
+// roots and root toggles/trackers 
 var educationRoot, workRoot, stationaryRoot;
 
 var mathCourseRoot, computerCourseRoot, econCourseRoot;
 var educHeaderRoot, educSummaryRoot;
 
+var workInternRoot, workMatOpsRoot, workContractRoot;
+var workTimelineRoot;
+
+var workInternToggle = false;
+var workMatOpsToggle = false;
+var workContractToggle = false;
 
 var mathRootMotion = false;
 var computerRootMotion = false;
@@ -19,58 +28,7 @@ var econRootMotion = false;
 var educHeaderRootMotion = false;
 var educSummaryRootMotion = false;
 
-var menu;
-
-var allStationaryObjects = [];
-
-var mathObjects = [];
-var computerObjects = [];
-var econObjects = [];
-
-var educationHeaderObjects = [];
-var educationSummaryObjects = [];
-var educationButtonObjects = [];
-
-var allEducationObjects = [];
-
-var menuButtonObjects = [];
-
-var allWorkObjects = [];
-
-var workHeaderObjects = [];
-var workContentObjects = [];
-
-var alignState = {
-    menuButtonTwirling: [],
-    menuButtonView: [],
-
-    allEducationTwirling: [],
-
-    educationHeaderTwirling: [],
-    educationButtonTwirling: [],
-    educationSummaryTwirling: [],
-    mathTwirling: [],
-    econTwirling: [],
-    computerTwirling: [],
-    
-    standardEducationView: [],
-    educationHeaderView: [],
-    educationSummaryView: [],
-    educationHeaderSelectedView: [],
-    educationButtonView: [],
-    mathView: [],
-    econView: [],
-    computerView: [],
-
-    allWorkTwirling: [],
-
-    workContentTwirling: [],
-    workHeaderTwirling: [],
-    
-    workContentView: [],
-    workHeaderView: []
-};
-
+// toggles / tracking for all 
 var educationToggle = false;
 var workToggle = false;
 var bioToggle = false;
@@ -80,6 +38,79 @@ var mathToggle = false;
 var econToggle = false;
 
 var workToggle = false;
+
+// stationary objects
+var allStationaryObjects = [];
+
+var menuButtonObjects = [];
+
+// education objects 
+var allEducationObjects = [];
+
+var educationHeaderObjects = [];
+var educationSummaryObjects = [];
+var educationButtonObjects = [];
+
+var mathObjects = [];
+var computerObjects = [];
+var econObjects = [];
+
+// work objects 
+var allWorkObjects = [];
+
+var workTimelineObjects = [];
+
+var workInternObjects = [];
+var workMatOpsObjects = [];
+var workContractObjects = [];
+
+
+
+
+
+
+// positioning object
+var alignState = {
+    // stationary positions - twirling 
+    menuButtonTwirling: [],
+
+    // stationary positions - view 
+    menuButtonView: [],
+
+    // education positions - twirling 
+    allEducationTwirling: [],
+
+    educationHeaderTwirling: [],
+    educationButtonTwirling: [],
+    educationSummaryTwirling: [],
+    mathTwirling: [],
+    econTwirling: [],
+    computerTwirling: [],
+     
+    // education position - view
+    standardEducationView: [],
+    educationHeaderView: [],
+    educationSummaryView: [],
+    educationHeaderSelectedView: [],
+    educationButtonView: [],
+    mathView: [],
+    econView: [],
+    computerView: [],
+
+    // work positions - twirling 
+    allWorkTwirling: [],
+
+    workTimelineTwirling: [],
+    workInternTwirling: [],
+    workMatOpsTwirling: [],
+    workContractTwirling: [],
+    
+    // work positions - view 
+    workTimelineView: [],
+    workInternView: [],
+    workMatOpsView: [],
+    workContractView: []
+};
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         navigation menu                         ////////
@@ -110,7 +141,6 @@ var menuButtonArray = [{
 
 var yHeight = 2;
 var selectedX = -1.4;
-
 var EducationHeaderSelectedArray = [{
         position: [selectedX, 1.5]
     },
@@ -165,7 +195,6 @@ var educationHeaderArray = [{
 
 var summaryX = 0;
 var summaryYStart = 0.8;
-
 var educationSummaryArray = [
     {
         clubName: "Mens Lacrosse",
@@ -212,7 +241,6 @@ var educationSummaryArray = [
 var left = -0.3;
 var mid = 0.8;
 var right = 1.9;
-
 var midLeft = 0.25;
 var midRight = 1.35;
 
@@ -428,9 +456,6 @@ var econArray = [
     },
 ];
 
-
-
-
 /////////////////////////////////////////////////////////////////////////////////
 ////////                           work history                          ////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -441,60 +466,76 @@ var workContentArray = [
         tools: ["SQL", "Power BI", "Excel"],
         timeline: "January 1019 - May 2019",
         img: "",
+        company: "Frontier Airlines",
+        id: "intern",
+        months: 5,
         description: "Analyze existing inventory to determine optimal usage and demand \
             levels across all locations. Helped build a new process using existing data to determine \
             new requisitions and part levels. Helped identify out of date materials and their locations, \
             purged these in the system and from the database to improve overall accuracy. Implemented \
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-            uploading new requisitions derived from the new process created. ",
-        position: [-1, 1]
+            uploading new requisitions derived from the new process created. "
     },
     {
         title: "Material Operations Analyst",
         tools: ["Python - Pandas & NumPy", "SQL", "Power BI"],
         timeline: "June 2019 - January 2020",
         img: "",
+        company: "Frontier Airlines",
+        months: 7,
+        id: "matops",
         description: "Analyze existing inventory to determine optimal usage and demand \
             levels across all locations. Helped build a new process using existing data to determine \
             new requisitions and part levels. Helped identify out of date materials and their locations, \
             purged these in the system and from the database to improve overall accuracy. Implemented \
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-            uploading new requisitions derived from the new process created. ",
-        position: [0, 1]
+            uploading new requisitions derived from the new process created. "
     },
     {
-        title: "Data Analyst - Contractor",
+        title: "Data Analyst",
         tools: ["Python - Pandas & NumPy)", "SQL", "Power BI", "PowerApps"],
         timeline: "January 2020 - Presant",
         img: "",
+        months: 13,
+        company: "Contractor",
+        id: "contract",
         description: "Analyze existing inventory to determine optimal usage and demand \
             levels across all locations. Helped build a new process using existing data to determine \
             new requisitions and part levels. Helped identify out of date materials and their locations, \
             purged these in the system and from the database to improve overall accuracy. Implemented \
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
-            uploading new requisitions derived from the new process created. ",
-        position: [1, 1]
+            uploading new requisitions derived from the new process created. "
     }
 ]
 
-var workHeaderArrayPosition = [
+var workViewDisplayArray = [
     {
+        title: 'header',
         position: [2, 2]
     },
     {
+        title: 'content',
         position: [1, 2]
-    },
-    {
-        position: [0, 2]
     }
 ];
 
-
-
-
+var workTimelineDisplayArray = [
+    {
+        title: 'intern',
+        position: [2, 2]
+    },
+    {
+        title: 'matops',
+        position: [1, 2]
+    },
+    {
+        title: 'contract',
+        position: [0, 2]
+    }
+];
 
 
 

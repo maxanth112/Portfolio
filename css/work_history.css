@@ -97,5 +97,132 @@
   .work-tools li:last-child {
     border-right: none;
   }
+ 
   
+  /* TIMELINE */
+
+    .timelines-years {
+      position: absolute;
+      top: 300px;
+      padding: 0 0 0 90px;
+      margin: 35px 0px;
+      white-space: nowrap;
+      border-top: 3px solid orange;
+      list-style: none;
+      font-size: 0;
+    }
+    
+    .timelines-years li {
+      position: relative;
+      display: inline-block;
+      width: 540px;
+      color: #868686;
+      font-size: 20px;
+      margin: 5px 0px;
+      text-indent: -21px;
+    }
+    
+    .timelines-years li:last-child {
+      width: 180px;
+    }
+    
+    .timeline-events {
+      position: absolute;
+      top: 210px;
+      padding: 0;
+      list-style: none;
+      overflow-wrap: break-word; 
+      font-size: 0;
+    }
+    
+    .timeline-events h2,
+    .timeline-events h3,
+    .timeline-events h4 {
+      margin: 0 0 1px 0;
+      font-weight: normal;
+      font-size: 11px;
+    }
+    
+    .timeline-events h2 {
+      font-size: 15px;
+      margin: 0 10px;
+      color: #777;
+      text-transform: uppercase;
+    }
+    
+     .timeline-events h3 {
+      font-size: 17px;
+      margin: 0 10px;
+    }
+    
+    .timeline-events h4 {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 18px;
+      font-style: italic;
+    }
+    
+    .timeline-events li {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .timeline-events li:before {
+      position: absolute;
+      left: 0;
+      bottom: -30px;
+      height: 8px;
+      border-radius: 8px;
+      content: "";
+    }
+    
+    .timeline-events li:nth-child(1):before {
+      bottom: 0px;
+      background: transparent; 
+    }
+   
+    .timeline-events li:before {
+      background: #FF9704;
+    }
+    
+    .timeline-events li h3 {
+      color: #FF9704;
+    }  
+    
+    .timeline-events li:nth-child(2) {
+      bottom: 10px;
+    }
+    
+    .timeline-events li:nth-child(3) {
+      bottom: 20px;
+    }
+    
+    .timeline-events li:nth-child(4) {
+      bottom: 30px;
+    }
+    
+    .timeline-months-2,
+    .timeline-months-2:before {
+      width: 90px;
+    }
+    
+    .timeline-months-5,
+    .timeline-months-5:before {
+      width: 225px;
+    }
+    
+    .timeline-months-7,
+    .timeline-months-7:before {
+      width: 315px;
+    }
+    
+    .timeline-months-13,
+    .timeline-months-13:before {
+      width: 585px;
+    }
+    
+    .timeline-events li:hover {
+      background-color: red;
+    }
   
+    

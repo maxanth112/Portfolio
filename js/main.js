@@ -25,29 +25,10 @@ function init() {
     animate();
 }
 
+// general use helper funcitons
 function sleep(delay) {
     var start = new Date().getTime();
     while (new Date().getTime() < start + delay);
-}
-
-function welcomeIntro() {
-
-    var welcomeDiv = document.createElement('div');
-    welcomeDiv.className = 'welcomeDiv';
-
-    welcomeDiv.innerHTML =
-        '<div class="welcome">' +
-        '<p class="pintro">Welcome to my website.</p>' +
-        '</div>' +
-        '<div class="name">' +
-        '<p class="pintro">Maximillian Wiesner</p>' +
-        '</div>' +
-        '<div class="controls">' +
-        '<p class="pintro">Use this to help you navigate. </p>' +
-        '</div>';
-
-    welcomeObject = new THREE.CSS3DObject(welcomeDiv);
-    welcomeRoot.add(welcomeObject);
 }
 
 function createTwirlingCoordinates(len, save, x, y, z) {
@@ -84,6 +65,128 @@ function createViewCoordinates(arr, save, x, y, z = 1800) {
     }
 }
 
+// main threejs rendering functions 
+function initRoots() {
+
+    targetQuaternion = new THREE.Quaternion();
+
+    educationRoot = new THREE.Object3D();
+    workRoot = new THREE.Object3D();
+    stationaryRoot = new THREE.Object3D();
+
+    scene.add(educationRoot);
+    scene.add(workRoot);
+    scene.add(stationaryRoot);
+    
+    mathCourseRoot = new THREE.Object3D();
+    computerCourseRoot = new THREE.Object3D();
+    econCourseRoot = new THREE.Object3D();
+    educHeaderRoot = new THREE.Object3D();
+    educSummaryRoot = new THREE.Object3D();
+
+    scene.add(mathCourseRoot);
+    scene.add(computerCourseRoot);
+    scene.add(econCourseRoot);
+    scene.add(educHeaderRoot);
+    scene.add(educSummaryRoot);
+
+    workInternRoot = new THREE.Object3D();
+    workMatOpsRoot = new THREE.Object3D();
+    workContractRoot = new THREE.Object3D();
+    workTimelineRoot = new THREE.Object3D();
+
+    scene.add(workInternRoot);
+    scene.add(workMatOpsRoot);
+    scene.add(workContractRoot);
+    scene.add(workTimelineRoot);
+}
+
+function initCamera() {
+
+    camera = new THREE.PerspectiveCamera(
+        90,
+        window.innerWidth / window.innerHeight,
+        100,
+        5000);
+    camera.position.set(0, 0, 2500);
+}
+
+function initControls() {
+
+    controls = new THREE.TrackballControls(camera, cssRenderer.domElement);
+    controls.rotateSpeed = 0.5;
+    controls.minDistance = 1;
+    controls.maxDistance = 4500;
+    controls.addEventListener('change', render);
+}
+
+function initMouseSceneMenu() {
+
+    mouse = new THREE.Vector2();
+    scene = new THREE.Scene();
+    menu = document.getElementById('menu');
+}
+
+function transform(start, end, duration) {
+
+    TWEEN.removeAll();
+    for (var i = 0; i < start.length; i++) {
+
+        var object = start[i];
+        var target = end[i];
+        
+        new TWEEN.Tween(object.position)
+            .to({
+                    x: target.position.x,
+                    y: target.position.y,
+                    z: target.position.z
+                },
+                Math.random() * duration + duration)
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+
+        new TWEEN.Tween(object.rotation)
+            .to({
+                    x: target.rotation.x,
+                    y: target.rotation.y,
+                    z: target.rotation.z
+                },
+                Math.random() * duration + duration)
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+    }
+
+    new TWEEN.Tween(this)
+        .to({}, duration * 2)
+        .onUpdate(render)
+        .start();
+}
+
+function createCssRenderer() {
+
+    var cssRenderer = new THREE.CSS3DRenderer();
+    cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    cssRenderer.domElement.style.top = 0;
+
+    return cssRenderer;
+}
+
+function render() {
+
+    cssRenderer.render(scene, camera);
+}
+
+function animate() {
+
+    scene.updateMatrixWorld();
+    controls.update();
+    TWEEN.update();
+    render();
+    requestAnimationFrame(animate);
+    // updateRotations();
+}
+
+// creating cards and divs 
 function createCourseCards(arr, save, saveRoot) {
 
     for (var i = 0; i < arr.length; i += 1) {
@@ -124,123 +227,6 @@ function createCourseCards(arr, save, saveRoot) {
             econCourseRoot.add(courseObj);
         }
     }
-}
-
-function clearAllNotSelected() {
-    
-    var b1 = document.getElementById("computer-button").parentElement;
-    var b2 = document.getElementById("math-button").parentElement;
-    var b3 = document.getElementById("econ-button").parentElement;
-
-    b1.classList.remove("not-selected-header");
-    b2.classList.remove("not-selected-header");
-    b3.classList.remove("not-selected-header");
-}
-
-function clearAllSelected() {
-
-    var b1 = document.getElementById("computer-button").parentElement;
-    var b2 = document.getElementById("math-button").parentElement;
-    var b3 = document.getElementById("econ-button").parentElement;
-    
-    b1.classList.remove("selected-header");
-    b2.classList.remove("selected-header");
-    b3.classList.remove("selected-header");
-}
-
-function clearAllActiveButtons() {
-    
-    var b1 = document.getElementById("computer-button");
-    var b2 = document.getElementById("math-button");
-    var b3 = document.getElementById("econ-button");
-
-    b1.classList.remove("button-active");
-    b2.classList.remove("button-active");
-    b3.classList.remove("button-active");
-    
-}
-
-function setNotSelected(selected) {
-    
-    var b1 = document.getElementById("computer-button").parentElement;
-    var b2 = document.getElementById("math-button").parentElement;
-    var b3 = document.getElementById("econ-button").parentElement;
-
-    b1.classList.add("not-selected-header");
-    b2.classList.add("not-selected-header");
-    b3.classList.add("not-selected-header");
-    
-    if (selected == "computer") {
-        b1.classList.remove("not-selected-header");
-    } else if (selected == "math") {
-        b2.classList.remove("not-selected-header");
-    } else {
-        b3.classList.remove("not-selected-header");
-    }
-}
-
-function flipToggles(toggle) {
-
-    computerToggle = false;
-    mathToggle = false;
-    econToggle = false;
-    
-    if (toggle == "computer") {
-
-        computerToggle = true;
-    } else if (toggle == "math") {
-
-        mathToggle = true;
-    } else {
-
-        econToggle = true;
-    }
-}
-
-function replaceButtonText(buttonId) {
-    
-    document.getElementById(buttonId).innerHTML = "Main View";
-}
-
-function resetAllButtonText() {
-
-    document.getElementById("computer-button").innerHTML = "See Courses";
-    document.getElementById("math-button").innerHTML = "See Courses";
-    document.getElementById("econ-button").innerHTML = "See Courses";
-}
-
-function manageButton(id) {
-    
-    flipToggles(id);
-    setNotSelected(id);
-    replaceButtonText(id + "-button");
-}
-
-function setEducationButtonSelects(mainButton) {
-
-    var buttons = ["computer-button", "math-button", "econ-button"];
-    buttons = buttons.filter(function removeMain(button) { 
-        return button != mainButton 
-    });
-
-    var b1 = document.getElementById(mainButton);
-    var b2 = document.getElementById(buttons[0]);
-    var b3 = document.getElementById(buttons[1]);
-
-    console.log(buttons[0]);
-    console.log(buttons[1]);
-
-    b1.classList.toggle("button-active");
-    b1.parentElement.classList.toggle("selected-header");
-    
-    b2.classList.remove("button-active");
-    b2.parentElement.classList.remove("selected-header");
-
-    b3.classList.remove("button-active");
-    b3.parentElement.classList.remove("selected-header");
-
-    resetAllButtonText();    
-    eliminateCourseFlipClass();
 }
 
 function createEducationHeaderCards() {
@@ -405,6 +391,8 @@ function createMenuButtons() {
                 this.classList.toggle("button-active");
                 document.getElementById("work-button").classList.remove("button-active");
                 document.getElementById("bio-button").classList.remove("button-active");
+                
+                // education reset 
                 resetAllButtonText();
                 clearAllSelected();
                 clearAllNotSelected();
@@ -415,6 +403,7 @@ function createMenuButtons() {
 
                     setMotionAndToggleFalse("educSummary");
                     setMotionAndToggleFalse("educHeader");
+
                     transform(allEducationObjects, alignState.allEducationTwirling, backInterval);
 
                 } else {
@@ -425,10 +414,38 @@ function createMenuButtons() {
                 }
                 workToggle = false;
             }, false);
-        }
+        } else if (menuButton.id == 'work-button') {
+
+            menuButton.addEventListener('click', function (x) {
+
+                this.classList.toggle("button-active");
+                document.getElementById("education-button").classList.remove("button-active");
+                document.getElementById("bio-button").classList.remove("button-active");
+
+                // education reset 
+                resetAllButtonText();
+                clearAllSelected();
+                clearAllNotSelected();
+                clearAllActiveButtons();
+                eliminateCourseFlipClass();
+
+                if (educationToggle) {
+
+                    setMotionAndToggleFalse("educSummary");
+                    setMotionAndToggleFalse("educHeader");
+                    transform(allWorkObjects, alignState.allWorkTwirling, backInterval);
+
+                } else {
+
+                    stopRotationSetTrue("educSummary");
+                    stopRotationSetTrue("educHeader");
+                    transform(allWorkObjects, alignState.workTimelineView, toInterval);
+                }
+                workToggle = false;
+            }, false);
+        } 
     }
 }
-
 
 function createWorkHeaderCards() {
 
@@ -446,9 +463,20 @@ function createWorkHeaderCards() {
             '</div>';
 
         var workHeaderObj = new THREE.CSS3DObject(workHeaderDiv);
-        workHeaderObjects[i] = workHeaderObj;
-        
-        workRoot.add(workHeaderObj);
+
+        if (workContentArray[i].id == "intern") {
+
+            workInternObjects.push(workHeaderObj);
+            workInternRoot.add(workHeaderObj);
+        } else if (workContentArray[i].id == "matops") {
+
+            workMatOpsObjects.push(workHeaderObj);
+            workMatOpsRoot.add(workHeaderObj);
+        } else if (workContentArray[i].id == "contract") {
+
+            workContractObjects.push(workHeaderObj);
+            workContractRoot.add(workHeaderObj);
+        }
     }
 }
 
@@ -457,7 +485,8 @@ function createWorkContentCards() {
     for (var i = 0; i < workContentArray.length; i += 1) {
 
         var workContentDiv = document.createElement('div');
-        workContentDiv.className = 'work-element';
+        workContentDiv.classList.add('work-element');
+        workContentDiv.classList.add(workContentArray[i].id);
 
         var tools = '';
         for (var j = 0; j < workContentArray[i].tools.length; j += 1) {
@@ -478,253 +507,149 @@ function createWorkContentCards() {
             '</div>';
 
         var workContentObj = new THREE.CSS3DObject(workContentDiv);
-        workContentObjects[i] = workContentObj;
 
-        workRoot.add(workContentObj);
+        if (workContentArray[i].id == "intern") {
+
+            workInternObjects.push(workContentObj);
+            workInternRoot.add(workContentObj);
+        } 
+        if (workContentArray[i].id == "matops") {
+
+            workMatOpsObjects.push(workContentObj);
+            workMatOpsRoot.add(workContentObj);
+        }
+        if (workContentArray[i].id == "contract") {
+
+            workContractObjects.push(workContentObj);
+            workContractRoot.add(workContentObj);
+        }
     }
 }
 
-function transform(start, end, duration) {
+function createWorkTimelineCards() {
+    
+    for (var i = 0; i < workContentArray.length; i += 1) {
 
-    TWEEN.removeAll();
-    for (var i = 0; i < start.length; i++) {
-
-        var object = start[i];
-        var target = end[i];
+        var workTimelineDiv = document.createElement('ul');
+        workTimelineDiv.classList.add("timeline-events");
         
-        new TWEEN.Tween(object.position)
-            .to({
-                    x: target.position.x,
-                    y: target.position.y,
-                    z: target.position.z
-                },
-                Math.random() * duration + duration)
-            .easing(TWEEN.Easing.Exponential.InOut)
-            .start();
+        workTimelineDiv.innerHTML = 
+                '<li class="timeline-months-2">' + 
+                '</li>' + 
+                '<li class="timeline-months-' + workContentArray[i].months + '">' + 
+                    '<h2>' + workContentArray[i].timeline + '</h2>' + 
+                    '<h3>' + workContentArray[i].company + '</h3>' + 
+                    '<h4>' + workContentArray[i].title + '</h4>' + 
+                '</li>';
 
-        new TWEEN.Tween(object.rotation)
-            .to({
-                    x: target.rotation.x,
-                    y: target.rotation.y,
-                    z: target.rotation.z
-                },
-                Math.random() * duration + duration)
-            .easing(TWEEN.Easing.Exponential.InOut)
-            .start();
+        var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
+        
+        workTimelineObjects.push(workTimelineObj);
+        workTimelineRoot.add(workTimelineObj);
     }
-
-    new TWEEN.Tween(this)
-        .to({}, duration * 2)
-        .onUpdate(render)
-        .start();
 }
 
-function createCssRenderer() {
+// managing buttons and toggles 
+function clearAllNotSelected() {
+    
+    var b1 = document.getElementById("computer-button").parentElement;
+    var b2 = document.getElementById("math-button").parentElement;
+    var b3 = document.getElementById("econ-button").parentElement;
 
-    var cssRenderer = new THREE.CSS3DRenderer();
-    cssRenderer.setSize(window.innerWidth, window.innerHeight);
-    cssRenderer.domElement.style.top = 0;
-
-    return cssRenderer;
+    b1.classList.remove("not-selected-header");
+    b2.classList.remove("not-selected-header");
+    b3.classList.remove("not-selected-header");
 }
 
-function render() {
+function clearAllSelected() {
 
-    cssRenderer.render(scene, camera);
+    var b1 = document.getElementById("computer-button").parentElement;
+    var b2 = document.getElementById("math-button").parentElement;
+    var b3 = document.getElementById("econ-button").parentElement;
+    
+    b1.classList.remove("selected-header");
+    b2.classList.remove("selected-header");
+    b3.classList.remove("selected-header");
 }
 
-function animate() {
+function clearAllActiveButtons() {
+    
+    var b1 = document.getElementById("computer-button");
+    var b2 = document.getElementById("math-button");
+    var b3 = document.getElementById("econ-button");
 
-    scene.updateMatrixWorld();
-    controls.update();
-    TWEEN.update();
-    render();
-    requestAnimationFrame(animate);
-    updateRotations();
+    b1.classList.remove("button-active");
+    b2.classList.remove("button-active");
+    b3.classList.remove("button-active");
+    
 }
 
-function flip(element) {
-    $('.' + element).toggleClass('flipped');
+function setNotSelected(selected) {
+    
+    var b1 = document.getElementById("computer-button").parentElement;
+    var b2 = document.getElementById("math-button").parentElement;
+    var b3 = document.getElementById("econ-button").parentElement;
+
+    b1.classList.add("not-selected-header");
+    b2.classList.add("not-selected-header");
+    b3.classList.add("not-selected-header");
+    
+    if (selected == "computer") {
+        b1.classList.remove("not-selected-header");
+    } else if (selected == "math") {
+        b2.classList.remove("not-selected-header");
+    } else {
+        b3.classList.remove("not-selected-header");
+    }
 }
 
-function eliminateCourseFlipClass() {
-    $('.course-card').removeClass('flipped');
+function replaceButtonText(buttonId) {
+    
+    document.getElementById(buttonId).innerHTML = "Main View";
 }
 
-function onWindowResize() {
+function resetAllButtonText() {
 
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    cssRenderer.setSize(window.innerWidth, window.innerHeight);
-    render();
+    document.getElementById("computer-button").innerHTML = "See Courses";
+    document.getElementById("math-button").innerHTML = "See Courses";
+    document.getElementById("econ-button").innerHTML = "See Courses";
 }
 
-function onDocumentMouseMove(event) {
-
-    event.preventDefault();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+function manageButton(id) {
+    
+    flipToggles(id);
+    setNotSelected(id);
+    replaceButtonText(id + "-button");
 }
 
-function initRoots() {
+function setEducationButtonSelects(mainButton) {
 
-    targetQuaternion = new THREE.Quaternion();
+    var buttons = ["computer-button", "math-button", "econ-button"];
+    buttons = buttons.filter(function removeMain(button) { 
+        return button != mainButton 
+    });
 
-    educationRoot = new THREE.Object3D();
-    workRoot = new THREE.Object3D();
-    stationaryRoot = new THREE.Object3D();
+    var b1 = document.getElementById(mainButton);
+    var b2 = document.getElementById(buttons[0]);
+    var b3 = document.getElementById(buttons[1]);
 
-    mathCourseRoot = new THREE.Object3D();
-    computerCourseRoot = new THREE.Object3D();
-    econCourseRoot = new THREE.Object3D();
-    educHeaderRoot = new THREE.Object3D();
-    educSummaryRoot = new THREE.Object3D();
+    console.log(buttons[0]);
+    console.log(buttons[1]);
 
-    scene.add(educationRoot);
-    scene.add(workRoot);
-    scene.add(stationaryRoot);
+    b1.classList.toggle("button-active");
+    b1.parentElement.classList.toggle("selected-header");
+    
+    b2.classList.remove("button-active");
+    b2.parentElement.classList.remove("selected-header");
 
-    scene.add(mathCourseRoot);
-    scene.add(computerCourseRoot);
-    scene.add(econCourseRoot);
-    scene.add(educHeaderRoot);
-    scene.add(educSummaryRoot);
+    b3.classList.remove("button-active");
+    b3.parentElement.classList.remove("selected-header");
+
+    resetAllButtonText();    
+    eliminateCourseFlipClass();
 }
 
-function initCamera() {
-
-    camera = new THREE.PerspectiveCamera(
-        90,
-        window.innerWidth / window.innerHeight,
-        100,
-        5000);
-    camera.position.set(0, 0, 2500);
-}
-
-function initControls() {
-
-    controls = new THREE.TrackballControls(camera, cssRenderer.domElement);
-    controls.rotateSpeed = 0.5;
-    controls.minDistance = 1;
-    controls.maxDistance = 4500;
-    controls.addEventListener('change', render);
-}
-
-function initMouseSceneMenu() {
-
-    mouse = new THREE.Vector2();
-    scene = new THREE.Scene();
-    menu = document.getElementById('menu');
-}
-
-function createAllCards() {
-    // creates the divs (cards) and saves them to the respective objects arrays
-
-    // stationary
-    createMenuButtons();
-
-    allStationaryObjects = menuButtonObjects;
-
-    // education
-    createCourseCards(mathArray, mathObjects, "math");
-    createCourseCards(computerArray, computerObjects, "computer");
-    createCourseCards(econArray, econObjects, "econ");
-    createEducationHeaderCards();
-    createEducationSummaryCards();
-
-    allEducationObjects = mathObjects
-        .concat(computerObjects)
-        .concat(econObjects)
-        .concat(educationHeaderObjects)
-        .concat(educationSummaryObjects);
-
-    // work history
-    createWorkHeaderCards();
-    createWorkContentCards();
-
-    allWorkObjects = workHeaderObjects
-        .concat(workContentObjects);
-}
-
-function createAllTwirlingCoordinates() {
-    // creates twirling coordinates and saves them to the respecive twirling arrays in align states 
-
-    // stationary
-    createTwirlingCoordinates(menuButtonArray.length, alignState.menuButtonTwirling, 50, 50, 0);
-
-    // education 
-    createTwirlingCoordinates(mathArray.length, alignState.mathTwirling, 700, 700, 0);
-    createTwirlingCoordinates(econArray.length, alignState.econTwirling, 700, 700, 0);
-    createTwirlingCoordinates(computerArray.length, alignState.computerTwirling, 700, 700, 0);
-    createTwirlingCoordinates(educationHeaderArray.length, alignState.educationHeaderTwirling, 700, 700, 0);
-    createTwirlingCoordinates(educationSummaryArray.length, alignState.educationSummaryTwirling, 500, 500, 0);
-
-    // work history 
-    createTwirlingCoordinates(workContentArray.length, alignState.workContentTwirling, 700, 700, 0);
-    createTwirlingCoordinates(workHeaderArrayPosition.length, alignState.workHeaderTwirling, 700, 700, 0);
-}
-
-function createAllViewCoordinates() {
-
-    // stationary
-    createViewCoordinates(menuButtonArray, alignState.menuButtonView, 1000, 5, 1925);
-
-    // education
-    createViewCoordinates(mathArray, alignState.mathView, 500, 200);
-    createViewCoordinates(econArray, alignState.econView, 500, 200);
-    createViewCoordinates(computerArray, alignState.computerView, 500, 200);
-    createViewCoordinates(educationHeaderArray, alignState.educationHeaderView, 500, 200);
-    createViewCoordinates(EducationHeaderSelectedArray, alignState.educationHeaderSelectedView, 600, 200);
-    createViewCoordinates(educationSummaryArray, alignState.educationSummaryView, 200, 160);
-
-    alignState.allEducationTwirling = alignState.mathTwirling
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderTwirling)
-        .concat(alignState.educationSummaryTwirling);
-
-    alignState.standardEducationView = alignState.mathTwirling
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderView)
-        .concat(alignState.educationSummaryView);
-
-    alignState.computerView = alignState.mathTwirling
-        .concat(alignState.computerView)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderSelectedView)
-        .concat(alignState.educationSummaryTwirling);
-
-    alignState.mathView = alignState.mathView
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderSelectedView)
-        .concat(alignState.educationSummaryTwirling);
-
-    alignState.econView = alignState.mathTwirling
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econView)
-        .concat(alignState.educationHeaderSelectedView)
-        .concat(alignState.educationSummaryTwirling);
-
-    // work history
-    createViewCoordinates(workContentArray, alignState.workContentView, 300, 200);
-    createViewCoordinates(workHeaderArrayPosition, alignState.workHeaderView, 340, 230);
-
-    alignState.allWorkTwirling = alignState.workContentTwirling
-        .concat(alignState.workHeaderTwirling);
-}
-
-function startTransformAllCourseObjects() {
-
-    transform(allEducationObjects
-            .concat(allWorkObjects)
-            .concat(allStationaryObjects), 
-        alignState.allEducationTwirling
-            .concat(alignState.allWorkTwirling)
-            .concat(alignState.menuButtonView), 500);
-}
-
+// managing rotations and toggles 
 function stopRotationSetTrue(root) {
 
     if ( root ==  "math" ) {
@@ -823,8 +748,205 @@ function setMotionAndToggleFalse(root) {
 
         educationToggle = false;
         educSummaryRootMotion = false;
-    } else if ( root == "f" ) {
+    } else if ( root == "workHeader" ) {
 
-        mathRootMotion = false;
+        
     }
+}
+
+function flipToggles(toggle) {
+
+    computerToggle = false;
+    mathToggle = false;
+    econToggle = false;
+    
+    if (toggle == "computer") {
+
+        computerToggle = true;
+    } else if (toggle == "math") {
+
+        mathToggle = true;
+    } else {
+
+        econToggle = true;
+    }
+}
+
+// managing flipping cards 
+function flip(element) {
+    $('.' + element).toggleClass('flipped');
+}
+
+function eliminateCourseFlipClass() {
+    $('.course-card').removeClass('flipped');
+}
+
+// calling all create/coordinate functions 
+function createAllCards() {
+    // creates the divs (cards) and saves them to the respective objects arrays
+
+    // stationary
+    createMenuButtons();
+
+    allStationaryObjects = menuButtonObjects;
+
+    // education
+    createCourseCards(mathArray, mathObjects, "math");
+    createCourseCards(computerArray, computerObjects, "computer");
+    createCourseCards(econArray, econObjects, "econ");
+    createEducationHeaderCards();
+    createEducationSummaryCards();
+
+    allEducationObjects = mathObjects
+        .concat(computerObjects)
+        .concat(econObjects)
+        .concat(educationHeaderObjects)
+        .concat(educationSummaryObjects);
+
+    // work history
+    createWorkTimelineCards();
+    createWorkHeaderCards();
+    createWorkContentCards();
+    
+    allWorkObjects = workTimelineObjects
+        .concat(workInternObjects)
+        .concat(workMatOpsObjects)
+        .concat(workContractObjects);
+}
+
+function createAllTwirlingCoordinates() {
+    // creates twirling coordinates and saves them to the respecive twirling arrays in align states 
+
+    // stationary
+    createTwirlingCoordinates(menuButtonArray.length, alignState.menuButtonTwirling, 50, 50, 0);
+
+    // education 
+    createTwirlingCoordinates(mathArray.length, alignState.mathTwirling, 700, 700, 0);
+    createTwirlingCoordinates(econArray.length, alignState.econTwirling, 700, 700, 0);
+    createTwirlingCoordinates(computerArray.length, alignState.computerTwirling, 700, 700, 0);
+    createTwirlingCoordinates(educationHeaderArray.length, alignState.educationHeaderTwirling, 700, 700, 0);
+    createTwirlingCoordinates(educationSummaryArray.length, alignState.educationSummaryTwirling, 500, 500, 0);
+
+    // work history 
+    createTwirlingCoordinates(workTimelineObjects.length, alignState.workTimelineTwirling, 2100, 2100, 0);
+    createTwirlingCoordinates(workInternObjects.length, alignState.workInternTwirling, 700, 700, 0);
+    createTwirlingCoordinates(workMatOpsObjects.length, alignState.workMatOpsTwirling, 800, 800, 0);
+    createTwirlingCoordinates(workContractObjects.length, alignState.workContractTwirling, 900, 900, 0);
+    
+}
+
+function createAllViewCoordinates() {
+
+    // stationary
+    createViewCoordinates(menuButtonArray, alignState.menuButtonView, 1000, 5, 1925);
+
+    // education
+    createViewCoordinates(mathArray, alignState.mathView, 500, 200);
+    createViewCoordinates(econArray, alignState.econView, 500, 200);
+    createViewCoordinates(computerArray, alignState.computerView, 500, 200);
+    createViewCoordinates(educationHeaderArray, alignState.educationHeaderView, 500, 200);
+    createViewCoordinates(EducationHeaderSelectedArray, alignState.educationHeaderSelectedView, 600, 200);
+    createViewCoordinates(educationSummaryArray, alignState.educationSummaryView, 200, 160);
+    
+    // work history
+    createViewCoordinates(workViewDisplayArray, alignState.workInternView, 300, 200);
+    createViewCoordinates(workViewDisplayArray, alignState.workMatOpsView, 340, 230);
+    createViewCoordinates(workViewDisplayArray, alignState.workContractView, 340, 230);
+    createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView, 340, 230);
+
+    // just all education twirling 
+    alignState.allEducationTwirling = alignState.mathTwirling
+        .concat(alignState.computerTwirling)
+        .concat(alignState.econTwirling)
+        .concat(alignState.educationHeaderTwirling)
+        .concat(alignState.educationSummaryTwirling);
+
+    // just all work twirling 
+    alignState.allWorkTwirling = alignState.workTimelineTwirling
+        .concat(alignState.workInternTwirling)
+        .concat(alignState.workMatOpsTwirling)
+        .concat(alignState.workContractTwirling);
+
+    // specific education views 
+    alignState.standardEducationView = alignState.mathTwirling
+        .concat(alignState.computerTwirling)
+        .concat(alignState.econTwirling)
+        .concat(alignState.educationHeaderView)
+        .concat(alignState.educationSummaryView)
+        .concat(alignState.allWorkTwirling);
+
+    alignState.computerView = alignState.mathTwirling
+        .concat(alignState.computerView)
+        .concat(alignState.econTwirling)
+        .concat(alignState.educationHeaderSelectedView)
+        .concat(alignState.educationSummaryTwirling)
+        .concat(alignState.allWorkTwirling);
+
+    alignState.mathView = alignState.mathView
+        .concat(alignState.computerTwirling)
+        .concat(alignState.econTwirling)
+        .concat(alignState.educationHeaderSelectedView)
+        .concat(alignState.educationSummaryTwirling)
+        .concat(alignState.allWorkTwirling);
+
+    alignState.econView = alignState.mathTwirling
+        .concat(alignState.computerTwirling)
+        .concat(alignState.econView)
+        .concat(alignState.educationHeaderSelectedView)
+        .concat(alignState.educationSummaryTwirling)
+        .concat(alignState.allWorkTwirling);
+
+    // specific work views 
+    alignState.workTimelineView = alignState.workTimelineView
+        .concat(alignState.workInternTwirling)
+        .concat(alignState.workMatOpsTwirling)
+        .concat(alignState.workContractTwirling);
+}
+
+// initial site startup 
+function startTransformAllCourseObjects() {
+
+    transform(allEducationObjects
+            .concat(allWorkObjects)
+            .concat(allStationaryObjects), 
+
+        alignState.allEducationTwirling
+            .concat(alignState.allWorkTwirling)
+            .concat(alignState.menuButtonView), 500);
+}
+
+function welcomeIntro() {
+
+    var welcomeDiv = document.createElement('div');
+    welcomeDiv.className = 'welcomeDiv';
+
+    welcomeDiv.innerHTML =
+        '<div class="welcome">' +
+        '<p class="pintro">Welcome to my website.</p>' +
+        '</div>' +
+        '<div class="name">' +
+        '<p class="pintro">Maximillian Wiesner</p>' +
+        '</div>' +
+        '<div class="controls">' +
+        '<p class="pintro">Use this to help you navigate. </p>' +
+        '</div>';
+
+    welcomeObject = new THREE.CSS3DObject(welcomeDiv);
+    welcomeRoot.add(welcomeObject);
+}
+
+// general event listeners 
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    render();
+}
+
+function onDocumentMouseMove(event) {
+
+    event.preventDefault();
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
