@@ -2,12 +2,16 @@
 ////////                         global variables                        ////////
 /////////////////////////////////////////////////////////////////////////////////
 
+var toInterval = 1000;
+var backInterval = 1800;
+
 var controls, camera, scene, cssRenderer, targetQuaternion;
 
 var educationRoot, workRoot, stationaryRoot;
 
 var mathCourseRoot, computerCourseRoot, econCourseRoot;
 var educHeaderRoot, educSummaryRoot;
+
 
 var mathRootMotion = false;
 var computerRootMotion = false;
