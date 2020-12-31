@@ -28,16 +28,26 @@ var econRootMotion = false;
 var educHeaderRootMotion = false;
 var educSummaryRootMotion = false;
 
+var workTimelineRootMotion = false;
+var workInternRootMotion = false;
+var workMatOpsRootMotion = false;
+var workContractRootMotion = false;
+
 // toggles / tracking for all 
 var educationToggle = false;
-var workToggle = false;
+var workTimelineToggle = false;
 var bioToggle = false;
 
 var computerToggle = false;
 var mathToggle = false;
 var econToggle = false;
 
-var workToggle = false;
+var internToggle = false; 
+var matopsToggle = false;
+var contractToggle = false;
+
+// all objects 
+var allObjects = [];
 
 // stationary objects
 var allStationaryObjects = [];
@@ -71,6 +81,9 @@ var workContractObjects = [];
 
 // positioning object
 var alignState = {
+    // starting view
+    startingView: [],
+
     // stationary positions - twirling 
     menuButtonTwirling: [],
 
@@ -106,6 +119,8 @@ var alignState = {
     workContractTwirling: [],
     
     // work positions - view 
+    workDefaultView: [],
+
     workTimelineView: [],
     workInternView: [],
     workMatOpsView: [],
@@ -462,10 +477,8 @@ var econArray = [
 
 var workContentArray = [
     {
-        title: "Technical Operations Analyst Intern",
-        tools: ["SQL", "Power BI", "Excel"],
-        timeline: "January 1019 - May 2019",
-        img: "",
+        title: "Technical Operations Analyst",
+        timeline: "Jan 1019 - May 2019",
         company: "Frontier Airlines",
         id: "intern",
         months: 5,
@@ -479,9 +492,7 @@ var workContentArray = [
     },
     {
         title: "Material Operations Analyst",
-        tools: ["Python - Pandas & NumPy", "SQL", "Power BI"],
-        timeline: "June 2019 - January 2020",
-        img: "",
+        timeline: "June 2019 - jan 2020",
         company: "Frontier Airlines",
         months: 7,
         id: "matops",
@@ -495,9 +506,7 @@ var workContentArray = [
     },
     {
         title: "Data Analyst",
-        tools: ["Python - Pandas & NumPy)", "SQL", "Power BI", "PowerApps"],
-        timeline: "January 2020 - Presant",
-        img: "",
+        timeline: "jan 2020 - Presant",
         months: 13,
         company: "Contractor",
         id: "contract",
@@ -511,36 +520,153 @@ var workContentArray = [
     }
 ]
 
+var workToolsArray = [
+    {
+        tool: "SQL",
+        score: {
+            intern: 10,
+            matops: 9,
+            contract: 3
+        },
+        image: './../img/sql.png'
+    },
+    {
+        tool: "Power BI",
+        score: {
+            intern: 10,
+            matops: 9,
+            contract: 3
+        },
+        image: './../img/powerbi.png'
+    },
+    {
+        tool: "Python",
+        score: {
+            intern: 10,
+            matops: 9,
+            contract: 3
+        },
+        image: './../img/python.png'
+    },
+    {
+        tool: "PowerApps",
+        score: {
+            intern: 10,
+            matops: 1,
+            contract: 3
+        },
+        image: './../img/powerapps.png'
+    },
+    {
+        tool: "Excel",
+        score: {
+            intern: 10,
+            matops: 1,
+            contract: 3
+        },
+        image: './../img/excel.png'
+    }
+];
+
 var workViewDisplayArray = [
     {
         title: 'header',
-        position: [2, 2]
+        position: [0.5, 2]
     },
     {
         title: 'content',
-        position: [1, 2]
+        position: [0.5, 0]
     }
 ];
 
+var timelineY = -3.5;
 var workTimelineDisplayArray = [
     {
         title: 'intern',
-        position: [2, 2]
+        position: [-1.02, timelineY - 0.13]
     },
     {
         title: 'matops',
-        position: [1, 2]
+        position: [-0.47, timelineY  - 0.1]
     },
     {
         title: 'contract',
-        position: [0, 2]
+        position: [0.44, timelineY - 0.085]
+    },
+    {
+        title: 'timeline',
+        position: [-1.37, timelineY + 2.25]
+    },
+    {
+        title: 'left-arrow',
+        position: [-1.55, timelineY + 0.9]
+    },
+    {
+        title: 'right-arrow',
+        position: [1.55, timelineY + 0.9]
     }
 ];
 
+var toolsX = -0.5;
 
+var workViewDisplayArrayIntern = workViewDisplayArray.concat([
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    }
+]);
 
+var workViewDisplayArrayMatOps = workViewDisplayArray.concat([
+    {
+        tool: "SQL",
+        position: [toolsX, 1]
+    },
+    {
+        tool: "Power BI",
+        position: [toolsX, -1]
+    },
+    {
+        tool: "Python",
+        position: [toolsX, 0]
+    },
+    {
+        tool: "PowerApps",
+        position: [toolsX, 2]
+    },
+    {
+        tool: "Excel",
+        position: [toolsX, 3]
+    }
+]);
 
-
+var workViewDisplayArrayContract = workViewDisplayArray.concat([
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    },
+    {
+        position: [1, 1]
+    }
+]);
 
 
 

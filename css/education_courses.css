@@ -88,3 +88,12 @@
     transform: rotateY(180deg);
   }
   
+  
+.course-front,
+.course-back {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
