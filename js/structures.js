@@ -482,12 +482,7 @@ var workContentArray = [
         company: "Frontier Airlines",
         id: "intern",
         months: 5,
-        description: "Analyze existing inventory to determine optimal usage and demand \
-            levels across all locations. Helped build a new process using existing data to determine \
-            new requisitions and part levels. Helped identify out of date materials and their locations, \
-            purged these in the system and from the database to improve overall accuracy. Implemented \
-            automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
-            phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
+        description: "Analyze existdfgdsfdsgfaircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. "
     },
     {
@@ -607,64 +602,92 @@ var workTimelineDisplayArray = [
     }
 ];
 
-var toolsX = -0.5;
+var toolsX = -1.4;
+var toolsGap = 0.6;
+var toolsRowOne = -0.5;
+var toolsRowTwo = toolsRowOne - toolsGap;
+var toolsRowThree = toolsRowOne - 2 * toolsGap;
+var toolsRowFour = toolsRowOne - 3 * toolsGap;
+var toolsRowFive = toolsRowOne - 4 * toolsGap;
 
 var workViewDisplayArrayIntern = workViewDisplayArray.concat([
     {
-        position: [1, 1]
+        tool: "SQL",
+        position: [toolsX, toolsRowThree]
     },
     {
-        position: [1, 1]
+        tool: "Power BI",
+        position: [toolsX, toolsRowOne]
     },
     {
-        position: [1, 1]
+        tool: "Python",
+        position: [toolsX, toolsRowFour]
     },
     {
-        position: [1, 1]
+        tool: "PowerApps",
+        position: [toolsX, toolsRowFive]
     },
     {
-        position: [1, 1]
+        tool: "Excel",
+        position: [toolsX, toolsRowTwo]
+    },
+    {
+        tool: "Container",
+        position: [toolsX, toolsRowOne + 2]
     }
 ]);
 
 var workViewDisplayArrayMatOps = workViewDisplayArray.concat([
     {
         tool: "SQL",
-        position: [toolsX, 1]
+        position: [toolsX, toolsRowTwo]
     },
     {
         tool: "Power BI",
-        position: [toolsX, -1]
+        position: [toolsX, toolsRowThree]
     },
     {
         tool: "Python",
-        position: [toolsX, 0]
+        position: [toolsX, toolsRowOne]
     },
     {
         tool: "PowerApps",
-        position: [toolsX, 2]
+        position: [toolsX, toolsRowFive]
     },
     {
         tool: "Excel",
-        position: [toolsX, 3]
+        position: [toolsX, toolsRowFour]
+    },
+    {
+        tool: "Container",
+        position: [toolsX, toolsRowOne]
     }
 ]);
 
 var workViewDisplayArrayContract = workViewDisplayArray.concat([
     {
-        position: [1, 1]
+        tool: "SQL",
+        position: [toolsX, toolsRowOne]
     },
     {
-        position: [1, 1]
+        tool: "Power BI",
+        position: [toolsX, toolsRowTwo]
     },
     {
-        position: [1, 1]
+        tool: "Python",
+        position: [toolsX, toolsRowFour]
     },
     {
-        position: [1, 1]
+        tool: "PowerApps",
+        position: [toolsX, toolsRowFive]
     },
     {
-        position: [1, 1]
+        tool: "Excel",
+        position: [toolsX, toolsRowThree]
+    },
+    {
+        tool: "Container",
+        position: [toolsX, toolsRowOne]
     }
 ]);
 

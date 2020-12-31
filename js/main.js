@@ -183,7 +183,7 @@ function animate() {
     TWEEN.update();
     render();
     requestAnimationFrame(animate);
-    updateRotations();
+    // updateRotations();
 }
 
 // creating cards and divs 
@@ -447,7 +447,7 @@ function createMenuButtons() {
                 } else {
 
                     stopRotationSetTrue("workTimeline");
-                    transform(allObjects, alignState.workMatOpsView, toInterval);
+                    transform(allObjects, alignState.workInternView, toInterval);
                 }
                 educationToggle = false;
             }, false);
@@ -542,15 +542,15 @@ function createWorkToolsCards() {
             // the tool div inner html
             var hide = workToolsArray[i].score[toolCategories[k]] ? "" : "hide";
 
-            var toolHtml = '<ul class="tool-row ' + hide + '">' + 
-                '<img class="tool-row-img" src="' + 
-                    workToolsArray[i].image +
+            var toolHtml = '<ul class="tool-row ' + hide + '">' +
+                '<img class="tool-row-img" src="' +
+                workToolsArray[i].image +
                 '">';
 
             // build the rankings 
             for (var j = 0; j < 10; j += 1) {
 
-                if (j <  workToolsArray[i].score[toolCategories[k]]) {
+                if (j < workToolsArray[i].score[toolCategories[k]]) {
 
                     toolHtml += '<li class="active">' + '</li>';
                 } else {
@@ -558,37 +558,64 @@ function createWorkToolsCards() {
                     toolHtml += '<li></li>';
                 }
             }
-            
+
             toolHtml += '</ul>';
             workToolsDiv.innerHTML = toolHtml;
             var workToolsObj = new THREE.CSS3DObject(workToolsDiv);
 
             if (toolCategories[k] == "intern") {
 
-                console.log("intern");
                 workInternObjects.push(workToolsObj);
                 workInternRoot.add(workToolsObj);
             }
             if (toolCategories[k] == "matops") {
-    
-                console.log("matops");
+
                 workMatOpsObjects.push(workToolsObj);
                 workMatOpsRoot.add(workToolsObj);
             }
             if (toolCategories[k] == "contract") {
-    
-                console.log("contract");
+
                 workContractObjects.push(workToolsObj);
                 workContractRoot.add(workToolsObj);
             }
         }
-    }    
+    }
+}
+
+function createWorkToolsContainer() {
+
+    var toolCategories = ["intern", "matops", "contract"];
+
+    for (var i = 0; i < toolCategories.length; i += 1) {
+
+        var toolContainer = document.createElement('div');
+        toolContainer.classList.add('tool-containter');
+        toolContainer.innerHTML = '<h2>HEYYYY</h2>';
+        var toolContainerObj = new THREE.CSS3DObject(toolContainer);
+    
+        if (toolCategories[i] == "intern") {
+    
+            workInternObjects.push(toolContainerObj);
+            workInternRoot.add(toolContainerObj);
+        }
+        if (toolCategories[i] == "matops") {
+    
+            workMatOpsObjects.push(toolContainerObj);
+            workMatOpsRoot.add(toolContainerObj);
+        }
+        if (toolCategories[i] == "contract") {
+    
+            console.log("dkslhf");
+            workContractObjects.push(toolContainerObj);
+            workContractRoot.add(toolContainerObj);
+        }
+    }
 }
 
 function createSocialMedia() {
     var html = '<div class="flex-center">' +
-    '<i class="fa fa-github fa-4x icon-3d">' + '</i>' +
-    '</div>';
+        '<i class="fa fa-github fa-4x icon-3d">' + '</i>' +
+        '</div>';
 }
 
 function createWorkTimelineCards() {
@@ -616,11 +643,11 @@ function createWorkTimelineCards() {
     var workTimelineList = document.createElement('ul');
     workTimelineList.classList.add("timeline-years");
 
-    workTimelineList.innerHTML = 
-        '<ul class="timelines-years">' + 
-            '<li>2019</li>' + 
-            '<li>2020</li>' + 
-            '<li>2021</li>' + 
+    workTimelineList.innerHTML =
+        '<ul class="timelines-years">' +
+        '<li>2019</li>' +
+        '<li>2020</li>' +
+        '<li>2021</li>' +
         '</ul>';
 
     var workTimelineListObj = new THREE.CSS3DObject(workTimelineList);
@@ -632,7 +659,7 @@ function createWorkTimelineCards() {
     leftButton.classList.add('left');
     rightButton.classList.add('right');
 
-    var content = 
+    var content =
         '<span></span>' +
         '<span></span>' +
         '<span></span>' +
@@ -910,11 +937,14 @@ function createAllCards() {
     createWorkHeaderCards();
     createWorkContentCards();
     createWorkToolsCards();
+    createWorkToolsContainer();
 
     allWorkObjects = workTimelineObjects
         .concat(workInternObjects)
         .concat(workMatOpsObjects)
         .concat(workContractObjects);
+
+    console.log(allWorkObjects);
 
     // ALL OBJECTS
     allObjects = allStationaryObjects
