@@ -94,11 +94,13 @@ function initRoots() {
     workMatOpsRoot = new THREE.Object3D();
     workContractRoot = new THREE.Object3D();
     workTimelineRoot = new THREE.Object3D();
+    workDefaultRoot = new THREE.Object3D();
 
     scene.add(workInternRoot);
     scene.add(workMatOpsRoot);
     scene.add(workContractRoot);
     scene.add(workTimelineRoot);
+    scene.add(workDefaultRoot);
 }
 
 function initCamera() {
@@ -183,7 +185,7 @@ function animate() {
     TWEEN.update();
     render();
     requestAnimationFrame(animate);
-    // updateRotations();
+    updateRotations();
 }
 
 // creating cards and divs 
@@ -264,7 +266,8 @@ function createEducationHeaderCards() {
 
                     transform(allObjects, alignState.computerView, toInterval);
                 }
-                workTimelineToggle = false;
+                workDefaultToggle = false;
+                checkToggles();
             }, false);
 
         } else if (courseButton.id == 'math-button') {
@@ -289,7 +292,8 @@ function createEducationHeaderCards() {
 
                     transform(allObjects, alignState.mathView, toInterval);
                 }
-                workTimelineToggle = false;
+                workDefaultToggle = false;
+                checkToggles();
             }, false);
         } else if (courseButton.id == 'econ-button') {
 
@@ -313,7 +317,8 @@ function createEducationHeaderCards() {
 
                     transform(allObjects, alignState.econView, toInterval);
                 }
-                workTimelineToggle = false;
+                workDefaultToggle = false;
+                checkToggles();
             }, false);
         }
 
@@ -401,14 +406,21 @@ function createMenuButtons() {
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
 
+                setMotionAndToggleFalse("econ");
+                    setMotionAndToggleFalse("math");
+                    setMotionAndToggleFalse("computer");
+
+                    setMotionAndToggleFalse("workDefault");
+                    setMotionAndToggleFalse("intern");
+                    setMotionAndToggleFalse("contract");
+                    setMotionAndToggleFalse("matops");
+                    setMotionAndToggleFalse("workTimeline");
+
                 if (educationToggle) {
 
                     setMotionAndToggleFalse("educSummary");
                     setMotionAndToggleFalse("educHeader");
-                    setMotionAndToggleFalse("workTimeline");
-                    setMotionAndToggleFalse("econ");
-                    setMotionAndToggleFalse("math");
-                    setMotionAndToggleFalse("computer");
+                    
 
                     transform(allObjects, alignState.startingView, backInterval);
 
@@ -419,7 +431,8 @@ function createMenuButtons() {
 
                     transform(allObjects, alignState.standardEducationView, toInterval);
                 }
-                workTimelineToggle = false;
+                workDefaultToggle = false;
+                checkToggles();
             }, false);
         } else if (menuButton.id == 'work-button') {
 
@@ -435,21 +448,31 @@ function createMenuButtons() {
                 clearAllNotSelected();
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
+                setMotionAndToggleFalse("educHeader");
+                setMotionAndToggleFalse("educSummary");
+                setMotionAndToggleFalse("econ");
+                setMotionAndToggleFalse("math");
+                setMotionAndToggleFalse("computer");
+                setMotionAndToggleFalse("intern");
+                setMotionAndToggleFalse("contract");
+                setMotionAndToggleFalse("matops");
 
-                if (workTimelineToggle) {
+                if (workDefaultToggle) {
 
-                    setMotionAndToggleFalse("educSummary");
-                    setMotionAndToggleFalse("educHeader");
+                    setMotionAndToggleFalse("workDefault");
                     setMotionAndToggleFalse("workTimeline");
 
                     transform(allObjects, alignState.startingView, backInterval);
 
                 } else {
 
+                    stopRotationSetTrue("workDefault");
                     stopRotationSetTrue("workTimeline");
-                    transform(allObjects, alignState.workInternView, toInterval);
+                    
+                    transform(allObjects, alignState.workDefaultView, toInterval);
                 }
                 educationToggle = false;
+                checkToggles();
             }, false);
         }
     }
@@ -589,8 +612,7 @@ function createWorkToolsContainer() {
     for (var i = 0; i < toolCategories.length; i += 1) {
 
         var toolContainer = document.createElement('div');
-        toolContainer.classList.add('tool-containter');
-        toolContainer.innerHTML = '<h2>HEYYYY</h2>';
+        toolContainer.innerHTML = '<div class="tool-container"><h1 class="tools-header">Tools Used</h1></div>';
         var toolContainerObj = new THREE.CSS3DObject(toolContainer);
     
         if (toolCategories[i] == "intern") {
@@ -605,7 +627,6 @@ function createWorkToolsContainer() {
         }
         if (toolCategories[i] == "contract") {
     
-            console.log("dkslhf");
             workContractObjects.push(toolContainerObj);
             workContractRoot.add(toolContainerObj);
         }
@@ -653,29 +674,146 @@ function createWorkTimelineCards() {
     var workTimelineListObj = new THREE.CSS3DObject(workTimelineList);
     workTimelineObjects.push(workTimelineListObj);
     workTimelineRoot.add(workTimelineListObj);
+}
 
+function createWorkButtons() {
+    
     var leftButton = document.createElement('div');
     var rightButton = document.createElement('div');
-    leftButton.classList.add('left');
-    rightButton.classList.add('right');
 
-    var content =
-        '<span></span>' +
-        '<span></span>' +
-        '<span></span>' +
-        '<span></span>';
+    leftButton.classList.add("flex-container");
+    rightButton.classList.add("flex-container");
+    leftButton.classList.add('left-arrow');
+    rightButton.classList.add('right-arrow');
 
-    leftButton.innerHTML = content;
-    rightButton.innerHTML = content;
+    leftButton.innerHTML = '<i class="fa fa-arrow-left fa-4x icon-3d"></i>';
+    rightButton.innerHTML =  '<i class="fa fa-arrow-right fa-4x icon-3d"></i>';
 
     var leftButtonObj = new THREE.CSS3DObject(leftButton);
     var rightButtonObj = new THREE.CSS3DObject(rightButton);
+
+    leftButton.addEventListener('click', function(x) {
+
+        if (workDefaultToggle) { // default -> intern
+
+            stopRotationSetTrue("intern");
+            stopRotationSetTrue("workTimeline");
+
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("contract");
+            setMotionAndToggleFalse("matops");
+            transform(allObjects, alignState.workInternView, backInterval);
+        } else if (workMatOpsToggle) { // matops -> intern
+
+            stopRotationSetTrue("intern");
+            stopRotationSetTrue("workTimeline");
+
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("contract");
+            setMotionAndToggleFalse("matops");
+            transform(allObjects, alignState.workInternView, backInterval);
+        } else if (workContractToggle) { // contract -> matops 
+
+            stopRotationSetTrue("matops");
+            stopRotationSetTrue("workTimeline");
+            
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("intern");
+            setMotionAndToggleFalse("contract");
+            transform(allObjects, alignState.workMatOpsView, backInterval);
+        } else if (workInternToggle) { // intern -> contract
+
+            stopRotationSetTrue("contract");
+            stopRotationSetTrue("workTimeline");
+            
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("intern");
+            setMotionAndToggleFalse("matops");
+            transform(allObjects, alignState.workContractView, backInterval);
+        }
+        checkToggles();
+
+    }, false);
+
+    rightButton.addEventListener('click', function(x) {
+
+        if (workDefaultToggle) { // default -> contract 
+
+            stopRotationSetTrue("contract");
+            stopRotationSetTrue("workTimeline");
+
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("intern");
+            setMotionAndToggleFalse("matops");
+            transform(allObjects, alignState.workContractView, backInterval);
+        } else if (workMatOpsToggle) { // matops -> contract
+
+            stopRotationSetTrue("contract");
+            stopRotationSetTrue("workTimeline");
+            
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("matops");
+            setMotionAndToggleFalse("intern");
+            transform(allObjects, alignState.workContractView, backInterval);
+        } else if (workContractToggle) { // contract -> intern
+
+            stopRotationSetTrue("intern");
+            stopRotationSetTrue("workTimeline");
+            
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("contract");
+            setMotionAndToggleFalse("matops");
+            transform(allObjects, alignState.workInternView, backInterval);
+        } else if (workInternToggle) { // intern -> matops
+
+            stopRotationSetTrue("matops");
+            stopRotationSetTrue("workTimeline");
+            
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("intern");
+            setMotionAndToggleFalse("contract");
+            transform(allObjects, alignState.workMatOpsView, backInterval);
+        }
+        checkToggles();
+
+    }, false);
+
+
+
+
+
+
+
+
+
+
 
     workTimelineObjects.push(leftButtonObj);
     workTimelineObjects.push(rightButtonObj);
 
     workTimelineRoot.add(leftButtonObj);
     workTimelineRoot.add(rightButtonObj);
+
+
+}
+
+function createWorkDefaultCards() {
+
+    var workDefaultMain = document.createElement('div');
+    workDefaultMain.classList.add('work-default');
+    
+    workDefaultMain.innerHTML = 
+        '<h3 class="work-default-header">' + 
+            workDefault.header + 
+        '</h3>' + 
+        '<p class="work-default-description">' + 
+            workDefault.description +
+        '</p>';
+
+    var workDefaultObj = new THREE.CSS3DObject(workDefaultMain);
+
+    workDefaultObjects.push(workDefaultObj);
+    workTimelineRoot.add(workDefaultObj);
 }
 
 // managing buttons and toggles 
@@ -762,9 +900,6 @@ function setEducationButtonSelects(mainButton) {
     var b2 = document.getElementById(buttons[0]);
     var b3 = document.getElementById(buttons[1]);
 
-    console.log(buttons[0]);
-    console.log(buttons[1]);
-
     b1.classList.toggle("button-active");
     b1.parentElement.classList.toggle("selected-header");
 
@@ -816,10 +951,86 @@ function stopRotationSetTrue(root) {
     } else if (root == "workTimeline") {
 
         workTimelineToggle = true;
+        workTimelineRootMotion = true;
         workTimelineRoot.rotation.x = 0;
         workTimelineRoot.rotation.y = 0;
         workTimelineRoot.rotation.z = 0;
+    } else if (root == "workDefault") {
+
+        workDefaultToggle = true;
+        workDefaultRootMotion = true;
+        workDefaultRoot.rotation.x = 0;
+        workDefaultRoot.rotation.y = 0;
+        workDefaultRoot.rotation.z = 0;
+    } else if (root == "intern") {
+
+        workInternToggle = true;
+        workInternRootMotion = true;
+        workInternRoot.rotation.x = 0;
+        workInternRoot.rotation.y = 0;
+        workInternRoot.rotation.z = 0;
+    } else if (root == "matops") {
+
+        workMatOpsToggle = true;
+        workMatOpsRootMotion = true;
+        workMatOpsRoot.rotation.x = 0;
+        workMatOpsRoot.rotation.y = 0;
+        workMatOpsRoot.rotation.z = 0;
+    } else if (root == "contract") {
+
+        workContractToggle = true;
+        workContractRootMotion = true;
+        workContractRoot.rotation.x = 0;
+        workContractRoot.rotation.y = 0;
+        workContractRoot.rotation.z = 0;
     }
+}
+
+function checkToggles() {
+    console.clear();
+    
+    console.log("EDUCATION: ");
+    console.log("   toggle: " + educationToggle);
+
+    console.log("EDUC SUMMARY: ");
+    console.log("   rootMotion: " + educSummaryRootMotion);
+
+    console.log("EDUC HEADER: ");
+    console.log("   rootMotion: " + educHeaderRootMotion);
+
+    console.log("computer: ");
+    console.log("   rootMotion: " + computerRootMotion);
+    console.log("   toggle: " + computerToggle);
+
+    console.log("math: ");
+    console.log("   rootMotion: " + mathRootMotion);
+    console.log("   toggle: " + mathToggle);
+
+    console.log("econ: ");
+    console.log("   rootMotion: " + econRootMotion);
+    console.log("   toggle: " + econToggle);
+
+    console.log("");
+
+    console.log("WORK TIMELINE: ");
+    console.log("   rootMotion: " + workTimelineRootMotion);
+    console.log("   toggle: " + workTimelineToggle);
+
+    console.log(" Work Default: ");
+    console.log("   rootMotion: " + workDefaultRootMotion);
+    console.log("   toggle: " + workDefaultToggle);
+
+    console.log("Intern: ");
+    console.log("   rootMotion: " + workInternRootMotion);
+    console.log("   toggle: " + workInternToggle);
+
+    console.log("MatOps: ");
+    console.log("   rootMotion: " + workMatOpsRootMotion);
+    console.log("   toggle: " + workMatOpsToggle);
+    
+    console.log("Contract: ");
+    console.log("   rootMotion: " + workContractRootMotion);
+    console.log("   toggle: " + workContractToggle);
 }
 
 function updateRotations() {
@@ -853,6 +1064,37 @@ function updateRotations() {
         econCourseRoot.rotation.x += 0.015;
         econCourseRoot.rotation.z += 0.02;
     }
+
+    if (!workDefaultRootMotion) {
+
+        workDefaultRoot.rotation.y += 0.015;
+        workDefaultRoot.rotation.z += 0.02;
+    }
+
+    if (!workInternRootMotion) {
+
+        workInternRoot.rotation.x += 0.015;
+        workInternRoot.rotation.y += 0.02;
+    }
+
+    if (!workMatOpsRootMotion) {
+
+        workMatOpsRoot.rotation.x += 0.015;
+        workMatOpsRoot.rotation.z += 0.02;
+    }
+
+    if (!workContractRootMotion) {
+
+        workContractRoot.rotation.y += 0.015;
+        workContractRoot.rotation.z += 0.02;
+    }
+
+    if (!workTimelineRootMotion) {
+
+        workTimelineRoot.rotation.y += 0.015;
+        workTimelineRoot.rotation.z += 0.02;
+    }
+
 }
 
 function setMotionAndToggleFalse(root) {
@@ -876,10 +1118,26 @@ function setMotionAndToggleFalse(root) {
     } else if (root == "educSummary") {
 
         educSummaryRootMotion = false;
+    } else if (root == "workDefault") {
+
+        workDefaultToggle = false;
+        workDefaultRootMotion = false;
+    } else if (root == "intern") {
+
+        workInternToggle = false;
+        workInternRootMotion = false;
+    } else if (root == "matops") {
+
+        workMatOpsToggle = false;
+        workMatOpsRootMotion = false;
+    } else if (root == "contract") {
+
+        workContractToggle = false;
+        workContractRootMotion = false;
     } else if (root == "workTimeline") {
 
-        workTimelineRootMotion = false;
         workTimelineToggle = false;
+        workTimelineRootMotion = false;
     }
 }
 
@@ -934,17 +1192,18 @@ function createAllCards() {
 
     // work history
     createWorkTimelineCards();
+    createWorkButtons();
     createWorkHeaderCards();
     createWorkContentCards();
     createWorkToolsCards();
     createWorkToolsContainer();
+    createWorkDefaultCards();
 
     allWorkObjects = workTimelineObjects
         .concat(workInternObjects)
         .concat(workMatOpsObjects)
-        .concat(workContractObjects);
-
-    console.log(allWorkObjects);
+        .concat(workContractObjects)
+        .concat(workDefaultObjects);
 
     // ALL OBJECTS
     allObjects = allStationaryObjects
@@ -959,17 +1218,18 @@ function createAllTwirlingCoordinates() {
     createTwirlingCoordinates(menuButtonArray.length, alignState.menuButtonTwirling, 50, 50, 0);
 
     // education 
-    createTwirlingCoordinates(mathArray.length, alignState.mathTwirling, 700, 700, 0);
-    createTwirlingCoordinates(econArray.length, alignState.econTwirling, 700, 700, 0);
-    createTwirlingCoordinates(computerArray.length, alignState.computerTwirling, 700, 700, 0);
-    createTwirlingCoordinates(educationHeaderArray.length, alignState.educationHeaderTwirling, 700, 700, 0);
-    createTwirlingCoordinates(educationSummaryArray.length, alignState.educationSummaryTwirling, 500, 500, 0);
+    createTwirlingCoordinates(mathArray.length, alignState.mathTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(econArray.length, alignState.econTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(computerArray.length, alignState.computerTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(educationHeaderArray.length, alignState.educationHeaderTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(educationSummaryArray.length, alignState.educationSummaryTwirling, sphereSize, sphereSize, 0);
 
     // work history 
     createTwirlingCoordinates(workTimelineObjects.length, alignState.workTimelineTwirling, 200, 200, 0);
-    createTwirlingCoordinates(workInternObjects.length, alignState.workInternTwirling, 700, 700, 0);
-    createTwirlingCoordinates(workMatOpsObjects.length, alignState.workMatOpsTwirling, 700, 700, 0);
-    createTwirlingCoordinates(workContractObjects.length, alignState.workContractTwirling, 700, 700, 0);
+    createTwirlingCoordinates(workInternObjects.length, alignState.workInternTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(workMatOpsObjects.length, alignState.workMatOpsTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(workContractObjects.length, alignState.workContractTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(workDefaultObjects.length, alignState.workDefaultTwirling, sphereSize, sphereSize, 0);
 
 }
 
@@ -991,6 +1251,7 @@ function createAllViewCoordinates() {
     createViewCoordinates(workViewDisplayArrayMatOps, alignState.workMatOpsView, 500, 200);
     createViewCoordinates(workViewDisplayArrayContract, alignState.workContractView, 500, 200);
     createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView, 500, 200);
+    createViewCoordinates(workDefaultDisplayArray, alignState.workDefaultView, 500, 200);
 
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
@@ -1003,7 +1264,8 @@ function createAllViewCoordinates() {
     alignState.allWorkTwirling = alignState.workTimelineTwirling
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractTwirling);
+        .concat(alignState.workContractTwirling)
+        .concat(alignState.workDefaultTwirling);
 
     // specific education views 
     alignState.standardEducationView = alignState.menuButtonView
@@ -1044,28 +1306,32 @@ function createAllViewCoordinates() {
         .concat(alignState.workTimelineView)
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractTwirling);
+        .concat(alignState.workContractTwirling)
+        .concat(alignState.workDefaultView);
 
     alignState.workInternView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
         .concat(alignState.workTimelineView)
         .concat(alignState.workInternView)
         .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractTwirling);
+        .concat(alignState.workContractTwirling)
+        .concat(alignState.workDefaultTwirling);
 
     alignState.workMatOpsView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
         .concat(alignState.workTimelineView)
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsView)
-        .concat(alignState.workContractTwirling);
+        .concat(alignState.workContractTwirling)
+        .concat(alignState.workDefaultTwirling);
 
     alignState.workContractView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
         .concat(alignState.workTimelineView)
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractView);
+        .concat(alignState.workContractView)
+        .concat(alignState.workDefaultTwirling);
 
     // ALL OBJECTS 
     alignState.startingView = alignState.menuButtonView

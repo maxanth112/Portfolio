@@ -5,6 +5,7 @@
 // tweening globals 
 var toInterval = 1000;
 var backInterval = 1800;
+var sphereSize = 1000; 
 
 // renderers, cameras, etc.
 var controls, camera, scene, cssRenderer;
@@ -16,7 +17,7 @@ var mathCourseRoot, computerCourseRoot, econCourseRoot;
 var educHeaderRoot, educSummaryRoot;
 
 var workInternRoot, workMatOpsRoot, workContractRoot;
-var workTimelineRoot;
+var workTimelineRoot, workDefaultRoot;
 
 var workInternToggle = false;
 var workMatOpsToggle = false;
@@ -29,13 +30,13 @@ var educHeaderRootMotion = false;
 var educSummaryRootMotion = false;
 
 var workTimelineRootMotion = false;
+var workDefaultRootMotion = false;
 var workInternRootMotion = false;
 var workMatOpsRootMotion = false;
 var workContractRootMotion = false;
 
-// toggles / tracking for all 
+// toggles / tracking for education
 var educationToggle = false;
-var workTimelineToggle = false;
 var bioToggle = false;
 
 var computerToggle = false;
@@ -45,6 +46,16 @@ var econToggle = false;
 var internToggle = false; 
 var matopsToggle = false;
 var contractToggle = false;
+
+// toggles / tracking for work
+var workTimelineToggle = false;
+var workDefaultToggle = false;
+
+var workInternToggle = false;
+var workMatOpsToggle = false;
+var workContractToggle = false;
+
+
 
 // all objects 
 var allObjects = [];
@@ -69,6 +80,7 @@ var econObjects = [];
 var allWorkObjects = [];
 
 var workTimelineObjects = [];
+var workDefaultObjects =[];
 
 var workInternObjects = [];
 var workMatOpsObjects = [];
@@ -114,14 +126,16 @@ var alignState = {
     allWorkTwirling: [],
 
     workTimelineTwirling: [],
+    workDefaultTwirling: [],
+
     workInternTwirling: [],
     workMatOpsTwirling: [],
     workContractTwirling: [],
     
     // work positions - view 
+    workTimelineView: [],
     workDefaultView: [],
 
-    workTimelineView: [],
     workInternView: [],
     workMatOpsView: [],
     workContractView: []
@@ -602,9 +616,9 @@ var workTimelineDisplayArray = [
     }
 ];
 
-var toolsX = -1.4;
+var toolsX = -1.37;
 var toolsGap = 0.6;
-var toolsRowOne = -0.5;
+var toolsRowOne = -0.3;
 var toolsRowTwo = toolsRowOne - toolsGap;
 var toolsRowThree = toolsRowOne - 2 * toolsGap;
 var toolsRowFour = toolsRowOne - 3 * toolsGap;
@@ -633,7 +647,7 @@ var workViewDisplayArrayIntern = workViewDisplayArray.concat([
     },
     {
         tool: "Container",
-        position: [toolsX, toolsRowOne + 2]
+        position: [toolsX + 0.05, toolsRowOne + 0.5]
     }
 ]);
 
@@ -692,13 +706,16 @@ var workViewDisplayArrayContract = workViewDisplayArray.concat([
 ]);
 
 
+var workDefault = {
+    header: "My career thus far",
+    description: "hdlkfasjdf klasd;jaskd askd;fjasdkfj kdhf;wlsie;askd "
+};
 
-
-
-
-
-
-
+var workDefaultDisplayArray = [
+    {
+        position: [0, 0]
+    }
+];
 
 
 
