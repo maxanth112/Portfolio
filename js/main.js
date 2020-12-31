@@ -352,7 +352,7 @@ function createEducationHeaderCards() {
 
 function createEducationSummaryCards() {
 
-    for (var i = 0; i < educationSummaryArray.length; i += 1) {
+    for (var i = 0; i < educationSummaryArray.length - 2; i += 1) {
 
         var educationSummaryCard = document.createElement('div');
         educationSummaryCard.className = 'summary-card';
@@ -376,6 +376,23 @@ function createEducationSummaryCards() {
 
         educSummaryRoot.add(educationSummaryObj);
     }
+    // education category headers 
+    var educationCategoryDegree = document.createElement('div');
+    educationCategoryDegree.className = 'degree';
+    educationCategoryDegree.innerHTML = '<h2>Degrees</h2>';
+
+    var degreeObj = new THREE.CSS3DObject(educationCategoryDegree);
+    educationSummaryObjects.push(degreeObj);
+    educSummaryRoot.add(degreeObj);
+
+
+    var educationCategoryExtra = document.createElement('div');
+    educationCategoryExtra.className = 'extra';
+    educationCategoryExtra.innerHTML = '<h2>Clubs/Associations</h2>';
+
+    var extraObj = new THREE.CSS3DObject(educationCategoryExtra);
+    educationSummaryObjects.push(extraObj);
+    educSummaryRoot.add(extraObj);
 }
 
 function createMenuButtons() {
@@ -409,12 +426,13 @@ function createMenuButtons() {
                 setMotionAndToggleFalse("econ");
                     setMotionAndToggleFalse("math");
                     setMotionAndToggleFalse("computer");
-
                     setMotionAndToggleFalse("workDefault");
                     setMotionAndToggleFalse("intern");
                     setMotionAndToggleFalse("contract");
                     setMotionAndToggleFalse("matops");
                     setMotionAndToggleFalse("workTimeline");
+                    
+                updateWorkSelected("home");
 
                 if (educationToggle) {
 
@@ -456,6 +474,7 @@ function createMenuButtons() {
                 setMotionAndToggleFalse("intern");
                 setMotionAndToggleFalse("contract");
                 setMotionAndToggleFalse("matops");
+                updateWorkSelected("home");
 
                 if (workDefaultToggle) {
 
@@ -645,11 +664,12 @@ function createWorkTimelineCards() {
 
         var workTimelineDiv = document.createElement('ul');
         workTimelineDiv.classList.add("timeline-events");
+        workTimelineDiv.id = workContentArray[i].id + "-timeline-event";
 
         workTimelineDiv.innerHTML =
             '<li class="timeline-months-2">' +
             '</li>' +
-            '<li class="timeline-months-' + workContentArray[i].months + '">' +
+            '<li id="' + '" class="timeline-months-' + workContentArray[i].months + '">' +
             '<h2>' + workContentArray[i].timeline + '</h2>' +
             '<h3>' + workContentArray[i].company + '</h3>' +
             '<h4>' + workContentArray[i].title + '</h4>' +
@@ -674,6 +694,25 @@ function createWorkTimelineCards() {
     var workTimelineListObj = new THREE.CSS3DObject(workTimelineList);
     workTimelineObjects.push(workTimelineListObj);
     workTimelineRoot.add(workTimelineListObj);
+
+    //exp 
+    var workTimelineDiv = document.createElement('ul');
+        workTimelineDiv.classList.add("timeline-events");
+        workTimelineDiv.id = "home-button";
+
+        workTimelineDiv.innerHTML =
+            '<li class="timeline-months-2">' +
+            '</li>' +
+            '<li id="' + '" class="timeline-months-' + 3 + '">' +
+            '<h2>' + 'TAKE ME HOME' + '</h2>' +
+            '<h3>' + 'HOME' + '</h3>' +
+            '<h4>' + 'HOME' + '</h4>' +
+            '</li>';
+
+        var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
+
+        workTimelineObjects.push(workTimelineObj);
+        workTimelineRoot.add(workTimelineObj);
 }
 
 function createWorkButtons() {
@@ -694,17 +733,21 @@ function createWorkButtons() {
 
     leftButton.addEventListener('click', function(x) {
 
-        if (workDefaultToggle) { // default -> intern
+        if (workDefaultToggle) { // default -> contract
 
-            stopRotationSetTrue("intern");
+            
+            updateWorkSelected("contract");
+            stopRotationSetTrue("contract");
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("contract");
+            setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workInternView, backInterval);
+            transform(allObjects, alignState.workContractView, backInterval);
         } else if (workMatOpsToggle) { // matops -> intern
 
+            
+            updateWorkSelected("intern");
             stopRotationSetTrue("intern");
             stopRotationSetTrue("workTimeline");
 
@@ -714,6 +757,8 @@ function createWorkButtons() {
             transform(allObjects, alignState.workInternView, backInterval);
         } else if (workContractToggle) { // contract -> matops 
 
+            
+            updateWorkSelected("matops");
             stopRotationSetTrue("matops");
             stopRotationSetTrue("workTimeline");
             
@@ -721,15 +766,17 @@ function createWorkButtons() {
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("contract");
             transform(allObjects, alignState.workMatOpsView, backInterval);
-        } else if (workInternToggle) { // intern -> contract
+        } else if (workInternToggle) { // intern -> default
 
-            stopRotationSetTrue("contract");
+            
+            updateWorkSelected("home");
+            stopRotationSetTrue("workDefault");
             stopRotationSetTrue("workTimeline");
             
-            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workContractView, backInterval);
+            transform(allObjects, alignState.workDefaultView, backInterval);
         }
         checkToggles();
 
@@ -737,35 +784,41 @@ function createWorkButtons() {
 
     rightButton.addEventListener('click', function(x) {
 
-        if (workDefaultToggle) { // default -> contract 
+        if (workDefaultToggle) { // default -> intern 
 
-            stopRotationSetTrue("contract");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("intern");
-            setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workContractView, backInterval);
-        } else if (workMatOpsToggle) { // matops -> contract
-
-            stopRotationSetTrue("contract");
-            stopRotationSetTrue("workTimeline");
-            
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("matops");
-            setMotionAndToggleFalse("intern");
-            transform(allObjects, alignState.workContractView, backInterval);
-        } else if (workContractToggle) { // contract -> intern
-
+            updateWorkSelected("intern");
             stopRotationSetTrue("intern");
             stopRotationSetTrue("workTimeline");
-            
+
             setMotionAndToggleFalse("workDefault");
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("matops");
             transform(allObjects, alignState.workInternView, backInterval);
+        } else if (workMatOpsToggle) { // matops -> contract
+            
+            updateWorkSelected("contract");
+            stopRotationSetTrue("contract");
+            stopRotationSetTrue("workTimeline");
+            
+            setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("matops");
+            setMotionAndToggleFalse("intern");
+            transform(allObjects, alignState.workContractView, backInterval);
+        } else if (workContractToggle) { // contract -> default
+
+            
+            updateWorkSelected("home");
+            stopRotationSetTrue("workDefault");
+            stopRotationSetTrue("workTimeline");
+            
+            setMotionAndToggleFalse("intern");
+            setMotionAndToggleFalse("contract");
+            setMotionAndToggleFalse("matops");
+            transform(allObjects, alignState.workDefaultView, backInterval);
         } else if (workInternToggle) { // intern -> matops
 
+            
+            updateWorkSelected("matops");
             stopRotationSetTrue("matops");
             stopRotationSetTrue("workTimeline");
             
@@ -778,42 +831,70 @@ function createWorkButtons() {
 
     }, false);
 
-
-
-
-
-
-
-
-
-
-
     workTimelineObjects.push(leftButtonObj);
     workTimelineObjects.push(rightButtonObj);
 
     workTimelineRoot.add(leftButtonObj);
     workTimelineRoot.add(rightButtonObj);
+}
 
+function updateWorkSelected(newSelected) {
 
+    if (newSelected == "home") {
+
+        document.getElementById("home-button").classList.toggle("selected-timeline");
+        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
+    } else if (newSelected == "intern") {
+
+        document.getElementById("intern-timeline-event").classList.toggle("selected-timeline");
+        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("home-button").classList.remove("selected-timeline");
+    } else if (newSelected == "matops") {
+
+        document.getElementById("matops-timeline-event").classList.toggle("selected-timeline");
+        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("home-button").classList.remove("selected-timeline");
+    } else if (newSelected == "contract") {
+
+        document.getElementById("contract-timeline-event").classList.toggle("selected-timeline");
+        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("home-button").classList.remove("selected-timeline");
+    } else {
+
+        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
+        document.getElementById("home-button").classList.remove("selected-timeline");
+    }
 }
 
 function createWorkDefaultCards() {
 
-    var workDefaultMain = document.createElement('div');
-    workDefaultMain.classList.add('work-default');
-    
-    workDefaultMain.innerHTML = 
-        '<h3 class="work-default-header">' + 
-            workDefault.header + 
-        '</h3>' + 
-        '<p class="work-default-description">' + 
-            workDefault.description +
-        '</p>';
+    for (var i = 0; i < workDefaultArray.length; i += 1) {
 
-    var workDefaultObj = new THREE.CSS3DObject(workDefaultMain);
+        var workDefaultMain = document.createElement('div');
+        workDefaultMain.classList.add('work-default');
+        workDefaultMain.id = workDefaultArray[i].id;
+        
+        workDefaultMain.innerHTML = 
+            '<h3 class="work-default-header">' + 
+                workDefaultArray[i].header + 
+            '</h3>' + 
+            '<p class="work-default-description">' + 
+                workDefaultArray[i].description +
+            '</p>';
 
-    workDefaultObjects.push(workDefaultObj);
-    workTimelineRoot.add(workDefaultObj);
+        var workDefaultObj = new THREE.CSS3DObject(workDefaultMain);
+
+        workDefaultObjects.push(workDefaultObj);
+        workTimelineRoot.add(workDefaultObj);
+
+    }
 }
 
 // managing buttons and toggles 
@@ -1015,7 +1096,7 @@ function checkToggles() {
     console.log("WORK TIMELINE: ");
     console.log("   rootMotion: " + workTimelineRootMotion);
     console.log("   toggle: " + workTimelineToggle);
-
+    
     console.log(" Work Default: ");
     console.log("   rootMotion: " + workDefaultRootMotion);
     console.log("   toggle: " + workDefaultToggle);
@@ -1251,7 +1332,7 @@ function createAllViewCoordinates() {
     createViewCoordinates(workViewDisplayArrayMatOps, alignState.workMatOpsView, 500, 200);
     createViewCoordinates(workViewDisplayArrayContract, alignState.workContractView, 500, 200);
     createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView, 500, 200);
-    createViewCoordinates(workDefaultDisplayArray, alignState.workDefaultView, 500, 200);
+    createViewCoordinates(workDefaultArray, alignState.workDefaultView, 500, 200);
 
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling

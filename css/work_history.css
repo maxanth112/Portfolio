@@ -212,8 +212,6 @@
     width: 585px;
 }
 
-
-
 .timeline-months-7 {
     top: -30px;
     padding: 0 0 18px 0;
@@ -227,6 +225,11 @@
 .timeline-months-13 {
     top: -30px;
     padding: 0 0 12px 0;
+}
+
+.selected-timeline li:nth-child(2){
+    margin: 0 0 70px 0;
+    border: 4px solid rgba(0, 255, 255, 0.95);;
 }
 
 /* BUTTONS AND ICONS */
@@ -323,7 +326,7 @@ ul img {
 }
 
 .tool-row .active {
- background-color: red;
+ background-color: rgb(28, 232, 247);;
 }
 
 .tool-container {

@@ -260,6 +260,14 @@ var educationSummaryArray = [
         role: "Member",
         position: [summaryX, summaryYStart - 4],
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
+    },
+    {
+        role: "Degrees",
+        position: [summaryX, summaryYStart + 2.8]
+    }, 
+    {
+        role: "Activities, clubs",
+        position: [summaryX, summaryYStart + 0.65]
     }
 ];
 
@@ -607,6 +615,10 @@ var workTimelineDisplayArray = [
         position: [-1.37, timelineY + 2.25]
     },
     {
+        title: 'home-button',
+        position: [-1.4, timelineY]
+    },
+    {
         title: 'left-arrow',
         position: [-1.55, timelineY + 0.9]
     },
@@ -615,6 +627,11 @@ var workTimelineDisplayArray = [
         position: [1.55, timelineY + 0.9]
     }
 ];
+
+var workHomeButton = [
+
+];
+
 
 var toolsX = -1.37;
 var toolsGap = 0.6;
@@ -706,18 +723,26 @@ var workViewDisplayArrayContract = workViewDisplayArray.concat([
 ]);
 
 
-var workDefault = {
-    header: "My career thus far",
-    description: "hdlkfasjdf klasd;jaskd askd;fjasdkfj kdhf;wlsie;askd "
-};
-
-var workDefaultDisplayArray = [
+var workDefaultArray = [
     {
-        position: [0, 0]
+    header: "My career thus far",
+    description: "hdlkfasjdf klasd;jaskd askd;fjasdkfj kdhf;wlsie;askd ",
+    id: "thurfar",
+    position: [0, 0]
+    },
+    {
+        header: "where i have been", 
+        description: "lkadsfh;alskdfjas;kld",
+        id: "been",
+        position: [-1, 0]
+    },
+    {
+        header: "where I am going", 
+        description: "lkadsfh;alskdfjas;kld",
+        id: "going",
+        position: [1, 0]
     }
 ];
-
-
 
 
 
