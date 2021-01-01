@@ -359,9 +359,36 @@ function createEducationSummaryCards() {
     for (var i = 0; i < educationSummaryArray.length - 2; i += 1) {
 
         var educationSummaryCard = document.createElement('div');
+        educationSummaryCard.id = educationSummaryArray[i].id;
         educationSummaryCard.className = 'summary-card';
 
-        educationSummaryCard.innerHTML =
+        if (educationSummaryArray[i].id == "capa" || educationSummaryArray[i].id == "lax") {
+            
+            educationSummaryCard.innerHTML =
+            '<div class="summary-flip ' + educationSummaryArray[i].id + `" onclick='flip("` + educationSummaryArray[i].id + `")'>` + 
+            '<div class="front">' + 
+            '<h4 class="club-header">' +
+            educationSummaryArray[i].clubName +
+            '</h4>' +
+            '<p class="club-position">' +
+            educationSummaryArray[i].role +
+            '</p>' +
+            '<p class="club-dates">' +
+            educationSummaryArray[i].dates +
+            '</p>' +
+            '<p class="club-description">' +
+            educationSummaryArray[i].description +
+            '</p>' + 
+            '</div>' + 
+            '<div class="back">' + 
+            '<p class="club-description">' +
+            educationSummaryArray[i].description +
+            '</p>' + 
+            '</div>' + 
+            '</div>';
+        } else {
+            
+            educationSummaryCard.innerHTML =
             '<h4 class="club-header">' +
             educationSummaryArray[i].clubName +
             '</h4>' +
@@ -374,6 +401,7 @@ function createEducationSummaryCards() {
             '<p class="club-description">' +
             educationSummaryArray[i].description +
             '</p>';
+        }
 
         var educationSummaryObj = new THREE.CSS3DObject(educationSummaryCard);
         educationSummaryObjects[i] = educationSummaryObj;
@@ -1251,6 +1279,7 @@ function flip(element) {
 
 function eliminateCourseFlipClass() {
     $('.course-card').removeClass('flipped');
+    $('.summary-flip').removeClass('flipped');
 }
 
 // calling all create/coordinate functions 

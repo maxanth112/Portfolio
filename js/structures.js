@@ -240,53 +240,62 @@ var EducationHeaderSelectedArray = [{
     }
 ];
 
-var summaryX = 0;
-var summaryYStart = 0.6;
-var summaryStep = 0.85;
+var leftSummary = -.652;
+var rightSummary = leftSummary + 1.95;
+
+var summaryYStart = -.2;
+var summaryRightYStart = 0.12;
+var summaryStepLeft = 1.95;
+var summaryStepRight = 1.3;
 var educationSummaryArray = [
     {
+        id: "lax",
         clubName: "Mens Lacrosse",
         url: "https://mcla.us/player/41671/max_wiesner.html",
         dates: "August 2015 - May 2016",
         role: "Student Athelete",
-        position: [summaryX, summaryYStart],
+        position: [leftSummary, summaryYStart],
         description: "All - Conference Award, MCLA D1 Player of the Week Award. "
     },
     {
-        clubName: "Sigma Phi Epsilon, Colorado Alpha Chapter",
-        dates: "August 2016 - July 2018",
-        role: "Brother",
-        position: [summaryX, summaryYStart - ( 2 * summaryStep )],
-        description: "Participated in fundraising events like the Jimmy V."
-    },
-    {
+        id: "capa",
         clubName: "CAPA Florence",
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
-        position: [summaryX, summaryYStart - ( 1 * summaryStep )],
+        position: [leftSummary, summaryYStart - summaryStepLeft],
         description: "Photo Contest Winner, student farting around in europe. "
     },
     {
+        id: "sigep",
+        clubName: "Sigma Phi Epsilon, Colorado Alpha Chapter",
+        dates: "August 2016 - July 2018",
+        role: "Brother",
+        position: [rightSummary, summaryRightYStart],
+        description: "Participated in fundraising events like the Jimmy V."
+    },
+    {
+        id: "econclub",
         clubName: "Economics Club",
         dates: "August 2016 - May 2019",
         role: "Member",
-        position: [summaryX, summaryYStart - ( 3 * summaryStep )],
+        position: [rightSummary, summaryRightYStart - ( 1 * summaryStepRight )],
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     },
     {
+        id: "mathclub",
         clubName: "Math Club",
         dates: "August 2020 - May 2021",
         role: "Member",
-        position: [summaryX, summaryYStart - ( 4 * summaryStep )],
+        position: [rightSummary, summaryRightYStart - ( 2 * summaryStepRight )],
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     },
     {
         role: "Degrees",
-        position: [summaryX, summaryYStart + ( 3.02 * summaryStep )]
+        position: [0, summaryYStart + 3.35]
     }, 
     {
         role: "Activities, clubs",
-        position: [summaryX, summaryYStart + (0.75 * summaryStep )]
+        position: [0, summaryYStart + 1.2]
     }
 ];
 
@@ -294,15 +303,17 @@ var educationSummaryArray = [
 ////////                          course list                            ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var left = -0.3;
-var mid = 0.8;
-var right = 1.9;
-var midLeft = 0.25;
-var midRight = 1.35;
+var left = -0.32;
+var courseStep = 0.9;
+var mid = left + ( courseStep * 1);
+var right = left + ( courseStep * 2);
+var midLeft = left + ( courseStep * 0.5);
+var midRight = left + ( courseStep * 1.5);
 
-var firstRow = 1.7;
-var secondRow = 0;
-var thirdRow = -1.7;
+var courseTall = 2;
+var firstRow = 2.1;
+var secondRow = firstRow - ( courseTall * 1);
+var thirdRow = firstRow - ( courseTall * 2);
 
 var mathArray = [{
         type: "APPM",
