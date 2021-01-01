@@ -16,6 +16,8 @@ var educationRoot, workRoot, stationaryRoot;
 var mathCourseRoot, computerCourseRoot, econCourseRoot;
 var educHeaderRoot, educSummaryRoot;
 
+var defaultBioRoot; 
+
 var workInternRoot, workMatOpsRoot, workContractRoot;
 var workTimelineRoot, workDefaultRoot;
 
@@ -34,6 +36,8 @@ var workDefaultRootMotion = false;
 var workInternRootMotion = false;
 var workMatOpsRootMotion = false;
 var workContractRootMotion = false;
+
+var defaultBioRootMotion = false;
 
 // toggles / tracking for education
 var educationToggle = false;
@@ -55,7 +59,8 @@ var workInternToggle = false;
 var workMatOpsToggle = false;
 var workContractToggle = false;
 
-
+// toggles / tracking for bio
+var defaultBioToggle = false;
 
 // all objects 
 var allObjects = [];
@@ -86,7 +91,9 @@ var workInternObjects = [];
 var workMatOpsObjects = [];
 var workContractObjects = [];
 
-
+// bio objects 
+var allBioObjects = [];
+var defaultBioObjects = [];
 
 
 
@@ -138,19 +145,27 @@ var alignState = {
 
     workInternView: [],
     workMatOpsView: [],
-    workContractView: []
+    workContractView: [],
+
+    // bio positions - view
+    defaultBioView: [],
+
+    // bio position - trirling 
+    allBioTwirling: [],
+
+    defaultBioTwirling: [],
 };
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         navigation menu                         ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var menuHeight = -110;
+var menuHeight = -135;
 
 var menuButtonArray = [{
         label: "Education",
         id: "education-button",
-        position: [-0.3, menuHeight]
+        position: [-0.2, menuHeight]
     },
     {
         label: "Professional",
@@ -160,7 +175,7 @@ var menuButtonArray = [{
     {
         label: "Bio",
         id: "bio-button",
-        position: [0.3, menuHeight]
+        position: [0.2, menuHeight]
     }
 ]
 
@@ -168,23 +183,11 @@ var menuButtonArray = [{
 ////////                      education headers                          ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var yHeight = 2;
-var selectedX = -1.4;
-var EducationHeaderSelectedArray = [{
-        position: [selectedX, 1.5]
-    },
-    {
-        position: [selectedX, -0.2]
-    },
-    {
-        position: [selectedX, -1.9]
-    }
-]
-
+var yHeight = 2.2;
 var educationHeaderArray = [{
         major: "Computer Science",
         college: "University of Colorado Boulder,",
-        focus: "",
+        focus: "[ Computer Science ]",
         subcollege: "College of Engineering and Applied Science",
         dates: "January 2020 - May 2021",
         GPA: "4.0",
@@ -192,7 +195,7 @@ var educationHeaderArray = [{
         cardId: "computer-header",
         img: "",
         id: "computer-button",
-        position: [-1.2, yHeight]
+        position: [-1.3, yHeight]
     },
     {
         major: "Mathematics",
@@ -218,12 +221,28 @@ var educationHeaderArray = [{
         cardId: "econ-header",
         id: "econ-button",
         img: "",
-        position: [1.2, yHeight],
+        position: [1.3, yHeight],
+    }
+];
+
+var selectedX = -1.45;
+var selectedY = 2.1;
+var selectedStep = 2;
+
+var EducationHeaderSelectedArray = [{
+        position: [selectedX, selectedY]
+    },
+    {
+        position: [selectedX, selectedY - ( 1 * selectedStep )]
+    },
+    {
+        position: [selectedX, selectedY - ( 2 * selectedStep )]
     }
 ];
 
 var summaryX = 0;
-var summaryYStart = 0.8;
+var summaryYStart = 0.6;
+var summaryStep = 0.85;
 var educationSummaryArray = [
     {
         clubName: "Mens Lacrosse",
@@ -237,37 +256,37 @@ var educationSummaryArray = [
         clubName: "Sigma Phi Epsilon, Colorado Alpha Chapter",
         dates: "August 2016 - July 2018",
         role: "Brother",
-        position: [summaryX, summaryYStart - 2],
+        position: [summaryX, summaryYStart - ( 2 * summaryStep )],
         description: "Participated in fundraising events like the Jimmy V."
     },
     {
         clubName: "CAPA Florence",
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
-        position: [summaryX, summaryYStart - 1],
+        position: [summaryX, summaryYStart - ( 1 * summaryStep )],
         description: "Photo Contest Winner, student farting around in europe. "
     },
     {
         clubName: "Economics Club",
         dates: "August 2016 - May 2019",
         role: "Member",
-        position: [summaryX, summaryYStart - 3],
+        position: [summaryX, summaryYStart - ( 3 * summaryStep )],
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     },
     {
         clubName: "Math Club",
         dates: "August 2020 - May 2021",
         role: "Member",
-        position: [summaryX, summaryYStart - 4],
+        position: [summaryX, summaryYStart - ( 4 * summaryStep )],
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     },
     {
         role: "Degrees",
-        position: [summaryX, summaryYStart + 2.8]
+        position: [summaryX, summaryYStart + ( 3.02 * summaryStep )]
     }, 
     {
         role: "Activities, clubs",
-        position: [summaryX, summaryYStart + 0.65]
+        position: [summaryX, summaryYStart + (0.75 * summaryStep )]
     }
 ];
 
@@ -743,8 +762,6 @@ var workDefaultArray = [
         position: [1, 0]
     }
 ];
-
-
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                      personal (about me)                        ////////

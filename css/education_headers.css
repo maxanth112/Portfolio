@@ -1,103 +1,121 @@
 /* EDUCATION HEADER, EDUCATION SUMMARY  */
 
-.education-header, .summary-card {
-    width: 600px;
-    max-width: 100%;
-    height: 270px;
-    max-height: 100%;
-    position: relative;
-    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
-    border: 2px solid rgba(127, 255, 255, 0.25);
-    color: rgba(127, 255, 255, 0.75);
-    transition: width 1s, height 1s;
-  }
-  
-  .summary-card {
-    width: 1400px;
-    height: 140px;
-  }
-  
-  .major {
-    font-size: 50px;
-    margin: 10px 20px 3px 20px;
-    transition: font-size 1s;
-    font-weight: 200px;
-  }
-  
-  .ba, .club-position {
-    margin: 0px 20px 15px 23px;
-    font-style: italic;
-    font-size: 19px;
-  }
-  
-  .college, .club-header {
-    margin: 0px 20px 2px 25px;  
-    font-size: 22px;
-    font-weight: 400;
-    transition: font-size 1s;
-  }
-  
-  .subcollege, .club-description, .club-dates {
-    margin: 0px 20px 2px 25px;  
-    font-size: 17px;
-    font-weight: 400;
-    transition: font-size 1s;
-  }
-  
-  .track {
-    margin: 10px 20px 5px 25px;
-    font-size: 16px;
-    transition: font-size 1s;
-  }
-  
-  .selected-header {
-    width: 600px;
-    height: 400px;
-  }
-  
-  .not-selected-header {
-    width: 600px;
-    height: 300px;
-  }
-  
-  .selected-header > .education-card > .college {
-    font-size: 30px;
-  }
-  
-  .selected-header > .education-card > .ba {
-    font-size: 24px;
-  }
-  
-  .selected-header > .education-card > .subcollege {
-    font-size: 23px;
-  }
-  
-  .selected-header > .education-card > .track {
-    font-size: 24px;
-  }
-  
-  .selected-header > .education-card > .major {
-    font-size: 60px;
-  }
-  
-  .extra {
-    width: 1200px;
-    max-width: 100%;
-    height: 40px;
-    max-height: 100%;
-    position: relative;
-    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
-    border: 2px solid rgba(127, 255, 255, 0.25);
-    color: rgba(127, 255, 255, 0.75);
-  }
+.education-header,
+.summary-card {
+  width: calc(var(--multiplier) * 40);
+  height: calc(var(--multiplier) * 18);
 
-  .degree {
-    width: 1200px;
-    max-width: 100%;
-    height: 40px;
-    max-height: 100%;
-    position: relative;
-    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
-    border: 2px solid rgba(127, 255, 255, 0.25);
-    color: rgba(127, 255, 255, 0.75);
-  }
+  box-shadow: 0em 0em calc(var(--multiplier) * 2) rgba(0, 255, 255, 0.5);
+  border: 0.2em solid rgba(127, 255, 255, 0.25);
+  color: rgba(127, 255, 255, 0.75);
+  transition: width 1s, height 1s, margin 1s;
+}
+
+.extra,
+.degree,
+.summary-card {
+  width: calc(var(--multiplier) * 121);
+  height: calc(var(--multiplier) * 5);
+
+  box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+  border: 2px solid rgba(127, 255, 255, 0.25);
+  color: rgba(127, 255, 255, 0.75);
+}
+
+.summary-card {
+  height: calc(var(--multiplier) * 10);
+}
+
+.major {
+  margin: 
+  calc(var(--multiplier) * 1.4) 
+  calc(var(--multiplier) * 1) 
+  calc(var(--multiplier) * 0) 
+  calc(var(--multiplier) * 1.5);
+  font-size: calc(var(--multiplier) * 3);
+  transition: font-size 1s;
+}
+
+.ba,
+.club-position {
+  margin: 
+    calc(var(--multiplier) * -0.3) 
+    calc(var(--multiplier) * 1) 
+    calc(var(--multiplier) * 0.01) 
+    calc(var(--multiplier) * 1.5);
+  font-style: italic;
+  font-size: calc(var(--multiplier) * 1.5);
+  transition: font-size 1s;
+}
+
+.college,
+.club-header {
+  margin: 
+    calc(var(--multiplier) * .2) 
+    calc(var(--multiplier) * 1) 
+    calc(var(--multiplier) * 0) 
+    calc(var(--multiplier) * 1.45);
+  font-size: calc(var(--multiplier) * 1.65);
+  transition: font-size 1s;
+}
+
+.subcollege,
+.club-description,
+.club-dates {
+  margin: 
+    calc(var(--multiplier) * 0) 
+    calc(var(--multiplier) * 1) 
+    calc(var(--multiplier) * 0) 
+    calc(var(--multiplier) * 1.45);
+  font-size: calc(var(--multiplier) * 1.4);
+  transition: font-size 1s;
+}
+
+.track {
+  margin: 
+    calc(var(--multiplier) * 0.5) 
+    calc(var(--multiplier) * 1) 
+    calc(var(--multiplier) * 0.5) 
+    calc(var(--multiplier) * 1.45);
+  font-size: calc(var(--multiplier) * 1.4);
+  transition: font-size 1s;
+}
+
+#computer-header .track {
+  visibility: hidden;
+}
+
+.selected-header,
+.not-selected-header {
+  height: calc(var(--multiplier) * 23);
+} 
+
+.selected-header {
+  width: calc(var(--multiplier) * 33);
+  margin: 0 0 0 calc(var(--multiplier) * 1.5);
+
+}
+
+.not-selected-header {
+  width: calc(var(--multiplier) * 30);
+}
+
+.selected-header>.education-card>.college {
+  font-size: calc(var(--multiplier) * 1.9);
+}
+
+.selected-header>.education-card>.ba {
+  font-size: calc(var(--multiplier) * 1.7);
+}
+
+.selected-header>.education-card>.subcollege {
+  font-size: calc(var(--multiplier) * 1.6);
+}
+
+.selected-header>.education-card>.track {
+  font-size: calc(var(--multiplier) * 1.7);
+}
+
+.selected-header>.education-card>.major {
+  font-size: calc(var(--multiplier) * 3.6);
+}

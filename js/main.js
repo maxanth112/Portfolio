@@ -52,7 +52,7 @@ function createTwirlingCoordinates(len, save, x, y, z) {
     }
 }
 
-function createViewCoordinates(arr, save, x, y, z = 1800) {
+function createViewCoordinates(arr, save, x = 500, y = 200, z = 1800) {
 
     for (var i = 0; i < arr.length; i += 1) {
 
@@ -101,6 +101,10 @@ function initRoots() {
     scene.add(workContractRoot);
     scene.add(workTimelineRoot);
     scene.add(workDefaultRoot);
+
+    defaultBioRoot = new THREE.Object3D();
+
+    scene.add(defaultBioRoot);
 }
 
 function initCamera() {
@@ -185,7 +189,7 @@ function animate() {
     TWEEN.update();
     render();
     requestAnimationFrame(animate);
-    updateRotations();
+    // updateRotations();
 }
 
 // creating cards and divs 
@@ -449,7 +453,7 @@ function createMenuButtons() {
 
                     transform(allObjects, alignState.standardEducationView, toInterval);
                 }
-                workDefaultToggle = false;
+                workTimelineToggle = false;
                 checkToggles();
             }, false);
         } else if (menuButton.id == 'work-button') {
@@ -476,7 +480,7 @@ function createMenuButtons() {
                 setMotionAndToggleFalse("matops");
                 updateWorkSelected("home");
 
-                if (workDefaultToggle) {
+                if (workTimelineToggle) {
 
                     setMotionAndToggleFalse("workDefault");
                     setMotionAndToggleFalse("workTimeline");
@@ -1317,22 +1321,22 @@ function createAllTwirlingCoordinates() {
 function createAllViewCoordinates() {
 
     // stationary
-    createViewCoordinates(menuButtonArray, alignState.menuButtonView, 1000, 5, 1925);
+    createViewCoordinates(menuButtonArray, alignState.menuButtonView, 1000, 5, 1800);
 
     // education
-    createViewCoordinates(mathArray, alignState.mathView, 500, 200);
-    createViewCoordinates(econArray, alignState.econView, 500, 200);
-    createViewCoordinates(computerArray, alignState.computerView, 500, 200);
-    createViewCoordinates(educationHeaderArray, alignState.educationHeaderView, 500, 200);
-    createViewCoordinates(EducationHeaderSelectedArray, alignState.educationHeaderSelectedView, 600, 200);
-    createViewCoordinates(educationSummaryArray, alignState.educationSummaryView, 200, 160);
+    createViewCoordinates(mathArray, alignState.mathView);
+    createViewCoordinates(econArray, alignState.econView);
+    createViewCoordinates(computerArray, alignState.computerView);
+    createViewCoordinates(educationHeaderArray, alignState.educationHeaderView);
+    createViewCoordinates(EducationHeaderSelectedArray, alignState.educationHeaderSelectedView);
+    createViewCoordinates(educationSummaryArray, alignState.educationSummaryView);
 
     // work history
-    createViewCoordinates(workViewDisplayArrayIntern, alignState.workInternView, 500, 200);
-    createViewCoordinates(workViewDisplayArrayMatOps, alignState.workMatOpsView, 500, 200);
-    createViewCoordinates(workViewDisplayArrayContract, alignState.workContractView, 500, 200);
-    createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView, 500, 200);
-    createViewCoordinates(workDefaultArray, alignState.workDefaultView, 500, 200);
+    createViewCoordinates(workViewDisplayArrayIntern, alignState.workInternView);
+    createViewCoordinates(workViewDisplayArrayMatOps, alignState.workMatOpsView);
+    createViewCoordinates(workViewDisplayArrayContract, alignState.workContractView);
+    createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView);
+    createViewCoordinates(workDefaultArray, alignState.workDefaultView);
 
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
@@ -1453,6 +1457,11 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    var currentSize = cssRenderer.getSize();
+    console.log(currentSize);
     render();
 }
 
