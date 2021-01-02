@@ -617,7 +617,7 @@ function createWorkToolsCards() {
             var hide = workToolsArray[i].score[toolCategories[k]] ? "" : "hide";
 
             var toolHtml = '<ul class="tool-row ' + hide + '">' +
-                '<img class="tool-row-img" src="' +
+                '<img class="tool-row-img '+ workToolsArray[i].id + '" src="' +
                 workToolsArray[i].image +
                 '">';
 
@@ -694,18 +694,16 @@ function createWorkTimelineCards() {
 
     for (var i = 0; i < workContentArray.length; i += 1) {
 
-        var workTimelineDiv = document.createElement('ul');
+        var workTimelineDiv = document.createElement('div');
         workTimelineDiv.classList.add("timeline-events");
         workTimelineDiv.id = workContentArray[i].id + "-timeline-event";
 
         workTimelineDiv.innerHTML =
-            '<li class="timeline-months-2">' +
-            '</li>' +
-            '<li id="' + '" class="timeline-months-' + workContentArray[i].months + '">' +
+            '<div id="' + '" class="timeline-months-' + workContentArray[i].months + '">' +
             '<h2>' + workContentArray[i].timeline + '</h2>' +
             '<h3>' + workContentArray[i].company + '</h3>' +
             '<h4>' + workContentArray[i].title + '</h4>' +
-            '</li>';
+            '</div>';
 
         var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
 
@@ -717,29 +715,25 @@ function createWorkTimelineCards() {
     workTimelineList.classList.add("timeline-years");
 
     workTimelineList.innerHTML =
-        '<ul class="timelines-years">' +
-        '<li>2019</li>' +
-        '<li>2020</li>' +
-        '<li>2021</li>' +
+        '<div class="timelines-years">' +
+        '<li class="tyears">2019</li>' +
+        '<li class="tyears">2020</li>' +
+        '<li class="tyears">2021</li>' +
         '</ul>';
 
     var workTimelineListObj = new THREE.CSS3DObject(workTimelineList);
     workTimelineObjects.push(workTimelineListObj);
     workTimelineRoot.add(workTimelineListObj);
 
-    //exp 
-    var workTimelineDiv = document.createElement('ul');
+    // home button 
+    var workTimelineDiv = document.createElement('div');
         workTimelineDiv.classList.add("timeline-events");
         workTimelineDiv.id = "home-button";
 
         workTimelineDiv.innerHTML =
-            '<li class="timeline-months-2">' +
-            '</li>' +
-            '<li id="' + '" class="timeline-months-' + 3 + '">' +
-            '<h2>' + 'TAKE ME HOME' + '</h2>' +
-            '<h3>' + 'HOME' + '</h3>' +
-            '<h4>' + 'HOME' + '</h4>' +
-            '</li>';
+            '<div id="' + '" class="timeline-months-' + 3 + '">' +
+            '<h4>' + 'Home Page' + '</h4>' +
+            '</div>';
 
         var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
 
@@ -757,8 +751,8 @@ function createWorkButtons() {
     leftButton.classList.add('left-arrow');
     rightButton.classList.add('right-arrow');
 
-    leftButton.innerHTML = '<i class="fa fa-arrow-left fa-4x icon-3d"></i>';
-    rightButton.innerHTML =  '<i class="fa fa-arrow-right fa-4x icon-3d"></i>';
+    leftButton.innerHTML = '<i class="fa fa-arrow-left fa-5x icon-3d"></i>';
+    rightButton.innerHTML =  '<i class="fa fa-arrow-right fa-5x icon-3d"></i>';
 
     var leftButtonObj = new THREE.CSS3DObject(leftButton);
     var rightButtonObj = new THREE.CSS3DObject(rightButton);
@@ -927,6 +921,11 @@ function createWorkDefaultCards() {
         workTimelineRoot.add(workDefaultObj);
 
     }
+}
+
+function createWorkDefaultSpinningApps() {
+
+
 }
 
 // managing buttons and toggles 

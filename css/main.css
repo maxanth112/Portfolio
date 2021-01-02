@@ -23,6 +23,7 @@ body {
   text-align: center;
   align-content: center;
   margin: 0px;
+  z-index: 10;
 }
 
 .menu-button {

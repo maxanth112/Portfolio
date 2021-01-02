@@ -250,6 +250,7 @@ var summaryStepRight = 1.3;
 var educationSummaryArray = [
     {
         id: "lax",
+        claddNum: 1,
         clubName: "Mens Lacrosse",
         url: "https://mcla.us/player/41671/max_wiesner.html",
         dates: "August 2015 - May 2016",
@@ -259,6 +260,7 @@ var educationSummaryArray = [
     },
     {
         id: "capa",
+        classNum: 2,
         clubName: "CAPA Florence",
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
@@ -570,6 +572,7 @@ var workContentArray = [
 var workToolsArray = [
     {
         tool: "SQL",
+        id: "sql",
         score: {
             intern: 10,
             matops: 9,
@@ -579,6 +582,7 @@ var workToolsArray = [
     },
     {
         tool: "Power BI",
+        id: "powerbi",
         score: {
             intern: 10,
             matops: 9,
@@ -588,6 +592,7 @@ var workToolsArray = [
     },
     {
         tool: "Python",
+        id: "python",
         score: {
             intern: 10,
             matops: 9,
@@ -597,6 +602,7 @@ var workToolsArray = [
     },
     {
         tool: "PowerApps",
+        id: "powerapps",
         score: {
             intern: 10,
             matops: 1,
@@ -606,6 +612,7 @@ var workToolsArray = [
     },
     {
         tool: "Excel",
+        id: "excel",
         score: {
             intern: 10,
             matops: 1,
@@ -626,42 +633,43 @@ var workViewDisplayArray = [
     }
 ];
 
-var timelineY = -3.5;
+var homeButtons = 1.7;
+var timelineY = -1.25;
+var timelineElement = timelineY - 1.35;
 var workTimelineDisplayArray = [
     {
         title: 'intern',
-        position: [-1.02, timelineY - 0.13]
+        position: [-0.82, timelineElement]
     },
     {
         title: 'matops',
-        position: [-0.47, timelineY  - 0.1]
+        position: [-0.28, timelineElement]
     },
     {
         title: 'contract',
-        position: [0.44, timelineY - 0.085]
+        position: [0.63, timelineElement]
     },
     {
         title: 'timeline',
-        position: [-1.37, timelineY + 2.25]
+        position: [-1.598, timelineY]
     },
     {
         title: 'home-button',
-        position: [-1.4, timelineY]
+        position: [-1.28, timelineElement]
     },
     {
         title: 'left-arrow',
-        position: [-1.55, timelineY + 0.9]
+        position: [-homeButtons, timelineElement]
     },
     {
         title: 'right-arrow',
-        position: [1.55, timelineY + 0.9]
+        position: [homeButtons, timelineElement]
     }
 ];
 
 var workHomeButton = [
 
 ];
-
 
 var toolsX = -1.37;
 var toolsGap = 0.6;
@@ -755,24 +763,75 @@ var workViewDisplayArrayContract = workViewDisplayArray.concat([
 
 var workDefaultArray = [
     {
-    header: "My career thus far",
-    description: "hdlkfasjdf klasd;jaskd askd;fjasdkfj kdhf;wlsie;askd ",
-    id: "thurfar",
-    position: [0, 0]
+        header: "My career thus far",
+        description: "hdlkfasjdf klasd;jaskd askd;fjasdkfj kdhf;wlsie;askd ",
+        id: "thusfar",
+        position: [0, 3.2]
     },
     {
         header: "where i have been", 
-        description: "lkadsfh;alskdfjas;kld",
+        description: "where i have been",
         id: "been",
-        position: [-1, 0]
+        position: [-0.65, 1.83]
     },
     {
         header: "where I am going", 
-        description: "lkadsfh;alskdfjas;kld",
+        description: "where i am going",
         id: "going",
-        position: [1, 0]
+        position: [0.65, -0.4]
     }
 ];
+
+// var workDefaultSpinningArray = [
+//     {
+//         img: './../img/sql.png',
+//         position: [1, 1]
+//     },
+//     {
+//         img: './../img/powerbi.png',
+//         position: [1, 1]
+//     },
+//     {
+//         img: './../img/python.png',
+//         position: [1, 1]
+//     },
+//     {
+//         img: './../img/excel.png',
+//         position: [1, 1]
+//     },
+//     {
+//         img: './../img/powerapps.png',
+//         position: [1, 1]
+//     },
+//     {
+//         img: ,
+//         position: [1, 1]
+//     },
+//     {
+//         img: ,
+//         position: [1, 1]
+//     },
+//     {
+//         img: ,
+//         position: [1, 1]
+//     },
+//     {
+//         img: ,
+//         position: [1, 1]
+//     },
+//     {
+//         img: ,
+//         position: [1, 1]
+//     },
+//     {
+//         img: ,
+//         position: [1, 1]
+//     },
+//     {
+//         img: ,
+//         position: [1, 1]
+//     }
+// ];
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                      personal (about me)                        ////////
