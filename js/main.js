@@ -95,12 +95,15 @@ function initRoots() {
     workContractRoot = new THREE.Object3D();
     workTimelineRoot = new THREE.Object3D();
     workDefaultRoot = new THREE.Object3D();
+    workDefaultToolsRoot = new THREE.Object3D();
+    workDefaultToolsRoot.renderOrder = 1;
 
     scene.add(workInternRoot);
     scene.add(workMatOpsRoot);
     scene.add(workContractRoot);
     scene.add(workTimelineRoot);
     scene.add(workDefaultRoot);
+    scene.add(workDefaultToolsRoot);
 
     defaultBioRoot = new THREE.Object3D();
 
@@ -185,7 +188,7 @@ function render() {
 function animate() {
 
     scene.updateMatrixWorld();
-    controls.update();
+    // controls.update();
     TWEEN.update();
     render();
     requestAnimationFrame(animate);
@@ -459,6 +462,7 @@ function createMenuButtons() {
                     setMotionAndToggleFalse("math");
                     setMotionAndToggleFalse("computer");
                     setMotionAndToggleFalse("workDefault");
+                    setMotionAndToggleFalse("defaultTools");
                     setMotionAndToggleFalse("intern");
                     setMotionAndToggleFalse("contract");
                     setMotionAndToggleFalse("matops");
@@ -511,6 +515,7 @@ function createMenuButtons() {
                 if (workTimelineToggle) {
 
                     setMotionAndToggleFalse("workDefault");
+                    setMotionAndToggleFalse("defaultTools");
                     setMotionAndToggleFalse("workTimeline");
 
                     transform(allObjects, alignState.startingView, backInterval);
@@ -518,6 +523,7 @@ function createMenuButtons() {
                 } else {
 
                     stopRotationSetTrue("workDefault");
+                    stopRotationSetTrue("defaultTools");
                     stopRotationSetTrue("workTimeline");
                     
                     transform(allObjects, alignState.workDefaultView, toInterval);
@@ -537,11 +543,13 @@ function createWorkHeaderCards() {
         workHeaderDiv.className = 'work-header-element';
 
         workHeaderDiv.innerHTML =
-            '<div class="header">' +
-            '<h5 class="name">' +
+            '<div class="work-top">' +
+            '<h5 class="work-top-name">' +
             workContentArray[i].title +
             '</h5>' +
-            workContentArray[i].timeline +
+            '<h3 class="work-top-span">' + 
+            workContentArray[i].comit +
+            '</h3>' +
             '</div>';
 
         var workHeaderObj = new THREE.CSS3DObject(workHeaderDiv);
@@ -656,6 +664,24 @@ function createWorkToolsCards() {
     }
 }
 
+function createWorkToolContentMoving() {
+
+    for (var i = 0; i < workDefaultSpinningArray.length; i += 1) {
+        
+        var workContentToolDiv = document.createElement('div');
+        workContentToolDiv.id = workDefaultSpinningArray[i].id;
+
+        workContentToolDiv.innerHTML = 
+            '<img class="tool-img-default" src="' +
+            workDefaultSpinningArray[i].img +
+            '">';
+     
+        var workToolsContentObj = new THREE.CSS3DObject(workContentToolDiv);
+        workDefaultToolObjects.push(workToolsContentObj);
+        workDefaultToolsRoot.add(workToolsContentObj);
+    }
+}
+
 function createWorkToolsContainer() {
 
     var toolCategories = ["intern", "matops", "contract"];
@@ -663,7 +689,7 @@ function createWorkToolsContainer() {
     for (var i = 0; i < toolCategories.length; i += 1) {
 
         var toolContainer = document.createElement('div');
-        toolContainer.innerHTML = '<div class="tool-container"><h1 class="tools-header">Tools Used</h1></div>';
+        toolContainer.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
         var toolContainerObj = new THREE.CSS3DObject(toolContainer);
     
         if (toolCategories[i] == "intern") {
@@ -767,6 +793,7 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("matops");
             transform(allObjects, alignState.workContractView, backInterval);
@@ -778,6 +805,7 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("matops");
             transform(allObjects, alignState.workInternView, backInterval);
@@ -789,6 +817,7 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
             
             setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("contract");
             transform(allObjects, alignState.workMatOpsView, backInterval);
@@ -797,6 +826,7 @@ function createWorkButtons() {
             
             updateWorkSelected("home");
             stopRotationSetTrue("workDefault");
+            stopRotationSetTrue("defaultTools");            
             stopRotationSetTrue("workTimeline");
             
             setMotionAndToggleFalse("contract");
@@ -817,6 +847,7 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("matops");
             transform(allObjects, alignState.workInternView, backInterval);
@@ -827,6 +858,7 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
             
             setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("matops");
             setMotionAndToggleFalse("intern");
             transform(allObjects, alignState.workContractView, backInterval);
@@ -835,6 +867,7 @@ function createWorkButtons() {
             
             updateWorkSelected("home");
             stopRotationSetTrue("workDefault");
+            stopRotationSetTrue("defaultTools");
             stopRotationSetTrue("workTimeline");
             
             setMotionAndToggleFalse("intern");
@@ -849,6 +882,7 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
             
             setMotionAndToggleFalse("workDefault");
+            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("contract");
             transform(allObjects, alignState.workMatOpsView, backInterval);
@@ -921,11 +955,6 @@ function createWorkDefaultCards() {
         workTimelineRoot.add(workDefaultObj);
 
     }
-}
-
-function createWorkDefaultSpinningApps() {
-
-
 }
 
 // managing buttons and toggles 
@@ -1095,6 +1124,13 @@ function stopRotationSetTrue(root) {
         workContractRoot.rotation.x = 0;
         workContractRoot.rotation.y = 0;
         workContractRoot.rotation.z = 0;
+    } else if (root == "defaultTools") {
+
+        workDefaultToolsToggle = true;
+        workDefaultToolsRootMotion = true;
+        workDefaultToolsRoot.rotation.x = 0;
+        workDefaultToolsRoot.rotation.y = 0;
+        workDefaultToolsRoot.rotation.z = 0;
     }
 }
 
@@ -1206,7 +1242,11 @@ function updateRotations() {
         workTimelineRoot.rotation.y += 0.015;
         workTimelineRoot.rotation.z += 0.02;
     }
+    if (!workDefaultToolsToggle) {
 
+        workDefaultToolsRoot.rotation.y += 0.015;
+        workDefaultToolsRoot.rotation.z += 0.02;
+    } 
 }
 
 function setMotionAndToggleFalse(root) {
@@ -1250,7 +1290,12 @@ function setMotionAndToggleFalse(root) {
 
         workTimelineToggle = false;
         workTimelineRootMotion = false;
+    } else if (root == "defaultTools") {
+
+        workDefaultToolsToggle = false;
+        workDefaultToolsRootMotion = false;
     }
+
 }
 
 function flipToggles(toggle) {
@@ -1311,12 +1356,14 @@ function createAllCards() {
     createWorkToolsCards();
     createWorkToolsContainer();
     createWorkDefaultCards();
+    createWorkToolContentMoving();
 
     allWorkObjects = workTimelineObjects
         .concat(workInternObjects)
         .concat(workMatOpsObjects)
         .concat(workContractObjects)
-        .concat(workDefaultObjects);
+        .concat(workDefaultObjects)
+        .concat(workDefaultToolObjects);
 
     // ALL OBJECTS
     allObjects = allStationaryObjects
@@ -1343,7 +1390,7 @@ function createAllTwirlingCoordinates() {
     createTwirlingCoordinates(workMatOpsObjects.length, alignState.workMatOpsTwirling, sphereSize, sphereSize, 0);
     createTwirlingCoordinates(workContractObjects.length, alignState.workContractTwirling, sphereSize, sphereSize, 0);
     createTwirlingCoordinates(workDefaultObjects.length, alignState.workDefaultTwirling, sphereSize, sphereSize, 0);
-
+    createTwirlingCoordinates(workDefaultSpinningArray.length, alignState.workDefaultToolsTwirling, sphereSize, sphereSize, 0);
 }
 
 function createAllViewCoordinates() {
@@ -1365,6 +1412,7 @@ function createAllViewCoordinates() {
     createViewCoordinates(workViewDisplayArrayContract, alignState.workContractView);
     createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView);
     createViewCoordinates(workDefaultArray, alignState.workDefaultView);
+    createViewCoordinates(workDefaultSpinningArray, alignState.workDefaultToolsMoving);
 
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
@@ -1378,7 +1426,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling);
+        .concat(alignState.workDefaultTwirling)
+        .concat(alignState.workDefaultToolsTwirling);
 
     // specific education views 
     alignState.standardEducationView = alignState.menuButtonView
@@ -1420,7 +1469,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultView);
+        .concat(alignState.workDefaultView)
+        .concat(alignState.workDefaultToolsMoving);
 
     alignState.workInternView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
@@ -1428,7 +1478,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternView)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling);
+        .concat(alignState.workDefaultTwirling)
+        .concat(alignState.workDefaultToolsTwirling);
 
     alignState.workMatOpsView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
@@ -1436,7 +1487,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsView)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling);
+        .concat(alignState.workDefaultTwirling)
+        .concat(alignState.workDefaultToolsTwirling);
 
     alignState.workContractView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
@@ -1444,7 +1496,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractView)
-        .concat(alignState.workDefaultTwirling);
+        .concat(alignState.workDefaultTwirling)
+        .concat(alignState.workDefaultToolsTwirling);
 
     // ALL OBJECTS 
     alignState.startingView = alignState.menuButtonView

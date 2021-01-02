@@ -19,7 +19,7 @@ var educHeaderRoot, educSummaryRoot;
 var defaultBioRoot; 
 
 var workInternRoot, workMatOpsRoot, workContractRoot;
-var workTimelineRoot, workDefaultRoot;
+var workTimelineRoot, workDefaultRoot, workDefaultToolsRoot;
 
 var workInternToggle = false;
 var workMatOpsToggle = false;
@@ -36,6 +36,7 @@ var workDefaultRootMotion = false;
 var workInternRootMotion = false;
 var workMatOpsRootMotion = false;
 var workContractRootMotion = false;
+var workDefaultToolsRootMotion = false;
 
 var defaultBioRootMotion = false;
 
@@ -54,6 +55,7 @@ var contractToggle = false;
 // toggles / tracking for work
 var workTimelineToggle = false;
 var workDefaultToggle = false;
+var workDefaultToolsToggle =false;
 
 var workInternToggle = false;
 var workMatOpsToggle = false;
@@ -86,6 +88,7 @@ var allWorkObjects = [];
 
 var workTimelineObjects = [];
 var workDefaultObjects =[];
+var workDefaultToolObjects = [];
 
 var workInternObjects = [];
 var workMatOpsObjects = [];
@@ -134,6 +137,7 @@ var alignState = {
 
     workTimelineTwirling: [],
     workDefaultTwirling: [],
+    workDefaultToolsTwirling: [],
 
     workInternTwirling: [],
     workMatOpsTwirling: [],
@@ -142,6 +146,7 @@ var alignState = {
     // work positions - view 
     workTimelineView: [],
     workDefaultView: [],
+    workDefaultToolsMoving: [],
 
     workInternView: [],
     workMatOpsView: [],
@@ -536,6 +541,7 @@ var workContentArray = [
         company: "Frontier Airlines",
         id: "intern",
         months: 5,
+        comit: "[ Full - Time ]",
         description: "Analyze existdfgdsfdsgfaircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. "
     },
@@ -544,6 +550,7 @@ var workContentArray = [
         timeline: "June 2019 - jan 2020",
         company: "Frontier Airlines",
         months: 7,
+        comit: "[ Full - Time ]",
         id: "matops",
         description: "Analyze existing inventory to determine optimal usage and demand \
             levels across all locations. Helped build a new process using existing data to determine \
@@ -554,9 +561,10 @@ var workContentArray = [
             uploading new requisitions derived from the new process created. "
     },
     {
-        title: "Data Analyst",
+        title: "Data Analyst (Contractor)",
         timeline: "jan 2020 - Presant",
         months: 13,
+        comit: "[ 30 Hour Weeks ]",
         company: "Contractor",
         id: "contract",
         description: "Analyze existing inventory to determine optimal usage and demand \
@@ -574,9 +582,9 @@ var workToolsArray = [
         tool: "SQL",
         id: "sql",
         score: {
-            intern: 10,
-            matops: 9,
-            contract: 3
+            intern: 5,
+            matops: 8,
+            contract: 10
         },
         image: './../img/sql.png'
     },
@@ -584,9 +592,9 @@ var workToolsArray = [
         tool: "Power BI",
         id: "powerbi",
         score: {
-            intern: 10,
-            matops: 9,
-            contract: 3
+            intern: 6,
+            matops: 10,
+            contract: 10
         },
         image: './../img/powerbi.png'
     },
@@ -594,9 +602,9 @@ var workToolsArray = [
         tool: "Python",
         id: "python",
         score: {
-            intern: 10,
-            matops: 9,
-            contract: 3
+            intern: 0,
+            matops: 8,
+            contract: 0
         },
         image: './../img/python.png'
     },
@@ -604,8 +612,8 @@ var workToolsArray = [
         tool: "PowerApps",
         id: "powerapps",
         score: {
-            intern: 10,
-            matops: 1,
+            intern: 0,
+            matops: 0,
             contract: 3
         },
         image: './../img/powerapps.png'
@@ -615,21 +623,41 @@ var workToolsArray = [
         id: "excel",
         score: {
             intern: 10,
-            matops: 1,
-            contract: 3
+            matops: 7,
+            contract: 4
         },
         image: './../img/excel.png'
+    },
+    {
+        tool: "Pandas (Python Library)",
+        id: "pandas",
+        score: {
+            intern: 0,
+            matops: 8,
+            contract: 0
+        },
+        image: './../img/pandas.jpg'
+    },
+    {
+        tool: "NumPy (Python Library)",
+        id: "numpy",
+        score: {
+            intern: 0,
+            matops: 0,
+            contract: 0
+        },
+        image: './../img/numpy.png'
     }
 ];
 
 var workViewDisplayArray = [
     {
         title: 'header',
-        position: [0.5, 2]
+        position: [0, 3]
     },
     {
         title: 'content',
-        position: [0.5, 0]
+        position: [0.39, 0.583]
     }
 ];
 
@@ -671,13 +699,20 @@ var workHomeButton = [
 
 ];
 
-var toolsX = -1.37;
-var toolsGap = 0.6;
-var toolsRowOne = -0.3;
+var toolsX = -1.55;
+var toolsGap = 0.66;
+var toolsRowOne = 1.55;
+var toolContainerX = -1.53;
+var toolContainerY = 0.585;
 var toolsRowTwo = toolsRowOne - toolsGap;
 var toolsRowThree = toolsRowOne - 2 * toolsGap;
 var toolsRowFour = toolsRowOne - 3 * toolsGap;
 var toolsRowFive = toolsRowOne - 4 * toolsGap;
+var toolsRowSix = toolsRowOne - 5 * toolsGap;
+var toolsRowSeven = toolsRowOne - 6 * toolsGap;
+
+var exclude = 0;
+
 
 var workViewDisplayArrayIntern = workViewDisplayArray.concat([
     {
@@ -686,50 +721,66 @@ var workViewDisplayArrayIntern = workViewDisplayArray.concat([
     },
     {
         tool: "Power BI",
-        position: [toolsX, toolsRowOne]
-    },
-    {
-        tool: "Python",
-        position: [toolsX, toolsRowFour]
-    },
-    {
-        tool: "PowerApps",
-        position: [toolsX, toolsRowFive]
-    },
-    {
-        tool: "Excel",
         position: [toolsX, toolsRowTwo]
     },
     {
+        tool: "Python",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "PowerApps",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "Excel",
+        position: [toolsX, toolsRowOne]
+    },
+    {
+        tool: "Pandas",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "NumPy",
+        position: [toolsX, exclude]
+    },
+    {
         tool: "Container",
-        position: [toolsX + 0.05, toolsRowOne + 0.5]
+        position: [toolContainerX, toolContainerY]
     }
 ]);
 
 var workViewDisplayArrayMatOps = workViewDisplayArray.concat([
     {
         tool: "SQL",
-        position: [toolsX, toolsRowTwo]
-    },
-    {
-        tool: "Power BI",
-        position: [toolsX, toolsRowThree]
-    },
-    {
-        tool: "Python",
-        position: [toolsX, toolsRowOne]
-    },
-    {
-        tool: "PowerApps",
-        position: [toolsX, toolsRowFive]
-    },
-    {
-        tool: "Excel",
         position: [toolsX, toolsRowFour]
     },
     {
-        tool: "Container",
+        tool: "Power BI",
         position: [toolsX, toolsRowOne]
+    },
+    {
+        tool: "Python",
+        position: [toolsX, toolsRowTwo]
+    },
+    {
+        tool: "PowerApps",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "Excel",
+        position: [toolsX, toolsRowFive]
+    },
+    {
+        tool: "Pandas",
+        position: [toolsX, toolsRowThree]
+    },
+    {
+        tool: "NumPy",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "Container",
+        position: [toolContainerX, toolContainerY]
     }
 ]);
 
@@ -744,19 +795,27 @@ var workViewDisplayArrayContract = workViewDisplayArray.concat([
     },
     {
         tool: "Python",
-        position: [toolsX, toolsRowFour]
+        position: [toolsX, exclude]
     },
     {
         tool: "PowerApps",
-        position: [toolsX, toolsRowFive]
+        position: [toolsX, toolsRowFour]
     },
     {
         tool: "Excel",
         position: [toolsX, toolsRowThree]
     },
     {
+        tool: "Pandas",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "NumPy",
+        position: [toolsX, exclude]
+    },
+    {
         tool: "Container",
-        position: [toolsX, toolsRowOne]
+        position: [toolContainerX, toolContainerY]
     }
 ]);
 
@@ -782,56 +841,88 @@ var workDefaultArray = [
     }
 ];
 
-// var workDefaultSpinningArray = [
-//     {
-//         img: './../img/sql.png',
-//         position: [1, 1]
-//     },
-//     {
-//         img: './../img/powerbi.png',
-//         position: [1, 1]
-//     },
-//     {
-//         img: './../img/python.png',
-//         position: [1, 1]
-//     },
-//     {
-//         img: './../img/excel.png',
-//         position: [1, 1]
-//     },
-//     {
-//         img: './../img/powerapps.png',
-//         position: [1, 1]
-//     },
-//     {
-//         img: ,
-//         position: [1, 1]
-//     },
-//     {
-//         img: ,
-//         position: [1, 1]
-//     },
-//     {
-//         img: ,
-//         position: [1, 1]
-//     },
-//     {
-//         img: ,
-//         position: [1, 1]
-//     },
-//     {
-//         img: ,
-//         position: [1, 1]
-//     },
-//     {
-//         img: ,
-//         position: [1, 1]
-//     },
-//     {
-//         img: ,
-//         position: [1, 1]
-//     }
-// ];
+var toptopY = 2.5;
+var topmidY = 1.9;
+var topBottomY = 1.1;
+
+var closeX = .8;
+var midX = 1.2;
+var farX = 1.7;
+var counter; 
+var workDefaultSpinningArray = [
+    {
+        part: "top",
+        id: "sql",
+        img: './../img/sql.png',
+        position: [closeX, toptopY]
+    },
+    {
+        part: "top",
+        id: "powerbi",
+        img: './../img/powerbi.png',
+        position: [farX, toptopY]
+    },
+    {
+        part: "top",
+        id: "python",
+        img: './../img/python.png',
+        position: [closeX, topmidY]
+    },
+    {
+        part: "top",
+        id: "excel",
+        img: './../img/excel.png',
+        position: [midX, topBottomY]
+    },
+    {
+        part: "top",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [farX, topBottomY]
+    },
+    {
+        part: "bottom",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [-farX, -topBottomY]
+    },
+    {
+        part: "bottom",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [-midX, -topBottomY]
+    },
+    {
+        part: "bottom",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [-farX, -toptopY]
+    },
+    {
+        part: "bottom",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [-closeX, -toptopY]
+    },
+    {
+        part: "bottom",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [-farX, -topBottomY]
+    },
+    {
+        part: "bottom",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [-farX, -topBottomY]
+    },
+    {
+        part: "bottom",
+        id: "powerapps",
+        img: './../img/powerapps.png',
+        position: [-farX, -topmidY]
+    }
+];
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                      personal (about me)                        ////////
