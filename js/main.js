@@ -95,15 +95,12 @@ function initRoots() {
     workContractRoot = new THREE.Object3D();
     workTimelineRoot = new THREE.Object3D();
     workDefaultRoot = new THREE.Object3D();
-    workDefaultToolsRoot = new THREE.Object3D();
-    workDefaultToolsRoot.renderOrder = 1;
 
     scene.add(workInternRoot);
     scene.add(workMatOpsRoot);
     scene.add(workContractRoot);
     scene.add(workTimelineRoot);
     scene.add(workDefaultRoot);
-    scene.add(workDefaultToolsRoot);
 
     defaultBioRoot = new THREE.Object3D();
 
@@ -366,44 +363,44 @@ function createEducationSummaryCards() {
         educationSummaryCard.className = 'summary-card';
 
         if (educationSummaryArray[i].id == "capa" || educationSummaryArray[i].id == "lax") {
-            
+
             educationSummaryCard.innerHTML =
-            '<div class="summary-flip ' + educationSummaryArray[i].id + `" onclick='flip("` + educationSummaryArray[i].id + `")'>` + 
-            '<div class="front">' + 
-            '<h4 class="club-header">' +
-            educationSummaryArray[i].clubName +
-            '</h4>' +
-            '<p class="club-position">' +
-            educationSummaryArray[i].role +
-            '</p>' +
-            '<p class="club-dates">' +
-            educationSummaryArray[i].dates +
-            '</p>' +
-            '<p class="club-description">' +
-            educationSummaryArray[i].description +
-            '</p>' + 
-            '</div>' + 
-            '<div class="back">' + 
-            '<p class="club-description">' +
-            educationSummaryArray[i].description +
-            '</p>' + 
-            '</div>' + 
-            '</div>';
+                '<div class="summary-flip ' + educationSummaryArray[i].id + `" onclick='flip("` + educationSummaryArray[i].id + `")'>` +
+                '<div class="front">' +
+                '<h4 class="club-header">' +
+                educationSummaryArray[i].clubName +
+                '</h4>' +
+                '<p class="club-position">' +
+                educationSummaryArray[i].role +
+                '</p>' +
+                '<p class="club-dates">' +
+                educationSummaryArray[i].dates +
+                '</p>' +
+                '<p class="club-description">' +
+                educationSummaryArray[i].description +
+                '</p>' +
+                '</div>' +
+                '<div class="back">' +
+                '<p class="club-description">' +
+                educationSummaryArray[i].description +
+                '</p>' +
+                '</div>' +
+                '</div>';
         } else {
-            
+
             educationSummaryCard.innerHTML =
-            '<h4 class="club-header">' +
-            educationSummaryArray[i].clubName +
-            '</h4>' +
-            '<p class="club-position">' +
-            educationSummaryArray[i].role +
-            '</p>' +
-            '<p class="club-dates">' +
-            educationSummaryArray[i].dates +
-            '</p>' +
-            '<p class="club-description">' +
-            educationSummaryArray[i].description +
-            '</p>';
+                '<h4 class="club-header">' +
+                educationSummaryArray[i].clubName +
+                '</h4>' +
+                '<p class="club-position">' +
+                educationSummaryArray[i].role +
+                '</p>' +
+                '<p class="club-dates">' +
+                educationSummaryArray[i].dates +
+                '</p>' +
+                '<p class="club-description">' +
+                educationSummaryArray[i].description +
+                '</p>';
         }
 
         var educationSummaryObj = new THREE.CSS3DObject(educationSummaryCard);
@@ -459,22 +456,22 @@ function createMenuButtons() {
                 eliminateCourseFlipClass();
 
                 setMotionAndToggleFalse("econ");
-                    setMotionAndToggleFalse("math");
-                    setMotionAndToggleFalse("computer");
-                    setMotionAndToggleFalse("workDefault");
-                    setMotionAndToggleFalse("defaultTools");
-                    setMotionAndToggleFalse("intern");
-                    setMotionAndToggleFalse("contract");
-                    setMotionAndToggleFalse("matops");
-                    setMotionAndToggleFalse("workTimeline");
-                    
+                setMotionAndToggleFalse("math");
+                setMotionAndToggleFalse("computer");
+                setMotionAndToggleFalse("workDefault");
+                setMotionAndToggleFalse("defaultTools");
+                setMotionAndToggleFalse("intern");
+                setMotionAndToggleFalse("contract");
+                setMotionAndToggleFalse("matops");
+                setMotionAndToggleFalse("workTimeline");
                 updateWorkSelected("home");
+
 
                 if (educationToggle) {
 
                     setMotionAndToggleFalse("educSummary");
                     setMotionAndToggleFalse("educHeader");
-                    
+
 
                     transform(allObjects, alignState.startingView, backInterval);
 
@@ -515,7 +512,6 @@ function createMenuButtons() {
                 if (workTimelineToggle) {
 
                     setMotionAndToggleFalse("workDefault");
-                    setMotionAndToggleFalse("defaultTools");
                     setMotionAndToggleFalse("workTimeline");
 
                     transform(allObjects, alignState.startingView, backInterval);
@@ -523,15 +519,90 @@ function createMenuButtons() {
                 } else {
 
                     stopRotationSetTrue("workDefault");
-                    stopRotationSetTrue("defaultTools");
                     stopRotationSetTrue("workTimeline");
-                    
+
                     transform(allObjects, alignState.workDefaultView, toInterval);
                 }
                 educationToggle = false;
                 checkToggles();
             }, false);
+        } else if (menuButton.id == 'bio-button') {
+
+            menuButton.addEventListener('click', function (x) {
+
+                this.classList.toggle("button-active");
+                document.getElementById("education-button").classList.remove("button-active");
+                document.getElementById("work-button").classList.remove("button-active");
+
+                // education reset 
+                resetAllButtonText();
+                clearAllSelected();
+                clearAllNotSelected();
+                clearAllActiveButtons();
+                eliminateCourseFlipClass();
+                setMotionAndToggleFalse("educHeader");
+                setMotionAndToggleFalse("educSummary");
+                setMotionAndToggleFalse("econ");
+                setMotionAndToggleFalse("math");
+                setMotionAndToggleFalse("computer");
+                setMotionAndToggleFalse("intern");
+                setMotionAndToggleFalse("contract");
+                setMotionAndToggleFalse("matops");
+                setMotionAndToggleFalse("workDefault");
+                setMotionAndToggleFalse("workTimeline");
+                updateWorkSelected("home");
+
+
+
+                if (workTimelineToggle) {
+
+                    setMotionAndToggleFalse("bioDefault");
+
+                    transform(allObjects, alignState.startingView, backInterval);
+
+                } else {
+
+                    stopRotationSetTrue("bioDefault");
+
+                    transform(allObjects, alignState.defaultBioView, toInterval);
+                }
+                educationToggle = false;
+                checkToggles();
+            }, false);
         }
+    }
+}
+
+function createBioDefaultCards() {
+
+    for (var i = 0; i < bioDefaultArray.length; i += 1) {
+
+        var bioDiv = document.createElement('div');
+        bioDiv.id = bioDefaultArray[i].id;
+        
+        if (bioDefaultArray[i].id == "pic") {
+
+            bioDiv.innerHTML = 
+                '<img class="bio-img" src="' + bioDefaultArray[i].img + '">';
+        } else if (bioDefaultArray[i].id == "right") {
+
+            bioDiv.classList.add("flex-container");
+            bioDiv.classList.add("right-arrow");
+            bioDiv.innerHTML = '<i class="fa fa-arrow-right fa-5x icon-3d"></i>';
+        } else if (bioDefaultArray[i].id == "left") {
+
+            bioDiv.classList.add("flex-container");
+            bioDiv.classList.add("left-arrow");
+            bioDiv.innerHTML = '<i class="fa fa-arrow-left fa-5x icon-3d"></i>';
+        } else {
+
+            bioDiv.innerHTML = 
+                '<h3>' + bioDefaultArray[i].description + '</h3>';
+        }
+
+        var bioDivObj = new THREE.CSS3DObject(bioDiv);
+        defaultBioObjects.push(bioDivObj);
+        defaultBioRoot.add(bioDivObj);        
     }
 }
 
@@ -547,7 +618,7 @@ function createWorkHeaderCards() {
             '<h5 class="work-top-name">' +
             workContentArray[i].title +
             '</h5>' +
-            '<h3 class="work-top-span">' + 
+            '<h3 class="work-top-span">' +
             workContentArray[i].comit +
             '</h3>' +
             '</div>';
@@ -625,9 +696,9 @@ function createWorkToolsCards() {
             var hide = workToolsArray[i].score[toolCategories[k]] ? "" : "hide";
 
             var toolHtml = '<ul class="tool-row ' + hide + '">' +
-                '<img class="tool-row-img '+ workToolsArray[i].id + '" src="' +
+                '<img class="tool-row-img ' + workToolsArray[i].id + '" src="' +
                 workToolsArray[i].image +
-                '">';
+                '">' + '<div class="all-tools">';
 
             // build the rankings 
             for (var j = 0; j < 10; j += 1) {
@@ -641,7 +712,7 @@ function createWorkToolsCards() {
                 }
             }
 
-            toolHtml += '</ul>';
+            toolHtml += '</div>' + '</ul>';
             workToolsDiv.innerHTML = toolHtml;
             var workToolsObj = new THREE.CSS3DObject(workToolsDiv);
 
@@ -664,24 +735,6 @@ function createWorkToolsCards() {
     }
 }
 
-function createWorkToolContentMoving() {
-
-    for (var i = 0; i < workDefaultSpinningArray.length; i += 1) {
-        
-        var workContentToolDiv = document.createElement('div');
-        workContentToolDiv.id = workDefaultSpinningArray[i].id;
-
-        workContentToolDiv.innerHTML = 
-            '<img class="tool-img-default" src="' +
-            workDefaultSpinningArray[i].img +
-            '">';
-     
-        var workToolsContentObj = new THREE.CSS3DObject(workContentToolDiv);
-        workDefaultToolObjects.push(workToolsContentObj);
-        workDefaultToolsRoot.add(workToolsContentObj);
-    }
-}
-
 function createWorkToolsContainer() {
 
     var toolCategories = ["intern", "matops", "contract"];
@@ -691,19 +744,19 @@ function createWorkToolsContainer() {
         var toolContainer = document.createElement('div');
         toolContainer.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
         var toolContainerObj = new THREE.CSS3DObject(toolContainer);
-    
+
         if (toolCategories[i] == "intern") {
-    
+
             workInternObjects.push(toolContainerObj);
             workInternRoot.add(toolContainerObj);
         }
         if (toolCategories[i] == "matops") {
-    
+
             workMatOpsObjects.push(toolContainerObj);
             workMatOpsRoot.add(toolContainerObj);
         }
         if (toolCategories[i] == "contract") {
-    
+
             workContractObjects.push(toolContainerObj);
             workContractRoot.add(toolContainerObj);
         }
@@ -753,22 +806,22 @@ function createWorkTimelineCards() {
 
     // home button 
     var workTimelineDiv = document.createElement('div');
-        workTimelineDiv.classList.add("timeline-events");
-        workTimelineDiv.id = "home-button";
+    workTimelineDiv.classList.add("timeline-events");
+    workTimelineDiv.id = "home-button";
 
-        workTimelineDiv.innerHTML =
-            '<div id="' + '" class="timeline-months-' + 3 + '">' +
-            '<h4>' + 'Home Page' + '</h4>' +
-            '</div>';
+    workTimelineDiv.innerHTML =
+        '<div id="' + '" class="timeline-months-' + 3 + '">' +
+        '<h4>' + 'Home Page' + '</h4>' +
+        '</div>';
 
-        var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
+    var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
 
-        workTimelineObjects.push(workTimelineObj);
-        workTimelineRoot.add(workTimelineObj);
+    workTimelineObjects.push(workTimelineObj);
+    workTimelineRoot.add(workTimelineObj);
 }
 
 function createWorkButtons() {
-    
+
     var leftButton = document.createElement('div');
     var rightButton = document.createElement('div');
 
@@ -778,16 +831,16 @@ function createWorkButtons() {
     rightButton.classList.add('right-arrow');
 
     leftButton.innerHTML = '<i class="fa fa-arrow-left fa-5x icon-3d"></i>';
-    rightButton.innerHTML =  '<i class="fa fa-arrow-right fa-5x icon-3d"></i>';
+    rightButton.innerHTML = '<i class="fa fa-arrow-right fa-5x icon-3d"></i>';
 
     var leftButtonObj = new THREE.CSS3DObject(leftButton);
     var rightButtonObj = new THREE.CSS3DObject(rightButton);
 
-    leftButton.addEventListener('click', function(x) {
+    leftButton.addEventListener('click', function (x) {
 
         if (workDefaultToggle) { // default -> contract
 
-            
+
             updateWorkSelected("contract");
             stopRotationSetTrue("contract");
             stopRotationSetTrue("workTimeline");
@@ -799,7 +852,7 @@ function createWorkButtons() {
             transform(allObjects, alignState.workContractView, backInterval);
         } else if (workMatOpsToggle) { // matops -> intern
 
-            
+
             updateWorkSelected("intern");
             stopRotationSetTrue("intern");
             stopRotationSetTrue("workTimeline");
@@ -811,11 +864,11 @@ function createWorkButtons() {
             transform(allObjects, alignState.workInternView, backInterval);
         } else if (workContractToggle) { // contract -> matops 
 
-            
+
             updateWorkSelected("matops");
             stopRotationSetTrue("matops");
             stopRotationSetTrue("workTimeline");
-            
+
             setMotionAndToggleFalse("workDefault");
             setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
@@ -823,12 +876,12 @@ function createWorkButtons() {
             transform(allObjects, alignState.workMatOpsView, backInterval);
         } else if (workInternToggle) { // intern -> default
 
-            
+
             updateWorkSelected("home");
             stopRotationSetTrue("workDefault");
-            stopRotationSetTrue("defaultTools");            
+            stopRotationSetTrue("defaultTools");
             stopRotationSetTrue("workTimeline");
-            
+
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("matops");
@@ -838,7 +891,7 @@ function createWorkButtons() {
 
     }, false);
 
-    rightButton.addEventListener('click', function(x) {
+    rightButton.addEventListener('click', function (x) {
 
         if (workDefaultToggle) { // default -> intern 
 
@@ -852,11 +905,11 @@ function createWorkButtons() {
             setMotionAndToggleFalse("matops");
             transform(allObjects, alignState.workInternView, backInterval);
         } else if (workMatOpsToggle) { // matops -> contract
-            
+
             updateWorkSelected("contract");
             stopRotationSetTrue("contract");
             stopRotationSetTrue("workTimeline");
-            
+
             setMotionAndToggleFalse("workDefault");
             setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("matops");
@@ -864,23 +917,23 @@ function createWorkButtons() {
             transform(allObjects, alignState.workContractView, backInterval);
         } else if (workContractToggle) { // contract -> default
 
-            
+
             updateWorkSelected("home");
             stopRotationSetTrue("workDefault");
             stopRotationSetTrue("defaultTools");
             stopRotationSetTrue("workTimeline");
-            
+
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("matops");
             transform(allObjects, alignState.workDefaultView, backInterval);
         } else if (workInternToggle) { // intern -> matops
 
-            
+
             updateWorkSelected("matops");
             stopRotationSetTrue("matops");
             stopRotationSetTrue("workTimeline");
-            
+
             setMotionAndToggleFalse("workDefault");
             setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
@@ -938,22 +991,28 @@ function createWorkDefaultCards() {
     for (var i = 0; i < workDefaultArray.length; i += 1) {
 
         var workDefaultMain = document.createElement('div');
-        workDefaultMain.classList.add('work-default');
         workDefaultMain.id = workDefaultArray[i].id;
-        
-        workDefaultMain.innerHTML = 
-            '<h3 class="work-default-header">' + 
-                workDefaultArray[i].header + 
-            '</h3>' + 
-            '<p class="work-default-description">' + 
+
+        if (workDefaultArray[i].id == "dataAnalysis" ||
+            workDefaultArray[i].id == "computer") {
+
+            workDefaultMain.innerHTML =
+                '<img class="icon-3d" src="' + workDefaultArray[i].img + '">';
+        } else {
+
+            workDefaultMain.classList.add('work-default');
+            workDefaultMain.innerHTML =
+                '<h3 class="work-default-header">' +
+                workDefaultArray[i].header +
+                '</h3>' +
+                '<p class="work-default-description">' +
                 workDefaultArray[i].description +
-            '</p>';
+                '</p>';
+        }
 
         var workDefaultObj = new THREE.CSS3DObject(workDefaultMain);
-
         workDefaultObjects.push(workDefaultObj);
         workTimelineRoot.add(workDefaultObj);
-
     }
 }
 
@@ -1124,19 +1183,19 @@ function stopRotationSetTrue(root) {
         workContractRoot.rotation.x = 0;
         workContractRoot.rotation.y = 0;
         workContractRoot.rotation.z = 0;
-    } else if (root == "defaultTools") {
+    } else if (root == "bioDefault") {
 
-        workDefaultToolsToggle = true;
-        workDefaultToolsRootMotion = true;
-        workDefaultToolsRoot.rotation.x = 0;
-        workDefaultToolsRoot.rotation.y = 0;
-        workDefaultToolsRoot.rotation.z = 0;
+        defaultBioToggle = true;
+        defaultBioRootMotion = true;
+        defaultBioRoot.rotation.x = 0;
+        defaultBioRoot.rotation.y = 0;
+        defaultBioRoot.rotation.z = 0;
     }
 }
 
 function checkToggles() {
     console.clear();
-    
+
     console.log("EDUCATION: ");
     console.log("   toggle: " + educationToggle);
 
@@ -1163,7 +1222,7 @@ function checkToggles() {
     console.log("WORK TIMELINE: ");
     console.log("   rootMotion: " + workTimelineRootMotion);
     console.log("   toggle: " + workTimelineToggle);
-    
+
     console.log(" Work Default: ");
     console.log("   rootMotion: " + workDefaultRootMotion);
     console.log("   toggle: " + workDefaultToggle);
@@ -1175,7 +1234,7 @@ function checkToggles() {
     console.log("MatOps: ");
     console.log("   rootMotion: " + workMatOpsRootMotion);
     console.log("   toggle: " + workMatOpsToggle);
-    
+
     console.log("Contract: ");
     console.log("   rootMotion: " + workContractRootMotion);
     console.log("   toggle: " + workContractToggle);
@@ -1241,12 +1300,13 @@ function updateRotations() {
 
         workTimelineRoot.rotation.y += 0.015;
         workTimelineRoot.rotation.z += 0.02;
-    }
-    if (!workDefaultToolsToggle) {
-
-        workDefaultToolsRoot.rotation.y += 0.015;
-        workDefaultToolsRoot.rotation.z += 0.02;
     } 
+
+    if (!defaultBioRootMotion) {
+
+        defaultBioRoot.rotation.y += 0.015;
+        defaultBioRoot.rotation.z += 0.02;
+    }
 }
 
 function setMotionAndToggleFalse(root) {
@@ -1290,12 +1350,11 @@ function setMotionAndToggleFalse(root) {
 
         workTimelineToggle = false;
         workTimelineRootMotion = false;
-    } else if (root == "defaultTools") {
+    } else if (root == "bioDefault") {
 
-        workDefaultToolsToggle = false;
-        workDefaultToolsRootMotion = false;
+        defaultBioToggle = false;
+        defaultBioRootMotion = false;
     }
-
 }
 
 function flipToggles(toggle) {
@@ -1356,19 +1415,23 @@ function createAllCards() {
     createWorkToolsCards();
     createWorkToolsContainer();
     createWorkDefaultCards();
-    createWorkToolContentMoving();
 
     allWorkObjects = workTimelineObjects
         .concat(workInternObjects)
         .concat(workMatOpsObjects)
         .concat(workContractObjects)
-        .concat(workDefaultObjects)
-        .concat(workDefaultToolObjects);
+        .concat(workDefaultObjects);
+
+    // bio
+    createBioDefaultCards();
+
+    allBioObjects = defaultBioObjects;
 
     // ALL OBJECTS
     allObjects = allStationaryObjects
         .concat(allEducationObjects)
-        .concat(allWorkObjects);
+        .concat(allWorkObjects)
+        .concat(allBioObjects);
 }
 
 function createAllTwirlingCoordinates() {
@@ -1390,7 +1453,9 @@ function createAllTwirlingCoordinates() {
     createTwirlingCoordinates(workMatOpsObjects.length, alignState.workMatOpsTwirling, sphereSize, sphereSize, 0);
     createTwirlingCoordinates(workContractObjects.length, alignState.workContractTwirling, sphereSize, sphereSize, 0);
     createTwirlingCoordinates(workDefaultObjects.length, alignState.workDefaultTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(workDefaultSpinningArray.length, alignState.workDefaultToolsTwirling, sphereSize, sphereSize, 0);
+
+    // bio
+    createTwirlingCoordinates(defaultBioObjects.length, alignState.defaultBioTwirling, sphereSize, sphereSize, 0);
 }
 
 function createAllViewCoordinates() {
@@ -1412,7 +1477,9 @@ function createAllViewCoordinates() {
     createViewCoordinates(workViewDisplayArrayContract, alignState.workContractView);
     createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView);
     createViewCoordinates(workDefaultArray, alignState.workDefaultView);
-    createViewCoordinates(workDefaultSpinningArray, alignState.workDefaultToolsMoving);
+
+    // bio
+    createViewCoordinates(bioDefaultArray, alignState.defaultBioView);
 
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
@@ -1426,8 +1493,10 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling)
-        .concat(alignState.workDefaultToolsTwirling);
+        .concat(alignState.workDefaultTwirling);
+
+    // just all bio twirling
+    alignState.allBioTwirling = alignState.defaultBioTwirling;
 
     // specific education views 
     alignState.standardEducationView = alignState.menuButtonView
@@ -1436,7 +1505,8 @@ function createAllViewCoordinates() {
         .concat(alignState.econTwirling)
         .concat(alignState.educationHeaderView)
         .concat(alignState.educationSummaryView)
-        .concat(alignState.allWorkTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
     alignState.computerView = alignState.menuButtonView
         .concat(alignState.mathTwirling)
@@ -1444,7 +1514,8 @@ function createAllViewCoordinates() {
         .concat(alignState.econTwirling)
         .concat(alignState.educationHeaderSelectedView)
         .concat(alignState.educationSummaryTwirling)
-        .concat(alignState.allWorkTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
     alignState.mathView = alignState.menuButtonView
         .concat(alignState.mathView)
@@ -1452,7 +1523,8 @@ function createAllViewCoordinates() {
         .concat(alignState.econTwirling)
         .concat(alignState.educationHeaderSelectedView)
         .concat(alignState.educationSummaryTwirling)
-        .concat(alignState.allWorkTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
     alignState.econView = alignState.menuButtonView
         .concat(alignState.mathTwirling)
@@ -1460,7 +1532,8 @@ function createAllViewCoordinates() {
         .concat(alignState.econView)
         .concat(alignState.educationHeaderSelectedView)
         .concat(alignState.educationSummaryTwirling)
-        .concat(alignState.allWorkTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
     // specific work views 
     alignState.workDefaultView = alignState.menuButtonView
@@ -1469,8 +1542,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultView)
-        .concat(alignState.workDefaultToolsMoving);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
     alignState.workInternView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
@@ -1478,8 +1551,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternView)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling)
-        .concat(alignState.workDefaultToolsTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
     alignState.workMatOpsView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
@@ -1487,8 +1560,8 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsView)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling)
-        .concat(alignState.workDefaultToolsTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
     alignState.workContractView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
@@ -1496,13 +1569,24 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractView)
-        .concat(alignState.workDefaultTwirling)
-        .concat(alignState.workDefaultToolsTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
+
+    // specific bio views 
+    alignState.defaultBioView = alignState.menuButtonView
+    .concat(alignState.allEducationTwirling)
+    .concat(alignState.workTimelineView)
+    .concat(alignState.workInternTwirling)
+    .concat(alignState.workMatOpsTwirling)
+    .concat(alignState.workContractView)
+    .concat(alignState.allWorkTwirling)
+    .concat(alignState.defaultBioView);
 
     // ALL OBJECTS 
     alignState.startingView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
-        .concat(alignState.allWorkTwirling);
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
 
 }
 

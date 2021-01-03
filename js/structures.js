@@ -695,13 +695,9 @@ var workTimelineDisplayArray = [
     }
 ];
 
-var workHomeButton = [
-
-];
-
-var toolsX = -1.55;
+var toolsX = -1.43;
 var toolsGap = 0.66;
-var toolsRowOne = 1.55;
+var toolsRowOne = 1.65;
 var toolContainerX = -1.53;
 var toolContainerY = 0.585;
 var toolsRowTwo = toolsRowOne - toolsGap;
@@ -819,7 +815,8 @@ var workViewDisplayArrayContract = workViewDisplayArray.concat([
     }
 ]);
 
-
+var imageX = 1.3;
+var imageY = 1.8;
 var workDefaultArray = [
     {
         header: "My career thus far",
@@ -838,7 +835,17 @@ var workDefaultArray = [
         description: "where i am going",
         id: "going",
         position: [0.65, -0.4]
-    }
+    }, 
+    {
+        id: "dataAnalysis", 
+        img: "./../img/dataAnalysis.png",
+        position: [imageX, imageY]
+    }, 
+    {
+        id: "computer", 
+        img: "./../img/computer.png",
+        position: [-imageX, -0.4]
+    }, 
 ];
 
 var toptopY = 2.5;
@@ -849,81 +856,61 @@ var closeX = .8;
 var midX = 1.2;
 var farX = 1.7;
 var counter; 
-var workDefaultSpinningArray = [
-    {
-        part: "top",
-        id: "sql",
-        img: './../img/sql.png',
-        position: [closeX, toptopY]
-    },
-    {
-        part: "top",
-        id: "powerbi",
-        img: './../img/powerbi.png',
-        position: [farX, toptopY]
-    },
-    {
-        part: "top",
-        id: "python",
-        img: './../img/python.png',
-        position: [closeX, topmidY]
-    },
-    {
-        part: "top",
-        id: "excel",
-        img: './../img/excel.png',
-        position: [midX, topBottomY]
-    },
-    {
-        part: "top",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [farX, topBottomY]
-    },
-    {
-        part: "bottom",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [-farX, -topBottomY]
-    },
-    {
-        part: "bottom",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [-midX, -topBottomY]
-    },
-    {
-        part: "bottom",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [-farX, -toptopY]
-    },
-    {
-        part: "bottom",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [-closeX, -toptopY]
-    },
-    {
-        part: "bottom",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [-farX, -topBottomY]
-    },
-    {
-        part: "bottom",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [-farX, -topBottomY]
-    },
-    {
-        part: "bottom",
-        id: "powerapps",
-        img: './../img/powerapps.png',
-        position: [-farX, -topmidY]
-    }
-];
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                      personal (about me)                        ////////
 /////////////////////////////////////////////////////////////////////////////////
+
+var bioDefaultArray = [
+    {
+        id: "header", 
+        position: [1, 1],
+        description: "",
+    },
+    {
+        id: "main", 
+        position: [1, 1],
+        description: "",
+    },
+    {
+        id: "pic", 
+        position: [1, 1],
+        img: "",
+        description: "",
+    },
+    {
+        id: "interests", 
+        position: [1, 1],
+        description: "",
+    },
+    {
+        id: "wood", 
+        position: [1, 1],
+        img: "",
+        description: "Woodworking",
+    },
+    {
+        id: "travel", 
+        position: [1, 1],
+        img: "",
+        description: "Travel",
+    },
+    {
+        id: "bikes", 
+        position: [1, 1],
+        img: "",
+        description: "Bikes",
+    },
+    {
+        id: "right", 
+        position: [1, 1],
+        img: "",
+        description: "",
+    },
+    {
+        id: "left", 
+        position: [1, 1],
+        img: "",
+        description: "",
+    },
+];
