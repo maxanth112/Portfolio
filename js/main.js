@@ -579,27 +579,30 @@ function createBioDefaultCards() {
 
         var bioDiv = document.createElement('div');
         bioDiv.id = bioDefaultArray[i].id;
-        
-        if (bioDefaultArray[i].id == "pic") {
-
+        if (bioDefaultArray[i].id == "bio-pic") {
+            
             bioDiv.innerHTML = 
-                '<img class="bio-img" src="' + bioDefaultArray[i].img + '">';
-        } else if (bioDefaultArray[i].id == "right") {
-
+            '<img class="bio-img" src="' + bioDefaultArray[i].img + '">';
+        } else if (bioDefaultArray[i].id == "bio-button-right") {
+            
             bioDiv.classList.add("flex-container");
             bioDiv.classList.add("right-arrow");
             bioDiv.innerHTML = '<i class="fa fa-arrow-right fa-5x icon-3d"></i>';
-        } else if (bioDefaultArray[i].id == "left") {
+        } else if (bioDefaultArray[i].id == "bio-button-left") {
 
             bioDiv.classList.add("flex-container");
             bioDiv.classList.add("left-arrow");
             bioDiv.innerHTML = '<i class="fa fa-arrow-left fa-5x icon-3d"></i>';
-        } else {
-
+        } else if (bioDefaultArray[i].id == "bio-main") {
+            
             bioDiv.innerHTML = 
-                '<h3>' + bioDefaultArray[i].description + '</h3>';
+            '<p>' + bioDefaultArray[i].description + '</p>';
+        } else {
+            
+            bioDiv.innerHTML = 
+            '<h3>' + bioDefaultArray[i].description + '</h3>';
         }
-
+        
         var bioDivObj = new THREE.CSS3DObject(bioDiv);
         defaultBioObjects.push(bioDivObj);
         defaultBioRoot.add(bioDivObj);        
@@ -1455,7 +1458,7 @@ function createAllTwirlingCoordinates() {
     createTwirlingCoordinates(workDefaultObjects.length, alignState.workDefaultTwirling, sphereSize, sphereSize, 0);
 
     // bio
-    createTwirlingCoordinates(defaultBioObjects.length, alignState.defaultBioTwirling, sphereSize, sphereSize, 0);
+    createTwirlingCoordinates(defaultBioObjects.length, alignState.defaultBioTwirling, 1000, 1000, 0);
 }
 
 function createAllViewCoordinates() {
@@ -1480,14 +1483,14 @@ function createAllViewCoordinates() {
 
     // bio
     createViewCoordinates(bioDefaultArray, alignState.defaultBioView);
-
+    
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderTwirling)
-        .concat(alignState.educationSummaryTwirling);
-
+    .concat(alignState.computerTwirling)
+    .concat(alignState.econTwirling)
+    .concat(alignState.educationHeaderTwirling)
+    .concat(alignState.educationSummaryTwirling);
+    
     // just all work twirling 
     alignState.allWorkTwirling = alignState.workTimelineTwirling
         .concat(alignState.workInternTwirling)
@@ -1495,7 +1498,7 @@ function createAllViewCoordinates() {
         .concat(alignState.workContractTwirling)
         .concat(alignState.workDefaultTwirling);
 
-    // just all bio twirling
+        // just all bio twirling
     alignState.allBioTwirling = alignState.defaultBioTwirling;
 
     // specific education views 
@@ -1517,7 +1520,7 @@ function createAllViewCoordinates() {
         .concat(alignState.allWorkTwirling)
         .concat(alignState.allBioTwirling);
 
-    alignState.mathView = alignState.menuButtonView
+        alignState.mathView = alignState.menuButtonView
         .concat(alignState.mathView)
         .concat(alignState.computerTwirling)
         .concat(alignState.econTwirling)
@@ -1542,7 +1545,7 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.allWorkTwirling)
+        .concat(alignState.workDefaultView)
         .concat(alignState.allBioTwirling);
 
     alignState.workInternView = alignState.menuButtonView
@@ -1551,16 +1554,16 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternView)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.allWorkTwirling)
+        .concat(alignState.workDefaultTwirling)
         .concat(alignState.allBioTwirling);
-
-    alignState.workMatOpsView = alignState.menuButtonView
+        
+        alignState.workMatOpsView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
         .concat(alignState.workTimelineView)
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsView)
         .concat(alignState.workContractTwirling)
-        .concat(alignState.allWorkTwirling)
+        .concat(alignState.workDefaultTwirling)
         .concat(alignState.allBioTwirling);
 
     alignState.workContractView = alignState.menuButtonView
@@ -1569,25 +1572,22 @@ function createAllViewCoordinates() {
         .concat(alignState.workInternTwirling)
         .concat(alignState.workMatOpsTwirling)
         .concat(alignState.workContractView)
-        .concat(alignState.allWorkTwirling)
+        .concat(alignState.workDefaultTwirling)
         .concat(alignState.allBioTwirling);
 
     // specific bio views 
     alignState.defaultBioView = alignState.menuButtonView
     .concat(alignState.allEducationTwirling)
-    .concat(alignState.workTimelineView)
-    .concat(alignState.workInternTwirling)
-    .concat(alignState.workMatOpsTwirling)
-    .concat(alignState.workContractView)
     .concat(alignState.allWorkTwirling)
     .concat(alignState.defaultBioView);
 
     // ALL OBJECTS 
     alignState.startingView = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.allBioTwirling);
-
+    .concat(alignState.allEducationTwirling)
+    .concat(alignState.allWorkTwirling)
+    .concat(alignState.allBioTwirling);
+    
+    // console.log(alignState.defaultBioView);
 }
 
 // initial site startup 

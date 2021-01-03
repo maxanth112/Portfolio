@@ -861,56 +861,68 @@ var counter;
 ////////                      personal (about me)                        ////////
 /////////////////////////////////////////////////////////////////////////////////
 
+var interestsX = -1.59;
+var interestsYStart = -.85;
+var interestsStep = .9;
+var interestsButtonY = -2.93;
+var interestButtonMid = .45;
+var interestButtonDist = 1;
 var bioDefaultArray = [
     {
-        id: "header", 
-        position: [1, 1],
-        description: "",
+        id: "bio-header", 
+        position: [0, 3.2],
+        description: "About Me",
     },
     {
-        id: "main", 
-        position: [1, 1],
-        description: "",
+        id: "bio-main", 
+        position: [0.47, 1.5],
+        description: "call me big pappa.",
     },
     {
-        id: "pic", 
-        position: [1, 1],
-        img: "",
+        id: "bio-pic", 
+        position: [-1.45, 1.5],
+        img: "./../img/me.png",
         description: "",
     },
     {
         id: "interests", 
-        position: [1, 1],
+        position: [0, -.16],
         description: "",
     },
     {
         id: "wood", 
-        position: [1, 1],
+        position: [interestsX, interestsYStart - interestsStep],
         img: "",
         description: "Woodworking",
     },
     {
         id: "travel", 
-        position: [1, 1],
+        position: [interestsX, interestsYStart],
         img: "",
         description: "Travel",
     },
     {
         id: "bikes", 
-        position: [1, 1],
+        position: [interestsX, interestsYStart - ( 2 * interestsStep )],
         img: "",
         description: "Bikes",
     },
     {
-        id: "right", 
-        position: [1, 1],
+        id: "bio-button-right", 
+        position: [interestButtonMid + interestButtonDist, interestsButtonY],
         img: "",
         description: "",
     },
     {
-        id: "left", 
-        position: [1, 1],
+        id: "bio-button-left", 
+        position: [interestButtonMid - interestButtonDist, interestsButtonY],
         img: "",
         description: "",
     },
+    {
+        id: "bio-navi", 
+        position: [.405, -2.95],
+        img: "",
+        description: "",
+    }
 ];
