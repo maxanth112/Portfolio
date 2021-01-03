@@ -1,3 +1,6 @@
+
+/* BIO DEFAULT */
+
 #bio-header, #interests {
     width: calc(var(--multiplier) * 120);
     height: calc(var(--multiplier) * 6);
@@ -40,6 +43,34 @@
     height: calc(var(--multiplier) * 5);
 }
 
+#interests h3 {
+    margin: 
+        calc(var(--multiplier) * .8)
+        calc(var(--multiplier) * 1.5);
+}
+
+.bio-button-header {
+    font-size: calc(var(--multiplier) * 2);
+    margin: 
+        calc(var(--multiplier) * 1.3)
+        calc(var(--multiplier) * 1)
+        calc(var(--multiplier) * 1.3)
+        calc(var(--multiplier) * 1.5);
+}
+
+.bio-default button {
+    background-color: transparent;
+    color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0px 0px 3px rgba(0, 255, 255, 0.5);
+    border: 4px solid rgba(127, 255, 255, 0.25);
+    height: calc(var(--multiplier) * 3);
+    width: calc(var(--multiplier) * 9);
+    margin: 
+        calc(var(--multiplier) * 0)
+        calc(var(--multiplier) * 1.5);
+    font-size: calc(var(--multiplier) * 1.4);
+}
+
 #bikes, 
 #travel,
 #wood {
@@ -54,6 +85,18 @@
 #bio-navi {
     width: calc(var(--multiplier) * 94);
     height: calc(var(--multiplier) * 5);
+    background-color: transparent;
+    color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0px 0px 3px rgba(0, 255, 255, 0.5);
+    border: 4px solid rgba(127, 255, 255, 0.25);
+}
+
+/* BIO DEFAULT STARTING INTEREST - TRAVEL */
+
+.slide-1 img,
+.slide-2 img,
+.slide-3 img {
+    height: calc(var(--multiplier) * 26);
     background-color: transparent;
     color: rgba(0, 255, 255, 0.5);
     box-shadow: 0px 0px 3px rgba(0, 255, 255, 0.5);

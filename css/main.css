@@ -4,10 +4,6 @@
 * {
   box-sizing: border-box;
 }
-html,
-body {
-  height: 100%;
-}
 
 body {
   margin: 0;
@@ -16,13 +12,15 @@ body {
   background-color: black;
 }
 
-#menu {
-  position: absolute;
-  bottom: 20px;
+#cssContainer, #glContainer {
   width: 100%;
-  text-align: center;
-  align-content: center;
-  z-index: 10;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+}
+
+#glContainer {
+  pointer-events: none;
 }
 
 .menu-button {

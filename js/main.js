@@ -6,12 +6,70 @@ init();
 function init() {
 
     cssRenderer = createCssRenderer();
-    document.getElementById('container').appendChild(cssRenderer.domElement);
+    // glRenderer = createGLRenderer();
 
     initMouseSceneMenu();
     initRoots();
     initCamera();
     initControls();
+
+    // // make a geometry that we will clip with the DOM elememt.
+    // ~function() {
+    //     var material = new THREE.MeshPhongMaterial({
+    //         color: 0x991d65,
+    //         emissive: 0x000000,
+    //         specular: 0x111111,
+    //         side: THREE.DoubleSide,
+    //         flatShading: false,
+    //         shininess: 30,
+    //         vertexColors: true,
+    //     })
+
+    //     var geometry = new THREE.SphereBufferGeometry( 70, 32, 32 );
+
+    //     // give the geometry custom colors for each vertex {{
+    //     geometry = geometry.toNonIndexed(); // ensure each face has unique vertices
+
+    //     position = geometry.attributes.position;
+    //     var colors = [];
+
+    //     const color = new THREE.Color
+    //     for ( var i = 0, l = position.count; i < l; i ++ ) {
+    //         color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.15 + 0.85 );
+    //         colors.push( color.r, color.g, color.b );
+    //     }
+
+    //     geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
+    //     // }}
+
+    //     sphere = new THREE.Mesh( geometry, material );
+    //     sphere.position.z = 1600;
+    //     sphere.position.x = 500;
+    //     sphere.position.y = 200;
+    //     sphere.castShadow = true;
+    //     sphere.receiveShadow = false;
+    //     glRoot.add( sphere );
+    // }()
+
+    // // light
+    // ~function() {
+    //     var ambientLight = new THREE.AmbientLight( 0x999999, 1.5 );
+    //     glRoot.add( ambientLight );
+
+    //     light = new THREE.PointLight( 0xffffff, 1, 0 );
+    //     light.castShadow = true;
+    //     light.position.z = 1600;
+    //     light.position.x = 500;
+    //     light.position.y = 200;
+    //     light.shadow.mapSize.width = 1024;  // default
+    //     light.shadow.mapSize.height = 1024; // default
+    //     light.shadow.camera.near = 1;       // default
+    //     light.shadow.camera.far = 2000;      // default
+
+    //     scene.add( new THREE.PointLightHelper( light, 10 ) )
+
+    //     glRoot.add( light );
+    // }()
 
     createAllCards();
     createAllTwirlingCoordinates();
@@ -68,8 +126,6 @@ function createViewCoordinates(arr, save, x = 500, y = 200, z = 1800) {
 // main threejs rendering functions 
 function initRoots() {
 
-    targetQuaternion = new THREE.Quaternion();
-
     educationRoot = new THREE.Object3D();
     workRoot = new THREE.Object3D();
     stationaryRoot = new THREE.Object3D();
@@ -103,8 +159,36 @@ function initRoots() {
     scene.add(workDefaultRoot);
 
     defaultBioRoot = new THREE.Object3D();
+    travel2Root = new THREE.Object3D();
+    travel3Root = new THREE.Object3D();
+    travel4Root = new THREE.Object3D();
+
+    wood1Root = new THREE.Object3D();
+    wood2Root = new THREE.Object3D();
+    wood3Root = new THREE.Object3D();
+
+    bike1Root = new THREE.Object3D();
+    bike2Root = new THREE.Object3D();
+    bike3Root = new THREE.Object3D();
 
     scene.add(defaultBioRoot);
+    scene.add(travel2Root);
+    scene.add(travel3Root);
+    scene.add(travel4Root);
+
+    scene.add(wood1Root);
+    scene.add(wood2Root);
+    scene.add(wood3Root);
+
+    scene.add(bike1Root);
+    scene.add(bike2Root);
+    scene.add(bike3Root);
+
+    glRoot = new THREE.Object3D();
+    glRoot.position.set.x = 0;
+    glRoot.position.set.y = 0;
+    glRoot.position.set.z = 0;
+    scene.add(glRoot);
 }
 
 function initCamera() {
@@ -172,24 +256,66 @@ function createCssRenderer() {
 
     var cssRenderer = new THREE.CSS3DRenderer();
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    cssRenderer.domElement.style.position = 'absolute';
     cssRenderer.domElement.style.top = 0;
+    document.getElementById('cssContainer').appendChild(cssRenderer.domElement);
 
     return cssRenderer;
+}
+
+function createGLRenderer() {
+    
+    var glRenderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
+    glRenderer.setClearColor( 0x000000, 0 );
+    glRenderer.setPixelRatio( window.devicePixelRatio );
+    glRenderer.shadowMap.enabled = true;
+    glRenderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+    document.getElementById('glContainer').appendChild(glRenderer.domElement);
+
+    return glRenderer;
 }
 
 function render() {
 
     cssRenderer.render(scene, camera);
+    // glRenderer.render(scene, camera);
 }
 
 function animate() {
 
+    // var time = performance.now();
+    // light.position.x = 30 * Math.sin(time * 0.003) + 30;
+    // light.position.y = 40 * Math.cos(time * 0.001) - 20;
+    
+    // sphere.rotation.x += 0.005
+    // sphere.rotation.y += 0.005
+
     scene.updateMatrixWorld();
-    // controls.update();
     TWEEN.update();
+
+    // controls.update();
     render();
+    
     requestAnimationFrame(animate);
     // updateRotations();
+}
+
+// general event listeners 
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    
+    cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    // glRenderer.setSize(window.innerWidth, window.innerHeight);
+    
+    camera.updateProjectionMatrix();
+}
+
+function onDocumentMouseMove(event) {
+
+    event.preventDefault();
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
 // creating cards and divs 
@@ -579,34 +705,83 @@ function createBioDefaultCards() {
 
         var bioDiv = document.createElement('div');
         bioDiv.id = bioDefaultArray[i].id;
+        bioDiv.classList.add("bio-default");
+
         if (bioDefaultArray[i].id == "bio-pic") {
             
             bioDiv.innerHTML = 
             '<img class="bio-img" src="' + bioDefaultArray[i].img + '">';
-        } else if (bioDefaultArray[i].id == "bio-button-right") {
+        } else if (bioDefaultArray[i].id == "bio-button-down") {
             
             bioDiv.classList.add("flex-container");
-            bioDiv.classList.add("right-arrow");
-            bioDiv.innerHTML = '<i class="fa fa-arrow-right fa-5x icon-3d"></i>';
-        } else if (bioDefaultArray[i].id == "bio-button-left") {
+            bioDiv.classList.add("down-arrow");
+            bioDiv.innerHTML = '<i class="fa fa-arrow-down fa-5x icon-3d"></i>';
+        } else if (bioDefaultArray[i].id == "bio-button-up") {
 
             bioDiv.classList.add("flex-container");
-            bioDiv.classList.add("left-arrow");
-            bioDiv.innerHTML = '<i class="fa fa-arrow-left fa-5x icon-3d"></i>';
+            bioDiv.classList.add("up-arrow");
+            bioDiv.innerHTML = '<i class="fa fa-arrow-up fa-5x icon-3d"></i>';
         } else if (bioDefaultArray[i].id == "bio-main") {
             
             bioDiv.innerHTML = 
             '<p>' + bioDefaultArray[i].description + '</p>';
-        } else {
+        } else if (bioDefaultArray[i].id == "bio-header" || bioDefaultArray[i].id == "interests") {
             
             bioDiv.innerHTML = 
             '<h3>' + bioDefaultArray[i].description + '</h3>';
+        } else {
+            bioDiv.innerHTML = 
+            '<h3 class="bio-button-header">' + bioDefaultArray[i].description + '</h3>' +
+            '<button id="' + bioDefaultArray[i].id + '-button">See Pics</button>';
         }
         
         var bioDivObj = new THREE.CSS3DObject(bioDiv);
         defaultBioObjects.push(bioDivObj);
         defaultBioRoot.add(bioDivObj);        
     }
+
+    createImgCards(travel1, defaultBioObjects, "default");
+}
+
+function createTravelCards() {
+
+
+}
+
+function createImgCards(arr, saveArr, saveRoot) {
+
+    for (var i = 0; i < arr.length; i += 1) {
+
+        var travelDiv = document.createElement('div');
+        travelDiv.classList.add(arr[i].id);
+        travelDiv.innerHTML = 
+            '<img src="' + arr[i].img + '">';
+
+        var travelObj = new THREE.CSS3DObject(travelDiv);
+        saveArr.push(travelObj);
+        
+        if (saveRoot == "default") { 
+            defaultBioRoot.add(travelObj);
+        } else if (saveRoot == "travel2") {
+            travel2Root.add(travelObj);
+        } else if (saveRoot == "travel3") {
+            travel3Root.add(travelObj);
+        } else if (saveRoot == "travel4") {
+            travel4Root.add(travelObj);
+        } else if (saveRoot == "wood1") {
+            wood1Root.add(travelObj);
+        } else if (saveRoot == "wood2") {
+            wood2Root.add(travelObj);
+        } else if (saveRoot == "wood3") {
+            wood3Root.add(travelObj);
+        } else if (saveRoot == "bike1") {
+            bike1Root.add(travelObj);
+        } else if (saveRoot == "bike2") {
+            bike2Root.add(travelObj);
+        } else if (saveRoot == "bike3") {
+            bike3Root.add(travelObj);
+        }
+    } 
 }
 
 function createWorkHeaderCards() {
@@ -1482,7 +1657,7 @@ function createAllViewCoordinates() {
     createViewCoordinates(workDefaultArray, alignState.workDefaultView);
 
     // bio
-    createViewCoordinates(bioDefaultArray, alignState.defaultBioView);
+    createViewCoordinates(bioDefaultArray.concat(travel1), alignState.defaultBioView);
     
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
@@ -1616,23 +1791,3 @@ function welcomeIntro() {
     welcomeRoot.add(welcomeObject);
 }
 
-// general event listeners 
-function onWindowResize() {
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    cssRenderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    var currentSize = cssRenderer.getSize();
-    console.log(currentSize);
-    render();
-}
-
-function onDocumentMouseMove(event) {
-
-    event.preventDefault();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}
