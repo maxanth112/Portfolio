@@ -1,3 +1,4 @@
+
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         global variables                        ////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -9,19 +10,12 @@ var sphereSize = 1000;
 
 // renderers, cameras, etc.
 var controls, camera, scene, cssRenderer;
-var glRoot, glRenderer;
-var sphere;
-// roots and root toggles/trackers 
 
+// roots and root toggles/trackers 
 var educationRoot, workRoot, stationaryRoot;
 
 var mathCourseRoot, computerCourseRoot, econCourseRoot;
 var educHeaderRoot, educSummaryRoot;
-
-var defaultBioRoot; 
-var travel1Root, travel2Root, travel3Root, travel4Root;
-var wood1Root, wood2Root, wood3Root;
-var bike1Root, bike2Root, bike3Root;
 
 var workInternRoot, workMatOpsRoot, workContractRoot;
 var workTimelineRoot, workDefaultRoot, workDefaultToolsRoot;
@@ -43,23 +37,8 @@ var workMatOpsRootMotion = false;
 var workContractRootMotion = false;
 var workDefaultToolsRootMotion = false;
 
-var defaultBioRootMotion = false;
-var travel1RootMotion = false;
-var travel2RootMotion = false;
-var travel3RootMotion = false;
-var travel4RootMotion = false;
-
-var bike1RootMotion = false;
-var bike2RootMotion = false;
-var bike3RootMotion = false;
-
-var wood1RootMotion = false;
-var wood2RootMotion = false;
-var wood3RootMotion = false;
-
 // toggles / tracking for education
 var educationToggle = false;
-var bioToggle = false;
 
 var computerToggle = false;
 var mathToggle = false;
@@ -80,20 +59,6 @@ var workContractToggle = false;
 
 // toggles / tracking for bio
 var defaultBioToggle = false;
-
-var defaultBioToggle= false;
-var travel1Toggle = false;
-var travel2Toggle = false;
-var travel3Toggle = false;
-var travel4Toggle = false;
-
-var bike1Toggle = false;
-var bike2Toggle = false;
-var bike3Toggle = false;
-
-var wood1Toggle = false;
-var wood2Toggle = false;
-var wood3Toggle = false;
 
 // all objects 
 var allObjects = [];
@@ -124,24 +89,6 @@ var workDefaultToolObjects = [];
 var workInternObjects = [];
 var workMatOpsObjects = [];
 var workContractObjects = [];
-
-// bio objects 
-var allBioObjects = [];
-var defaultBioObjects = [];
-
-var travel1Objects = [];
-var travel2Objects = [];
-var travel3Objects = [];
-var travel4Objects = [];
-
-var wood1Objects = [];
-var wood2Objects = [];
-var wood3Objects = [];
-
-var bike1Objects = [];
-var bike2Objects = [];
-var bike3Objects = [];
-
 
 // positioning object
 var alignState = {
@@ -196,35 +143,15 @@ var alignState = {
 
     // bio positions - view
     defaultBioView: [],
-    travel1View: [],
-    travel2View: [],
-    travel3View: [],
-    travel4View: [],
-
-    wood1View: [],
-    wood2View: [],
-    wood3View: [],
-
-    bike1View: [],
-    bike2View: [],
-    bike3View: [],
+    interestPic1View: [],
+    interestPic2View: [],
 
     // bio position - trirling 
     allBioTwirling: [],
 
     defaultBioTwirling: [],
-    travel1Twirling: [],
-    travel2Twirling: [],
-    travel3Twirling: [],
-    travel4Twirling: [],
-
-    wood1Twirling: [],
-    wood2Twirling: [],
-    wood3Twirling: [],
-
-    bike1Twirling: [],
-    bike2Twirling: [],
-    bike3Twirling: [],
+    interestPic1Twirling: [],
+    interestPic2Twirling: [],
 };
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -927,9 +854,9 @@ var counter;
 ////////                      personal (about me)                        ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var interestsX = -1.59;
+var interestsX = -1.66;
 var interestsYStart = -.85;
-var interestsStep = .9;
+var interestsStep = .933;
 
 var interestsButtonX = 1.8;
 var interestButtonMid = -1.78
@@ -988,13 +915,49 @@ var bioDefaultArray = [
     }
 ];
 
-var slideXStep = 1.2;
-var slide1X = -1;
+var defaultBioRoot; 
+var interestPic1Root, interestPic2Root;
+
+var defaultBioRootMotion = false;
+var interestPic1Motion = false; 
+var interestPic2Motion = false;
+
+// bio objects 
+var allBioObjects = [];
+var defaultBioObjects = [];
+
+var interestPic1Objects = [];
+var interestPic2Objects = [];
+
+
+var bioDefaultToggle = false;
+
+var interestPic1Toggle = false;
+var interestPic2Toggle = false;
+
+var travel1Toggle = false;
+var travel2Toggle = false;
+var travel3Toggle = false;
+var travel4Toggle = false;
+
+var bike1Toggle = false;
+var bike2Toggle = false;
+var bike3Toggle = false;
+
+var wood1Toggle = false;
+var wood2Toggle = false;
+var wood3Toggle = false;
+
+
+
+
+var slideXStep = 1;
+var slide1X = -.8;
 var slide2X = slide1X + slideXStep;
 var slide3X = slide2X + slideXStep;
 
-var slideY = -1;
-var uSlideDiff = 1.2;
+var slideY = -1.4;
+var uSlideDiff = 1.4;
 
 var travel1 = [
     {
@@ -1021,15 +984,15 @@ var travel1 = [
     {
         card: "u",
         id: "uslide-1", 
-        position: [slide3X, slideY - uSlideDiff],
-        header: "dfg",
-        description: "",
+        position: [slide1X, slideY - uSlideDiff],
+        header: "Postino, Italy",
+        description: "Once I went to postino italy, i liked it very much, they had really good pizza. thanks.",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-2", 
-        position: [slide3X, slideY - uSlideDiff],
+        position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
         img: "./../img/travel.jpg"
@@ -1037,11 +1000,11 @@ var travel1 = [
     {
         card: "u",
         id: "uslide-3", 
-        position: [slide3X, slideY] - uSlideDiff,
+        position: [slide3X, slideY - uSlideDiff],
         header: "travle 1",
-        description: "",
+        description: "kjjkjkjk",
         img: "./../img/travel.jpg"
-    },
+    }
 ];
 
 var travel2 = [

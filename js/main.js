@@ -100,32 +100,12 @@ function initRoots() {
     scene.add(workDefaultRoot);
 
     defaultBioRoot = new THREE.Object3D();
-    travel1Root = new THREE.Object3D();    
-    travel2Root = new THREE.Object3D();
-    travel3Root = new THREE.Object3D();
-    travel4Root = new THREE.Object3D();
-
-    wood1Root = new THREE.Object3D();
-    wood2Root = new THREE.Object3D();
-    wood3Root = new THREE.Object3D();
-
-    bike1Root = new THREE.Object3D();
-    bike2Root = new THREE.Object3D();
-    bike3Root = new THREE.Object3D();
+    interestPic1Root = new THREE.Object3D();    
+    interestPic2Root = new THREE.Object3D();
 
     scene.add(defaultBioRoot);
-    scene.add(travel1Root);
-    scene.add(travel2Root);
-    scene.add(travel3Root);
-    scene.add(travel4Root);
-
-    scene.add(wood1Root);
-    scene.add(wood2Root);
-    scene.add(wood3Root);
-
-    scene.add(bike1Root);
-    scene.add(bike2Root);
-    scene.add(bike3Root);
+    scene.add(interestPic1Root);
+    scene.add(interestPic2Root);
 }
 
 function initCamera() {
@@ -560,7 +540,7 @@ function createMenuButtons() {
                     stopRotationSetTrue("workDefault");
                     stopRotationSetTrue("workTimeline");
 
-                    transform(allObjects, alignState.workDefaultView, toInterval);
+                    transform(allObjects, alignState.interestPic1View, toInterval);
                 }
                 educationToggle = false;
                 checkToggles();
@@ -593,17 +573,20 @@ function createMenuButtons() {
 
 
 
-                if (workTimelineToggle) {
+                if (bioDefaultToggle) {
 
                     setMotionAndToggleFalse("bioDefault");
+                    setMotionAndToggleFalse("bioPic1");
+                    setMotionAndToggleFalse("bioPic2");
 
                     transform(allObjects, alignState.startingView, backInterval);
 
                 } else {
 
                     stopRotationSetTrue("bioDefault");
+                    stopRotationSetTrue("bioPic1");
 
-                    transform(allObjects, alignState.travel1View, toInterval);
+                    transform(allObjects, alignState.interestPic1View, toInterval);
                 }
                 educationToggle = false;
                 checkToggles();
@@ -619,6 +602,10 @@ function createBioDefaultCards() {
         var bioDiv = document.createElement('div');
         bioDiv.id = bioDefaultArray[i].id;
         bioDiv.classList.add("bio-default");
+        if (bioDefaultArray[i].id == "travel") {
+
+            bioDiv.classList.add('interest-selected');
+        }
 
         if (bioDefaultArray[i].id == "bio-pic") {
             
@@ -636,13 +623,13 @@ function createBioDefaultCards() {
             bioDiv.innerHTML = '<i class="fa fa-arrow-up fa-5x icon-3d"></i>';
         } else if (bioDefaultArray[i].id == "bio-main") {
             
-            bioDiv.innerHTML = 
-            '<p>' + bioDefaultArray[i].description + '</p>';
+            bioDiv.innerHTML = '<p>' + bioDefaultArray[i].description + '</p>';
         } else if (bioDefaultArray[i].id == "bio-header" || bioDefaultArray[i].id == "interests") {
             
-            bioDiv.innerHTML = 
-            '<h3>' + bioDefaultArray[i].description + '</h3>';
+            bioDiv.innerHTML = '<h3>' + bioDefaultArray[i].description + '</h3>';
         } else {
+
+            bioDiv.classList.add('interest-cards');
             bioDiv.innerHTML = 
             '<h3 class="bio-button-header">' + bioDefaultArray[i].description + '</h3>' +
             '<button id="' + bioDefaultArray[i].id + '-button">See Pics</button>';
@@ -652,6 +639,26 @@ function createBioDefaultCards() {
         defaultBioObjects.push(bioDivObj);
         defaultBioRoot.add(bioDivObj);        
     }
+}
+
+function linkBioInterestButtons() {
+
+    document.getElementById('interests-button').addEventListener('click', function(x) {
+
+        
+        // start here tomorrow :) :P :}
+    });
+
+    document.getElementById('wood-button').addEventListener('click', function(x) {
+
+
+        
+    });
+
+    document.getElementById('bikes-button').addEventListener('click', function(x) {
+
+        
+    });
 }
 
 function createImgCards(arr, saveArr, saveRoot) {
@@ -673,26 +680,10 @@ function createImgCards(arr, saveArr, saveRoot) {
         var travelObj = new THREE.CSS3DObject(travelDiv);
         saveArr.push(travelObj);
         
-        if (saveRoot == "travel1") { 
-            travel1Root.add(travelObj);
-        } else if (saveRoot == "travel2") {
-            travel2Root.add(travelObj);
-        } else if (saveRoot == "travel3") {
-            travel3Root.add(travelObj);
-        } else if (saveRoot == "travel4") {
-            travel4Root.add(travelObj);
-        } else if (saveRoot == "wood1") {
-            wood1Root.add(travelObj);
-        } else if (saveRoot == "wood2") {
-            wood2Root.add(travelObj);
-        } else if (saveRoot == "wood3") {
-            wood3Root.add(travelObj);
-        } else if (saveRoot == "bike1") {
-            bike1Root.add(travelObj);
-        } else if (saveRoot == "bike2") {
-            bike2Root.add(travelObj);
-        } else if (saveRoot == "bike3") {
-            bike3Root.add(travelObj);
+        if (saveRoot == "pic1") { 
+            interestPic1Root.add(travelObj);
+        } else {
+            interestPic2Root.add(travelObj);
         }
     } 
 }
@@ -1281,6 +1272,20 @@ function stopRotationSetTrue(root) {
         defaultBioRoot.rotation.x = 0;
         defaultBioRoot.rotation.y = 0;
         defaultBioRoot.rotation.z = 0;
+    } else if (root == "bioPic1") {
+        
+        interestPic1Toggle = true;
+        interestPic1Motion = true;
+        interestPic1Root.rotation.x = 0;
+        interestPic1Root.rotation.y = 0;
+        interestPic1Root.rotation.z = 0;
+    } else if (root == "bioPic2") {
+
+        interestPic2Toggle = true;
+        interestPic2Motion = true;
+        interestPic2Root.rotation.x = 0;
+        interestPic2Root.rotation.y = 0;
+        interestPic2Root.rotation.z = 0;
     }
 }
 
@@ -1397,6 +1402,16 @@ function updateRotations() {
 
         defaultBioRoot.rotation.y += 0.0015;
         defaultBioRoot.rotation.z += 0.002;
+    } 
+    
+    if (!interestPic1Motion) {
+        interestPic1Root.rotation.z += 0.002;
+        interestPic1Root.rotation.x += 0.0015;
+    }
+
+    if (!interestPic2Motion) {
+        interestPic2Root.rotation.z += 0.002;
+        interestPic2Root.rotation.y += 0.0015;
     }
 }
 
@@ -1445,6 +1460,14 @@ function setMotionAndToggleFalse(root) {
 
         defaultBioToggle = false;
         defaultBioRootMotion = false;
+    } else if (root == "bioPic1") {
+
+        interestPic1Motion = false;
+        interestPic1Toggle = false;
+    } else if (root == "bioPic2") {
+
+        interestPic2Motion = false;
+        interestPic2Toggle = false;
     }
 }
 
@@ -1515,16 +1538,12 @@ function createAllCards() {
 
     // bio
     createBioDefaultCards();
-    createImgCards(travel1, travel1Objects, "travel1");
-    createImgCards(travel2, travel2Objects, "travel2");
-    createImgCards(travel3, travel3Objects, "travel3");
-    createImgCards(travel4, travel4Objects, "travel4");
+    createImgCards(travel1, interestPic1Objects, "pic1");
+    createImgCards(travel2, interestPic2Objects, "pic2");
 
     allBioObjects = defaultBioObjects
-        .concat(travel1Objects)
-        .concat(travel2Objects)
-        .concat(travel3Objects)
-        .concat(travel4Objects);
+        .concat(interestPic1Objects)
+        .concat(interestPic2Objects);
 
     // ALL OBJECTS
     allObjects = allStationaryObjects
@@ -1555,10 +1574,8 @@ function createAllTwirlingCoordinates() {
 
     // bio
     createTwirlingCoordinates(defaultBioObjects.length, alignState.defaultBioTwirling, 1000, 1000, 0);
-    createTwirlingCoordinates(travel1Objects.length, alignState.travel1Twirling, 1000, 1000, 0);
-    createTwirlingCoordinates(travel2Objects.length, alignState.travel2Twirling, 1000, 1000, 0);
-    createTwirlingCoordinates(travel3Objects.length, alignState.travel3Twirling, 1000, 1000, 0);
-    createTwirlingCoordinates(travel4Objects.length, alignState.travel4Twirling, 1000, 1000, 0);
+    createTwirlingCoordinates(interestPic1Objects.length, alignState.interestPic1Twirling, 1000, 1000, 0);
+    createTwirlingCoordinates(interestPic2Objects.length, alignState.interestPic2Twirling, 1000, 1000, 0);
 }
 
 function createAllViewCoordinates() {
@@ -1583,10 +1600,8 @@ function createAllViewCoordinates() {
 
     // bio
     createViewCoordinates(bioDefaultArray, alignState.defaultBioView);
-    createViewCoordinates(travel1, alignState.travel1View);
-    createViewCoordinates(travel2, alignState.travel2View);
-    createViewCoordinates(travel3, alignState.travel3View);
-    createViewCoordinates(travel4, alignState.travel4View);
+    createViewCoordinates(travel1, alignState.interestPic1View);
+    createViewCoordinates(travel2, alignState.interestPic2View);
     
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
@@ -1604,10 +1619,8 @@ function createAllViewCoordinates() {
 
         // just all bio twirling
     alignState.allBioTwirling = alignState.defaultBioTwirling
-        .concat(alignState.travel1Twirling)
-        .concat(alignState.travel2Twirling)
-        .concat(alignState.travel3Twirling)
-        .concat(alignState.travel4Twirling);
+        .concat(alignState.interestPic1Twirling)
+        .concat(alignState.interestPic2Twirling);
 
     // specific education views 
     alignState.standardEducationView = alignState.menuButtonView
@@ -1665,7 +1678,7 @@ function createAllViewCoordinates() {
         .concat(alignState.workDefaultTwirling)
         .concat(alignState.allBioTwirling);
         
-        alignState.workMatOpsView = alignState.menuButtonView
+    alignState.workMatOpsView = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
         .concat(alignState.workTimelineView)
         .concat(alignState.workInternTwirling)
@@ -1684,49 +1697,26 @@ function createAllViewCoordinates() {
         .concat(alignState.allBioTwirling);
 
     // specific bio views 
-    alignState.travel1View = alignState.menuButtonView
+    alignState.interestPic1View = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
         .concat(alignState.allWorkTwirling)
         .concat(alignState.defaultBioView)
-        .concat(alignState.travel1View)
-        .concat(alignState.travel2Twirling)
-        .concat(alignState.travel3Twirling)
-        .concat(alignState.travel4Twirling);
+        .concat(alignState.interestPic1View)
+        .concat(alignState.interestPic2Twirling);
 
-    alignState.travel2View = alignState.menuButtonView
+    alignState.interestPic2View = alignState.menuButtonView
         .concat(alignState.allEducationTwirling)
         .concat(alignState.allWorkTwirling)
         .concat(alignState.defaultBioView)
-        .concat(alignState.travel1View)
-        .concat(alignState.travel2View)
-        .concat(alignState.travel3Twirling)
-        .concat(alignState.travel4Twirling);
-
-    alignState.travel3View = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.defaultBioView)
-        .concat(alignState.travel1Twirling)
-        .concat(alignState.travel2Twirling)
-        .concat(alignState.travel3View)
-        .concat(alignState.travel4Twirling);
-
-    alignState.travel4View = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.defaultBioView)
-        .concat(alignState.travel1Twirling)
-        .concat(alignState.travel2Twirling)
-        .concat(alignState.travel3Twirling)
-        .concat(alignState.travel4View);
-
+        .concat(alignState.interestPic1Twirling)
+        .concat(alignState.interestPic2View);
 
     // ALL OBJECTS 
     alignState.startingView = alignState.menuButtonView
-    .concat(alignState.allEducationTwirling)
-    .concat(alignState.allWorkTwirling)
-    .concat(alignState.allBioTwirling);
-    
+        .concat(alignState.allEducationTwirling)
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.allBioTwirling);
+        
     // console.log(alignState.defaultBioView);
 }
 
@@ -1736,23 +1726,12 @@ function startTransformAllCourseObjects() {
     transform(allObjects, alignState.startingView, 500);
 }
 
-function welcomeIntro() {
 
-    var welcomeDiv = document.createElement('div');
-    welcomeDiv.className = 'welcomeDiv';
 
-    welcomeDiv.innerHTML =
-        '<div class="welcome">' +
-        '<p class="pintro">Welcome to my website.</p>' +
-        '</div>' +
-        '<div class="name">' +
-        '<p class="pintro">Maximillian Wiesner</p>' +
-        '</div>' +
-        '<div class="controls">' +
-        '<p class="pintro">Use this to help you navigate. </p>' +
-        '</div>';
 
-    welcomeObject = new THREE.CSS3DObject(welcomeDiv);
-    welcomeRoot.add(welcomeObject);
-}
+
+
+
+
+
 
