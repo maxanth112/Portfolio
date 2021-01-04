@@ -12,13 +12,14 @@ var controls, camera, scene, cssRenderer;
 var glRoot, glRenderer;
 var sphere;
 // roots and root toggles/trackers 
+
 var educationRoot, workRoot, stationaryRoot;
 
 var mathCourseRoot, computerCourseRoot, econCourseRoot;
 var educHeaderRoot, educSummaryRoot;
 
 var defaultBioRoot; 
-var travel2Root, travel3Root, travel4Root;
+var travel1Root, travel2Root, travel3Root, travel4Root;
 var wood1Root, wood2Root, wood3Root;
 var bike1Root, bike2Root, bike3Root;
 
@@ -43,6 +44,7 @@ var workContractRootMotion = false;
 var workDefaultToolsRootMotion = false;
 
 var defaultBioRootMotion = false;
+var travel1RootMotion = false;
 var travel2RootMotion = false;
 var travel3RootMotion = false;
 var travel4RootMotion = false;
@@ -80,6 +82,7 @@ var workContractToggle = false;
 var defaultBioToggle = false;
 
 var defaultBioToggle= false;
+var travel1Toggle = false;
 var travel2Toggle = false;
 var travel3Toggle = false;
 var travel4Toggle = false;
@@ -126,6 +129,7 @@ var workContractObjects = [];
 var allBioObjects = [];
 var defaultBioObjects = [];
 
+var travel1Objects = [];
 var travel2Objects = [];
 var travel3Objects = [];
 var travel4Objects = [];
@@ -192,9 +196,10 @@ var alignState = {
 
     // bio positions - view
     defaultBioView: [],
-    travel2view: [],
-    travel3view: [],
-    travel4view: [],
+    travel1View: [],
+    travel2View: [],
+    travel3View: [],
+    travel4View: [],
 
     wood1View: [],
     wood2View: [],
@@ -208,6 +213,7 @@ var alignState = {
     allBioTwirling: [],
 
     defaultBioTwirling: [],
+    travel1Twirling: [],
     travel2Twirling: [],
     travel3Twirling: [],
     travel4Twirling: [],
@@ -988,87 +994,196 @@ var slide2X = slide1X + slideXStep;
 var slide3X = slide2X + slideXStep;
 
 var slideY = -1;
+var uSlideDiff = 1.2;
 
 var travel1 = [
     {
+        card: "s",
         id: "slide-1", 
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-2", 
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-3", 
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
-    }
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY] - uSlideDiff,
+        header: "travle 1",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
 ];
 
-var travelSecond = [
+var travel2 = [
     {
+        card: "s",
         id: "slide-1", 
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-2", 
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-3", 
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
-    }
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY] - uSlideDiff,
+        header: "travle 1",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
 ];
 
-var travelThird = [
+var travel3 = [
     {
+        card: "s",
         id: "slide-1", 
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-2", 
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-3", 
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
-    }
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY] - uSlideDiff,
+        header: "travle 1",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
 ];
 
-var travelFourth = [
+var travel4 = [
     {
+        card: "s",
         id: "slide-1", 
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-2", 
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
+        card: "s",
         id: "slide-3", 
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
-    }
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY] - uSlideDiff,
+        header: "travle 1",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
 ];

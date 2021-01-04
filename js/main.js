@@ -6,71 +6,12 @@ init();
 function init() {
 
     cssRenderer = createCssRenderer();
-    // glRenderer = createGLRenderer();
 
     initMouseSceneMenu();
     initRoots();
     initCamera();
     initControls();
-
-    // // make a geometry that we will clip with the DOM elememt.
-    // ~function() {
-    //     var material = new THREE.MeshPhongMaterial({
-    //         color: 0x991d65,
-    //         emissive: 0x000000,
-    //         specular: 0x111111,
-    //         side: THREE.DoubleSide,
-    //         flatShading: false,
-    //         shininess: 30,
-    //         vertexColors: true,
-    //     })
-
-    //     var geometry = new THREE.SphereBufferGeometry( 70, 32, 32 );
-
-    //     // give the geometry custom colors for each vertex {{
-    //     geometry = geometry.toNonIndexed(); // ensure each face has unique vertices
-
-    //     position = geometry.attributes.position;
-    //     var colors = [];
-
-    //     const color = new THREE.Color
-    //     for ( var i = 0, l = position.count; i < l; i ++ ) {
-    //         color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.15 + 0.85 );
-    //         colors.push( color.r, color.g, color.b );
-    //     }
-
-    //     geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colors, 3 ) );
-    //     // }}
-
-    //     sphere = new THREE.Mesh( geometry, material );
-    //     sphere.position.z = 1600;
-    //     sphere.position.x = 500;
-    //     sphere.position.y = 200;
-    //     sphere.castShadow = true;
-    //     sphere.receiveShadow = false;
-    //     glRoot.add( sphere );
-    // }()
-
-    // // light
-    // ~function() {
-    //     var ambientLight = new THREE.AmbientLight( 0x999999, 1.5 );
-    //     glRoot.add( ambientLight );
-
-    //     light = new THREE.PointLight( 0xffffff, 1, 0 );
-    //     light.castShadow = true;
-    //     light.position.z = 1600;
-    //     light.position.x = 500;
-    //     light.position.y = 200;
-    //     light.shadow.mapSize.width = 1024;  // default
-    //     light.shadow.mapSize.height = 1024; // default
-    //     light.shadow.camera.near = 1;       // default
-    //     light.shadow.camera.far = 2000;      // default
-
-    //     scene.add( new THREE.PointLightHelper( light, 10 ) )
-
-    //     glRoot.add( light );
-    // }()
-
+    
     createAllCards();
     createAllTwirlingCoordinates();
     createAllViewCoordinates();
@@ -159,6 +100,7 @@ function initRoots() {
     scene.add(workDefaultRoot);
 
     defaultBioRoot = new THREE.Object3D();
+    travel1Root = new THREE.Object3D();    
     travel2Root = new THREE.Object3D();
     travel3Root = new THREE.Object3D();
     travel4Root = new THREE.Object3D();
@@ -172,6 +114,7 @@ function initRoots() {
     bike3Root = new THREE.Object3D();
 
     scene.add(defaultBioRoot);
+    scene.add(travel1Root);
     scene.add(travel2Root);
     scene.add(travel3Root);
     scene.add(travel4Root);
@@ -183,12 +126,6 @@ function initRoots() {
     scene.add(bike1Root);
     scene.add(bike2Root);
     scene.add(bike3Root);
-
-    glRoot = new THREE.Object3D();
-    glRoot.position.set.x = 0;
-    glRoot.position.set.y = 0;
-    glRoot.position.set.z = 0;
-    scene.add(glRoot);
 }
 
 function initCamera() {
@@ -197,7 +134,7 @@ function initCamera() {
         90,
         window.innerWidth / window.innerHeight,
         100,
-        5000);
+        8000);
     camera.position.set(0, 0, 2500);
 }
 
@@ -263,51 +200,27 @@ function createCssRenderer() {
     return cssRenderer;
 }
 
-function createGLRenderer() {
-    
-    var glRenderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
-    glRenderer.setClearColor( 0x000000, 0 );
-    glRenderer.setPixelRatio( window.devicePixelRatio );
-    glRenderer.shadowMap.enabled = true;
-    glRenderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-    document.getElementById('glContainer').appendChild(glRenderer.domElement);
-
-    return glRenderer;
-}
-
 function render() {
 
     cssRenderer.render(scene, camera);
-    // glRenderer.render(scene, camera);
 }
 
 function animate() {
 
-    // var time = performance.now();
-    // light.position.x = 30 * Math.sin(time * 0.003) + 30;
-    // light.position.y = 40 * Math.cos(time * 0.001) - 20;
-    
-    // sphere.rotation.x += 0.005
-    // sphere.rotation.y += 0.005
-
     scene.updateMatrixWorld();
     TWEEN.update();
-
     // controls.update();
     render();
     
     requestAnimationFrame(animate);
-    // updateRotations();
+    updateRotations();
 }
 
 // general event listeners 
 function onWindowResize() {
 
     camera.aspect = window.innerWidth / window.innerHeight;
-    
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
-    // glRenderer.setSize(window.innerWidth, window.innerHeight);
-    
     camera.updateProjectionMatrix();
 }
 
@@ -690,7 +603,7 @@ function createMenuButtons() {
 
                     stopRotationSetTrue("bioDefault");
 
-                    transform(allObjects, alignState.defaultBioView, toInterval);
+                    transform(allObjects, alignState.travel1View, toInterval);
                 }
                 educationToggle = false;
                 checkToggles();
@@ -739,13 +652,6 @@ function createBioDefaultCards() {
         defaultBioObjects.push(bioDivObj);
         defaultBioRoot.add(bioDivObj);        
     }
-
-    createImgCards(travel1, defaultBioObjects, "default");
-}
-
-function createTravelCards() {
-
-
 }
 
 function createImgCards(arr, saveArr, saveRoot) {
@@ -754,14 +660,21 @@ function createImgCards(arr, saveArr, saveRoot) {
 
         var travelDiv = document.createElement('div');
         travelDiv.classList.add(arr[i].id);
-        travelDiv.innerHTML = 
-            '<img src="' + arr[i].img + '">';
+
+        if (arr[i].card == "s") {
+            travelDiv.innerHTML = 
+                '<img src="' + arr[i].img + '">';
+        } else {
+            travelDiv.innerHTML = 
+                '<h3 class="img-loc">' + arr[i].header + '</h3>' +
+                '<p>' + arr[i].description + '</p>';
+        }
 
         var travelObj = new THREE.CSS3DObject(travelDiv);
         saveArr.push(travelObj);
         
-        if (saveRoot == "default") { 
-            defaultBioRoot.add(travelObj);
+        if (saveRoot == "travel1") { 
+            travel1Root.add(travelObj);
         } else if (saveRoot == "travel2") {
             travel2Root.add(travelObj);
         } else if (saveRoot == "travel3") {
@@ -1422,68 +1335,68 @@ function updateRotations() {
 
     if (!educHeaderRootMotion) {
 
-        educHeaderRoot.rotation.x += 0.015;
-        educHeaderRoot.rotation.y += 0.02;
+        educHeaderRoot.rotation.x += 0.0015;
+        educHeaderRoot.rotation.y += 0.002;
     }
 
     if (!educSummaryRootMotion) {
 
-        educSummaryRoot.rotation.y += 0.03;
-        educSummaryRoot.rotation.z += 0.015;
+        educSummaryRoot.rotation.y += 0.003;
+        educSummaryRoot.rotation.z += 0.0015;
     }
 
     if (!mathRootMotion) {
 
-        mathCourseRoot.rotation.x += 0.02;
-        mathCourseRoot.rotation.y += 0.015;
+        mathCourseRoot.rotation.x += 0.002;
+        mathCourseRoot.rotation.y += 0.0015;
     }
 
     if (!computerRootMotion) {
 
-        computerCourseRoot.rotation.y += 0.03;
-        computerCourseRoot.rotation.z += 0.015;
+        computerCourseRoot.rotation.y += 0.003;
+        computerCourseRoot.rotation.z += 0.0015;
     }
 
     if (!econRootMotion) {
 
-        econCourseRoot.rotation.x += 0.015;
-        econCourseRoot.rotation.z += 0.02;
+        econCourseRoot.rotation.x += 0.005;
+        econCourseRoot.rotation.z += 0.001;
     }
 
     if (!workDefaultRootMotion) {
 
-        workDefaultRoot.rotation.y += 0.015;
-        workDefaultRoot.rotation.z += 0.02;
+        workDefaultRoot.rotation.y += 0.005;
+        workDefaultRoot.rotation.z += 0.002;
     }
 
     if (!workInternRootMotion) {
 
-        workInternRoot.rotation.x += 0.015;
-        workInternRoot.rotation.y += 0.02;
+        workInternRoot.rotation.x += 0.005;
+        workInternRoot.rotation.y += 0.002;
     }
 
     if (!workMatOpsRootMotion) {
 
-        workMatOpsRoot.rotation.x += 0.015;
-        workMatOpsRoot.rotation.z += 0.02;
+        workMatOpsRoot.rotation.x += 0.0015;
+        workMatOpsRoot.rotation.z += 0.002;
     }
 
     if (!workContractRootMotion) {
 
-        workContractRoot.rotation.y += 0.015;
-        workContractRoot.rotation.z += 0.02;
+        workContractRoot.rotation.y += 0.0015;
+        workContractRoot.rotation.z += 0.002;
     }
 
     if (!workTimelineRootMotion) {
 
-        workTimelineRoot.rotation.y += 0.015;
-        workTimelineRoot.rotation.z += 0.02;
+        workTimelineRoot.rotation.y += 0.0015;
+        workTimelineRoot.rotation.z += 0.002;
     } 
 
     if (!defaultBioRootMotion) {
 
-        defaultBioRoot.rotation.y += 0.015;
-        defaultBioRoot.rotation.z += 0.02;
+        defaultBioRoot.rotation.y += 0.0015;
+        defaultBioRoot.rotation.z += 0.002;
     }
 }
 
@@ -1602,8 +1515,16 @@ function createAllCards() {
 
     // bio
     createBioDefaultCards();
+    createImgCards(travel1, travel1Objects, "travel1");
+    createImgCards(travel2, travel2Objects, "travel2");
+    createImgCards(travel3, travel3Objects, "travel3");
+    createImgCards(travel4, travel4Objects, "travel4");
 
-    allBioObjects = defaultBioObjects;
+    allBioObjects = defaultBioObjects
+        .concat(travel1Objects)
+        .concat(travel2Objects)
+        .concat(travel3Objects)
+        .concat(travel4Objects);
 
     // ALL OBJECTS
     allObjects = allStationaryObjects
@@ -1634,6 +1555,10 @@ function createAllTwirlingCoordinates() {
 
     // bio
     createTwirlingCoordinates(defaultBioObjects.length, alignState.defaultBioTwirling, 1000, 1000, 0);
+    createTwirlingCoordinates(travel1Objects.length, alignState.travel1Twirling, 1000, 1000, 0);
+    createTwirlingCoordinates(travel2Objects.length, alignState.travel2Twirling, 1000, 1000, 0);
+    createTwirlingCoordinates(travel3Objects.length, alignState.travel3Twirling, 1000, 1000, 0);
+    createTwirlingCoordinates(travel4Objects.length, alignState.travel4Twirling, 1000, 1000, 0);
 }
 
 function createAllViewCoordinates() {
@@ -1657,15 +1582,19 @@ function createAllViewCoordinates() {
     createViewCoordinates(workDefaultArray, alignState.workDefaultView);
 
     // bio
-    createViewCoordinates(bioDefaultArray.concat(travel1), alignState.defaultBioView);
+    createViewCoordinates(bioDefaultArray, alignState.defaultBioView);
+    createViewCoordinates(travel1, alignState.travel1View);
+    createViewCoordinates(travel2, alignState.travel2View);
+    createViewCoordinates(travel3, alignState.travel3View);
+    createViewCoordinates(travel4, alignState.travel4View);
     
     // just all education twirling 
     alignState.allEducationTwirling = alignState.mathTwirling
-    .concat(alignState.computerTwirling)
-    .concat(alignState.econTwirling)
-    .concat(alignState.educationHeaderTwirling)
-    .concat(alignState.educationSummaryTwirling);
-    
+        .concat(alignState.computerTwirling)
+        .concat(alignState.econTwirling)
+        .concat(alignState.educationHeaderTwirling)
+        .concat(alignState.educationSummaryTwirling);
+        
     // just all work twirling 
     alignState.allWorkTwirling = alignState.workTimelineTwirling
         .concat(alignState.workInternTwirling)
@@ -1674,7 +1603,11 @@ function createAllViewCoordinates() {
         .concat(alignState.workDefaultTwirling);
 
         // just all bio twirling
-    alignState.allBioTwirling = alignState.defaultBioTwirling;
+    alignState.allBioTwirling = alignState.defaultBioTwirling
+        .concat(alignState.travel1Twirling)
+        .concat(alignState.travel2Twirling)
+        .concat(alignState.travel3Twirling)
+        .concat(alignState.travel4Twirling);
 
     // specific education views 
     alignState.standardEducationView = alignState.menuButtonView
@@ -1695,7 +1628,7 @@ function createAllViewCoordinates() {
         .concat(alignState.allWorkTwirling)
         .concat(alignState.allBioTwirling);
 
-        alignState.mathView = alignState.menuButtonView
+    alignState.mathView = alignState.menuButtonView
         .concat(alignState.mathView)
         .concat(alignState.computerTwirling)
         .concat(alignState.econTwirling)
@@ -1751,10 +1684,42 @@ function createAllViewCoordinates() {
         .concat(alignState.allBioTwirling);
 
     // specific bio views 
-    alignState.defaultBioView = alignState.menuButtonView
-    .concat(alignState.allEducationTwirling)
-    .concat(alignState.allWorkTwirling)
-    .concat(alignState.defaultBioView);
+    alignState.travel1View = alignState.menuButtonView
+        .concat(alignState.allEducationTwirling)
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.defaultBioView)
+        .concat(alignState.travel1View)
+        .concat(alignState.travel2Twirling)
+        .concat(alignState.travel3Twirling)
+        .concat(alignState.travel4Twirling);
+
+    alignState.travel2View = alignState.menuButtonView
+        .concat(alignState.allEducationTwirling)
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.defaultBioView)
+        .concat(alignState.travel1View)
+        .concat(alignState.travel2View)
+        .concat(alignState.travel3Twirling)
+        .concat(alignState.travel4Twirling);
+
+    alignState.travel3View = alignState.menuButtonView
+        .concat(alignState.allEducationTwirling)
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.defaultBioView)
+        .concat(alignState.travel1Twirling)
+        .concat(alignState.travel2Twirling)
+        .concat(alignState.travel3View)
+        .concat(alignState.travel4Twirling);
+
+    alignState.travel4View = alignState.menuButtonView
+        .concat(alignState.allEducationTwirling)
+        .concat(alignState.allWorkTwirling)
+        .concat(alignState.defaultBioView)
+        .concat(alignState.travel1Twirling)
+        .concat(alignState.travel2Twirling)
+        .concat(alignState.travel3Twirling)
+        .concat(alignState.travel4View);
+
 
     // ALL OBJECTS 
     alignState.startingView = alignState.menuButtonView

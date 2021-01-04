@@ -3,6 +3,7 @@
 .course-element {
   width: calc(var(--multiplier) * 27);
   height: calc(var(--multiplier) * 24);
+  color: red;
 }
 
 .course-card {
