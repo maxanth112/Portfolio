@@ -87,6 +87,10 @@
     margin-left: calc(var(--multiplier) * 1.5);
 }
 
+.interest-selected button {
+    cursor: default;
+}
+
 #bio-navi {
     width: calc(var(--multiplier) * 94);
     height: calc(var(--multiplier) * 5);

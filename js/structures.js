@@ -929,27 +929,25 @@ var defaultBioObjects = [];
 var interestPic1Objects = [];
 var interestPic2Objects = [];
 
+var travel1Objects = [];
+var travel2Objects = [];
+var travel3Objects = [];
+var travel4Objects = [];
+
+var wood1Objects = [];
+var wood2Objects = [];
+var wood3Objects = [];
+
+var bike1Objects = [];
+var bike2Objects = [];
+var bike3Objects = [];
 
 var bioDefaultToggle = false;
 
 var interestPic1Toggle = false;
 var interestPic2Toggle = false;
 
-var travel1Toggle = false;
-var travel2Toggle = false;
-var travel3Toggle = false;
-var travel4Toggle = false;
-
-var bike1Toggle = false;
-var bike2Toggle = false;
-var bike3Toggle = false;
-
-var wood1Toggle = false;
-var wood2Toggle = false;
-var wood3Toggle = false;
-
-
-
+var currentPage = "";
 
 var slideXStep = 1;
 var slide1X = -.8;
@@ -1032,7 +1030,7 @@ var travel2 = [
     {
         card: "u",
         id: "uslide-1", 
-        position: [slide3X, slideY - uSlideDiff],
+        position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
         img: "./../img/travel.jpg"
@@ -1040,7 +1038,7 @@ var travel2 = [
     {
         card: "u",
         id: "uslide-2", 
-        position: [slide3X, slideY - uSlideDiff],
+        position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
         img: "./../img/travel.jpg"
@@ -1048,8 +1046,8 @@ var travel2 = [
     {
         card: "u",
         id: "uslide-3", 
-        position: [slide3X, slideY] - uSlideDiff,
-        header: "travle 1",
+        position: [slide3X, slideY - uSlideDiff],
+        header: "travle 2",
         description: "",
         img: "./../img/travel.jpg"
     },
@@ -1080,7 +1078,7 @@ var travel3 = [
     {
         card: "u",
         id: "uslide-1", 
-        position: [slide3X, slideY - uSlideDiff],
+        position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
         img: "./../img/travel.jpg"
@@ -1088,7 +1086,7 @@ var travel3 = [
     {
         card: "u",
         id: "uslide-2", 
-        position: [slide3X, slideY - uSlideDiff],
+        position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
         img: "./../img/travel.jpg"
@@ -1096,8 +1094,8 @@ var travel3 = [
     {
         card: "u",
         id: "uslide-3", 
-        position: [slide3X, slideY] - uSlideDiff,
-        header: "travle 1",
+        position: [slide3X, slideY - uSlideDiff],
+        header: "travle 3",
         description: "",
         img: "./../img/travel.jpg"
     },
@@ -1128,7 +1126,7 @@ var travel4 = [
     {
         card: "u",
         id: "uslide-1", 
-        position: [slide3X, slideY - uSlideDiff],
+        position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
         img: "./../img/travel.jpg"
@@ -1136,7 +1134,7 @@ var travel4 = [
     {
         card: "u",
         id: "uslide-2", 
-        position: [slide3X, slideY - uSlideDiff],
+        position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
         img: "./../img/travel.jpg"
@@ -1144,9 +1142,318 @@ var travel4 = [
     {
         card: "u",
         id: "uslide-3", 
-        position: [slide3X, slideY] - uSlideDiff,
-        header: "travle 1",
+        position: [slide3X, slideY - uSlideDiff],
+        header: "travel 4",
         description: "",
         img: "./../img/travel.jpg"
     },
 ];
+
+
+var wood1 = [
+    {
+        card: "s",
+        id: "slide-1", 
+        position: [slide1X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-2", 
+        position: [slide2X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-3", 
+        position: [slide3X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide1X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide2X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "travle 1",
+        description: "wood1",
+        img: "./../img/travel.jpg"
+    },
+];
+var wood2 = [
+    {
+        card: "s",
+        id: "slide-1", 
+        position: [slide1X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-2", 
+        position: [slide2X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-3", 
+        position: [slide3X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide1X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide2X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "travle 1",
+        description: "wood2",
+        img: "./../img/travel.jpg"
+    },
+];
+var wood3 = [
+    {
+        card: "s",
+        id: "slide-1", 
+        position: [slide1X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-2", 
+        position: [slide2X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-3", 
+        position: [slide3X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide1X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide2X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "wood3",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+];
+
+var bike1 = [
+    {
+        card: "s",
+        id: "slide-1", 
+        position: [slide1X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-2", 
+        position: [slide2X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-3", 
+        position: [slide3X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide1X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide2X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "bike1",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+];
+
+var bike2 = [
+    {
+        card: "s",
+        id: "slide-1", 
+        position: [slide1X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-2", 
+        position: [slide2X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-3", 
+        position: [slide3X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide1X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide2X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "bike2",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+];
+
+var bike3 = [
+    {
+        card: "s",
+        id: "slide-1", 
+        position: [slide1X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-2", 
+        position: [slide2X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-3", 
+        position: [slide3X, slideY],
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-1", 
+        position: [slide1X, slideY - uSlideDiff],
+        header: "dfg",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2", 
+        position: [slide2X, slideY - uSlideDiff],
+        header: "dfgda",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3", 
+        position: [slide3X, slideY - uSlideDiff],
+        header: "bike3",
+        description: "",
+        img: "./../img/travel.jpg"
+    },
+];
+
+
+var travelPage = 0;
+var woodPage = 1;
+var bikePage = 2;
+
+var currentInterestPage = 0;
+var actualCurrentPage = 0;
+
+var currentInterestObjArray = [
+    [
+        travel1Objects, travel2Objects, travel3Objects, travel4Objects
+    ], 
+    [
+        wood1Objects, wood2Objects, wood3Objects
+    ], 
+    [
+        bike1Objects, bike2Objects, bike3Objects
+    ]
+];
+
+var currentInterestObj;
