@@ -831,14 +831,27 @@ var workDefaultArray = [
     }, 
     {
         id: "dataAnalysis", 
-        img: "./../img/dataAnalysis.png",
+        img: "./../img/laptop.png",
         position: [imageX, imageY]
     }, 
     {
         id: "computer", 
-        img: "./../img/computer.png",
+        img: "./../img/laptop.png",
         position: [-imageX, -0.4]
     }, 
+    {
+        id: "data-code", 
+        text1: "git heug dsfd",
+        text2: "asdf \n /nsafsd dsafgdfgsda dfsg", 
+        position: [imageX, 0.4]
+    }, 
+    {
+        id: "comp-code", 
+        text1: "asdf fasdgasdg adgadsga", 
+        text2: "adga gdfgdsfg ggggg",
+        position: [-imageX, -0.4]
+    }, 
+
 ];
 
 var toptopY = 2.5;
@@ -936,11 +949,11 @@ var travel4Objects = [];
 
 var wood1Objects = [];
 var wood2Objects = [];
-var wood3Objects = [];
+var wood1Objects = [];
 
 var bike1Objects = [];
-var bike2Objects = [];
-var bike3Objects = [];
+var bike1Objects = [];
+var bike1Objects = [];
 
 var bioDefaultToggle = false;
 
@@ -961,6 +974,7 @@ var travel1 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "t1-s1",
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -968,6 +982,7 @@ var travel1 = [
     {
         card: "s",
         id: "slide-2", 
+        newid: "t1-s2",
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -975,6 +990,7 @@ var travel1 = [
     {
         card: "s",
         id: "slide-3", 
+        newid: "t1-s3",
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -982,6 +998,7 @@ var travel1 = [
     {
         card: "u",
         id: "uslide-1", 
+        newid: "t1-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "Postino, Italy",
         description: "Once I went to postino italy, i liked it very much, they had really good pizza. thanks.",
@@ -990,16 +1007,18 @@ var travel1 = [
     {
         card: "u",
         id: "uslide-2", 
+        newid: "t1-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
+        header: "TRAVLE 1",
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-3", 
+        newid: "t1-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "travle 1",
+        header: "travl 1",
         description: "kjjkjkjk",
         img: "./../img/travel.jpg"
     }
@@ -1009,43 +1028,49 @@ var travel2 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "t2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/wood.jpg"
     },
     {
         card: "s",
         id: "slide-2", 
+        newid: "t2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/wood.jpg"
     },
     {
         card: "s",
         id: "slide-3", 
+        newid: "t2-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/wood.jpg"
     },
     {
         card: "u",
         id: "uslide-1", 
+        newid: "t2-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
+        header: "travl 2",
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-2", 
+        newid: "t2-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
+        header: "travl 2",
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-3", 
+        newid: "t2-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "travle 2",
         description: "",
@@ -1057,43 +1082,49 @@ var travel3 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "t3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/pandas.jpg"
     },
     {
         card: "s",
         id: "slide-2", 
+        newid: "t3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/pandas.jpg"
     },
     {
         card: "s",
         id: "slide-3", 
+        newid: "t3-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/pandas.jpg"
     },
     {
         card: "u",
         id: "uslide-1", 
+        newid: "t3-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
+        header: "travl 3",
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-2", 
+        newid: "t3-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
+        header: "travl 3",
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-3", 
+        newid: "t3-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "travle 3",
         description: "",
@@ -1105,43 +1136,49 @@ var travel4 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "t4-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/us.jpg"
     },
     {
         card: "s",
         id: "slide-2", 
+        newid: "t4-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/us.jpg"
     },
     {
         card: "s",
         id: "slide-3", 
+        newid: "t4-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/us.jpg"
     },
     {
         card: "u",
         id: "uslide-1", 
+        newid: "t4-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
+        header: "travl 4",
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-2", 
+        newid: "t4-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
+        header: "travl 4",
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "u",
         id: "uslide-3", 
+        newid: "t4-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "travel 4",
         description: "",
@@ -1154,12 +1191,14 @@ var wood1 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "w1-s1",
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "s",
+        newid: "w1-s2",
         id: "slide-2", 
         position: [slide2X, slideY],
         description: "",
@@ -1168,6 +1207,7 @@ var wood1 = [
     {
         card: "s",
         id: "slide-3", 
+        newid: "w1-s3",
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1175,6 +1215,7 @@ var wood1 = [
     {
         card: "u",
         id: "uslide-1", 
+        newid: "w1-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
@@ -1183,6 +1224,7 @@ var wood1 = [
     {
         card: "u",
         id: "uslide-2", 
+        newid: "w1-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
@@ -1191,6 +1233,7 @@ var wood1 = [
     {
         card: "u",
         id: "uslide-3", 
+        newid: "w1-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "travle 1",
         description: "wood1",
@@ -1201,6 +1244,7 @@ var wood2 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "w2-s1",
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1208,6 +1252,7 @@ var wood2 = [
     {
         card: "s",
         id: "slide-2", 
+        newid: "w2-s2",
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1215,6 +1260,7 @@ var wood2 = [
     {
         card: "s",
         id: "slide-3", 
+        newid: "w2-s3",
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1222,6 +1268,7 @@ var wood2 = [
     {
         card: "u",
         id: "uslide-1", 
+        newid: "w2-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
@@ -1230,6 +1277,7 @@ var wood2 = [
     {
         card: "u",
         id: "uslide-2", 
+        newid: "w2-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
@@ -1238,6 +1286,7 @@ var wood2 = [
     {
         card: "u",
         id: "uslide-3", 
+        newid: "w2-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "travle 1",
         description: "wood2",
@@ -1248,6 +1297,7 @@ var wood3 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "w3-s1",
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1255,6 +1305,7 @@ var wood3 = [
     {
         card: "s",
         id: "slide-2", 
+        newid: "w3-s2",
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1262,6 +1313,7 @@ var wood3 = [
     {
         card: "s",
         id: "slide-3", 
+        newid: "w3-s3",
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1269,6 +1321,7 @@ var wood3 = [
     {
         card: "u",
         id: "uslide-1", 
+        newid: "w3-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
@@ -1277,6 +1330,7 @@ var wood3 = [
     {
         card: "u",
         id: "uslide-2", 
+        newid: "w3-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
@@ -1285,6 +1339,7 @@ var wood3 = [
     {
         card: "u",
         id: "uslide-3", 
+        newid: "w3-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "wood3",
         description: "",
@@ -1296,6 +1351,7 @@ var bike1 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "b1-s1",
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1303,6 +1359,7 @@ var bike1 = [
     {
         card: "s",
         id: "slide-2", 
+        newid: "b1-s2",
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1310,6 +1367,7 @@ var bike1 = [
     {
         card: "s",
         id: "slide-3", 
+        newid: "b1-s3",
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1317,6 +1375,7 @@ var bike1 = [
     {
         card: "u",
         id: "uslide-1", 
+        newid: "b1-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
@@ -1325,6 +1384,7 @@ var bike1 = [
     {
         card: "u",
         id: "uslide-2", 
+        newid: "b1-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
@@ -1333,6 +1393,7 @@ var bike1 = [
     {
         card: "u",
         id: "uslide-3", 
+        newid: "b1-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "bike1",
         description: "",
@@ -1344,6 +1405,7 @@ var bike2 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "b2-s1",
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1351,12 +1413,14 @@ var bike2 = [
     {
         card: "s",
         id: "slide-2", 
+        newid: "b2-s2",
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
     },
     {
         card: "s",
+        newid: "b2-s3",
         id: "slide-3", 
         position: [slide3X, slideY],
         description: "",
@@ -1365,6 +1429,7 @@ var bike2 = [
     {
         card: "u",
         id: "uslide-1", 
+        newid: "b2-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
@@ -1373,6 +1438,7 @@ var bike2 = [
     {
         card: "u",
         id: "uslide-2", 
+        newid: "b2-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
@@ -1381,6 +1447,7 @@ var bike2 = [
     {
         card: "u",
         id: "uslide-3", 
+        newid: "b2-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "bike2",
         description: "",
@@ -1392,6 +1459,7 @@ var bike3 = [
     {
         card: "s",
         id: "slide-1", 
+        newid: "b3-s1",
         position: [slide1X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1399,6 +1467,7 @@ var bike3 = [
     {
         card: "s",
         id: "slide-2", 
+        newid: "b3-s2",
         position: [slide2X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1406,6 +1475,7 @@ var bike3 = [
     {
         card: "s",
         id: "slide-3", 
+        newid: "b3-s3",
         position: [slide3X, slideY],
         description: "",
         img: "./../img/travel.jpg"
@@ -1413,6 +1483,7 @@ var bike3 = [
     {
         card: "u",
         id: "uslide-1", 
+        newid: "b3-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "dfg",
         description: "",
@@ -1421,6 +1492,7 @@ var bike3 = [
     {
         card: "u",
         id: "uslide-2", 
+        newid: "b3-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "dfgda",
         description: "",
@@ -1429,6 +1501,7 @@ var bike3 = [
     {
         card: "u",
         id: "uslide-3", 
+        newid: "b3-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "bike3",
         description: "",
@@ -1441,19 +1514,20 @@ var travelPage = 0;
 var woodPage = 1;
 var bikePage = 2;
 
-var currentInterestPage = 0;
-var actualCurrentPage = 0;
+var interestPage = 0;
+var currentPage = 0;
 
-var currentInterestObjArray = [
+var allInterestObjs = [
     [
-        travel1Objects, travel2Objects, travel3Objects, travel4Objects
+        travel1, travel2, travel3, travel4
     ], 
     [
-        wood1Objects, wood2Objects, wood3Objects
+        wood1, wood2, wood3
     ], 
     [
-        bike1Objects, bike2Objects, bike3Objects
+        bike1, bike2, bike3
     ]
 ];
 
-var currentInterestObj;
+var pic1Obj;
+var pic2Obj;

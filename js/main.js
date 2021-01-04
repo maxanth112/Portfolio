@@ -549,6 +549,14 @@ function createMenuButtons() {
                     stopRotationSetTrue("workTimeline");
 
                     transform(allObjects, alignState.workDefaultView, toInterval);
+
+                    
+                    var typewriter = document.getElementById('typewriter');
+
+                    typewriter = setupTypewriter(typewriter);
+
+                    typewriter.type();
+                    
                 }
                 educationToggle = false;
                 bioDefaultToggle = false;
@@ -594,8 +602,9 @@ function createMenuButtons() {
                 } else {
 
                     resetBioButtons();
-                    currentInterestPage = 0;
+                    interestPage = 0;
                     currentInterest = 0;
+                    pic2Obj = travel2;
 
                     stopRotationSetTrue("bioDefault");
                     stopRotationSetTrue("bioPic1");
@@ -612,6 +621,7 @@ function createMenuButtons() {
 
 function createBioDefaultCards() {
 
+    pic1Obj = travel1;
     for (var i = 0; i < bioDefaultArray.length; i += 1) {
 
         var bioDiv = document.createElement('div');
@@ -673,7 +683,7 @@ function createBioDefaultCards() {
                     var bikesButton = document.getElementById("bikes-button");
                     updateBioInterestButtons(this, bikesButton, woodButton);
 
-                    currentInterestPage = 0;
+                    interestPage = 0;
                     updateInterestPage(0);
 
                 }, false);
@@ -688,7 +698,7 @@ function createBioDefaultCards() {
                     var travelButton = document.getElementById("travel-button");
                     updateBioInterestButtons(this, bikesButton, travelButton);
 
-                    currentInterestPage = 1;
+                    interestPage = 1;
                     updateInterestPage(0);
 
                 }, false);
@@ -703,7 +713,7 @@ function createBioDefaultCards() {
                     var travelButton = document.getElementById("travel-button");
                     updateBioInterestButtons(this, woodButton, travelButton);
 
-                    currentInterestPage = 2;
+                    interestPage = 2;
                     updateInterestPage(0);
 
                 }, false);
@@ -719,45 +729,65 @@ function createBioDefaultCards() {
 }
 
 function updateInterestPage(pageChange) {
-
-    actualCurrentPage += pageChange;
+    currentPage += pageChange;
     
-    if (currentInterestPage == 0 && actualCurrentPage == 4) { // currently on last travel page, taking to first
-     
-        currentInterestPage = 0;
-    } else if (actualCurrentPage == 3) { // on wood or bikes last page, taking to first 
+    if ( (interestPage == 0 ) && ( currentPage == 4 ) ) { // currently on last travel page, taking to first
         
-        actualCurrentPage = 0;
+        currentPage = 0;
+    } else if ( (interestPage == 0 ) && ( currentPage == -1 ) ){ // currently on last travel page, taking to first
+        
+        currentPage = 3;
+    } else if ( ( interestPage != 0 ) && ( currentPage == 3 ) ) { // on wood or bikes last page, taking to first 
+        
+        currentPage = 0;
+    } else if ( ( interestPage != 0 ) && ( currentPage == -1 ) ) { // on wood or bikes last page, taking to first 
+        
+        currentPage = 2;
     }
+    
+    newObj = allInterestObjs[interestPage][currentPage];
+    
+    if (interestPic1Toggle) { 
 
-    currentInterestObj = currentInterestObjArray[currentInterestPage][actualCurrentPage];
+        for (var i = 0; i < newObj.length; i += 1) {
 
-    if (interestPic1Toggle) { // pic1 page is in current view 
+            if (i < 3) {
 
-
-        interestPic2Objects = currentInterestObj;
-        // console.log(interestPic2Objects);
-        // console.log(allObjects);
-        // updateAllObjects();
-        // console.log(allObjects);
+                document.getElementById(pic2Obj[i].newid + "-img").src = newObj[i].img;
+            } else {
+                
+                document.getElementById(pic2Obj[i].newid + "-p").innerHTML = newObj[i].description;
+                document.getElementById(pic2Obj[i].newid + "-h3").innerHTML = newObj[i].header;
+            }
+        }
         
-
         transform(allObjects, alignState.interestPic2View, toInterval);
         interestPic1Toggle = false; // in back
         interestPic2Toggle = true; // now in view
-    } else { // pic2 page is in current view 
+
+    } else { 
         
+        for (var i = 0; i < newObj.length; i += 1) {
 
+            if (i < 3) {
 
-        interestPic1Objects = currentInterestObj;
-        // console.log(interestPic1Objects);
-        // console.log(alignState.interestPic1View);
-        // updateAllObjects();
+                document.getElementById(pic1Obj[i].newid + "-img").src = pic1Obj[i].img;
+            } else {
+                
+                document.getElementById(pic1Obj[i].newid + "-p").innerHTML = newObj[i].description;
+                document.getElementById(pic1Obj[i].newid + "-h3").innerHTML = newObj[i].header;
+            }
+        }
 
         transform(allObjects, alignState.interestPic1View, toInterval);
         interestPic2Toggle = false; // in back
         interestPic1Toggle = true; // now in view
+        
+        console.log("now pic 2 is in back");
     }
+    console.log("ending:");
+    console.log("interest pic 1 toggle: " + interestPic1Toggle);
+    console.log("interest pic 2 toggle: " + interestPic2Toggle);
 }
 
 function updateAllObjects() {
@@ -798,7 +828,7 @@ function resetBioButtons() {
     bikesButton.innerHTML = "See Pics";
 }
 
-function createImgCards(arr, saveArr) {
+function createImgCards(arr, saveArr, saveRoot) {
 
     for (var i = 0; i < arr.length; i += 1) {
 
@@ -806,27 +836,38 @@ function createImgCards(arr, saveArr) {
         travelDiv.classList.add(arr[i].id);
 
         if (arr[i].card == "s") {
-            travelDiv.innerHTML =
-                '<img src="' + arr[i].img + '">';
+           var travelDivImg = document.createElement('img');
+           travelDivImg.src = arr[i].img;
+           travelDivImg.id = arr[i].newid + '-img';
+
+           travelDiv.appendChild(travelDivImg);
+           console.log(travelDivImg.id);
+
         } else {
-            travelDiv.innerHTML =
-                '<h3 class="img-loc">' + arr[i].header + '</h3>' +
-                '<p>' + arr[i].description + '</p>';
+            var travelDivH3 = document.createElement('h3');
+            travelDivH3.id = arr[i].newid + '-h3';
+            travelDivH3.classList.add("img-loc");
+            travelDivH3.innerHTML = arr[i].header;
+
+            var travelDivP = document.createElement('p');
+            travelDivP.id = arr[i].newid + '-p';
+            travelDivP.innerHTML = arr[i].description;
+
+
+           travelDiv.appendChild(travelDivH3);
+           travelDiv.appendChild(travelDivP);
+            
+           console.log(travelDivP.id);
+           console.log(travelDivH3.id);
         }
 
         var travelObj = new THREE.CSS3DObject(travelDiv);
         saveArr.push(travelObj);
-    }
-}
-
-function addInitialImgCards(objArr, saveRoot) {
-
-    for (var i = 0; i < objArr.length; i += 1) {
 
         if (saveRoot == "pic1") {
-            interestPic1Root.add(objArr[i]);
+            interestPic1Root.add(travelObj);
         } else {
-            interestPic2Root.add(objArr[i]);
+            interestPic2Root.add(travelObj);
         }
     }
 }
@@ -1223,6 +1264,18 @@ function createWorkDefaultCards() {
 
             workDefaultMain.innerHTML =
                 '<img class="icon-3d" src="' + workDefaultArray[i].img + '">';
+        } else if (workDefaultArray[i].id == "data-code" || workDefaultArray[i].id == "comp-code") {
+            
+            workDefaultMain.innerHTML = '<pre id="typewriter">' + 
+            '<span class="var-highlight">var</span> object = {' +
+                'name: <span class="string-highlight">Foo</span>,' +
+                'type: <span class="string-highlight">Ba</span>,' +
+                'location: <span class="string-highlight">Earth</span>,' +
+                'properties:[<span class="string-highlight">Javascript</span>,' +
+                            '<span class="string-highlight">HTML</span>,' +
+                            '<span class="string-highlight">CSS</span>];' +
+            '}; </pre>';
+
         } else {
 
             workDefaultMain.classList.add('work-default');
@@ -1239,6 +1292,71 @@ function createWorkDefaultCards() {
         workDefaultObjects.push(workDefaultObj);
         workTimelineRoot.add(workDefaultObj);
     }
+}
+
+function setupTypewriter(t) {
+    var HTML = t.innerHTML;
+
+    t.innerHTML = "";
+
+    var cursorPosition = 0,
+        tag = "",
+        writingTag = false,
+        tagOpen = false,
+        typeSpeed = 100,
+    tempTypeSpeed = 0;
+
+    var type = function() {
+    
+        if (writingTag === true) {
+            tag += HTML[cursorPosition];
+        }
+
+        if (HTML[cursorPosition] === "<") {
+            tempTypeSpeed = 0;
+            if (tagOpen) {
+                tagOpen = false;
+                writingTag = true;
+            } else {
+                tag = "";
+                tagOpen = true;
+                writingTag = true;
+                tag += HTML[cursorPosition];
+            }
+        }
+        if (!writingTag && tagOpen) {
+            tag.innerHTML += HTML[cursorPosition];
+        }
+        if (!writingTag && !tagOpen) {
+            if (HTML[cursorPosition] === " ") {
+                tempTypeSpeed = 0;
+            }
+            else {
+                tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+            }
+            t.innerHTML += HTML[cursorPosition];
+        }
+        if (writingTag === true && HTML[cursorPosition] === ">") {
+            tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+            writingTag = false;
+            if (tagOpen) {
+                var newSpan = document.createElement("span");
+                t.appendChild(newSpan);
+                newSpan.innerHTML = tag;
+                tag = newSpan.firstChild;
+            }
+        }
+
+        cursorPosition += 1;
+        if (cursorPosition < HTML.length - 1) {
+            setTimeout(type, tempTypeSpeed);
+        }
+
+    };
+
+    return {
+        type: type
+    };
 }
 
 // managing buttons and toggles 
@@ -1681,25 +1799,8 @@ function createAllCards() {
         .concat(workDefaultObjects);
 
     // bio
-    createImgCards(travel1, travel1Objects);
-    createImgCards(travel2, travel2Objects);
-    createImgCards(travel3, travel3Objects);
-    createImgCards(travel4, travel4Objects);
-    
-    createImgCards(bike1, bike1Objects);
-    createImgCards(bike2, bike2Objects);
-    createImgCards(bike3, bike3Objects);
- 
-    createImgCards(wood1, wood1Objects);
-    createImgCards(wood2, wood2Objects);
-    createImgCards(wood3, wood3Objects);
-
-    interestPic1Objects = travel1Objects;
-    interestPic2Objects = travel2Objects; 
-    addInitialImgCards(interestPic1Objects, "pic1");
-    addInitialImgCards(interestPic2Objects, "pic2");
-
-    
+    createImgCards(travel1, interestPic1Objects, "pic1");
+    createImgCards(travel2, interestPic2Objects, "pic2");
     createBioDefaultCards();
 
     allBioObjects = defaultBioObjects
