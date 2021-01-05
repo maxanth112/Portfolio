@@ -550,14 +550,31 @@ function createMenuButtons() {
 
                     transform(allObjects, alignState.workDefaultView, toInterval);
 
-                    
-                    var typewriter = document.getElementById('typewriter');
+                    setTimeout(function(){ 
 
-                    typewriter = setupTypewriter(typewriter);
+                        var app = document.getElementById("comp-code");
+                        var typewriter = new Typewriter(app, {
+                            loop: true,
+                            delay: 75,
+                            cursor: "_"
+                          });
+                          
+                          typewriter
+                            .pauseFor(200)
+                            .typeString('<span style="color: white;">PS C:\Users\maxwiesner></span>')
+                            .pauseFor(300)
+                            .typeString('<span style="color: white;">wsl</span>')
+                            .pauseFor(300)
+                            .deleteAll()
+                            .typeString('<span style="color: #27ae60;">maxwies@DESKTOP-BA4NIFH:/mnt/c/Users/maximil$</span>')
+                            .deleteChars(10)
+                            .typeString('<strong>only <span style="color: #27ae60;">5kb</span> Gzipped!</strong>')
+                            .pauseFor(1000)
+                            .start();
+                     }, 2000);
 
-                    typewriter.type();
-                    
                 }
+
                 educationToggle = false;
                 bioDefaultToggle = false;
                 checkToggles();
@@ -1259,22 +1276,9 @@ function createWorkDefaultCards() {
         var workDefaultMain = document.createElement('div');
         workDefaultMain.id = workDefaultArray[i].id;
 
-        if (workDefaultArray[i].id == "dataAnalysis" ||
-            workDefaultArray[i].id == "computer") {
-
-            workDefaultMain.innerHTML =
-                '<img class="icon-3d" src="' + workDefaultArray[i].img + '">';
-        } else if (workDefaultArray[i].id == "data-code" || workDefaultArray[i].id == "comp-code") {
+        if ( (workDefaultArray[i].id == "data-code") || (workDefaultArray[i].id == "comp-code") ) {
             
-            workDefaultMain.innerHTML = '<pre id="typewriter">' + 
-            '<span class="var-highlight">var</span> object = {' +
-                'name: <span class="string-highlight">Foo</span>,' +
-                'type: <span class="string-highlight">Ba</span>,' +
-                'location: <span class="string-highlight">Earth</span>,' +
-                'properties:[<span class="string-highlight">Javascript</span>,' +
-                            '<span class="string-highlight">HTML</span>,' +
-                            '<span class="string-highlight">CSS</span>];' +
-            '}; </pre>';
+            workDefaultMain.innerHTML = '<p></p>';
 
         } else {
 
@@ -1292,71 +1296,6 @@ function createWorkDefaultCards() {
         workDefaultObjects.push(workDefaultObj);
         workTimelineRoot.add(workDefaultObj);
     }
-}
-
-function setupTypewriter(t) {
-    var HTML = t.innerHTML;
-
-    t.innerHTML = "";
-
-    var cursorPosition = 0,
-        tag = "",
-        writingTag = false,
-        tagOpen = false,
-        typeSpeed = 100,
-    tempTypeSpeed = 0;
-
-    var type = function() {
-    
-        if (writingTag === true) {
-            tag += HTML[cursorPosition];
-        }
-
-        if (HTML[cursorPosition] === "<") {
-            tempTypeSpeed = 0;
-            if (tagOpen) {
-                tagOpen = false;
-                writingTag = true;
-            } else {
-                tag = "";
-                tagOpen = true;
-                writingTag = true;
-                tag += HTML[cursorPosition];
-            }
-        }
-        if (!writingTag && tagOpen) {
-            tag.innerHTML += HTML[cursorPosition];
-        }
-        if (!writingTag && !tagOpen) {
-            if (HTML[cursorPosition] === " ") {
-                tempTypeSpeed = 0;
-            }
-            else {
-                tempTypeSpeed = (Math.random() * typeSpeed) + 50;
-            }
-            t.innerHTML += HTML[cursorPosition];
-        }
-        if (writingTag === true && HTML[cursorPosition] === ">") {
-            tempTypeSpeed = (Math.random() * typeSpeed) + 50;
-            writingTag = false;
-            if (tagOpen) {
-                var newSpan = document.createElement("span");
-                t.appendChild(newSpan);
-                newSpan.innerHTML = tag;
-                tag = newSpan.firstChild;
-            }
-        }
-
-        cursorPosition += 1;
-        if (cursorPosition < HTML.length - 1) {
-            setTimeout(type, tempTypeSpeed);
-        }
-
-    };
-
-    return {
-        type: type
-    };
 }
 
 // managing buttons and toggles 

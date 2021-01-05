@@ -830,25 +830,13 @@ var workDefaultArray = [
         position: [0.65, -0.4]
     }, 
     {
-        id: "dataAnalysis", 
-        img: "./../img/laptop.png",
-        position: [imageX, imageY]
-    }, 
-    {
-        id: "computer", 
-        img: "./../img/laptop.png",
-        position: [-imageX, -0.4]
-    }, 
-    {
         id: "data-code", 
-        text1: "git heug dsfd",
-        text2: "asdf \n /nsafsd dsafgdfgsda dfsg", 
-        position: [imageX, 0.4]
+        text: "d fjs aldkjfa lsfakjkjldf aslkdfjla lkdfgjldskfgj klkdfgjl sdkdfgjs fk kldfgjs fdf",
+        position: [imageX, 1.8]
     }, 
     {
         id: "comp-code", 
-        text1: "asdf fasdgasdg adgadsga", 
-        text2: "adga gdfgdsfg ggggg",
+        text: "asdf fasdgasdg adgadsga", 
         position: [-imageX, -0.4]
     }, 
 
