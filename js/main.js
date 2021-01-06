@@ -574,7 +574,7 @@ function createMenuButtons() {
                      }, 2000);
 
                 }
-
+                var bacon = "good";
                 educationToggle = false;
                 bioDefaultToggle = false;
                 checkToggles();

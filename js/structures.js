@@ -831,7 +831,7 @@ var workDefaultArray = [
     }, 
     {
         id: "data-code", 
-        text: "d fjs aldkjfa lsfakjkjldf aslkdfjla lkdfgjldskfgj klkdfgjl sdkdfgjs fk kldfgjs fdf",
+        text: "",
         position: [imageX, 1.8]
     }, 
     {
