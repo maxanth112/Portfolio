@@ -10,8 +10,13 @@ var sphereSize = 1000;
 // renderers, cameras, etc.
 var controls, camera, scene, cssRenderer;
 
-var rootNames = ["stationary", "math", "computer", "econ", "educHeader", "educSummary", "workTimeline", "intern", 
-"matops", "contract", "workDefault", "pic1", "pic2", "bioDefault"];
+var allObjects = [];
+var rootNames = [
+    "stationary", 
+    "math", "computer", "econ", "educSelect", "educHeader", "educSummary", 
+    "workTimeline", "intern", "matops", "contract", "workDefault", 
+    "bioDefault", "pic1", "pic2"
+];
 var roots = {
     stationary: {
         root: '',
@@ -21,7 +26,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: [],
+            exclude: ["educSelect"]
         },
         rotationX: 0,
         rotationY: 0,
@@ -35,7 +42,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["educSelect", "math"],
+            exclude: ["educHeader"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -49,7 +58,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["educSelect", "computer"],
+            exclude: ["educHeader"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -63,7 +74,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["educSelect", "econ"],
+            exclude: ["educHeader"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -77,7 +90,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: [],
+            exclude: []
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -91,7 +106,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["educSelect"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -105,7 +122,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["educSummary", "educHeader"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -119,7 +138,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: [],
+            exclude: []
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -133,7 +154,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["workTimeline", "intern"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -147,7 +170,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["workTimeline", "matops"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -161,7 +186,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["workTimeline", "contract"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -175,7 +202,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [],
-            viewFinal: []
+            viewFinal: [],
+            include: ["workDefault", "workTimeline"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -189,7 +218,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [], 
-            viewFinal: []
+            viewFinal: [],
+            include: [],
+            exclude: []
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -203,7 +234,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [], 
-            viewFinal: []
+            viewFinal: [],
+            include: ["bioDefault", "pic1"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -217,7 +250,9 @@ var roots = {
         coordinates: {
             view: [],
             rotate: [], 
-            viewFinal: []
+            viewFinal: [],
+            include: ["bioDefault", "pic2"],
+            exclude: ["educSelect"]
         },
         rotationX: 0.0002,
         rotationY: 0.0015,
@@ -225,31 +260,26 @@ var roots = {
     }
 };
 
-// all objects 
-var allObjects = [];
-var allEducationObjects = [];
-var allWorkObjects = [];
-
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         navigation menu                         ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var menuHeight = -135;
+var stationaryButtonY = -135;
 
 var menuButtonArray = [{
         label: "Education",
         id: "education-button",
-        position: [-0.2, menuHeight]
+        position: [-0.2, stationaryButtonY]
     },
     {
         label: "Professional",
         id: "work-button",
-        position: [0, menuHeight]
+        position: [0, stationaryButtonY]
     },
     {
         label: "Bio",
         id: "bio-button",
-        position: [0.2, menuHeight]
+        position: [0.2, stationaryButtonY]
     }
 ]
 
@@ -257,7 +287,7 @@ var menuButtonArray = [{
 ////////                      education headers                          ////////
 /////////////////////////////////////////////////////////////////////////////////
 
-var yHeight = 2.2;
+var educHeaderY = 2.2;
 var educationHeaderArray = [{
         major: "Computer Science",
         college: "University of Colorado Boulder,",
@@ -269,7 +299,7 @@ var educationHeaderArray = [{
         cardId: "computer-header",
         img: "",
         id: "computer-button",
-        position: [-1.3, yHeight]
+        position: [-1.3, educHeaderY]
     },
     {
         major: "Mathematics",
@@ -282,7 +312,7 @@ var educationHeaderArray = [{
         id: "math-button",
         img: "",
         label: "See Courses",
-        position: [0, yHeight],
+        position: [0, educHeaderY],
     },
     {
         major: "Economics",
@@ -295,32 +325,34 @@ var educationHeaderArray = [{
         cardId: "econ-header",
         id: "econ-button",
         img: "",
-        position: [1.3, yHeight],
+        position: [1.3, educHeaderY],
     }
 ];
 
-var selectedX = -1.45;
-var selectedY = 2.1;
-var selectedStep = 2;
+var educSelectedX = -1.45;
+var educSelectedY = 2.1;
+var educSelectedStepY = 2;
 
 var EducationHeaderSelectedArray = [{
-        position: [selectedX, selectedY]
+        position: [educSelectedX, educSelectedY]
     },
     {
-        position: [selectedX, selectedY - (1 * selectedStep)]
+        position: [educSelectedX, educSelectedY - (1 * educSelectedStepY)]
     },
     {
-        position: [selectedX, selectedY - (2 * selectedStep)]
+        position: [educSelectedX, educSelectedY - (2 * educSelectedStepY)]
     }
 ];
 
-var leftSummary = -.652;
-var rightSummary = leftSummary + 1.95;
+var educSummaryLeftX = -.652;
+var educSummaryRightX = educSummaryLeftX + 1.95;
 
-var summaryYStart = -.2;
-var summaryRightYStart = 0.12;
-var summaryStepLeft = 1.95;
-var summaryStepRight = 1.3;
+var educSummaryY = -.2;
+
+var educSummaryYStart = 0.12;
+var educSummaryLeftY = 1.95;
+var educSummaryRightY = 1.3;
+
 var educationSummaryArray = [{
         id: "lax",
         claddNum: 1,
@@ -328,7 +360,7 @@ var educationSummaryArray = [{
         url: "https://mcla.us/player/41671/max_wiesner.html",
         dates: "August 2015 - May 2016",
         role: "Student Athelete",
-        position: [leftSummary, summaryYStart],
+        position: [educSummaryLeftX, educSummaryY],
         description: "All - Conference Award, MCLA D1 Player of the Week Award. "
     },
     {
@@ -337,7 +369,7 @@ var educationSummaryArray = [{
         clubName: "CAPA Florence",
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
-        position: [leftSummary, summaryYStart - summaryStepLeft],
+        position: [educSummaryLeftX, educSummaryY - educSummaryLeftY],
         description: "Photo Contest Winner, student farting around in europe. "
     },
     {
@@ -345,7 +377,7 @@ var educationSummaryArray = [{
         clubName: "Sigma Phi Epsilon, Colorado Alpha Chapter",
         dates: "August 2016 - July 2018",
         role: "Brother",
-        position: [rightSummary, summaryRightYStart],
+        position: [educSummaryRightX, educSummaryYStart],
         description: "Participated in fundraising events like the Jimmy V."
     },
     {
@@ -353,7 +385,7 @@ var educationSummaryArray = [{
         clubName: "Economics Club",
         dates: "August 2016 - May 2019",
         role: "Member",
-        position: [rightSummary, summaryRightYStart - (1 * summaryStepRight)],
+        position: [educSummaryRightX, educSummaryYStart - (1 * educSummaryRightY)],
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     },
     {
@@ -361,18 +393,18 @@ var educationSummaryArray = [{
         clubName: "Math Club",
         dates: "August 2020 - May 2021",
         role: "Member",
-        position: [rightSummary, summaryRightYStart - (2 * summaryStepRight)],
+        position: [educSummaryRightX, educSummaryYStart - (2 * educSummaryRightY)],
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     },
     {
         id: "degree",
         role: "Degrees",
-        position: [0, summaryYStart + 3.35]
+        position: [0, educSummaryY + 3.35]
     },
     {
         id: "extra",
         role: "Activities, clubs",
-        position: [0, summaryYStart + 1.2]
+        position: [0, educSummaryY + 1.2]
     }
 ];
 

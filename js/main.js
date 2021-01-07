@@ -32,39 +32,6 @@ function checkToggles() {
     });
 }
 
-function createTwirlingCoordinates(rootName, x = sphereSize, y = sphereSize, z = 600) {
-
-    var vector = new THREE.Vector3();
-    var counter = 0;
-    var len = roots[rootName].objects.length;
-    roots[rootName].objects.forEach(element => {
-        var obj = new THREE.Object3D();
-        var formula = 2 * Math.PI * (counter++) / len;
-
-        obj.position.x = (x * Math.cos(formula));
-        obj.position.y = (y * Math.sin(formula));
-        obj.position.z = (z * Math.sin(formula));
-
-        vector.copy(obj.position).multiplyScalar(2);
-        obj.lookAt(vector);
-        obj.name = rootName;
-        roots[rootName].coordinates.rotate.push(obj);
-    });
-}
-
-function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
-
-    arr.forEach(element => {
-        console.log(saveRoot);
-        var viewCoordinate = new THREE.Object3D();
-        viewCoordinate.position.x = element.position[0] * x;
-        viewCoordinate.position.y = element.position[1] * y;
-        viewCoordinate.position.z = z;
-
-        roots[saveRoot].coordinates.view.push(viewCoordinate);
-    });
-}
-
 // main threejs rendering functions 
 function initRoots() {
 
@@ -162,7 +129,7 @@ function animate() {
     render();
 
     requestAnimationFrame(animate);
-    // updateRotations();
+    updateRotations();
 }
 
 // general event listeners 
@@ -225,22 +192,19 @@ function createEducationHeaderCards() {
 
                 if (roots["computer"].toggle) {
 
-                    setMotionAndToggleFalse("computer");
-                    stopRotationSetTrue("educSummary");
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(["educSummary", "educHeader"]);
                     clearAllNotSelected();
 
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
                 } else {
 
-                    stopRotationSetTrue("computer"); // stop rotation
-                    setMotionAndToggleFalse("educSummary"); // start rotation and set toggle (up) to false 
-                    setMotionAndToggleFalse("math");
-                    setMotionAndToggleFalse("econ");
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(["computer", "educHeader"]); // stop rotation
                     manageButton("computer");
 
-                    transform(allObjects, roots.stationary.viewFinal, toInterval);
+                    transform(allObjects, roots.computer.coordinates.viewFinal, toInterval);
                 }
-                roots["workDefault"].toggle = false;
             }, false);
 
         } else if (elementButton.id == 'math-button') {
@@ -250,22 +214,19 @@ function createEducationHeaderCards() {
 
                 if (roots["math"].toggle) {
 
-                    setMotionAndToggleFalse("math");
-                    stopRotationSetTrue("educSummary");
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(["educSummary", "educHeader"]);
                     clearAllNotSelected();
 
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
                 } else {
 
-                    stopRotationSetTrue("math");
-                    setMotionAndToggleFalse("educSummary");
-                    setMotionAndToggleFalse("computer");
-                    setMotionAndToggleFalse("econ");
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(["educHeader", "math"]);
                     manageButton("math");
 
                     transform(allObjects, roots.math.coordinates.viewFinal, toInterval);
                 }
-                roots["workDefault"].toggle = false;
             }, false);
         } else if (elementButton.id == 'econ-button') {
 
@@ -274,22 +235,19 @@ function createEducationHeaderCards() {
 
                 if ( roots["econ"].toggle) {
 
-                    setMotionAndToggleFalse("econ");
-                    stopRotationSetTrue("educSummary");
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(["educSummary", "educHeader"]);
                     clearAllNotSelected();
 
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
                 } else {
 
-                    stopRotationSetTrue("econ");
-                    setMotionAndToggleFalse("educSummary");
-                    setMotionAndToggleFalse("math");
-                    setMotionAndToggleFalse("computer");
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(["econ", "educHeader"]);
                     manageButton("econ");
 
                     transform(allObjects, roots.econ.coordinates.viewFinal, toInterval);
                 }
-                roots["workDefault"].toggle = false;
             }, false);
         }
 
@@ -376,33 +334,17 @@ function createMenuButtons() {
                 clearAllNotSelected();
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
-
-                setMotionAndToggleFalse("econ");
-                setMotionAndToggleFalse("math");
-                setMotionAndToggleFalse("computer");
-                setMotionAndToggleFalse("workDefault");
-                setMotionAndToggleFalse("intern");
-                setMotionAndToggleFalse("contract");
-                setMotionAndToggleFalse("matops");
-                setMotionAndToggleFalse("workTimeline");
                 updateWorkSelected("home");
-
 
                 if (roots["educHeader"].toggle) {
 
-                    setMotionAndToggleFalse("educSummary");
-                    setMotionAndToggleFalse("educHeader");
+                    setMotionAndToggleFalse();
                     transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
-
                 } else {
 
-                    stopRotationSetTrue("educSummary");
-                    stopRotationSetTrue("educHeader");
+                    stopRotationSetTrue(["educSummary", "educHeader"]);
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, toInterval);
-                }
-                roots["bioDefault"].toggle = false;
-                roots["workTimeline"].toggle = false;
-                
+                }                
                 checkToggles();
             }, false);
         } else if (menuButton.id == 'work-button') {
@@ -419,35 +361,18 @@ function createMenuButtons() {
                 clearAllNotSelected();
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
-                setMotionAndToggleFalse("educHeader");
-                setMotionAndToggleFalse("educSummary");
-                setMotionAndToggleFalse("econ");
-                setMotionAndToggleFalse("math");
-                setMotionAndToggleFalse("computer");
-                setMotionAndToggleFalse("intern");
-                setMotionAndToggleFalse("contract");
-                setMotionAndToggleFalse("matops");
                 updateWorkSelected("home");
-
 
                 if (roots["workTimeline"].toggle) {
 
-                    setMotionAndToggleFalse("workDefault");
-                    setMotionAndToggleFalse("workTimeline");
-
+                    setMotionAndToggleFalse();
                     transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
-
                 } else {
 
-                    stopRotationSetTrue("workDefault");
-                    stopRotationSetTrue("workTimeline");
-
+                    stopRotationSetTrue(["workDefault", "workTimeline"]);
                     transform(allObjects,  roots.workDefault.coordinates.viewFinal, toInterval);
-
                     startCompText();
                 }
-                roots["bioDefault"].toggle = false;
-                roots["educHeader"].toggle = false;
                 checkToggles();
             }, false);
         } else if (menuButton.id == 'bio-button') {
@@ -464,26 +389,12 @@ function createMenuButtons() {
                 clearAllNotSelected();
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
-                setMotionAndToggleFalse("educHeader");
-                setMotionAndToggleFalse("educSummary");
-                setMotionAndToggleFalse("econ");
-                setMotionAndToggleFalse("math");
-                setMotionAndToggleFalse("computer");
-                setMotionAndToggleFalse("intern");
-                setMotionAndToggleFalse("contract");
-                setMotionAndToggleFalse("matops");
-                setMotionAndToggleFalse("workDefault");
-                setMotionAndToggleFalse("workTimeline");
                 updateWorkSelected("home");
 
-
-
-                if (bioDefaultToggle) {
+                if (roots["bioDefault"].toggle) {
 
                     resetBioButtons();
-                    setMotionAndToggleFalse("bioDefault");
-                    setMotionAndToggleFalse("pic1");
-                    setMotionAndToggleFalse("pic2");
+                    setMotionAndToggleFalse();
                     transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
 
                 } else {
@@ -493,14 +404,9 @@ function createMenuButtons() {
                     currentInterest = 0;
                     pic2Obj = travel2;
 
-                    stopRotationSetTrue("bioDefault");
-                    stopRotationSetTrue("pic1");
-
+                    stopRotationSetTrue(["pic1", "bioDefault"]);
                     transform(allObjects,  roots.pic1.coordinates.viewFinal, toInterval);
                 }
-                roots["workTimeline"].toggle = false;
-                roots["educHeader"].toggle = false;
-                
                 checkToggles();
             }, false);
         }
@@ -518,14 +424,12 @@ function createBioDefaultCards() {
 
         if (bioDefaultArray[i].id == "bio-pic") {
 
-            bioDiv.innerHTML =
-                '<img class="bio-img" src="' + bioDefaultArray[i].img + '">';
+            bioDiv.innerHTML = '<img class="bio-img" src="' + bioDefaultArray[i].img + '">';
         } else if (bioDefaultArray[i].id == "bio-button-down") {
 
             bioDiv.addEventListener('click', function (x) {
 
                 updateInterestPage(-1);
-
             }, false);
 
             bioDiv.classList.add("flex-container");
@@ -536,7 +440,6 @@ function createBioDefaultCards() {
             bioDiv.addEventListener('click', function (x) {
 
                 updateInterestPage(1);
-
             }, false);
 
             bioDiv.classList.add("flex-container");
@@ -548,12 +451,10 @@ function createBioDefaultCards() {
         } else if (bioDefaultArray[i].id == "bio-header" || bioDefaultArray[i].id == "interests") {
 
             bioDiv.innerHTML = '<h3>' + bioDefaultArray[i].description + '</h3>';
-        } else {
-
+        } else { 
 
             bioDiv.classList.add('interest-cards');
-            bioDiv.innerHTML =
-                '<h3 class="bio-button-header">' + bioDefaultArray[i].description + '</h3>';
+            bioDiv.innerHTML = '<h3 class="bio-button-header">' + bioDefaultArray[i].description + '</h3>';
 
             var interestButton = document.createElement('button');
             interestButton.id = bioDefaultArray[i].id + "-button";
@@ -573,12 +474,9 @@ function createBioDefaultCards() {
 
                     interestPage = 0;
                     updateInterestPage(0);
-
                 }, false);
 
             } else if (bioDefaultArray[i].id == "wood") {
-
-
 
                 interestButton.addEventListener('click', function (x) {
 
@@ -588,12 +486,9 @@ function createBioDefaultCards() {
 
                     interestPage = 1;
                     updateInterestPage(0);
-
                 }, false);
 
             } else if (bioDefaultArray[i].id == "bikes") {
-
-
 
                 interestButton.addEventListener('click', function (x) {
 
@@ -603,13 +498,11 @@ function createBioDefaultCards() {
 
                     interestPage = 2;
                     updateInterestPage(0);
-
                 }, false);
             }
 
             bioDiv.appendChild(interestButton);
         }
-
         var bioDivObj = new THREE.CSS3DObject(bioDiv);
         roots["bioDefault"].objects.push(bioDivObj);
         roots["bioDefault"].root.add(bioDivObj);
@@ -673,18 +566,6 @@ function updateInterestPage(pageChange) {
     }
 }
 
-function updateAllObjects() {
-
-    allBioObjects = defaultBioObjects
-        .concat(interestPic1Objects)
-        .concat(interestPic2Objects);
-
-    allObjects = allStationaryObjects
-        .concat(allEducationObjects)
-        .concat(allWorkObjects)
-        .concat(allBioObjects);
-}
-
 function updateBioInterestButtons(selected, not1, not2) {
 
     not1.innerHTML = "See Pics";
@@ -746,7 +627,6 @@ function createImgCards(arr, saveRoot) {
 function createWorkHeaderCards() {
 
     workContentArray.forEach(workElement => {
-
         var element = document.createElement('div');
         element.className = 'work-header-element';
         element.innerHTML =
@@ -768,7 +648,6 @@ function createWorkHeaderCards() {
 function createWorkContentCards() {
 
     workContentArray.forEach(workElement => {
-
         var element = document.createElement('div');
         element.classList.add('work-element');
         element.classList.add(workElement.id);
@@ -791,7 +670,6 @@ function createWorkContentCards() {
 function createWorkToolsCards() {
 
     var toolCategories = ["intern", "matops", "contract"];
-
     for (var k = 0; k < toolCategories.length; k += 1) {
 
         // for each element in the tools array
@@ -803,7 +681,6 @@ function createWorkToolsCards() {
 
             // the tool div inner html
             var hide = workToolsArray[i].score[toolCategories[k]] ? "" : "hide";
-
             var toolHtml = '<ul class="tool-row ' + hide + '">' +
                 '<img class="tool-row-img ' + workToolsArray[i].id + '" src="' +
                 workToolsArray[i].image +
@@ -915,49 +792,35 @@ function createWorkButtons() {
 
     leftButton.addEventListener('click', function (x) {
 
+        
         if (roots["workDefault"].toggle) { // default -> contract
 
 
+            setMotionAndToggleFalse();
             updateWorkSelected("contract");
-            stopRotationSetTrue("contract");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("intern");
-            setMotionAndToggleFalse("matops");
+            stopRotationSetTrue(["contract", "workTimeline"]);
             transform(allObjects, roots.contract.coordinates.viewFinal, backInterval);
         } else if (roots["matops"].toggle) { // matops -> intern
 
 
+            setMotionAndToggleFalse();
             updateWorkSelected("intern");
-            stopRotationSetTrue("intern");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("contract");
-            setMotionAndToggleFalse("matops");
+            stopRotationSetTrue(["intern", "workTimeline"]);
             transform(allObjects, roots.intern.coordinates.viewFinal, backInterval);
         } else if (roots["contract"].toggle) { // contract -> matops 
 
 
+            setMotionAndToggleFalse();
             updateWorkSelected("matops");
-            stopRotationSetTrue("matops");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("intern");
-            setMotionAndToggleFalse("contract");
+            stopRotationSetTrue(["matops", "workTimeline"]);
             transform(allObjects, roots.matops.coordinates.viewFinal, backInterval);
-        } else if (roots["pinternc1"].toggle) { // intern -> default
+        } else if (roots["intern"].toggle) { // intern -> default
 
 
+            setMotionAndToggleFalse();
             updateWorkSelected("home");
-            stopRotationSetTrue("workDefault");
-            stopRotationSetTrue("workTimeline");
+            stopRotationSetTrue(["workDefault", "workTimeline"]);
 
-            setMotionAndToggleFalse("contract");
-            setMotionAndToggleFalse("intern");
-            setMotionAndToggleFalse("matops");
             transform(allObjects, roots.workDefault.coordinates.viewFinal, backInterval);
         }
     }, false);
@@ -966,45 +829,28 @@ function createWorkButtons() {
 
         if (roots["workDefault"].toggle) { // default -> intern 
 
+            
+            setMotionAndToggleFalse();
             updateWorkSelected("intern");
-            stopRotationSetTrue("intern");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("contract");
-            setMotionAndToggleFalse("matops");
+            stopRotationSetTrue(["intern", "workTimeline"]);
             transform(allObjects, roots.intern.coordinates.viewFinal, backInterval);
         } else if (roots["matops"].toggle) { // matops -> contract
 
+            setMotionAndToggleFalse();
             updateWorkSelected("contract");
-            stopRotationSetTrue("contract");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("matops");
-            setMotionAndToggleFalse("intern");
+            stopRotationSetTrue(["contract", "workTimeline"]);
             transform(allObjects, roots.contract.coordinates.viewFinal, backInterval);
         } else if (roots["contract"].toggle) { // contract -> default
 
-
+            setMotionAndToggleFalse();
             updateWorkSelected("home");
-            stopRotationSetTrue("workDefault");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("intern");
-            setMotionAndToggleFalse("contract");
-            setMotionAndToggleFalse("matops");
-            transform(allObjects, roots.default.coordinates.viewFinal, backInterval);
+            stopRotationSetTrue(["workDefault", "workTimeline"]);
+            transform(allObjects, roots.workDefault.coordinates.viewFinal, backInterval);
         } else if (roots["intern"].toggle) { // intern -> matops
 
-
+            setMotionAndToggleFalse();
             updateWorkSelected("matops");
-            stopRotationSetTrue("matops");
-            stopRotationSetTrue("workTimeline");
-
-            setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("intern");
-            setMotionAndToggleFalse("contract");
+            stopRotationSetTrue(["matops", "workTimeline"]);
             transform(allObjects, roots.matops.coordinates.viewFinal, backInterval);
         }
     }, false);
@@ -1173,13 +1019,15 @@ function setEducationButtonSelects(mainButton) {
 }
 
 // managing rotations and toggles 
-function stopRotationSetTrue(rootName) {
+function stopRotationSetTrue(rootNames) {
 
-    roots[rootName].toggle = true;
-    roots[rootName].motion = true;
-    roots[rootName].root.rotation.x = 0;
-    roots[rootName].root.rotation.y = 0;
-    roots[rootName].root.rotation.z = 0;
+    rootNames.forEach(rootName => {
+        roots[rootName].toggle = true;
+        roots[rootName].motion = true;
+        roots[rootName].root.rotation.x = 0;
+        roots[rootName].root.rotation.y = 0;
+        roots[rootName].root.rotation.z = 0;
+    });
 }
 
 function updateRotations() {
@@ -1193,10 +1041,12 @@ function updateRotations() {
     });
 }
 
-function setMotionAndToggleFalse(rootName) {
+function setMotionAndToggleFalse() {
 
-    roots[rootName].toggle = false;
-    roots[rootName].motion = false;
+    rootNames.forEach(rootName => {
+        roots[rootName].toggle = false;
+        roots[rootName].motion = false;
+    });
 }
 
 function flipToggles(toggle) {
@@ -1216,27 +1066,16 @@ function eliminateCourseFlipClass() {
 
 // calling all create/coordinate functions 
 function createAllCards() {
-    // creates the divs (cards) and saves them to the respective objects arrays
+    // creates the divs (cards) and saves them to the respective objects arrays and all objects
 
-    // stationary
     createMenuButtons();
-
-    console.log(roots["stationary"].objects);
-
-    // education
+    
     createCourseCards(mathArray, "math");
     createCourseCards(computerArray, "computer");
     createCourseCards(econArray, "econ");
     createEducationHeaderCards();
     createEducationSummary();
 
-    allEducationObjects = roots["math"].objects
-        .concat(roots["computer"].objects)
-        .concat(roots["econ"].objects)
-        .concat(roots["educHeader"].objects)
-        .concat(roots["educSummary"].objects);
-
-    // work history
     createWorkTimelineCards();
     createWorkButtons();
     createWorkHeaderCards();
@@ -1245,26 +1084,15 @@ function createAllCards() {
     createWorkToolsContainer();
     createWorkDefaultCards();
 
-    allWorkObjects = roots["workTimeline"].objects
-        .concat(roots["intern"].objects)
-        .concat(roots["matops"].objects)
-        .concat(roots["contract"].objects)
-        .concat(roots["workDefault"].objects);
-
-    // bio
     createImgCards(travel1, "pic1");
     createImgCards(travel2, "pic2");
     createBioDefaultCards();
 
-    allBioObjects = roots["bioDefault"].objects
-        .concat(roots["pic1"].objects)
-        .concat(roots["pic2"].objects);
-
-    // ALL OBJECTS
-    allObjects = roots["stationary"].objects
-        .concat(allEducationObjects)
-        .concat(allWorkObjects)
-        .concat(allBioObjects);
+    rootNames.forEach(rootName => {
+        if (!rootName.includes("educSelect")) {
+            allObjects = allObjects.concat(roots[rootName].objects);
+        }
+    });
 }
 
 function concatCoordinates(inViewArr, ignoreArr = []) {
@@ -1279,11 +1107,31 @@ function concatCoordinates(inViewArr, ignoreArr = []) {
 
             coordinates = coordinates.concat(roots[rootName].coordinates.view);
         } else {
+
             coordinates = coordinates.concat(roots[rootName].coordinates.rotate);
         }
     });
-    console.log(coordinates);
     return coordinates;
+}
+
+function createTwirlingCoordinates(rootName, x = sphereSize, y = sphereSize, z = 0) {
+
+    var vector = new THREE.Vector3();
+    var counter = 0;
+    var len = roots[rootName].objects.length;
+    roots[rootName].objects.forEach(element => {
+        var formula = 2 * Math.PI * (counter++) / len;
+        
+        var obj = new THREE.Object3D();
+        obj.position.x = (x * Math.cos(formula));
+        obj.position.y = (y * Math.sin(formula));
+        obj.position.z = (z * Math.sin(formula));
+
+        vector.copy(obj.position).multiplyScalar(2);
+        obj.lookAt(vector);
+        obj.name = rootName + '-rotate';
+        roots[rootName].coordinates.rotate.push(obj);
+    });
 }
 
 function createAllTwirlingCoordinates() {
@@ -1299,11 +1147,24 @@ function createAllTwirlingCoordinates() {
     });
 }
 
+function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
+
+    arr.forEach(element => {
+        console.log(saveRoot);
+        var obj = new THREE.Object3D();
+        obj.position.x = element.position[0] * x;
+        obj.position.y = element.position[1] * y;
+        obj.position.z = z;
+
+        obj.name = saveRoot + '-view';
+        roots[saveRoot].coordinates.view.push(obj);
+    });
+}
+
 function createAllViewCoordinates() {
 
     // stationary
     createViewCoordinates(menuButtonArray, "stationary", 1000, 5, 1800);
-
     // education
     createViewCoordinates(mathArray, "math");
     createViewCoordinates(econArray, "econ");
@@ -1311,43 +1172,29 @@ function createAllViewCoordinates() {
     createViewCoordinates(educationHeaderArray, "educHeader");
     createViewCoordinates(EducationHeaderSelectedArray, "educSelect");
     createViewCoordinates(educationSummaryArray, "educSummary");
-
     // work history
     createViewCoordinates(workViewDisplayArrayIntern,"intern");
     createViewCoordinates(workViewDisplayArrayMatOps, "matops");
     createViewCoordinates(workViewDisplayArrayContract, "contract");
     createViewCoordinates(workTimelineDisplayArray, "workTimeline");
     createViewCoordinates(workDefaultArray, "workDefault");
-
     // bio
     createViewCoordinates(bioDefaultArray, "bioDefault");
     createViewCoordinates(travel1, "pic1");
     createViewCoordinates(travel2, "pic2");
 
-    // specific education views
-    roots.educSummary.coordinates.viewFinal = concatCoordinates(["educSummary", "educHeader"], "educSelect");
-    roots.computer.coordinates.viewFinal = concatCoordinates(["educSummary", "educSelect", "computer"], "educHeader");
-    roots.math.coordinates.viewFinal = concatCoordinates(["educSummary", "educSelect", "math"], "educHeader");
-    roots.econ.coordinates.viewFinal = concatCoordinates(["educSummary", "educSelect", "econ"], "educHeader");
-    
-    // specific work views 
-    roots.workDefault.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault"], "educSelect");
-    roots.intern.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault", "intern"], "educSelect");
-    roots.matops.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault", "matops"], "educSelect");
-    roots.contract.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault", "contract"], "educSelect");
-
-    // specific bio views 
-    roots.pic1.coordinates.viewFinal = concatCoordinates(["defaultBio", "pic1"], "educSelect");
-    roots.pic2.coordinates.viewFinal = concatCoordinates(["defaultBio", "pic2"], "educSelect");
-
-    // starting will be stationarys view final
-    roots.stationary.coordinates.viewFinal = concatCoordinates([], "educSelect");
+    // creates the specific views
+    rootNames.forEach(rootName => {
+        var rootCoords = roots[rootName].coordinates;
+        if (rootCoords.include != rootCoords.exclude) {
+            rootCoords.viewFinal = concatCoordinates(rootCoords.include, rootCoords.exclude);
+        }
+    });
 }
 
 // initial site startup 
 function startTransformAllCourseObjects() {
 
     transform(allObjects, roots.stationary.coordinates.viewFinal, 500);
-    
-    console.log(allObjects);
+    // console.log(allObjects);
 }
