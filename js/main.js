@@ -141,11 +141,6 @@ function transform(start, end, duration) {
 
         var object = start[i];
         var target = end[i];
-        // console.log("start " + i + "  : ");
-        // console.log(start[i]);
-        // console.log("end " + i + "  : ");
-        // console.log(end[i]);
-        // console.log("");
 
         new TWEEN.Tween(object.position)
             .to({
@@ -230,15 +225,15 @@ function createCourseCards(arr, save, saveRoot) {
             '<div class="back">' +
             '<div class="align-me">' +
             '<p class="course-header">' + arrElement.type + arrElement.number + '</p>' +
-            '<p class="languages">' +arrElement.language + '</p>' +
+            '<p class="languages">' + arrElement.language + '</p>' +
             '</div>' +
-            '<p class="course-description">' +arrElement.description + '</p>' +
+            '<p class="course-description">' + arrElement.description + '</p>' +
             '</div>' +
             '</div>';
 
         element = new THREE.CSS3DObject(element);
         save.push(element);
-        if (saveRoot == "computer") { 
+        if (saveRoot == "computer") {
             computerCourseRoot.add(element);
         } else if (saveRoot == "math") {
             mathCourseRoot.add(element);
@@ -351,7 +346,7 @@ function createEducationHeaderCards() {
         element = new THREE.CSS3DObject(element);
         educationHeaderObjects.push(element);
 
-        educHeaderRoot.add(element); 
+        educHeaderRoot.add(element);
     });
 }
 
@@ -404,8 +399,8 @@ function createEducationSummary() {
     element.className = 'extra';
     element.innerHTML = '<h2>Clubs/Associations</h2>';
 
-    var extraObj = new THREE.CSS3DObject(element);
-    educationSummaryObjects.push(extraObj);
+    var element = new THREE.CSS3DObject(element);
+    educationSummaryObjects.push(element);
     educSummaryRoot.add(element);
 }
 
@@ -572,7 +567,6 @@ function createMenuButtons() {
     }
 }
 
-
 function createBioDefaultCards() {
 
     pic1Obj = travel1;
@@ -591,8 +585,8 @@ function createBioDefaultCards() {
             bioDiv.addEventListener('click', function (x) {
 
                 updateInterestPage(-1);
- 
-             }, false);
+
+            }, false);
 
             bioDiv.classList.add("flex-container");
             bioDiv.classList.add("down-arrow");
@@ -601,7 +595,7 @@ function createBioDefaultCards() {
 
             bioDiv.addEventListener('click', function (x) {
 
-               updateInterestPage(1);
+                updateInterestPage(1);
 
             }, false);
 
@@ -684,24 +678,24 @@ function createBioDefaultCards() {
 
 function updateInterestPage(pageChange) {
     currentPage += pageChange;
-    
-    if ( (interestPage == 0 ) && ( currentPage == 4 ) ) { // currently on last travel page, taking to first
-        
+
+    if ((interestPage == 0) && (currentPage == 4)) { // currently on last travel page, taking to first
+
         currentPage = 0;
-    } else if ( (interestPage == 0 ) && ( currentPage == -1 ) ){ // currently on last travel page, taking to first
-        
+    } else if ((interestPage == 0) && (currentPage == -1)) { // currently on last travel page, taking to first
+
         currentPage = 3;
-    } else if ( ( interestPage != 0 ) && ( currentPage == 3 ) ) { // on wood or bikes last page, taking to first 
-        
+    } else if ((interestPage != 0) && (currentPage == 3)) { // on wood or bikes last page, taking to first 
+
         currentPage = 0;
-    } else if ( ( interestPage != 0 ) && ( currentPage == -1 ) ) { // on wood or bikes last page, taking to first 
-        
+    } else if ((interestPage != 0) && (currentPage == -1)) { // on wood or bikes last page, taking to first 
+
         currentPage = 2;
     }
-    
+
     newObj = allInterestObjs[interestPage][currentPage];
-    
-    if (interestPic1Toggle) { 
+
+    if (interestPic1Toggle) {
 
         for (var i = 0; i < newObj.length; i += 1) {
 
@@ -709,25 +703,25 @@ function updateInterestPage(pageChange) {
 
                 document.getElementById(pic2Obj[i].newid + "-img").src = newObj[i].img;
             } else {
-                
+
                 document.getElementById(pic2Obj[i].newid + "-p").innerHTML = newObj[i].description;
                 document.getElementById(pic2Obj[i].newid + "-h3").innerHTML = newObj[i].header;
             }
         }
-        
+
         transform(allObjects, alignState.interestPic2View, toInterval);
         interestPic1Toggle = false; // in back
         interestPic2Toggle = true; // now in view
 
-    } else { 
-        
+    } else {
+
         for (var i = 0; i < newObj.length; i += 1) {
 
             if (i < 3) {
 
                 document.getElementById(pic1Obj[i].newid + "-img").src = pic1Obj[i].img;
             } else {
-                
+
                 document.getElementById(pic1Obj[i].newid + "-p").innerHTML = newObj[i].description;
                 document.getElementById(pic1Obj[i].newid + "-h3").innerHTML = newObj[i].header;
             }
@@ -736,7 +730,7 @@ function updateInterestPage(pageChange) {
         transform(allObjects, alignState.interestPic1View, toInterval);
         interestPic2Toggle = false; // in back
         interestPic1Toggle = true; // now in view
-        
+
         console.log("now pic 2 is in back");
     }
     console.log("ending:");
@@ -789,11 +783,11 @@ function createImgCards(arr, saveArr, saveRoot) {
         element.classList.add(arrElement.id);
 
         if (arrElement.card == "s") {
-           var elementImg = document.createElement('img');
-           elementImg.src = arrElement.img;
-           elementImg.id = arrElement.newid + '-img';
+            var elementImg = document.createElement('img');
+            elementImg.src = arrElement.img;
+            elementImg.id = arrElement.newid + '-img';
 
-           element.appendChild(elementImg);
+            element.appendChild(elementImg);
         } else {
             var elementHeader = document.createElement('h3');
             elementHeader.id = arrElement.newid + '-h3';
@@ -835,7 +829,7 @@ function createWorkHeaderCards() {
             workElement.comit +
             '</h3>' +
             '</div>';
-        
+
         element = new THREE.CSS3DObject(element);
         if (workElement.id == "intern") {
 
@@ -977,7 +971,7 @@ function createSocialMedia() {
 
 function createWorkTimelineCards() {
 
-    workContentArray.forEach( arrElement => {
+    workContentArray.forEach(arrElement => {
 
         var element = document.createElement('div');
         element.classList.add("timeline-events");
@@ -1194,7 +1188,7 @@ function createWorkDefaultCards() {
         var element = document.createElement('div');
         element.id = workElement.id;
 
-        if ( (workElement.id != "data-code") && (workElement.id != "comp-code") ) {
+        if ((workElement.id != "data-code") && (workElement.id != "comp-code")) {
 
             element.classList.add('work-default');
             element.innerHTML =
@@ -1204,7 +1198,7 @@ function createWorkDefaultCards() {
                 '<p class="work-default-description">' +
                 workElement.description +
                 '</p>';
-        } 
+        }
 
         element = new THREE.CSS3DObject(element);
         workDefaultObjects.push(element);
@@ -1312,94 +1306,108 @@ function setEducationButtonSelects(mainButton) {
 // managing rotations and toggles 
 function stopRotationSetTrue(root) {
 
-    if (root == "math") {
+    switch (root) {
 
-        mathRootMotion = true;
-        mathCourseRoot.rotation.x = 0;
-        mathCourseRoot.rotation.y = 0;
-        mathCourseRoot.rotation.z = 0;
-    } else if (root == "computer") {
+        case "math":
+            mathRootMotion = true;
+            mathCourseRoot.rotation.x = 0;
+            mathCourseRoot.rotation.y = 0;
+            mathCourseRoot.rotation.z = 0;
+            break;
 
-        computerRootMotion = true;
-        computerCourseRoot.rotation.x = 0;
-        computerCourseRoot.rotation.y = 0;
-        computerCourseRoot.rotation.z = 0;
-    } else if (root == "econ") {
+        case "computer":
+            computerRootMotion = true;
+            computerCourseRoot.rotation.x = 0;
+            computerCourseRoot.rotation.y = 0;
+            computerCourseRoot.rotation.z = 0;
+            break;
 
-        econRootMotion = true;
-        econCourseRoot.rotation.x = 0;
-        econCourseRoot.rotation.y = 0;
-        econCourseRoot.rotation.z = 0;
-    } else if (root == "educHeader") {
+        case "econ":
+            econRootMotion = true;
+            econCourseRoot.rotation.x = 0;
+            econCourseRoot.rotation.y = 0;
+            econCourseRoot.rotation.z = 0;
+            break;
 
-        educationToggle = true;
-        educHeaderRootMotion = true;
-        educHeaderRoot.rotation.x = 0;
-        educHeaderRoot.rotation.y = 0;
-        educHeaderRoot.rotation.z = 0;
-    } else if (root == "educSummary") {
+        case "educHeader":
+            educationToggle = true;
+            educHeaderRootMotion = true;
+            educHeaderRoot.rotation.x = 0;
+            educHeaderRoot.rotation.y = 0;
+            educHeaderRoot.rotation.z = 0;
+            break;
 
-        educationToggle = true;
-        educSummaryRootMotion = true;
-        educSummaryRoot.rotation.x = 0;
-        educSummaryRoot.rotation.y = 0;
-        educSummaryRoot.rotation.z = 0;
-    } else if (root == "workTimeline") {
+        case "educSummary":
+            educationToggle = true;
+            educSummaryRootMotion = true;
+            educSummaryRoot.rotation.x = 0;
+            educSummaryRoot.rotation.y = 0;
+            educSummaryRoot.rotation.z = 0;
+            break;
 
-        workTimelineToggle = true;
-        workTimelineRootMotion = true;
-        workTimelineRoot.rotation.x = 0;
-        workTimelineRoot.rotation.y = 0;
-        workTimelineRoot.rotation.z = 0;
-    } else if (root == "workDefault") {
+        case "workTimeline":
+            workTimelineToggle = true;
+            workTimelineRootMotion = true;
+            workTimelineRoot.rotation.x = 0;
+            workTimelineRoot.rotation.y = 0;
+            workTimelineRoot.rotation.z = 0;
+            break;
 
-        workDefaultToggle = true;
-        workDefaultRootMotion = true;
-        workDefaultRoot.rotation.x = 0;
-        workDefaultRoot.rotation.y = 0;
-        workDefaultRoot.rotation.z = 0;
-    } else if (root == "intern") {
+        case "workDefault":
+            workDefaultToggle = true;
+            workDefaultRootMotion = true;
+            workDefaultRoot.rotation.x = 0;
+            workDefaultRoot.rotation.y = 0;
+            workDefaultRoot.rotation.z = 0;
+            break;
 
-        workInternToggle = true;
-        workInternRootMotion = true;
-        workInternRoot.rotation.x = 0;
-        workInternRoot.rotation.y = 0;
-        workInternRoot.rotation.z = 0;
-    } else if (root == "matops") {
+        case "intern":
+            workInternToggle = true;
+            workInternRootMotion = true;
+            workInternRoot.rotation.x = 0;
+            workInternRoot.rotation.y = 0;
+            workInternRoot.rotation.z = 0;
+            break;
 
-        workMatOpsToggle = true;
-        workMatOpsRootMotion = true;
-        workMatOpsRoot.rotation.x = 0;
-        workMatOpsRoot.rotation.y = 0;
-        workMatOpsRoot.rotation.z = 0;
-    } else if (root == "contract") {
+        case "matops":
+            workMatOpsToggle = true;
+            workMatOpsRootMotion = true;
+            workMatOpsRoot.rotation.x = 0;
+            workMatOpsRoot.rotation.y = 0;
+            workMatOpsRoot.rotation.z = 0;
+            break;
 
-        workContractToggle = true;
-        workContractRootMotion = true;
-        workContractRoot.rotation.x = 0;
-        workContractRoot.rotation.y = 0;
-        workContractRoot.rotation.z = 0;
-    } else if (root == "bioDefault") {
+        case "contract":
+            workContractToggle = true;
+            workContractRootMotion = true;
+            workContractRoot.rotation.x = 0;
+            workContractRoot.rotation.y = 0;
+            workContractRoot.rotation.z = 0;
+            break;
 
-        defaultBioToggle = true;
-        defaultBioRootMotion = true;
-        defaultBioRoot.rotation.x = 0;
-        defaultBioRoot.rotation.y = 0;
-        defaultBioRoot.rotation.z = 0;
-    } else if (root == "bioPic1") {
+        case "bioDefault":
+            defaultBioToggle = true;
+            defaultBioRootMotion = true;
+            defaultBioRoot.rotation.x = 0;
+            defaultBioRoot.rotation.y = 0;
+            defaultBioRoot.rotation.z = 0;
+            break;
 
-        interestPic1Toggle = true;
-        interestPic1Motion = true;
-        interestPic1Root.rotation.x = 0;
-        interestPic1Root.rotation.y = 0;
-        interestPic1Root.rotation.z = 0;
-    } else if (root == "bioPic2") {
+        case "bioPic1":
+            interestPic1Toggle = true;
+            interestPic1Motion = true;
+            interestPic1Root.rotation.x = 0;
+            interestPic1Root.rotation.y = 0;
+            interestPic1Root.rotation.z = 0;
+            break;
 
-        interestPic2Toggle = true;
-        interestPic2Motion = true;
-        interestPic2Root.rotation.x = 0;
-        interestPic2Root.rotation.y = 0;
-        interestPic2Root.rotation.z = 0;
+        case "bioPic2":
+            interestPic2Toggle = true;
+            interestPic2Motion = true;
+            interestPic2Root.rotation.x = 0;
+            interestPic2Root.rotation.y = 0;
+            interestPic2Root.rotation.z = 0;
+            break;
     }
 }
 
