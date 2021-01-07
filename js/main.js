@@ -24,20 +24,22 @@ function init() {
     animate();
 }
 
-// general use helper funcitons
-function sleep(delay) {
-    var start = new Date().getTime();
-    while (new Date().getTime() < start + delay);
+function checkToggles() {
+
+    console.clear();
+    rootNames.forEach(rootName => {
+        console.log(rootName + ": " + roots[rootName].toggle);
+    });
 }
 
-function createTwirlingCoordinates(len, save, x, y, z) {
+function createTwirlingCoordinates(rootName, x = sphereSize, y = sphereSize, z = 600) {
 
     var vector = new THREE.Vector3();
-
-    for (var i = 0; i < len; i += 1) {
-
+    var counter = 0;
+    var len = roots[rootName].objects.length;
+    roots[rootName].objects.forEach(element => {
         var obj = new THREE.Object3D();
-        var formula = 2 * Math.PI * i / len;
+        var formula = 2 * Math.PI * (counter++) / len;
 
         obj.position.x = (x * Math.cos(formula));
         obj.position.y = (y * Math.sin(formula));
@@ -45,67 +47,34 @@ function createTwirlingCoordinates(len, save, x, y, z) {
 
         vector.copy(obj.position).multiplyScalar(2);
         obj.lookAt(vector);
-
-        // save to location 
-        save[i] = obj;
-    }
+        obj.name = rootName;
+        roots[rootName].coordinates.rotate.push(obj);
+    });
 }
 
-function createViewCoordinates(arr, save, x = 500, y = 200, z = 1800) {
+function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
 
-    for (var i = 0; i < arr.length; i += 1) {
-
+    arr.forEach(element => {
+        console.log(saveRoot);
         var viewCoordinate = new THREE.Object3D();
-        viewCoordinate.position.x = arr[i].position[0] * x;
-        viewCoordinate.position.y = arr[i].position[1] * y;
+        viewCoordinate.position.x = element.position[0] * x;
+        viewCoordinate.position.y = element.position[1] * y;
         viewCoordinate.position.z = z;
 
-        save[i] = viewCoordinate;
-    }
+        roots[saveRoot].coordinates.view.push(viewCoordinate);
+    });
 }
 
 // main threejs rendering functions 
 function initRoots() {
 
-    educationRoot = new THREE.Object3D();
-    workRoot = new THREE.Object3D();
-    stationaryRoot = new THREE.Object3D();
+    rootNames.forEach(rootObj => {
+        roots[rootObj].root = new THREE.Object3D();
+        scene.add(roots[rootObj].root);
 
-    scene.add(educationRoot);
-    scene.add(workRoot);
-    scene.add(stationaryRoot);
-
-    mathCourseRoot = new THREE.Object3D();
-    computerCourseRoot = new THREE.Object3D();
-    econCourseRoot = new THREE.Object3D();
-    educHeaderRoot = new THREE.Object3D();
-    educSummaryRoot = new THREE.Object3D();
-
-    scene.add(mathCourseRoot);
-    scene.add(computerCourseRoot);
-    scene.add(econCourseRoot);
-    scene.add(educHeaderRoot);
-    scene.add(educSummaryRoot);
-
-    workInternRoot = new THREE.Object3D();
-    workMatOpsRoot = new THREE.Object3D();
-    workContractRoot = new THREE.Object3D();
-    workTimelineRoot = new THREE.Object3D();
-    workDefaultRoot = new THREE.Object3D();
-
-    scene.add(workInternRoot);
-    scene.add(workMatOpsRoot);
-    scene.add(workContractRoot);
-    scene.add(workTimelineRoot);
-    scene.add(workDefaultRoot);
-
-    defaultBioRoot = new THREE.Object3D();
-    interestPic1Root = new THREE.Object3D();
-    interestPic2Root = new THREE.Object3D();
-
-    scene.add(defaultBioRoot);
-    scene.add(interestPic1Root);
-    scene.add(interestPic2Root);
+        roots[rootObj].toggle = false;
+        roots[rootObj].motion = false;
+    });
 }
 
 function initCamera() {
@@ -189,11 +158,11 @@ function animate() {
 
     scene.updateMatrixWorld();
     TWEEN.update();
-    // controls.update();
+    controls.update();
     render();
 
     requestAnimationFrame(animate);
-    updateRotations();
+    // updateRotations();
 }
 
 // general event listeners 
@@ -212,7 +181,7 @@ function onDocumentMouseMove(event) {
 }
 
 // creating cards and divs 
-function createCourseCards(arr, save, saveRoot) {
+function createCourseCards(arr, saveRoot) {
 
     arr.forEach(arrElement => {
         var element = document.createElement('div');
@@ -232,14 +201,8 @@ function createCourseCards(arr, save, saveRoot) {
             '</div>';
 
         element = new THREE.CSS3DObject(element);
-        save.push(element);
-        if (saveRoot == "computer") {
-            computerCourseRoot.add(element);
-        } else if (saveRoot == "math") {
-            mathCourseRoot.add(element);
-        } else {
-            econCourseRoot.add(element);
-        }
+        roots[saveRoot].objects.push(element);
+        roots[saveRoot].root.add(element);
     });
 }
 
@@ -260,13 +223,13 @@ function createEducationHeaderCards() {
             elementButton.addEventListener('click', function (x) {
                 setEducationButtonSelects("computer-button");
 
-                if (computerToggle) {
+                if (roots["computer"].toggle) {
 
                     setMotionAndToggleFalse("computer");
                     stopRotationSetTrue("educSummary");
                     clearAllNotSelected();
 
-                    transform(allObjects, alignState.standardEducationView, backInterval);
+                    transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
                 } else {
 
                     stopRotationSetTrue("computer"); // stop rotation
@@ -275,10 +238,9 @@ function createEducationHeaderCards() {
                     setMotionAndToggleFalse("econ");
                     manageButton("computer");
 
-                    transform(allObjects, alignState.computerView, toInterval);
+                    transform(allObjects, roots.stationary.viewFinal, toInterval);
                 }
-                workDefaultToggle = false;
-                checkToggles();
+                roots["workDefault"].toggle = false;
             }, false);
 
         } else if (elementButton.id == 'math-button') {
@@ -286,13 +248,13 @@ function createEducationHeaderCards() {
             elementButton.addEventListener('click', function (x) {
                 setEducationButtonSelects("math-button");
 
-                if (mathToggle) {
+                if (roots["math"].toggle) {
 
                     setMotionAndToggleFalse("math");
                     stopRotationSetTrue("educSummary");
                     clearAllNotSelected();
 
-                    transform(allObjects, alignState.standardEducationView, backInterval);
+                    transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
                 } else {
 
                     stopRotationSetTrue("math");
@@ -301,23 +263,22 @@ function createEducationHeaderCards() {
                     setMotionAndToggleFalse("econ");
                     manageButton("math");
 
-                    transform(allObjects, alignState.mathView, toInterval);
+                    transform(allObjects, roots.math.coordinates.viewFinal, toInterval);
                 }
-                workDefaultToggle = false;
-                checkToggles();
+                roots["workDefault"].toggle = false;
             }, false);
         } else if (elementButton.id == 'econ-button') {
 
             elementButton.addEventListener('click', function (x) {
                 setEducationButtonSelects("econ-button");
 
-                if (econToggle) {
+                if ( roots["econ"].toggle) {
 
                     setMotionAndToggleFalse("econ");
                     stopRotationSetTrue("educSummary");
                     clearAllNotSelected();
 
-                    transform(allObjects, alignState.standardEducationView, backInterval);
+                    transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
                 } else {
 
                     stopRotationSetTrue("econ");
@@ -326,10 +287,9 @@ function createEducationHeaderCards() {
                     setMotionAndToggleFalse("computer");
                     manageButton("econ");
 
-                    transform(allObjects, alignState.econView, toInterval);
+                    transform(allObjects, roots.econ.coordinates.viewFinal, toInterval);
                 }
-                workDefaultToggle = false;
-                checkToggles();
+                roots["workDefault"].toggle = false;
             }, false);
         }
 
@@ -344,64 +304,49 @@ function createEducationHeaderCards() {
             '</div>';
         element.appendChild(elementButton);
         element = new THREE.CSS3DObject(element);
-        educationHeaderObjects.push(element);
-
-        educHeaderRoot.add(element);
+        roots["educHeader"].objects.push(element);
+        roots["educHeader"].root.add(element);
     });
 }
 
 function createEducationSummary() {
 
-    for (var i = 0; i < educationSummaryArray.length - 2; i += 1) {
-
+    educationSummaryArray.forEach(elementSummary => {
         var element = document.createElement('div');
-        element.id = educationSummaryArray[i].id;
-        element.className = 'summary-card';
-
-        if (educationSummaryArray[i].id == "capa" || educationSummaryArray[i].id == "lax") {
-
+        element.id = elementSummary.id;
+        
+        if (elementSummary.id == "capa" || elementSummary.id == "lax") {
+            
+            element.className = 'summary-card';
             element.innerHTML =
-                '<div class="summary-flip ' + educationSummaryArray[i].id + `" onclick='flip("` + educationSummaryArray[i].id + `")'>` +
+                '<div class="summary-flip ' + elementSummary.id + `" onclick='flip("` + elementSummary.id + `")'>` +
                 '<div class="front">' +
-                '<h4 class="club-header">' + educationSummaryArray[i].clubName + '</h4>' +
-                '<p class="club-position">' + educationSummaryArray[i].role + '</p>' +
-                '<p class="club-dates">' + educationSummaryArray[i].dates + '</p>' +
-                '<p class="club-description">' + educationSummaryArray[i].description + '</p>' +
+                '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
+                '<p class="club-position">' + elementSummary.role + '</p>' +
+                '<p class="club-dates">' + elementSummary.dates + '</p>' +
+                '<p class="club-description">' + elementSummary.description + '</p>' +
                 '</div>' +
                 '<div class="back">' +
-                '<p class="club-description">' + educationSummaryArray[i].description + '</p>' +
+                '<p class="club-description">' + elementSummary.description + '</p>' +
                 '</div>' +
                 '</div>';
+        } else if (elementSummary.id == "degree" || elementSummary.id == "extra") {
+            
+            element.className = elementSummary.id;
+            element.innerHTML = '<h2>' + elementSummary.role + '</h2>';
         } else {
 
+            element.className = 'summary-card';
             element.innerHTML =
-                '<h4 class="club-header">' + educationSummaryArray[i].clubName + '</h4>' +
-                '<p class="club-position">' + educationSummaryArray[i].role + '</p>' +
-                '<p class="club-dates">' + educationSummaryArray[i].dates + '</p>' +
-                '<p class="club-description">' + educationSummaryArray[i].description + '</p>';
+                '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
+                '<p class="club-position">' + elementSummary.role + '</p>' +
+                '<p class="club-dates">' + elementSummary.dates + '</p>' +
+                '<p class="club-description">' + elementSummary.description + '</p>';
         }
-
         element = new THREE.CSS3DObject(element);
-        educationSummaryObjects[i] = element;
-
-        educSummaryRoot.add(element);
-    }
-    // education category headers 
-    element = document.createElement('div');
-    element.className = 'degree';
-    element.innerHTML = '<h2>Degrees</h2>';
-
-    element = new THREE.CSS3DObject(element);
-    educationSummaryObjects.push(element);
-    educSummaryRoot.add(element);
-
-    element = document.createElement('div');
-    element.className = 'extra';
-    element.innerHTML = '<h2>Clubs/Associations</h2>';
-
-    var element = new THREE.CSS3DObject(element);
-    educationSummaryObjects.push(element);
-    educSummaryRoot.add(element);
+        roots["educSummary"].objects.push(element);
+        roots["educSummary"].root.add(element);
+    });
 }
 
 function createMenuButtons() {
@@ -414,8 +359,8 @@ function createMenuButtons() {
         menuButton.innerHTML = menuButtonArray[i].label;
 
         var menuButtonObj = new THREE.CSS3DObject(menuButton);
-        stationaryRoot.add(menuButtonObj); /////////////////////////////////
-        menuButtonObjects[i] = menuButtonObj;
+        roots["stationary"].root.add(menuButtonObj);
+        roots["stationary"].objects.push(menuButtonObj);
 
         if (menuButton.id == 'education-button') {
 
@@ -436,7 +381,6 @@ function createMenuButtons() {
                 setMotionAndToggleFalse("math");
                 setMotionAndToggleFalse("computer");
                 setMotionAndToggleFalse("workDefault");
-                setMotionAndToggleFalse("defaultTools");
                 setMotionAndToggleFalse("intern");
                 setMotionAndToggleFalse("contract");
                 setMotionAndToggleFalse("matops");
@@ -444,24 +388,21 @@ function createMenuButtons() {
                 updateWorkSelected("home");
 
 
-                if (educationToggle) {
+                if (roots["educHeader"].toggle) {
 
                     setMotionAndToggleFalse("educSummary");
                     setMotionAndToggleFalse("educHeader");
-
-
-                    transform(allObjects, alignState.startingView, backInterval);
+                    transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
 
                 } else {
 
                     stopRotationSetTrue("educSummary");
                     stopRotationSetTrue("educHeader");
-
-
-                    transform(allObjects, alignState.standardEducationView, toInterval);
+                    transform(allObjects, roots.educSummary.coordinates.viewFinal, toInterval);
                 }
-                workTimelineToggle = false;
-                bioDefaultToggle = false;
+                roots["bioDefault"].toggle = false;
+                roots["workTimeline"].toggle = false;
+                
                 checkToggles();
             }, false);
         } else if (menuButton.id == 'work-button') {
@@ -489,25 +430,24 @@ function createMenuButtons() {
                 updateWorkSelected("home");
 
 
-                if (workTimelineToggle) {
+                if (roots["workTimeline"].toggle) {
 
                     setMotionAndToggleFalse("workDefault");
                     setMotionAndToggleFalse("workTimeline");
 
-                    transform(allObjects, alignState.startingView, backInterval);
+                    transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
 
                 } else {
 
                     stopRotationSetTrue("workDefault");
                     stopRotationSetTrue("workTimeline");
 
-                    transform(allObjects, alignState.workDefaultView, toInterval);
+                    transform(allObjects,  roots.workDefault.coordinates.viewFinal, toInterval);
 
                     startCompText();
                 }
-
-                educationToggle = false;
-                bioDefaultToggle = false;
+                roots["bioDefault"].toggle = false;
+                roots["educHeader"].toggle = false;
                 checkToggles();
             }, false);
         } else if (menuButton.id == 'bio-button') {
@@ -542,10 +482,9 @@ function createMenuButtons() {
 
                     resetBioButtons();
                     setMotionAndToggleFalse("bioDefault");
-                    setMotionAndToggleFalse("bioPic1");
-                    setMotionAndToggleFalse("bioPic2");
-
-                    transform(allObjects, alignState.startingView, backInterval);
+                    setMotionAndToggleFalse("pic1");
+                    setMotionAndToggleFalse("pic2");
+                    transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
 
                 } else {
 
@@ -555,12 +494,13 @@ function createMenuButtons() {
                     pic2Obj = travel2;
 
                     stopRotationSetTrue("bioDefault");
-                    stopRotationSetTrue("bioPic1");
+                    stopRotationSetTrue("pic1");
 
-                    transform(allObjects, alignState.interestPic1View, toInterval);
+                    transform(allObjects,  roots.pic1.coordinates.viewFinal, toInterval);
                 }
-                educationToggle = false;
-                workTimelineToggle = false;
+                roots["workTimeline"].toggle = false;
+                roots["educHeader"].toggle = false;
+                
                 checkToggles();
             }, false);
         }
@@ -623,7 +563,7 @@ function createBioDefaultCards() {
 
                 bioDiv.classList.add('interest-selected');
                 interestButton.innerHTML = "Like Em'?";
-                interestPic1Toggle = true;
+                roots["pic1"].toggle = true;
 
                 interestButton.addEventListener('click', function (x) {
 
@@ -671,8 +611,8 @@ function createBioDefaultCards() {
         }
 
         var bioDivObj = new THREE.CSS3DObject(bioDiv);
-        defaultBioObjects.push(bioDivObj);
-        defaultBioRoot.add(bioDivObj);
+        roots["bioDefault"].objects.push(bioDivObj);
+        roots["bioDefault"].root.add(bioDivObj);
     }
 }
 
@@ -695,7 +635,7 @@ function updateInterestPage(pageChange) {
 
     newObj = allInterestObjs[interestPage][currentPage];
 
-    if (interestPic1Toggle) {
+    if (roots["pic1"].toggle) {
 
         for (var i = 0; i < newObj.length; i += 1) {
 
@@ -709,9 +649,9 @@ function updateInterestPage(pageChange) {
             }
         }
 
-        transform(allObjects, alignState.interestPic2View, toInterval);
-        interestPic1Toggle = false; // in back
-        interestPic2Toggle = true; // now in view
+        transform(allObjects, roots.pic2.coordinates.viewFinal, toInterval);
+        roots["pic1"].toggle = false; // in back
+        roots["pic2"].toggle = true; // now in view
 
     } else {
 
@@ -727,15 +667,10 @@ function updateInterestPage(pageChange) {
             }
         }
 
-        transform(allObjects, alignState.interestPic1View, toInterval);
-        interestPic2Toggle = false; // in back
-        interestPic1Toggle = true; // now in view
-
-        console.log("now pic 2 is in back");
+        transform(allObjects, roots.pic1.coordinates.viewFinal, toInterval);
+        roots["pic2"].toggle = false; // in back
+        roots["pic1"].toggle = true; // now in view
     }
-    console.log("ending:");
-    console.log("interest pic 1 toggle: " + interestPic1Toggle);
-    console.log("interest pic 2 toggle: " + interestPic2Toggle);
 }
 
 function updateAllObjects() {
@@ -776,7 +711,7 @@ function resetBioButtons() {
     bikesButton.innerHTML = "See Pics";
 }
 
-function createImgCards(arr, saveArr, saveRoot) {
+function createImgCards(arr, saveRoot) {
 
     arr.forEach(arrElement => {
         var element = document.createElement('div');
@@ -803,14 +738,8 @@ function createImgCards(arr, saveArr, saveRoot) {
         }
 
         element = new THREE.CSS3DObject(element);
-        saveArr.push(element);
-        if (saveRoot == "pic1") {
-
-            interestPic1Root.add(element);
-        } else {
-
-            interestPic2Root.add(element);
-        }
+        roots[saveRoot].objects.push(element);
+        roots[saveRoot].root.add(element);
     });
 }
 
@@ -831,19 +760,8 @@ function createWorkHeaderCards() {
             '</div>';
 
         element = new THREE.CSS3DObject(element);
-        if (workElement.id == "intern") {
-
-            workInternObjects.push(element);
-            workInternRoot.add(element);
-        } else if (workElement.id == "matops") {
-
-            workMatOpsObjects.push(element);
-            workMatOpsRoot.add(element);
-        } else {
-
-            workContractObjects.push(element);
-            workContractRoot.add(element);
-        }
+        roots[workElement.id].root.add(element);
+        roots[workElement.id].objects.push(element);
     });
 }
 
@@ -865,19 +783,8 @@ function createWorkContentCards() {
             '</div>';
 
         element = new THREE.CSS3DObject(element);
-        if (workElement.id == "intern") {
-
-            workInternObjects.push(element);
-            workInternRoot.add(element);
-        } else if (workElement.id == "matops") {
-
-            workMatOpsObjects.push(element);
-            workMatOpsRoot.add(element);
-        } else {
-
-            workContractObjects.push(element);
-            workContractRoot.add(element);
-        }
+        roots[workElement.id].root.add(element);
+        roots[workElement.id].objects.push(element);
     });
 }
 
@@ -917,22 +824,8 @@ function createWorkToolsCards() {
             toolHtml += '</div>' + '</ul>';
             workToolsDiv.innerHTML = toolHtml;
             var workToolsObj = new THREE.CSS3DObject(workToolsDiv);
-
-            if (toolCategories[k] == "intern") {
-
-                workInternObjects.push(workToolsObj);
-                workInternRoot.add(workToolsObj);
-            }
-            if (toolCategories[k] == "matops") {
-
-                workMatOpsObjects.push(workToolsObj);
-                workMatOpsRoot.add(workToolsObj);
-            }
-            if (toolCategories[k] == "contract") {
-
-                workContractObjects.push(workToolsObj);
-                workContractRoot.add(workToolsObj);
-            }
+            roots[toolCategories[k]].root.add(workToolsObj);
+            roots[toolCategories[k]].objects.push(workToolsObj);
         }
     }
 }
@@ -946,20 +839,8 @@ function createWorkToolsContainer() {
         var element = document.createElement('div');
         element.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
         element = new THREE.CSS3DObject(element);
-
-        if (tool == "intern") {
-
-            workInternObjects.push(element);
-            workInternRoot.add(element);
-        } else if (tool == "matops") {
-
-            workMatOpsObjects.push(element);
-            workMatOpsRoot.add(element);
-        } else {
-
-            workContractObjects.push(element);
-            workContractRoot.add(element);
-        }
+        roots[tool].root.add(element);
+        roots[tool].objects.push(element);
     });
 }
 
@@ -984,8 +865,8 @@ function createWorkTimelineCards() {
             '</div>';
 
         element = new THREE.CSS3DObject(element);
-        workTimelineObjects.push(element);
-        workTimelineRoot.add(element);
+        roots["workTimeline"].objects.push(element);
+        roots["workTimeline"].root.add(element);
     });
 
     // timeline bar 
@@ -999,8 +880,8 @@ function createWorkTimelineCards() {
         '</ul>';
 
     element = new THREE.CSS3DObject(element);
-    workTimelineObjects.push(element);
-    workTimelineRoot.add(element);
+    roots["workTimeline"].objects.push(element);
+    roots["workTimeline"].root.add(element);
 
     // home button 
     element = document.createElement('div');
@@ -1012,8 +893,8 @@ function createWorkTimelineCards() {
         '</div>';
 
     element = new THREE.CSS3DObject(element);
-    workTimelineObjects.push(element);
-    workTimelineRoot.add(element);
+    roots["workTimeline"].objects.push(element);
+    roots["workTimeline"].root.add(element);
 }
 
 function createWorkButtons() {
@@ -1034,7 +915,7 @@ function createWorkButtons() {
 
     leftButton.addEventListener('click', function (x) {
 
-        if (workDefaultToggle) { // default -> contract
+        if (roots["workDefault"].toggle) { // default -> contract
 
 
             updateWorkSelected("contract");
@@ -1042,11 +923,10 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workContractView, backInterval);
-        } else if (workMatOpsToggle) { // matops -> intern
+            transform(allObjects, roots.contract.coordinates.viewFinal, backInterval);
+        } else if (roots["matops"].toggle) { // matops -> intern
 
 
             updateWorkSelected("intern");
@@ -1054,11 +934,10 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workInternView, backInterval);
-        } else if (workContractToggle) { // contract -> matops 
+            transform(allObjects, roots.intern.coordinates.viewFinal, backInterval);
+        } else if (roots["contract"].toggle) { // contract -> matops 
 
 
             updateWorkSelected("matops");
@@ -1066,64 +945,57 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("contract");
-            transform(allObjects, alignState.workMatOpsView, backInterval);
-        } else if (workInternToggle) { // intern -> default
+            transform(allObjects, roots.matops.coordinates.viewFinal, backInterval);
+        } else if (roots["pinternc1"].toggle) { // intern -> default
 
 
             updateWorkSelected("home");
             stopRotationSetTrue("workDefault");
-            stopRotationSetTrue("defaultTools");
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workDefaultView, backInterval);
+            transform(allObjects, roots.workDefault.coordinates.viewFinal, backInterval);
         }
-        checkToggles();
-
     }, false);
 
     rightButton.addEventListener('click', function (x) {
 
-        if (workDefaultToggle) { // default -> intern 
+        if (roots["workDefault"].toggle) { // default -> intern 
 
             updateWorkSelected("intern");
             stopRotationSetTrue("intern");
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workInternView, backInterval);
-        } else if (workMatOpsToggle) { // matops -> contract
+            transform(allObjects, roots.intern.coordinates.viewFinal, backInterval);
+        } else if (roots["matops"].toggle) { // matops -> contract
 
             updateWorkSelected("contract");
             stopRotationSetTrue("contract");
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("matops");
             setMotionAndToggleFalse("intern");
-            transform(allObjects, alignState.workContractView, backInterval);
-        } else if (workContractToggle) { // contract -> default
+            transform(allObjects, roots.contract.coordinates.viewFinal, backInterval);
+        } else if (roots["contract"].toggle) { // contract -> default
 
 
             updateWorkSelected("home");
             stopRotationSetTrue("workDefault");
-            stopRotationSetTrue("defaultTools");
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("contract");
             setMotionAndToggleFalse("matops");
-            transform(allObjects, alignState.workDefaultView, backInterval);
-        } else if (workInternToggle) { // intern -> matops
+            transform(allObjects, roots.default.coordinates.viewFinal, backInterval);
+        } else if (roots["intern"].toggle) { // intern -> matops
 
 
             updateWorkSelected("matops");
@@ -1131,20 +1003,17 @@ function createWorkButtons() {
             stopRotationSetTrue("workTimeline");
 
             setMotionAndToggleFalse("workDefault");
-            setMotionAndToggleFalse("defaultTools");
             setMotionAndToggleFalse("intern");
             setMotionAndToggleFalse("contract");
-            transform(allObjects, alignState.workMatOpsView, backInterval);
+            transform(allObjects, roots.matops.coordinates.viewFinal, backInterval);
         }
-        checkToggles();
-
     }, false);
 
-    workTimelineObjects.push(leftButtonObj);
-    workTimelineObjects.push(rightButtonObj);
-
-    workTimelineRoot.add(leftButtonObj);
-    workTimelineRoot.add(rightButtonObj);
+    
+    roots["workTimeline"].objects.push(leftButtonObj);
+    roots["workTimeline"].objects.push(rightButtonObj);
+    roots["workTimeline"].root.add(leftButtonObj);
+    roots["workTimeline"].root.add(rightButtonObj);
 }
 
 function updateWorkSelected(newSelected) {
@@ -1201,8 +1070,8 @@ function createWorkDefaultCards() {
         }
 
         element = new THREE.CSS3DObject(element);
-        workDefaultObjects.push(element);
-        workTimelineRoot.add(element);
+        roots["workDefault"].objects.push(element);
+        roots["workTimeline"].root.add(element);
     });
 }
 
@@ -1304,312 +1173,35 @@ function setEducationButtonSelects(mainButton) {
 }
 
 // managing rotations and toggles 
-function stopRotationSetTrue(root) {
+function stopRotationSetTrue(rootName) {
 
-    switch (root) {
-
-        case "math":
-            mathRootMotion = true;
-            mathCourseRoot.rotation.x = 0;
-            mathCourseRoot.rotation.y = 0;
-            mathCourseRoot.rotation.z = 0;
-            break;
-
-        case "computer":
-            computerRootMotion = true;
-            computerCourseRoot.rotation.x = 0;
-            computerCourseRoot.rotation.y = 0;
-            computerCourseRoot.rotation.z = 0;
-            break;
-
-        case "econ":
-            econRootMotion = true;
-            econCourseRoot.rotation.x = 0;
-            econCourseRoot.rotation.y = 0;
-            econCourseRoot.rotation.z = 0;
-            break;
-
-        case "educHeader":
-            educationToggle = true;
-            educHeaderRootMotion = true;
-            educHeaderRoot.rotation.x = 0;
-            educHeaderRoot.rotation.y = 0;
-            educHeaderRoot.rotation.z = 0;
-            break;
-
-        case "educSummary":
-            educationToggle = true;
-            educSummaryRootMotion = true;
-            educSummaryRoot.rotation.x = 0;
-            educSummaryRoot.rotation.y = 0;
-            educSummaryRoot.rotation.z = 0;
-            break;
-
-        case "workTimeline":
-            workTimelineToggle = true;
-            workTimelineRootMotion = true;
-            workTimelineRoot.rotation.x = 0;
-            workTimelineRoot.rotation.y = 0;
-            workTimelineRoot.rotation.z = 0;
-            break;
-
-        case "workDefault":
-            workDefaultToggle = true;
-            workDefaultRootMotion = true;
-            workDefaultRoot.rotation.x = 0;
-            workDefaultRoot.rotation.y = 0;
-            workDefaultRoot.rotation.z = 0;
-            break;
-
-        case "intern":
-            workInternToggle = true;
-            workInternRootMotion = true;
-            workInternRoot.rotation.x = 0;
-            workInternRoot.rotation.y = 0;
-            workInternRoot.rotation.z = 0;
-            break;
-
-        case "matops":
-            workMatOpsToggle = true;
-            workMatOpsRootMotion = true;
-            workMatOpsRoot.rotation.x = 0;
-            workMatOpsRoot.rotation.y = 0;
-            workMatOpsRoot.rotation.z = 0;
-            break;
-
-        case "contract":
-            workContractToggle = true;
-            workContractRootMotion = true;
-            workContractRoot.rotation.x = 0;
-            workContractRoot.rotation.y = 0;
-            workContractRoot.rotation.z = 0;
-            break;
-
-        case "bioDefault":
-            defaultBioToggle = true;
-            defaultBioRootMotion = true;
-            defaultBioRoot.rotation.x = 0;
-            defaultBioRoot.rotation.y = 0;
-            defaultBioRoot.rotation.z = 0;
-            break;
-
-        case "bioPic1":
-            interestPic1Toggle = true;
-            interestPic1Motion = true;
-            interestPic1Root.rotation.x = 0;
-            interestPic1Root.rotation.y = 0;
-            interestPic1Root.rotation.z = 0;
-            break;
-
-        case "bioPic2":
-            interestPic2Toggle = true;
-            interestPic2Motion = true;
-            interestPic2Root.rotation.x = 0;
-            interestPic2Root.rotation.y = 0;
-            interestPic2Root.rotation.z = 0;
-            break;
-    }
-}
-
-function checkToggles() {
-    return;
-    console.clear();
-
-    console.log("EDUCATION: ");
-    console.log("   toggle: " + educationToggle);
-
-    console.log("EDUC SUMMARY: ");
-    console.log("   rootMotion: " + educSummaryRootMotion);
-
-    console.log("EDUC HEADER: ");
-    console.log("   rootMotion: " + educHeaderRootMotion);
-
-    console.log("computer: ");
-    console.log("   rootMotion: " + computerRootMotion);
-    console.log("   toggle: " + computerToggle);
-
-    console.log("math: ");
-    console.log("   rootMotion: " + mathRootMotion);
-    console.log("   toggle: " + mathToggle);
-
-    console.log("econ: ");
-    console.log("   rootMotion: " + econRootMotion);
-    console.log("   toggle: " + econToggle);
-
-    console.log("");
-
-    console.log("WORK TIMELINE: ");
-    console.log("   rootMotion: " + workTimelineRootMotion);
-    console.log("   toggle: " + workTimelineToggle);
-
-    console.log(" Work Default: ");
-    console.log("   rootMotion: " + workDefaultRootMotion);
-    console.log("   toggle: " + workDefaultToggle);
-
-    console.log("Intern: ");
-    console.log("   rootMotion: " + workInternRootMotion);
-    console.log("   toggle: " + workInternToggle);
-
-    console.log("MatOps: ");
-    console.log("   rootMotion: " + workMatOpsRootMotion);
-    console.log("   toggle: " + workMatOpsToggle);
-
-    console.log("Contract: ");
-    console.log("   rootMotion: " + workContractRootMotion);
-    console.log("   toggle: " + workContractToggle);
+    roots[rootName].toggle = true;
+    roots[rootName].motion = true;
+    roots[rootName].root.rotation.x = 0;
+    roots[rootName].root.rotation.y = 0;
+    roots[rootName].root.rotation.z = 0;
 }
 
 function updateRotations() {
 
-    if (!educHeaderRootMotion) {
-
-        educHeaderRoot.rotation.x += 0.0015;
-        educHeaderRoot.rotation.y += 0.002;
-    }
-
-    if (!educSummaryRootMotion) {
-
-        educSummaryRoot.rotation.y += 0.003;
-        educSummaryRoot.rotation.z += 0.0015;
-    }
-
-    if (!mathRootMotion) {
-
-        mathCourseRoot.rotation.x += 0.002;
-        mathCourseRoot.rotation.y += 0.0015;
-    }
-
-    if (!computerRootMotion) {
-
-        computerCourseRoot.rotation.y += 0.003;
-        computerCourseRoot.rotation.z += 0.0015;
-    }
-
-    if (!econRootMotion) {
-
-        econCourseRoot.rotation.x += 0.005;
-        econCourseRoot.rotation.z += 0.001;
-    }
-
-    if (!workDefaultRootMotion) {
-
-        workDefaultRoot.rotation.y += 0.005;
-        workDefaultRoot.rotation.z += 0.002;
-    }
-
-    if (!workInternRootMotion) {
-
-        workInternRoot.rotation.x += 0.005;
-        workInternRoot.rotation.y += 0.002;
-    }
-
-    if (!workMatOpsRootMotion) {
-
-        workMatOpsRoot.rotation.x += 0.0015;
-        workMatOpsRoot.rotation.z += 0.002;
-    }
-
-    if (!workContractRootMotion) {
-
-        workContractRoot.rotation.y += 0.0015;
-        workContractRoot.rotation.z += 0.002;
-    }
-
-    if (!workTimelineRootMotion) {
-
-        workTimelineRoot.rotation.y += 0.0015;
-        workTimelineRoot.rotation.z += 0.002;
-    }
-
-    if (!defaultBioRootMotion) {
-
-        defaultBioRoot.rotation.y += 0.0015;
-        defaultBioRoot.rotation.z += 0.002;
-    }
-
-    if (!interestPic1Motion) {
-        interestPic1Root.rotation.z += 0.002;
-        interestPic1Root.rotation.x += 0.0015;
-    }
-
-    if (!interestPic2Motion) {
-        interestPic2Root.rotation.z += 0.002;
-        interestPic2Root.rotation.y += 0.0015;
-    }
+    rootNames.forEach(rootName => {
+        if (!roots[rootName].motion) {
+            roots[rootName].root.rotation.x += roots[rootName].rotationX;
+            roots[rootName].root.rotation.y += roots[rootName].rotationY;
+            roots[rootName].root.rotation.z += roots[rootName].rotationZ;
+        }
+    });
 }
 
-function setMotionAndToggleFalse(root) {
+function setMotionAndToggleFalse(rootName) {
 
-    if (root == "math") {
-
-        mathRootMotion = false;
-        mathToggle = false;
-    } else if (root == "computer") {
-
-        computerRootMotion = false;
-        computerToggle = false;
-    } else if (root == "econ") {
-
-        econRootMotion = false;
-        econToggle = false;
-    } else if (root == "educHeader") {
-
-        educationToggle = false;
-        educHeaderRootMotion = false;
-    } else if (root == "educSummary") {
-
-        educSummaryRootMotion = false;
-    } else if (root == "workDefault") {
-
-        workDefaultToggle = false;
-        workDefaultRootMotion = false;
-    } else if (root == "intern") {
-
-        workInternToggle = false;
-        workInternRootMotion = false;
-    } else if (root == "matops") {
-
-        workMatOpsToggle = false;
-        workMatOpsRootMotion = false;
-    } else if (root == "contract") {
-
-        workContractToggle = false;
-        workContractRootMotion = false;
-    } else if (root == "workTimeline") {
-
-        workTimelineToggle = false;
-        workTimelineRootMotion = false;
-    } else if (root == "bioDefault") {
-
-        defaultBioToggle = false;
-        defaultBioRootMotion = false;
-    } else if (root == "bioPic1") {
-
-        interestPic1Motion = false;
-        interestPic1Toggle = false;
-    } else if (root == "bioPic2") {
-
-        interestPic2Motion = false;
-        interestPic2Toggle = false;
-    }
+    roots[rootName].toggle = false;
+    roots[rootName].motion = false;
 }
 
 function flipToggles(toggle) {
 
-    computerToggle = false;
-    mathToggle = false;
-    econToggle = false;
-
-    if (toggle == "computer") {
-
-        computerToggle = true;
-    } else if (toggle == "math") {
-
-        mathToggle = true;
-    } else {
-
-        econToggle = true;
-    }
+    roots[toggle].toggle = true;
 }
 
 // managing flipping cards 
@@ -1629,20 +1221,20 @@ function createAllCards() {
     // stationary
     createMenuButtons();
 
-    allStationaryObjects = menuButtonObjects;
+    console.log(roots["stationary"].objects);
 
     // education
-    createCourseCards(mathArray, mathObjects, "math");
-    createCourseCards(computerArray, computerObjects, "computer");
-    createCourseCards(econArray, econObjects, "econ");
+    createCourseCards(mathArray, "math");
+    createCourseCards(computerArray, "computer");
+    createCourseCards(econArray, "econ");
     createEducationHeaderCards();
     createEducationSummary();
 
-    allEducationObjects = mathObjects
-        .concat(computerObjects)
-        .concat(econObjects)
-        .concat(educationHeaderObjects)
-        .concat(educationSummaryObjects);
+    allEducationObjects = roots["math"].objects
+        .concat(roots["computer"].objects)
+        .concat(roots["econ"].objects)
+        .concat(roots["educHeader"].objects)
+        .concat(roots["educSummary"].objects);
 
     // work history
     createWorkTimelineCards();
@@ -1653,198 +1245,109 @@ function createAllCards() {
     createWorkToolsContainer();
     createWorkDefaultCards();
 
-    allWorkObjects = workTimelineObjects
-        .concat(workInternObjects)
-        .concat(workMatOpsObjects)
-        .concat(workContractObjects)
-        .concat(workDefaultObjects);
+    allWorkObjects = roots["workTimeline"].objects
+        .concat(roots["intern"].objects)
+        .concat(roots["matops"].objects)
+        .concat(roots["contract"].objects)
+        .concat(roots["workDefault"].objects);
 
     // bio
-    createImgCards(travel1, interestPic1Objects, "pic1");
-    createImgCards(travel2, interestPic2Objects, "pic2");
+    createImgCards(travel1, "pic1");
+    createImgCards(travel2, "pic2");
     createBioDefaultCards();
 
-    allBioObjects = defaultBioObjects
-        .concat(interestPic1Objects)
-        .concat(interestPic2Objects);
+    allBioObjects = roots["bioDefault"].objects
+        .concat(roots["pic1"].objects)
+        .concat(roots["pic2"].objects);
 
     // ALL OBJECTS
-    allObjects = allStationaryObjects
+    allObjects = roots["stationary"].objects
         .concat(allEducationObjects)
         .concat(allWorkObjects)
         .concat(allBioObjects);
 }
 
+function concatCoordinates(inViewArr, ignoreArr = []) {
+
+    var coordinates = [];
+    inViewArr.push("stationary");
+
+    rootNames.forEach(rootName => {
+        if (ignoreArr.includes(rootName)){
+           
+        } else if (inViewArr.includes(rootName)) {
+
+            coordinates = coordinates.concat(roots[rootName].coordinates.view);
+        } else {
+            coordinates = coordinates.concat(roots[rootName].coordinates.rotate);
+        }
+    });
+    console.log(coordinates);
+    return coordinates;
+}
+
 function createAllTwirlingCoordinates() {
-    // creates twirling coordinates and saves them to the respecive twirling arrays in align states 
 
-    // stationary
-    createTwirlingCoordinates(menuButtonArray.length, alignState.menuButtonTwirling, 50, 50, 0);
+    rootNames.forEach(rootName => {
+        if (rootName == "stationary"){
 
-    // education 
-    createTwirlingCoordinates(mathArray.length, alignState.mathTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(econArray.length, alignState.econTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(computerArray.length, alignState.computerTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(educationHeaderArray.length, alignState.educationHeaderTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(educationSummaryArray.length, alignState.educationSummaryTwirling, sphereSize, sphereSize, 0);
+            createTwirlingCoordinates("stationary", 50, 50, 0);
+        } else if (rootName != "educSelect") {
 
-    // work history 
-    createTwirlingCoordinates(workTimelineObjects.length, alignState.workTimelineTwirling, 200, 200, 0);
-    createTwirlingCoordinates(workInternObjects.length, alignState.workInternTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(workMatOpsObjects.length, alignState.workMatOpsTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(workContractObjects.length, alignState.workContractTwirling, sphereSize, sphereSize, 0);
-    createTwirlingCoordinates(workDefaultObjects.length, alignState.workDefaultTwirling, sphereSize, sphereSize, 0);
-
-    // bio
-    createTwirlingCoordinates(defaultBioObjects.length, alignState.defaultBioTwirling, 1000, 1000, 0);
-    createTwirlingCoordinates(interestPic1Objects.length, alignState.interestPic1Twirling, 1000, 1000, 0);
-    createTwirlingCoordinates(interestPic2Objects.length, alignState.interestPic2Twirling, 1000, 1000, 0);
+            createTwirlingCoordinates(rootName);
+        }
+    });
 }
 
 function createAllViewCoordinates() {
 
     // stationary
-    createViewCoordinates(menuButtonArray, alignState.menuButtonView, 1000, 5, 1800);
+    createViewCoordinates(menuButtonArray, "stationary", 1000, 5, 1800);
 
     // education
-    createViewCoordinates(mathArray, alignState.mathView);
-    createViewCoordinates(econArray, alignState.econView);
-    createViewCoordinates(computerArray, alignState.computerView);
-    createViewCoordinates(educationHeaderArray, alignState.educationHeaderView);
-    createViewCoordinates(EducationHeaderSelectedArray, alignState.educationHeaderSelectedView);
-    createViewCoordinates(educationSummaryArray, alignState.educationSummaryView);
+    createViewCoordinates(mathArray, "math");
+    createViewCoordinates(econArray, "econ");
+    createViewCoordinates(computerArray, "computer");
+    createViewCoordinates(educationHeaderArray, "educHeader");
+    createViewCoordinates(EducationHeaderSelectedArray, "educSelect");
+    createViewCoordinates(educationSummaryArray, "educSummary");
 
     // work history
-    createViewCoordinates(workViewDisplayArrayIntern, alignState.workInternView);
-    createViewCoordinates(workViewDisplayArrayMatOps, alignState.workMatOpsView);
-    createViewCoordinates(workViewDisplayArrayContract, alignState.workContractView);
-    createViewCoordinates(workTimelineDisplayArray, alignState.workTimelineView);
-    createViewCoordinates(workDefaultArray, alignState.workDefaultView);
+    createViewCoordinates(workViewDisplayArrayIntern,"intern");
+    createViewCoordinates(workViewDisplayArrayMatOps, "matops");
+    createViewCoordinates(workViewDisplayArrayContract, "contract");
+    createViewCoordinates(workTimelineDisplayArray, "workTimeline");
+    createViewCoordinates(workDefaultArray, "workDefault");
 
     // bio
-    createViewCoordinates(bioDefaultArray, alignState.defaultBioView);
-    createViewCoordinates(travel1, alignState.interestPic1View);
-    createViewCoordinates(travel2, alignState.interestPic2View);
+    createViewCoordinates(bioDefaultArray, "bioDefault");
+    createViewCoordinates(travel1, "pic1");
+    createViewCoordinates(travel2, "pic2");
 
-    // just all education twirling 
-    alignState.allEducationTwirling = alignState.mathTwirling
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderTwirling)
-        .concat(alignState.educationSummaryTwirling);
-
-    // just all work twirling 
-    alignState.allWorkTwirling = alignState.workTimelineTwirling
-        .concat(alignState.workInternTwirling)
-        .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling);
-
-    // just all bio twirling
-    alignState.allBioTwirling = alignState.defaultBioTwirling
-        .concat(alignState.interestPic1Twirling)
-        .concat(alignState.interestPic2Twirling);
-
-    // specific education views 
-    alignState.standardEducationView = alignState.menuButtonView
-        .concat(alignState.mathTwirling)
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderView)
-        .concat(alignState.educationSummaryView)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.allBioTwirling);
-
-    alignState.computerView = alignState.menuButtonView
-        .concat(alignState.mathTwirling)
-        .concat(alignState.computerView)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderSelectedView)
-        .concat(alignState.educationSummaryTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.allBioTwirling);
-
-    alignState.mathView = alignState.menuButtonView
-        .concat(alignState.mathView)
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econTwirling)
-        .concat(alignState.educationHeaderSelectedView)
-        .concat(alignState.educationSummaryTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.allBioTwirling);
-
-    alignState.econView = alignState.menuButtonView
-        .concat(alignState.mathTwirling)
-        .concat(alignState.computerTwirling)
-        .concat(alignState.econView)
-        .concat(alignState.educationHeaderSelectedView)
-        .concat(alignState.educationSummaryTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.allBioTwirling);
-
+    // specific education views
+    roots.educSummary.coordinates.viewFinal = concatCoordinates(["educSummary", "educHeader"], "educSelect");
+    roots.computer.coordinates.viewFinal = concatCoordinates(["educSummary", "educSelect", "computer"], "educHeader");
+    roots.math.coordinates.viewFinal = concatCoordinates(["educSummary", "educSelect", "math"], "educHeader");
+    roots.econ.coordinates.viewFinal = concatCoordinates(["educSummary", "educSelect", "econ"], "educHeader");
+    
     // specific work views 
-    alignState.workDefaultView = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.workTimelineView)
-        .concat(alignState.workInternTwirling)
-        .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultView)
-        .concat(alignState.allBioTwirling);
-
-    alignState.workInternView = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.workTimelineView)
-        .concat(alignState.workInternView)
-        .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling)
-        .concat(alignState.allBioTwirling);
-
-    alignState.workMatOpsView = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.workTimelineView)
-        .concat(alignState.workInternTwirling)
-        .concat(alignState.workMatOpsView)
-        .concat(alignState.workContractTwirling)
-        .concat(alignState.workDefaultTwirling)
-        .concat(alignState.allBioTwirling);
-
-    alignState.workContractView = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.workTimelineView)
-        .concat(alignState.workInternTwirling)
-        .concat(alignState.workMatOpsTwirling)
-        .concat(alignState.workContractView)
-        .concat(alignState.workDefaultTwirling)
-        .concat(alignState.allBioTwirling);
+    roots.workDefault.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault"], "educSelect");
+    roots.intern.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault", "intern"], "educSelect");
+    roots.matops.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault", "matops"], "educSelect");
+    roots.contract.coordinates.viewFinal = concatCoordinates(["workTimeline", "workDefault", "contract"], "educSelect");
 
     // specific bio views 
-    alignState.interestPic1View = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.defaultBioView)
-        .concat(alignState.interestPic1View)
-        .concat(alignState.interestPic2Twirling);
+    roots.pic1.coordinates.viewFinal = concatCoordinates(["defaultBio", "pic1"], "educSelect");
+    roots.pic2.coordinates.viewFinal = concatCoordinates(["defaultBio", "pic2"], "educSelect");
 
-    alignState.interestPic2View = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.defaultBioView)
-        .concat(alignState.interestPic1Twirling)
-        .concat(alignState.interestPic2View);
-
-    // ALL OBJECTS 
-    alignState.startingView = alignState.menuButtonView
-        .concat(alignState.allEducationTwirling)
-        .concat(alignState.allWorkTwirling)
-        .concat(alignState.allBioTwirling);
-
-    // console.log(alignState.defaultBioView);
+    // starting will be stationarys view final
+    roots.stationary.coordinates.viewFinal = concatCoordinates([], "educSelect");
 }
 
 // initial site startup 
 function startTransformAllCourseObjects() {
 
-    transform(allObjects, alignState.startingView, 500);
+    transform(allObjects, roots.stationary.coordinates.viewFinal, 500);
+    
+    console.log(allObjects);
 }

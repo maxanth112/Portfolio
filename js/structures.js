@@ -10,256 +10,225 @@ var sphereSize = 1000;
 // renderers, cameras, etc.
 var controls, camera, scene, cssRenderer;
 
-// roots and root toggles/trackers 
-var educationRoot, workRoot, stationaryRoot;
-
-var mathCourseRoot, computerCourseRoot, econCourseRoot;
-var educHeaderRoot, educSummaryRoot;
-
-var workInternRoot, workMatOpsRoot, workContractRoot;
-var workTimelineRoot, workDefaultRoot, workDefaultToolsRoot;
-
-
-var workInternToggle = false;
-var workMatOpsToggle = false;
-var workContractToggle = false;
-
-var mathRootMotion = false;
-var computerRootMotion = false;
-var econRootMotion = false;
-var educHeaderRootMotion = false;
-var educSummaryRootMotion = false;
-
-var workTimelineRootMotion = false;
-var workDefaultRootMotion = false;
-var workInternRootMotion = false;
-var workMatOpsRootMotion = false;
-var workContractRootMotion = false;
-var workDefaultToolsRootMotion = false;
-
+var rootNames = ["stationary", "math", "computer", "econ", "educHeader", "educSummary", "workTimeline", "intern", 
+"matops", "contract", "workDefault", "pic1", "pic2", "bioDefault"];
 var roots = {
-    econ: {
-        root: educHeaderRoot,
-        toggle: educationToggle,
-        motion: educHeaderRootMotion,
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+    stationary: {
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
-    educSummary: {
-        root: educSummaryRoot,
-        toggle: educationToggle,
-        motion: educSummaryRootMotion,
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
-    },
-    econ: {
-        root: econCourseRoot,
-        toggle: econToggle,
-        motion: econRootMotion,
+    math: {
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     computer: {
-        root: computerCourseRoot,
-        toggle: mathToggle,
-        motion: mathRootMotion,
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
-    math: {
-        root: mathCourseRoot,
-        toggle: educationToggle,
-        motion: educHeaderRootMotion,
+    econ: {
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
+        rotationX: 0.0002,
+        rotationY: 0.0015,
+        rotationZ: 0.0003,
+    },
+    educSelect: {
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
+        rotationX: 0.0002,
+        rotationY: 0.0015,
+        rotationZ: 0.0003,
+    },
+    educHeader: {
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
+        rotationX: 0.0002,
+        rotationY: 0.0015,
+        rotationZ: 0.0003,
+    },
+    educSummary: {
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     workTimeline: {
-        root: workTimelineRoot,
-        toggle: workTimelineToggle,
-        motion: workTimelineRootMotion,
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
-    },
-    workDefault: {
-        root: workDefaultRoot,
-        toggle: workDefaultToggle,
-        motion: workDefaultRootMotion,
+        root:'',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     intern: {
-        root: workInternRoot,
-        toggle: workInternToggle,
-        motion: workInternRootMotion,
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     matops: {
-        root: workMatOpsRoot,
-        toggle: workMatOpsToggle,
-        motion: workMatOpsRootMotion,
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     contract: {
-        root: workContractRoot,
-        toggle: workContractToggle,
-        motion: workContractRootMotion,
+        root: '',
+        toggle: '',
+        motion:'',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
+        rotationX: 0.0002,
+        rotationY: 0.0015,
+        rotationZ: 0.0003,
+    },
+    workDefault: {
+        root: '',
+        toggle:'',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     bioDefault: {
-        root: defaultBioRoot,
-        toggle: defaultBioToggle,
-        motion: defaultBioRootMotion,
+        root:'',
+        toggle:'',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [], 
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     pic1: {
-        root: interestPic1Root,
-        toggle: interestPic1Toggle,
-        motion: interestPic1Motion,
+        root: '',
+        toggle: '',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [], 
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     },
     pic2: {
-        root: interestPic2Root,
-        toggle: interestPic2Toggle,
-        motion: interestPic2Motion,
+        root: '',
+        toggle:'',
+        motion: '',
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [], 
+            viewFinal: []
+        },
         rotationX: 0.0002,
         rotationY: 0.0015,
         rotationZ: 0.0003,
     }
 };
 
-// toggles / tracking for education
-var educationToggle = false;
-
-var computerToggle = false;
-var mathToggle = false;
-var econToggle = false;
-
-var internToggle = false;
-var matopsToggle = false;
-var contractToggle = false;
-
-// toggles / tracking for work
-var workTimelineToggle = false;
-var workDefaultToggle = false;
-var workDefaultToolsToggle = false;
-
-var workInternToggle = false;
-var workMatOpsToggle = false;
-var workContractToggle = false;
-
-// toggles / tracking for bio
-var defaultBioToggle = false;
-
 // all objects 
 var allObjects = [];
-
-// stationary objects
-var allStationaryObjects = [];
-
-var menuButtonObjects = [];
-
-// education objects 
 var allEducationObjects = [];
-
-var educationHeaderObjects = [];
-var educationSummaryObjects = [];
-var educationButtonObjects = [];
-
-var mathObjects = [];
-var computerObjects = [];
-var econObjects = [];
-
-// work objects 
 var allWorkObjects = [];
-
-var workTimelineObjects = [];
-var workDefaultObjects = [];
-var workDefaultToolObjects = [];
-
-var workInternObjects = [];
-var workMatOpsObjects = [];
-var workContractObjects = [];
-
-// positioning object
-var alignState = {
-    // starting view
-    startingView: [],
-
-    // stationary positions - twirling 
-    menuButtonTwirling: [],
-
-    // stationary positions - view 
-    menuButtonView: [],
-
-    // education positions - twirling 
-    allEducationTwirling: [],
-
-    educationHeaderTwirling: [],
-    educationButtonTwirling: [],
-    educationSummaryTwirling: [],
-    mathTwirling: [],
-    econTwirling: [],
-    computerTwirling: [],
-
-    // education position - view
-    standardEducationView: [],
-    educationHeaderView: [],
-    educationSummaryView: [],
-    educationHeaderSelectedView: [],
-    educationButtonView: [],
-    mathView: [],
-    econView: [],
-    computerView: [],
-
-    // work positions - twirling 
-    allWorkTwirling: [],
-
-    workTimelineTwirling: [],
-    workDefaultTwirling: [],
-    workDefaultToolsTwirling: [],
-
-    workInternTwirling: [],
-    workMatOpsTwirling: [],
-    workContractTwirling: [],
-
-    // work positions - view 
-    workTimelineView: [],
-    workDefaultView: [],
-    workDefaultToolsMoving: [],
-
-    workInternView: [],
-    workMatOpsView: [],
-    workContractView: [],
-
-    // bio positions - view
-    defaultBioView: [],
-    interestPic1View: [],
-    interestPic2View: [],
-
-    // bio position - trirling 
-    allBioTwirling: [],
-
-    defaultBioTwirling: [],
-    interestPic1Twirling: [],
-    interestPic2Twirling: [],
-};
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         navigation menu                         ////////
@@ -396,10 +365,12 @@ var educationSummaryArray = [{
         description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
     },
     {
+        id: "degree",
         role: "Degrees",
         position: [0, summaryYStart + 3.35]
     },
     {
+        id: "extra",
         role: "Activities, clubs",
         position: [0, summaryYStart + 1.2]
     }
