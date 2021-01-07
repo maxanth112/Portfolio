@@ -20,6 +20,10 @@ var educHeaderRoot, educSummaryRoot;
 var workInternRoot, workMatOpsRoot, workContractRoot;
 var workTimelineRoot, workDefaultRoot, workDefaultToolsRoot;
 
+var roots = [ educationRoot, workRoot, stationaryRoot, mathCourseRoot, computerCourseRoot, econCourseRoot,
+    educHeaderRoot, educSummaryRoot, workInternRoot, workMatOpsRoot, workTimelineRoot, workDefaultRoot,
+    defaultBioRootMotion, interestPic1Root, interestPic2Root]
+
 var workInternToggle = false;
 var workMatOpsToggle = false;
 var workContractToggle = false;
@@ -831,7 +835,7 @@ var workDefaultArray = [
     }, 
     {
         id: "data-code", 
-        text: "",
+        text: "d fjs aldkjfa lsfakjkjldf aslkdfjla lkdfgjldskfgjdf",
         position: [imageX, 1.8]
     }, 
     {

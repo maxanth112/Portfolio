@@ -309,9 +309,8 @@ ul img {
 
 #data-code p,
 #comp-code p {
-    font-size: calc(var(--multiplier) * 1.9);
+    font-size: calc(var(--multiplier) * 1.4);
     color: rgb(255, 255, 255);
-    margin: calc(var(--multiplier) * 1.5);
 }
 
 #data-code,
@@ -319,4 +318,5 @@ ul img {
     width: calc(var(--multiplier) * 36);
     height: calc(var(--multiplier) * 27);
     border: 3px solid red;
+    padding: calc(var(--multiplier) * 1.5);
 }

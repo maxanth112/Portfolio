@@ -198,7 +198,7 @@ function animate() {
     render();
 
     requestAnimationFrame(animate);
-    // updateRotations();
+    updateRotations();
 }
 
 // general event listeners 
@@ -219,62 +219,50 @@ function onDocumentMouseMove(event) {
 // creating cards and divs 
 function createCourseCards(arr, save, saveRoot) {
 
-    for (var i = 0; i < arr.length; i += 1) {
-
-        var courseDiv = document.createElement('div');
-        courseDiv.className = 'course-element';
-
-        courseDiv.innerHTML =
-            '<div class="course-card ' + arr[i].number + '" onclick="flip(' + arr[i].number + ')">' +
+    arr.forEach(arrElement => {
+        var element = document.createElement('div');
+        element.className = 'course-element';
+        element.innerHTML =
+            '<div class="course-card ' + arrElement.number + '" onclick="flip(' + arrElement.number + ')">' +
             '<div class="front">' +
-            '<h5 class="front-header">' +
-            arr[i].name +
-            '</h5>' +
+            '<h5 class="front-header">' + arrElement.name + '</h5>' +
             '</div>' +
             '<div class="back">' +
             '<div class="align-me">' +
-            '<p class="course-header">' +
-            arr[i].type + arr[i].number +
-            '</p>' +
-            '<p class="languages">' +
-            arr[i].language +
-            '</p>' +
+            '<p class="course-header">' + arrElement.type + arrElement.number + '</p>' +
+            '<p class="languages">' +arrElement.language + '</p>' +
             '</div>' +
-            '<p class="course-description">' +
-            arr[i].description +
-            '</p>' +
+            '<p class="course-description">' +arrElement.description + '</p>' +
             '</div>' +
             '</div>';
 
-        var courseObj = new THREE.CSS3DObject(courseDiv);
-        save[i] = courseObj;
-
-        if (saveRoot == "computer") { /////////////////////////////////////////
-            computerCourseRoot.add(courseObj);
+        element = new THREE.CSS3DObject(element);
+        save.push(element);
+        if (saveRoot == "computer") { 
+            computerCourseRoot.add(element);
         } else if (saveRoot == "math") {
-            mathCourseRoot.add(courseObj);
+            mathCourseRoot.add(element);
         } else {
-            econCourseRoot.add(courseObj);
+            econCourseRoot.add(element);
         }
-    }
+    });
 }
 
 function createEducationHeaderCards() {
 
-    for (var i = 0; i < educationHeaderArray.length; i += 1) {
+    educationHeaderArray.forEach(arrHeader => {
+        var element = document.createElement('div');
+        element.className = 'education-header';
+        element.id = arrHeader.cardId;
 
-        var educationDiv = document.createElement('div');
-        educationDiv.className = 'education-header';
-        educationDiv.id = educationHeaderArray[i].cardId;
+        var elementButton = document.createElement('button');
+        elementButton.id = arrHeader.id;
+        elementButton.innerHTML = arrHeader.label;
+        elementButton.classList.add('menu-button');
 
-        var courseButton = document.createElement('button');
-        courseButton.id = educationHeaderArray[i].id;
-        courseButton.innerHTML = educationHeaderArray[i].label;
-        courseButton.classList.add('menu-button');
+        if (elementButton.id == 'computer-button') {
 
-        if (courseButton.id == 'computer-button') {
-
-            courseButton.addEventListener('click', function (x) {
+            elementButton.addEventListener('click', function (x) {
                 setEducationButtonSelects("computer-button");
 
                 if (computerToggle) {
@@ -298,9 +286,9 @@ function createEducationHeaderCards() {
                 checkToggles();
             }, false);
 
-        } else if (courseButton.id == 'math-button') {
+        } else if (elementButton.id == 'math-button') {
 
-            courseButton.addEventListener('click', function (x) {
+            elementButton.addEventListener('click', function (x) {
                 setEducationButtonSelects("math-button");
 
                 if (mathToggle) {
@@ -323,9 +311,9 @@ function createEducationHeaderCards() {
                 workDefaultToggle = false;
                 checkToggles();
             }, false);
-        } else if (courseButton.id == 'econ-button') {
+        } else if (elementButton.id == 'econ-button') {
 
-            courseButton.addEventListener('click', function (x) {
+            elementButton.addEventListener('click', function (x) {
                 setEducationButtonSelects("econ-button");
 
                 if (econToggle) {
@@ -351,104 +339,74 @@ function createEducationHeaderCards() {
         }
 
 
-        educationDiv.innerHTML =
+        element.innerHTML =
             '<div class="education-card">' +
-            '<h4 class="major">' +
-            educationHeaderArray[i].major +
-            '</h4>' +
-            '<p class="ba">' +
-            'Bachelor of Arts' +
-            '</p>' +
-            '<h5 class="college">' +
-            educationHeaderArray[i].college +
-            '</h5>' +
-            '<h5 class="subcollege">' +
-            educationHeaderArray[i].subcollege +
-            '</h5>' +
-            '<p class="track">' +
-            educationHeaderArray[i].focus +
-            '</p>' +
+            '<h4 class="major">' + arrHeader.major + '</h4>' +
+            '<p class="ba">' + 'Bachelor of Arts' + '</p>' +
+            '<h5 class="college">' + arrHeader.college + '</h5>' +
+            '<h5 class="subcollege">' + arrHeader.subcollege + '</h5>' +
+            '<p class="track">' + arrHeader.focus + '</p>' +
             '</div>';
-        educationDiv.appendChild(courseButton);
+        element.appendChild(elementButton);
+        element = new THREE.CSS3DObject(element);
+        educationHeaderObjects.push(element);
 
-        var educationObj = new THREE.CSS3DObject(educationDiv);
-        educationHeaderObjects[i] = educationObj;
-
-        educHeaderRoot.add(educationObj); //////////////////////////////////////////
-    }
+        educHeaderRoot.add(element); 
+    });
 }
 
-function createEducationSummaryCards() {
+function createEducationSummary() {
 
     for (var i = 0; i < educationSummaryArray.length - 2; i += 1) {
 
-        var educationSummaryCard = document.createElement('div');
-        educationSummaryCard.id = educationSummaryArray[i].id;
-        educationSummaryCard.className = 'summary-card';
+        var element = document.createElement('div');
+        element.id = educationSummaryArray[i].id;
+        element.className = 'summary-card';
 
         if (educationSummaryArray[i].id == "capa" || educationSummaryArray[i].id == "lax") {
 
-            educationSummaryCard.innerHTML =
+            element.innerHTML =
                 '<div class="summary-flip ' + educationSummaryArray[i].id + `" onclick='flip("` + educationSummaryArray[i].id + `")'>` +
                 '<div class="front">' +
-                '<h4 class="club-header">' +
-                educationSummaryArray[i].clubName +
-                '</h4>' +
-                '<p class="club-position">' +
-                educationSummaryArray[i].role +
-                '</p>' +
-                '<p class="club-dates">' +
-                educationSummaryArray[i].dates +
-                '</p>' +
-                '<p class="club-description">' +
-                educationSummaryArray[i].description +
-                '</p>' +
+                '<h4 class="club-header">' + educationSummaryArray[i].clubName + '</h4>' +
+                '<p class="club-position">' + educationSummaryArray[i].role + '</p>' +
+                '<p class="club-dates">' + educationSummaryArray[i].dates + '</p>' +
+                '<p class="club-description">' + educationSummaryArray[i].description + '</p>' +
                 '</div>' +
                 '<div class="back">' +
-                '<p class="club-description">' +
-                educationSummaryArray[i].description +
-                '</p>' +
+                '<p class="club-description">' + educationSummaryArray[i].description + '</p>' +
                 '</div>' +
                 '</div>';
         } else {
 
-            educationSummaryCard.innerHTML =
-                '<h4 class="club-header">' +
-                educationSummaryArray[i].clubName +
-                '</h4>' +
-                '<p class="club-position">' +
-                educationSummaryArray[i].role +
-                '</p>' +
-                '<p class="club-dates">' +
-                educationSummaryArray[i].dates +
-                '</p>' +
-                '<p class="club-description">' +
-                educationSummaryArray[i].description +
-                '</p>';
+            element.innerHTML =
+                '<h4 class="club-header">' + educationSummaryArray[i].clubName + '</h4>' +
+                '<p class="club-position">' + educationSummaryArray[i].role + '</p>' +
+                '<p class="club-dates">' + educationSummaryArray[i].dates + '</p>' +
+                '<p class="club-description">' + educationSummaryArray[i].description + '</p>';
         }
 
-        var educationSummaryObj = new THREE.CSS3DObject(educationSummaryCard);
-        educationSummaryObjects[i] = educationSummaryObj;
+        element = new THREE.CSS3DObject(element);
+        educationSummaryObjects[i] = element;
 
-        educSummaryRoot.add(educationSummaryObj);
+        educSummaryRoot.add(element);
     }
     // education category headers 
-    var educationCategoryDegree = document.createElement('div');
-    educationCategoryDegree.className = 'degree';
-    educationCategoryDegree.innerHTML = '<h2>Degrees</h2>';
+    element = document.createElement('div');
+    element.className = 'degree';
+    element.innerHTML = '<h2>Degrees</h2>';
 
-    var degreeObj = new THREE.CSS3DObject(educationCategoryDegree);
-    educationSummaryObjects.push(degreeObj);
-    educSummaryRoot.add(degreeObj);
+    element = new THREE.CSS3DObject(element);
+    educationSummaryObjects.push(element);
+    educSummaryRoot.add(element);
 
+    element = document.createElement('div');
+    element.className = 'extra';
+    element.innerHTML = '<h2>Clubs/Associations</h2>';
 
-    var educationCategoryExtra = document.createElement('div');
-    educationCategoryExtra.className = 'extra';
-    educationCategoryExtra.innerHTML = '<h2>Clubs/Associations</h2>';
-
-    var extraObj = new THREE.CSS3DObject(educationCategoryExtra);
+    var extraObj = new THREE.CSS3DObject(element);
     educationSummaryObjects.push(extraObj);
-    educSummaryRoot.add(extraObj);
+    educSummaryRoot.add(element);
 }
 
 function createMenuButtons() {
@@ -550,31 +508,9 @@ function createMenuButtons() {
 
                     transform(allObjects, alignState.workDefaultView, toInterval);
 
-                    setTimeout(function(){ 
-
-                        var app = document.getElementById("comp-code");
-                        var typewriter = new Typewriter(app, {
-                            loop: true,
-                            delay: 75,
-                            cursor: "_"
-                          });
-                          
-                          typewriter
-                            .pauseFor(200)
-                            .typeString('<span style="color: white;">PS C:\Users\maxwiesner></span>')
-                            .pauseFor(300)
-                            .typeString('<span style="color: white;">wsl</span>')
-                            .pauseFor(300)
-                            .deleteAll()
-                            .typeString('<span style="color: #27ae60;">maxwies@DESKTOP-BA4NIFH:/mnt/c/Users/maximil$</span>')
-                            .deleteChars(10)
-                            .typeString('<strong>only <span style="color: #27ae60;">5kb</span> Gzipped!</strong>')
-                            .pauseFor(1000)
-                            .start();
-                     }, 2000);
-
+                    startCompText();
                 }
-                var bacon = "good";
+
                 educationToggle = false;
                 bioDefaultToggle = false;
                 checkToggles();
@@ -635,6 +571,7 @@ function createMenuButtons() {
         }
     }
 }
+
 
 function createBioDefaultCards() {
 
@@ -847,119 +784,107 @@ function resetBioButtons() {
 
 function createImgCards(arr, saveArr, saveRoot) {
 
-    for (var i = 0; i < arr.length; i += 1) {
+    arr.forEach(arrElement => {
+        var element = document.createElement('div');
+        element.classList.add(arrElement.id);
 
-        var travelDiv = document.createElement('div');
-        travelDiv.classList.add(arr[i].id);
+        if (arrElement.card == "s") {
+           var elementImg = document.createElement('img');
+           elementImg.src = arrElement.img;
+           elementImg.id = arrElement.newid + '-img';
 
-        if (arr[i].card == "s") {
-           var travelDivImg = document.createElement('img');
-           travelDivImg.src = arr[i].img;
-           travelDivImg.id = arr[i].newid + '-img';
-
-           travelDiv.appendChild(travelDivImg);
-           console.log(travelDivImg.id);
-
+           element.appendChild(elementImg);
         } else {
-            var travelDivH3 = document.createElement('h3');
-            travelDivH3.id = arr[i].newid + '-h3';
-            travelDivH3.classList.add("img-loc");
-            travelDivH3.innerHTML = arr[i].header;
+            var elementHeader = document.createElement('h3');
+            elementHeader.id = arrElement.newid + '-h3';
+            elementHeader.classList.add("img-loc");
+            elementHeader.innerHTML = arrElement.header;
 
-            var travelDivP = document.createElement('p');
-            travelDivP.id = arr[i].newid + '-p';
-            travelDivP.innerHTML = arr[i].description;
+            var elementP = document.createElement('p');
+            elementP.id = arrElement.newid + '-p';
+            elementP.innerHTML = arrElement.description;
 
-
-           travelDiv.appendChild(travelDivH3);
-           travelDiv.appendChild(travelDivP);
-            
-           console.log(travelDivP.id);
-           console.log(travelDivH3.id);
+            element.appendChild(elementHeader);
+            element.appendChild(elementP);
         }
 
-        var travelObj = new THREE.CSS3DObject(travelDiv);
-        saveArr.push(travelObj);
-
+        element = new THREE.CSS3DObject(element);
+        saveArr.push(element);
         if (saveRoot == "pic1") {
-            interestPic1Root.add(travelObj);
+
+            interestPic1Root.add(element);
         } else {
-            interestPic2Root.add(travelObj);
+
+            interestPic2Root.add(element);
         }
-    }
+    });
 }
 
 function createWorkHeaderCards() {
 
-    for (var i = 0; i < workContentArray.length; i += 1) {
+    workContentArray.forEach(workElement => {
 
-        var workHeaderDiv = document.createElement('div');
-        workHeaderDiv.className = 'work-header-element';
-
-        workHeaderDiv.innerHTML =
+        var element = document.createElement('div');
+        element.className = 'work-header-element';
+        element.innerHTML =
             '<div class="work-top">' +
             '<h5 class="work-top-name">' +
-            workContentArray[i].title +
+            workElement.title +
             '</h5>' +
             '<h3 class="work-top-span">' +
-            workContentArray[i].comit +
+            workElement.comit +
             '</h3>' +
             '</div>';
+        
+        element = new THREE.CSS3DObject(element);
+        if (workElement.id == "intern") {
 
-        var workHeaderObj = new THREE.CSS3DObject(workHeaderDiv);
+            workInternObjects.push(element);
+            workInternRoot.add(element);
+        } else if (workElement.id == "matops") {
 
-        if (workContentArray[i].id == "intern") {
+            workMatOpsObjects.push(element);
+            workMatOpsRoot.add(element);
+        } else {
 
-            workInternObjects.push(workHeaderObj);
-            workInternRoot.add(workHeaderObj);
-        } else if (workContentArray[i].id == "matops") {
-
-            workMatOpsObjects.push(workHeaderObj);
-            workMatOpsRoot.add(workHeaderObj);
-        } else if (workContentArray[i].id == "contract") {
-
-            workContractObjects.push(workHeaderObj);
-            workContractRoot.add(workHeaderObj);
+            workContractObjects.push(element);
+            workContractRoot.add(element);
         }
-    }
+    });
 }
 
 function createWorkContentCards() {
 
-    for (var i = 0; i < workContentArray.length; i += 1) {
+    workContentArray.forEach(workElement => {
 
-        var workContentDiv = document.createElement('div');
-        workContentDiv.classList.add('work-element');
-        workContentDiv.classList.add(workContentArray[i].id);
-
-        workContentDiv.innerHTML =
+        var element = document.createElement('div');
+        element.classList.add('work-element');
+        element.classList.add(workElement.id);
+        element.innerHTML =
             '<div class="work-header">' +
             '<h5 class="work-name">' +
-            workContentArray[i].timeline +
+            workElement.timeline +
             '</h5>' +
             '<p class="work-details">' +
-            workContentArray[i].description +
+            workElement.description +
             '</p>' +
             '</div>';
 
-        var workContentObj = new THREE.CSS3DObject(workContentDiv);
+        element = new THREE.CSS3DObject(element);
+        if (workElement.id == "intern") {
 
-        if (workContentArray[i].id == "intern") {
+            workInternObjects.push(element);
+            workInternRoot.add(element);
+        } else if (workElement.id == "matops") {
 
-            workInternObjects.push(workContentObj);
-            workInternRoot.add(workContentObj);
+            workMatOpsObjects.push(element);
+            workMatOpsRoot.add(element);
+        } else {
+
+            workContractObjects.push(element);
+            workContractRoot.add(element);
         }
-        if (workContentArray[i].id == "matops") {
-
-            workMatOpsObjects.push(workContentObj);
-            workMatOpsRoot.add(workContentObj);
-        }
-        if (workContentArray[i].id == "contract") {
-
-            workContractObjects.push(workContentObj);
-            workContractRoot.add(workContentObj);
-        }
-    }
+    });
 }
 
 function createWorkToolsCards() {
@@ -1022,28 +947,26 @@ function createWorkToolsContainer() {
 
     var toolCategories = ["intern", "matops", "contract"];
 
-    for (var i = 0; i < toolCategories.length; i += 1) {
+    toolCategories.forEach(tool => {
 
-        var toolContainer = document.createElement('div');
-        toolContainer.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
-        var toolContainerObj = new THREE.CSS3DObject(toolContainer);
+        var element = document.createElement('div');
+        element.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
+        element = new THREE.CSS3DObject(element);
 
-        if (toolCategories[i] == "intern") {
+        if (tool == "intern") {
 
-            workInternObjects.push(toolContainerObj);
-            workInternRoot.add(toolContainerObj);
+            workInternObjects.push(element);
+            workInternRoot.add(element);
+        } else if (tool == "matops") {
+
+            workMatOpsObjects.push(element);
+            workMatOpsRoot.add(element);
+        } else {
+
+            workContractObjects.push(element);
+            workContractRoot.add(element);
         }
-        if (toolCategories[i] == "matops") {
-
-            workMatOpsObjects.push(toolContainerObj);
-            workMatOpsRoot.add(toolContainerObj);
-        }
-        if (toolCategories[i] == "contract") {
-
-            workContractObjects.push(toolContainerObj);
-            workContractRoot.add(toolContainerObj);
-        }
-    }
+    });
 }
 
 function createSocialMedia() {
@@ -1054,53 +977,49 @@ function createSocialMedia() {
 
 function createWorkTimelineCards() {
 
-    for (var i = 0; i < workContentArray.length; i += 1) {
+    workContentArray.forEach( arrElement => {
 
-        var workTimelineDiv = document.createElement('div');
-        workTimelineDiv.classList.add("timeline-events");
-        workTimelineDiv.id = workContentArray[i].id + "-timeline-event";
-
-        workTimelineDiv.innerHTML =
-            '<div id="' + '" class="timeline-months-' + workContentArray[i].months + '">' +
-            '<h2>' + workContentArray[i].timeline + '</h2>' +
-            '<h3>' + workContentArray[i].company + '</h3>' +
-            '<h4>' + workContentArray[i].title + '</h4>' +
+        var element = document.createElement('div');
+        element.classList.add("timeline-events");
+        element.id = arrElement.id + "-timeline-event";
+        element.innerHTML =
+            '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
+            '<h2>' + arrElement.timeline + '</h2>' +
+            '<h3>' + arrElement.company + '</h3>' +
+            '<h4>' + arrElement.title + '</h4>' +
             '</div>';
 
-        var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
+        element = new THREE.CSS3DObject(element);
+        workTimelineObjects.push(element);
+        workTimelineRoot.add(element);
+    });
 
-        workTimelineObjects.push(workTimelineObj);
-        workTimelineRoot.add(workTimelineObj);
-    }
-
-    var workTimelineList = document.createElement('ul');
-    workTimelineList.classList.add("timeline-years");
-
-    workTimelineList.innerHTML =
+    // timeline bar 
+    var element = document.createElement('ul');
+    element.classList.add("timeline-years");
+    element.innerHTML =
         '<div class="timelines-years">' +
         '<li class="tyears">2019</li>' +
         '<li class="tyears">2020</li>' +
         '<li class="tyears">2021</li>' +
         '</ul>';
 
-    var workTimelineListObj = new THREE.CSS3DObject(workTimelineList);
-    workTimelineObjects.push(workTimelineListObj);
-    workTimelineRoot.add(workTimelineListObj);
+    element = new THREE.CSS3DObject(element);
+    workTimelineObjects.push(element);
+    workTimelineRoot.add(element);
 
     // home button 
-    var workTimelineDiv = document.createElement('div');
-    workTimelineDiv.classList.add("timeline-events");
-    workTimelineDiv.id = "home-button";
-
-    workTimelineDiv.innerHTML =
+    element = document.createElement('div');
+    element.classList.add("timeline-events");
+    element.id = "home-button";
+    element.innerHTML =
         '<div id="' + '" class="timeline-months-' + 3 + '">' +
         '<h4>' + 'Home Page' + '</h4>' +
         '</div>';
 
-    var workTimelineObj = new THREE.CSS3DObject(workTimelineDiv);
-
-    workTimelineObjects.push(workTimelineObj);
-    workTimelineRoot.add(workTimelineObj);
+    element = new THREE.CSS3DObject(element);
+    workTimelineObjects.push(element);
+    workTimelineRoot.add(element);
 }
 
 function createWorkButtons() {
@@ -1271,31 +1190,26 @@ function updateWorkSelected(newSelected) {
 
 function createWorkDefaultCards() {
 
-    for (var i = 0; i < workDefaultArray.length; i += 1) {
+    workDefaultArray.forEach(workElement => {
+        var element = document.createElement('div');
+        element.id = workElement.id;
 
-        var workDefaultMain = document.createElement('div');
-        workDefaultMain.id = workDefaultArray[i].id;
+        if ( (workElement.id != "data-code") && (workElement.id != "comp-code") ) {
 
-        if ( (workDefaultArray[i].id == "data-code") || (workDefaultArray[i].id == "comp-code") ) {
-            
-            workDefaultMain.innerHTML = '<p></p>';
-
-        } else {
-
-            workDefaultMain.classList.add('work-default');
-            workDefaultMain.innerHTML =
+            element.classList.add('work-default');
+            element.innerHTML =
                 '<h3 class="work-default-header">' +
-                workDefaultArray[i].header +
+                workElement.header +
                 '</h3>' +
                 '<p class="work-default-description">' +
-                workDefaultArray[i].description +
+                workElement.description +
                 '</p>';
-        }
+        } 
 
-        var workDefaultObj = new THREE.CSS3DObject(workDefaultMain);
-        workDefaultObjects.push(workDefaultObj);
-        workTimelineRoot.add(workDefaultObj);
-    }
+        element = new THREE.CSS3DObject(element);
+        workDefaultObjects.push(element);
+        workTimelineRoot.add(element);
+    });
 }
 
 // managing buttons and toggles 
@@ -1714,7 +1628,7 @@ function createAllCards() {
     createCourseCards(computerArray, computerObjects, "computer");
     createCourseCards(econArray, econObjects, "econ");
     createEducationHeaderCards();
-    createEducationSummaryCards();
+    createEducationSummary();
 
     allEducationObjects = mathObjects
         .concat(computerObjects)
