@@ -1,55 +1,58 @@
-
 :root {
-    --educ-background: #1e2424;
-    --educ-border: #68c4bc;
-    --educ-box-shadow: #68c4bc;
-    --educ-color: #1e2424;
+    --educ-color: white;
+    --computer-color: rgba(255, 204, 255, 0.8);
+    --math-color: rgba(66, 236, 245, 0.8);
+    --econ-color: rgba(129, 66, 245, 0.8);
 }
 
-.math-in-view {
-
-}
-
-.computer-in-view {
-
-}
-
+.education-main-in-view, 
+.computer-in-view,
+.math-in-view,
 .econ-in-view {
-
+    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
+    border: 2px solid rgba(127, 255, 255, 0.25);
+    color: black;
+    background-color: rgba(0, 0, 0, .7);
 }
 
-.education-main-in-view {
-    background: var(--educ-background);
-    border: 1px solid var(--educ-border);
-    box-shadow: inset 0 0 1rem var(--educ-box-shadow);
-    text-shadow:
-          0 0 5px #fff,
-          0 0 10px #fff,
-          0 0 20px #fff,
-          0 0 40px #0ff,
-          0 0 80px #0ff,
-          0 0 90px #0ff,
-          0 0 100px #0ff,
-          0 0 150px #0ff;
-      
+.education-main-in-view-active, 
+.education-main-in-view-active .menu-button {
+    color: var(--educ-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--educ-color);
+    border:  calc(var(--multiplier) * .2) solid var(--educ-color);
+    text-shadow: 0 0 4px rgba(255,255,255,.8),
+                 0 0 8px rgba(255,255,255,.8),
+                 0 0 12px rgba(55,255,255,.8);
 }
 
-.education-main-in-view:hover {
-    animation: place-order-keyframes 1s linear;
-    background-color: var(--educ-color);
+.computer-in-view-active,
+.computer-header-in-view-active,
+.computer-header-in-view-active .menu-button {
+    color: var(--computer-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--computer-color);
+    border:  calc(var(--multiplier) * .2) solid var(--computer-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
 
-@keyframes place-order-keyframes {
-    0% {
-        background-color: #004c4c;
-        box-shadow: 0 0 0 0 rgba(104, 196, 188, .8), inset 0 0 1rem #68c4bc, inset 0 0 0 0 rgba(104, 196, 188, 1);
-   }
-    4%, 90% {
-        background-color: #017474;
-        box-shadow: 0 0 25px 3px rgba(104, 196, 188, .8), inset 0 0 0 4px rgba(255, 255, 255, 1), inset 0 0 25px 8px rgba(255, 255, 255, 1);
-   }
-    100% {
-        background-color: #1e2424;
-        box-shadow: 0 0 0 0 rgba(104, 196, 188, .8), inset 0 0 1rem #68c4bc, inset 0 0 0 0 rgba(104, 196, 188, 1);
-   }
+
+.math-in-view-active,
+.math-header-in-view-active,
+.math-header-in-view-active .menu-button {
+    color: var(--math-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--math-color);
+    border:  calc(var(--multiplier) * .2) solid var(--math-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
+
+.econ-in-view-active,
+.econ-header-in-view-active,
+.econ-header-in-view-active .menu-button {
+    color: var(--econ-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--econ-color);
+    border:  calc(var(--multiplier) * .2) solid var(--econ-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.computer-in-view {}
+
+.econ-in-view {}

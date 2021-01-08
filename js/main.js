@@ -26,10 +26,10 @@ function init() {
 
 function checkToggles() {
 
-    console.clear();
-    rootNames.forEach(rootName => {
-        console.log(rootName + ": " + roots[rootName].toggle);
-    });
+    // console.clear();
+    // rootNames.forEach(rootName => {
+    //     console.log(rootName + ": " + roots[rootName].toggle);
+    // });
 }
 
 // main threejs rendering functions 
@@ -50,7 +50,7 @@ function initCamera() {
         90,
         window.innerWidth / window.innerHeight,
         100,
-        8000);
+        4000);
     camera.position.set(0, 0, 2500);
 }
 
@@ -129,7 +129,7 @@ function animate() {
     render();
 
     requestAnimationFrame(animate);
-    updateRotations();
+    // updateRotations();
 }
 
 // general event listeners 
@@ -147,8 +147,28 @@ function onDocumentMouseMove(event) {
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
-function updateInViewClassLights(updateClass) {
-    
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+function addInViewClass(updateClass, time) {
+
+    setTimeout(function(x) {
+        var updateClassList = document.getElementsByClassName(updateClass);
+        for (var i = 0; i < updateClassList.length; i++) {
+            
+            updateClassList[i].classList.add(updateClass + "-active");
+        }    
+    }, time);
+}
+
+function removeInViewClass(updateClass) {
+
+    var updateClassList = document.getElementsByClassName(updateClass);
+    console.log(updateClassList);
+    for (var i = 0; i < updateClassList.length; i++) {
+        updateClassList[i].classList.remove(updateClass + "-active");
+    }
 }
 
 // creating cards and divs 
@@ -157,9 +177,8 @@ function createCourseCards(arr, saveRoot) {
     arr.forEach(arrElement => {
         var element = document.createElement('div');
         element.classList.add('course-element');
-        element.classList.add(saveRoot + '-in-view');
         element.innerHTML =
-            '<div class="course-card ' + arrElement.number + '" onclick="flip(' + arrElement.number + ')">' +
+            '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-in-view' + '" onclick="flip(' + arrElement.number + ')">' +
             '<div class="front">' +
             '<h5 class="front-header">' + arrElement.name + '</h5>' +
             '</div>' +
@@ -184,14 +203,12 @@ function createEducationHeaderCards() {
         var element = document.createElement('div');
         element.classList.add('education-header');
         element.classList.add('education-main-in-view');
-        element.classList.add('computer-in-view');
-        element.classList.add('math-in-view');
-        element.classList.add('econ-in-view');
+        element.classList.add(arrHeader.cardId + '-in-view');
         element.id = arrHeader.cardId;
 
         var elementButton = document.createElement('button');
         elementButton.id = arrHeader.id;
-        elementButton.innerHTML = arrHeader.label;
+        elementButton.innerHTML = '<p>' + arrHeader.label + '</p>';
         elementButton.classList.add('menu-button');
 
         if (elementButton.id == 'computer-button') {
@@ -206,6 +223,15 @@ function createEducationHeaderCards() {
                     clearAllNotSelected();
 
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
+                    
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("math-in-view");
+                    removeInViewClass("econ-in-view");
+                    removeInViewClass("math-header-in-view");
+                    removeInViewClass("computer-header-in-view");  
+                    removeInViewClass("econ-header-in-view");
+                    addInViewClass("education-main-in-view", timeoutTime);  
+                    // addInViewClass('')
                 } else {
 
                     setMotionAndToggleFalse();
@@ -213,6 +239,15 @@ function createEducationHeaderCards() {
                     manageButton("computer");
 
                     transform(allObjects, roots.computer.coordinates.viewFinal, toInterval);
+
+                    
+                    removeInViewClass("education-main-in-view");
+                    removeInViewClass("econ-in-view");  
+                    removeInViewClass("math-in-view");
+                    addInViewClass("computer-in-view", timeoutTime);  
+                    addInViewClass("computer-header-in-view", timeoutTime);
+                    addInViewClass("math-header-in-view", timeoutTime);
+                    addInViewClass("econ-header-in-view", timeoutTime);
                 }
             }, false);
 
@@ -228,6 +263,13 @@ function createEducationHeaderCards() {
                     clearAllNotSelected();
 
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("math-in-view");
+                    removeInViewClass("econ-in-view");
+                    removeInViewClass("math-header-in-view");
+                    removeInViewClass("computer-header-in-view");  
+                    removeInViewClass("econ-header-in-view");
+                    addInViewClass("education-main-in-view", timeoutTime);  
                 } else {
 
                     setMotionAndToggleFalse();
@@ -235,6 +277,14 @@ function createEducationHeaderCards() {
                     manageButton("math");
 
                     transform(allObjects, roots.math.coordinates.viewFinal, toInterval);
+                    
+                    removeInViewClass("education-main-in-view");
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("econ-in-view");
+                    addInViewClass("math-in-view", timeoutTime);  
+                    addInViewClass("computer-header-in-view", timeoutTime);
+                    addInViewClass("math-header-in-view", timeoutTime);
+                    addInViewClass("econ-header-in-view", timeoutTime);
                 }
             }, false);
         } else if (elementButton.id == 'econ-button') {
@@ -242,13 +292,20 @@ function createEducationHeaderCards() {
             elementButton.addEventListener('click', function (x) {
                 setEducationButtonSelects("econ-button");
 
-                if ( roots["econ"].toggle) {
+                if (roots["econ"].toggle) {
 
                     setMotionAndToggleFalse();
                     stopRotationSetTrue(["educSummary", "educHeader"]);
                     clearAllNotSelected();
 
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("math-in-view");
+                    removeInViewClass("econ-in-view");
+                    removeInViewClass("math-header-in-view");
+                    removeInViewClass("computer-header-in-view");  
+                    removeInViewClass("econ-header-in-view");
+                    addInViewClass("education-main-in-view", timeoutTime);  
                 } else {
 
                     setMotionAndToggleFalse();
@@ -256,6 +313,14 @@ function createEducationHeaderCards() {
                     manageButton("econ");
 
                     transform(allObjects, roots.econ.coordinates.viewFinal, toInterval);
+
+                    removeInViewClass("education-main-in-view");
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("math-in-view");
+                    addInViewClass("computer-header-in-view", timeoutTime);
+                    addInViewClass("math-header-in-view", timeoutTime);
+                    addInViewClass("econ-in-view", timeoutTime);  
+                    addInViewClass("econ-header-in-view", timeoutTime);
                 }
             }, false);
         }
@@ -280,14 +345,13 @@ function createEducationSummary() {
 
     educationSummaryArray.forEach(elementSummary => {
         var element = document.createElement('div');
-        element.classList.add('education-main-in-view');
         element.id = elementSummary.id;
-        
+
         if (elementSummary.id == "capa" || elementSummary.id == "lax") {
-            
-            element.className = 'summary-card';
+
+            element.classList.add('summary-card');
             element.innerHTML =
-                '<div class="summary-flip ' + elementSummary.id + `" onclick='flip("` + elementSummary.id + `")'>` +
+                '<div class="summary-flip ' + elementSummary.id + ' education-main-in-view' + `" onclick='flip("` + elementSummary.id + `")'>` +
                 '<div class="front">' +
                 '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
                 '<p class="club-position">' + elementSummary.role + '</p>' +
@@ -299,12 +363,16 @@ function createEducationSummary() {
                 '</div>' +
                 '</div>';
         } else if (elementSummary.id == "degree" || elementSummary.id == "extra") {
-            
-            element.className = elementSummary.id;
+
+
+            element.classList.add('education-main-in-view');
+            element.classList.add(elementSummary.id);
             element.innerHTML = '<h2>' + elementSummary.role + '</h2>';
         } else {
 
-            element.className = 'summary-card';
+
+            element.classList.add('education-main-in-view');
+            element.classList.add('summary-card');
             element.innerHTML =
                 '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
                 '<p class="club-position">' + elementSummary.role + '</p>' +
@@ -346,18 +414,32 @@ function createMenuButtons() {
                 eliminateCourseFlipClass();
                 updateWorkSelected("home");
                 setMotionAndToggleFalse(["workTimeline", "workDefault", "bioDefault", "pic1", "pic2"]);
-                
+
                 if (roots["educSummary"].toggle) {
-                    
+
                     setMotionAndToggleFalse();
                     transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
+
+                    removeInViewClass('education-main-in-view');
+                    removeInViewClass("math-in-view");
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("econ-in-view");
+                    removeInViewClass("math-header-in-view");
+                    removeInViewClass("computer-header-in-view");  
+                    removeInViewClass("econ-header-in-view");
                 } else {
 
                     stopRotationSetTrue(["educSummary", "educHeader"]);
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, toInterval);
 
-                    // setTimeout()
-                }                
+                    removeInViewClass("math-in-view");
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("econ-in-view");
+                    removeInViewClass("math-header-in-view");
+                    removeInViewClass("computer-header-in-view");  
+                    removeInViewClass("econ-header-in-view");
+                    addInViewClass('education-main-in-view', timeoutTime);
+                }
                 checkToggles();
             }, false);
         } else if (menuButton.id == 'work-button') {
@@ -376,16 +458,24 @@ function createMenuButtons() {
                 eliminateCourseFlipClass();
                 updateWorkSelected("home");
                 setMotionAndToggleFalse(["educSummary", "bioDefault", "educHeader", "pic1", "pic2"]);
-                
+
                 if (roots["workTimeline"].toggle) {
-                    
+
                     setMotionAndToggleFalse();
-                    transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
+                    transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
                 } else {
 
                     stopRotationSetTrue(["workDefault", "workTimeline"]);
-                    transform(allObjects,  roots.workDefault.coordinates.viewFinal, toInterval);
+                    transform(allObjects, roots.workDefault.coordinates.viewFinal, toInterval);
                     startCompText();
+
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("math-in-view");
+                    removeInViewClass("econ-in-view");
+                    removeInViewClass("math-header-in-view");
+                    removeInViewClass("computer-header-in-view");  
+                    removeInViewClass("econ-header-in-view");
+                    removeInViewClass("education-main-in-view");
                 }
                 checkToggles();
             }, false);
@@ -405,12 +495,12 @@ function createMenuButtons() {
                 eliminateCourseFlipClass();
                 updateWorkSelected("home");
                 setMotionAndToggleFalse(["workTimeline", "educSummary", "educHeader", "workDefault"]);
-                
+
                 if (roots["bioDefault"].toggle) {
-                    
+
                     setMotionAndToggleFalse();
                     resetBioButtons();
-                    transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
+                    transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
 
                 } else {
 
@@ -420,7 +510,15 @@ function createMenuButtons() {
                     pic2Obj = travel2;
 
                     stopRotationSetTrue(["pic1", "bioDefault"]);
-                    transform(allObjects,  roots.pic1.coordinates.viewFinal, toInterval);
+                    transform(allObjects, roots.pic1.coordinates.viewFinal, toInterval);
+                    
+                    removeInViewClass("computer-in-view");  
+                    removeInViewClass("math-in-view");
+                    removeInViewClass("econ-in-view");
+                    removeInViewClass("math-header-in-view");
+                    removeInViewClass("computer-header-in-view");  
+                    removeInViewClass("econ-header-in-view");
+                    removeInViewClass("education-main-in-view");
                 }
                 checkToggles();
             }, false);
@@ -466,7 +564,7 @@ function createBioDefaultCards() {
         } else if (bioDefaultArray[i].id == "bio-header" || bioDefaultArray[i].id == "interests") {
 
             bioDiv.innerHTML = '<h3>' + bioDefaultArray[i].description + '</h3>';
-        } else { 
+        } else {
 
             bioDiv.classList.add('interest-cards');
             bioDiv.innerHTML = '<h3 class="bio-button-header">' + bioDefaultArray[i].description + '</h3>';
@@ -807,7 +905,7 @@ function createWorkButtons() {
 
     leftButton.addEventListener('click', function (x) {
 
-        
+
         if (roots["workDefault"].toggle) { // default -> contract
 
 
@@ -844,7 +942,7 @@ function createWorkButtons() {
 
         if (roots["workDefault"].toggle) { // default -> intern 
 
-            
+
             setMotionAndToggleFalse();
             updateWorkSelected("intern");
             stopRotationSetTrue(["intern", "workTimeline"]);
@@ -870,7 +968,7 @@ function createWorkButtons() {
         }
     }, false);
 
-    
+
     roots["workTimeline"].objects.push(leftButtonObj);
     roots["workTimeline"].objects.push(rightButtonObj);
     roots["workTimeline"].root.add(leftButtonObj);
@@ -1064,13 +1162,13 @@ function setMotionAndToggleFalse(rootNameArr = "nada") {
             roots[rootName].motion = false;
         });
         return;
-    } 
+    }
 
     rootNames.forEach(rootName => {
         roots[rootName].toggle = false;
         roots[rootName].motion = false;
     });
-    
+
 };
 
 function flipToggles(toggle) {
@@ -1093,7 +1191,7 @@ function createAllCards() {
     // creates the divs (cards) and saves them to the respective objects arrays and all objects
 
     createMenuButtons();
-    
+
     createCourseCards(mathArray, "math");
     createCourseCards(computerArray, "computer");
     createCourseCards(econArray, "econ");
@@ -1125,8 +1223,8 @@ function concatCoordinates(inViewArr, ignoreArr = []) {
     inViewArr.push("stationary");
 
     rootNames.forEach(rootName => {
-        if (ignoreArr.includes(rootName)){
-           
+        if (ignoreArr.includes(rootName)) {
+
         } else if (inViewArr.includes(rootName)) {
 
             coordinates = coordinates.concat(roots[rootName].coordinates.view);
@@ -1145,7 +1243,7 @@ function createTwirlingCoordinates(rootName, x = sphereSize, y = sphereSize, z =
     var len = roots[rootName].objects.length;
     roots[rootName].objects.forEach(element => {
         var formula = 2 * Math.PI * (counter++) / len;
-        
+
         var obj = new THREE.Object3D();
         obj.position.x = (x * Math.cos(formula));
         obj.position.y = (y * Math.sin(formula));
@@ -1161,7 +1259,7 @@ function createTwirlingCoordinates(rootName, x = sphereSize, y = sphereSize, z =
 function createAllTwirlingCoordinates() {
 
     rootNames.forEach(rootName => {
-        if (rootName == "stationary"){
+        if (rootName == "stationary") {
 
             createTwirlingCoordinates("stationary", 50, 50, 0);
         } else if (rootName != "educSelect") {
@@ -1197,7 +1295,7 @@ function createAllViewCoordinates() {
     createViewCoordinates(EducationHeaderSelectedArray, "educSelect");
     createViewCoordinates(educationSummaryArray, "educSummary");
     // work history
-    createViewCoordinates(workViewDisplayArrayIntern,"intern");
+    createViewCoordinates(workViewDisplayArrayIntern, "intern");
     createViewCoordinates(workViewDisplayArrayMatOps, "matops");
     createViewCoordinates(workViewDisplayArrayContract, "contract");
     createViewCoordinates(workTimelineDisplayArray, "workTimeline");
@@ -1218,7 +1316,7 @@ function createAllViewCoordinates() {
 
 // initial site startup 
 function startTransformAllCourseObjects() {
-    
+
     setMotionAndToggleFalse();
     transform(allObjects, roots.stationary.coordinates.viewFinal, 500);
     // console.log(allObjects);

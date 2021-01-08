@@ -5,6 +5,7 @@
 // tweening globals 
 var toInterval = 1000;
 var backInterval = 1800;
+var timeoutTime = 1700;
 var sphereSize = 1000;
 
 // renderers, cameras, etc.
@@ -321,7 +322,7 @@ var educHeaderY = 2.2;
 var educationHeaderArray = [{
         major: "Computer Science",
         college: "University of Colorado Boulder,",
-        focus: "[ Computer Science ]",
+        focus: "[Computer]",
         subcollege: "College of Engineering and Applied Science",
         dates: "January 2020 - May 2021",
         GPA: "4.0",
@@ -333,7 +334,7 @@ var educationHeaderArray = [{
     },
     {
         major: "Mathematics",
-        focus: "[ Computational Mathematics Track ]",
+        focus: "[Computational Mathematics Track]",
         college: "University of Colorado Boulder,",
         subcollege: "College of Arts and Sciences",
         dates: "January 2020 - May 2021",
@@ -346,7 +347,7 @@ var educationHeaderArray = [{
     },
     {
         major: "Economics",
-        focus: "[ International Economics Track ]",
+        focus: "[International Economics Track]",
         college: "University of Colorado Boulder,",
         subcollege: "College of Arts and Sciences",
         dates: "August 2015 - May 2019",
@@ -666,7 +667,7 @@ var econArray = [{
 
 var workContentArray = [{
         title: "Technical Operations Analyst",
-        timeline: "Jan 1019 - May 2019",
+        timeline: "Jan '19 - May '19",
         company: "Frontier Airlines",
         id: "intern",
         months: 5,
@@ -676,7 +677,7 @@ var workContentArray = [{
     },
     {
         title: "Material Operations Analyst",
-        timeline: "June 2019 - jan 2020",
+        timeline: "June '19 - Jan '20",
         company: "Frontier Airlines",
         months: 7,
         comit: "[ Full - Time ]",
@@ -691,9 +692,9 @@ var workContentArray = [{
     },
     {
         title: "Data Analyst (Contractor)",
-        timeline: "jan 2020 - Presant",
+        timeline: "Jan '20 - Presant",
         months: 13,
-        comit: "[ 30 Hour Weeks ]",
+        comit: "[30 Hour Weeks]",
         company: "Contractor",
         id: "contract",
         description: "Analyze existing inventory to determine optimal usage and demand \
@@ -1092,7 +1093,7 @@ var travel1 = [{
         newid: "t1-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/coast2.jpg"
     },
     {
         card: "s",
@@ -1100,7 +1101,7 @@ var travel1 = [{
         newid: "t1-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/elfie.jpg"
     },
     {
         card: "s",
@@ -1108,7 +1109,7 @@ var travel1 = [{
         newid: "t1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/plane1.jpg"
     },
     {
         card: "u",
@@ -1145,7 +1146,7 @@ var travel2 = [{
         newid: "t2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/wood.jpg"
+        img: "./../img/iceland-falls.jpg"
     },
     {
         card: "s",
@@ -1153,7 +1154,7 @@ var travel2 = [{
         newid: "t2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/wood.jpg"
+        img: "./../img/godzilla.jpg"
     },
     {
         card: "s",
@@ -1161,7 +1162,7 @@ var travel2 = [{
         newid: "t2-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/wood.jpg"
+        img: "./../img/cabo.jpg"
     },
     {
         card: "u",
@@ -1198,7 +1199,7 @@ var travel3 = [{
         newid: "t3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/pandas.jpg"
+        img: "./../img/deer.jpg"
     },
     {
         card: "s",
@@ -1206,7 +1207,7 @@ var travel3 = [{
         newid: "t3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/pandas.jpg"
+        img: "./../img/coast3.jpg"
     },
     {
         card: "s",
@@ -1214,7 +1215,7 @@ var travel3 = [{
         newid: "t3-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/pandas.jpg"
+        img: "./../img/australia.jpg"
     },
     {
         card: "u",
@@ -1251,7 +1252,7 @@ var travel4 = [{
         newid: "t4-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/us.jpg"
+        img: "./../img/bomb.jpg"
     },
     {
         card: "s",
@@ -1259,7 +1260,7 @@ var travel4 = [{
         newid: "t4-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/us.jpg"
+        img: "./../img/overlook.jpg"
     },
     {
         card: "s",
@@ -1267,7 +1268,7 @@ var travel4 = [{
         newid: "t4-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/us.jpg"
+        img: "./../img/gladiator.jpg"
     },
     {
         card: "u",
