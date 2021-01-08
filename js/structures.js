@@ -22,6 +22,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -38,6 +40,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: ['math-in-view'],
         objects: [],
         coordinates: {
             view: [],
@@ -54,6 +58,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: ['computer-in-view'],
         objects: [],
         coordinates: {
             view: [],
@@ -70,6 +76,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: ['econ-in-view'],
         objects: [],
         coordinates: {
             view: [],
@@ -86,6 +94,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -102,6 +112,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: ['education-main-in-view'],
         objects: [],
         coordinates: {
             view: [],
@@ -118,6 +130,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: ['education-main-in-view'],
         objects: [],
         coordinates: {
             view: [],
@@ -134,6 +148,8 @@ var roots = {
         root:'',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -150,6 +166,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -166,6 +184,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -182,6 +202,8 @@ var roots = {
         root: '',
         toggle: '',
         motion:'',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -198,6 +220,8 @@ var roots = {
         root: '',
         toggle:'',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -214,6 +238,8 @@ var roots = {
         root:'',
         toggle:'',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -230,6 +256,8 @@ var roots = {
         root: '',
         toggle: '',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
@@ -246,6 +274,8 @@ var roots = {
         root: '',
         toggle:'',
         motion: '',
+        inViewClass: '',
+        classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],

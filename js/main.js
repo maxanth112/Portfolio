@@ -147,12 +147,17 @@ function onDocumentMouseMove(event) {
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
+function updateInViewClassLights(updateClass) {
+    
+}
+
 // creating cards and divs 
 function createCourseCards(arr, saveRoot) {
 
     arr.forEach(arrElement => {
         var element = document.createElement('div');
-        element.className = 'course-element';
+        element.classList.add('course-element');
+        element.classList.add(saveRoot + '-in-view');
         element.innerHTML =
             '<div class="course-card ' + arrElement.number + '" onclick="flip(' + arrElement.number + ')">' +
             '<div class="front">' +
@@ -177,7 +182,11 @@ function createEducationHeaderCards() {
 
     educationHeaderArray.forEach(arrHeader => {
         var element = document.createElement('div');
-        element.className = 'education-header';
+        element.classList.add('education-header');
+        element.classList.add('education-main-in-view');
+        element.classList.add('computer-in-view');
+        element.classList.add('math-in-view');
+        element.classList.add('econ-in-view');
         element.id = arrHeader.cardId;
 
         var elementButton = document.createElement('button');
@@ -271,6 +280,7 @@ function createEducationSummary() {
 
     educationSummaryArray.forEach(elementSummary => {
         var element = document.createElement('div');
+        element.classList.add('education-main-in-view');
         element.id = elementSummary.id;
         
         if (elementSummary.id == "capa" || elementSummary.id == "lax") {
@@ -335,15 +345,18 @@ function createMenuButtons() {
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
                 updateWorkSelected("home");
-
-                if (roots["educHeader"].toggle) {
-
+                setMotionAndToggleFalse(["workTimeline", "workDefault", "bioDefault", "pic1", "pic2"]);
+                
+                if (roots["educSummary"].toggle) {
+                    
                     setMotionAndToggleFalse();
                     transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
                 } else {
 
                     stopRotationSetTrue(["educSummary", "educHeader"]);
                     transform(allObjects, roots.educSummary.coordinates.viewFinal, toInterval);
+
+                    // setTimeout()
                 }                
                 checkToggles();
             }, false);
@@ -362,9 +375,10 @@ function createMenuButtons() {
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
                 updateWorkSelected("home");
-
+                setMotionAndToggleFalse(["educSummary", "bioDefault", "educHeader", "pic1", "pic2"]);
+                
                 if (roots["workTimeline"].toggle) {
-
+                    
                     setMotionAndToggleFalse();
                     transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
                 } else {
@@ -390,11 +404,12 @@ function createMenuButtons() {
                 clearAllActiveButtons();
                 eliminateCourseFlipClass();
                 updateWorkSelected("home");
-
+                setMotionAndToggleFalse(["workTimeline", "educSummary", "educHeader", "workDefault"]);
+                
                 if (roots["bioDefault"].toggle) {
-
-                    resetBioButtons();
+                    
                     setMotionAndToggleFalse();
+                    resetBioButtons();
                     transform(allObjects,  roots.stationary.coordinates.viewFinal, backInterval);
 
                 } else {
@@ -471,7 +486,7 @@ function createBioDefaultCards() {
                     var woodButton = document.getElementById("wood-button");
                     var bikesButton = document.getElementById("bikes-button");
                     updateBioInterestButtons(this, bikesButton, woodButton);
-
+                    currentPage = 0;
                     interestPage = 0;
                     updateInterestPage(0);
                 }, false);
@@ -483,7 +498,7 @@ function createBioDefaultCards() {
                     var bikesButton = document.getElementById("bikes-button");
                     var travelButton = document.getElementById("travel-button");
                     updateBioInterestButtons(this, bikesButton, travelButton);
-
+                    currentPage = 0;
                     interestPage = 1;
                     updateInterestPage(0);
                 }, false);
@@ -495,7 +510,7 @@ function createBioDefaultCards() {
                     var woodButton = document.getElementById("wood-button");
                     var travelButton = document.getElementById("travel-button");
                     updateBioInterestButtons(this, woodButton, travelButton);
-
+                    currentPage = 0;
                     interestPage = 2;
                     updateInterestPage(0);
                 }, false);
@@ -543,9 +558,9 @@ function updateInterestPage(pageChange) {
         }
 
         transform(allObjects, roots.pic2.coordinates.viewFinal, toInterval);
-        roots["pic1"].toggle = false; // in back
-        roots["pic2"].toggle = true; // now in view
 
+        setMotionAndToggleFalse();
+        stopRotationSetTrue(["pic2", "bioDefault"]);
     } else {
 
         for (var i = 0; i < newObj.length; i += 1) {
@@ -561,8 +576,8 @@ function updateInterestPage(pageChange) {
         }
 
         transform(allObjects, roots.pic1.coordinates.viewFinal, toInterval);
-        roots["pic2"].toggle = false; // in back
-        roots["pic1"].toggle = true; // now in view
+        setMotionAndToggleFalse();
+        stopRotationSetTrue(["pic1", "bioDefault"]);
     }
 }
 
@@ -1041,13 +1056,22 @@ function updateRotations() {
     });
 }
 
-function setMotionAndToggleFalse() {
+function setMotionAndToggleFalse(rootNameArr = "nada") {
+
+    if (rootNameArr != "nada") {
+        rootNameArr.forEach(rootName => {
+            roots[rootName].toggle = false;
+            roots[rootName].motion = false;
+        });
+        return;
+    } 
 
     rootNames.forEach(rootName => {
         roots[rootName].toggle = false;
         roots[rootName].motion = false;
     });
-}
+    
+};
 
 function flipToggles(toggle) {
 
@@ -1194,7 +1218,8 @@ function createAllViewCoordinates() {
 
 // initial site startup 
 function startTransformAllCourseObjects() {
-
+    
+    setMotionAndToggleFalse();
     transform(allObjects, roots.stationary.coordinates.viewFinal, 500);
     // console.log(allObjects);
 }
