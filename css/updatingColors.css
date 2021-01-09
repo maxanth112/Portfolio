@@ -5,6 +5,9 @@
     --econ-color: rgba(129, 66, 245, 0.8);
 
     --work-default-color: rgba(121, 248, 36, 0.8);
+    --intern-color: rgba(218, 0, 0, 0.8);
+    --matops-color: rgba(0, 204, 255, 0.8);
+    --contract-color: rgba(255, 0, 234, 0.8);
 }
 
 /* EDUCATION */
@@ -65,5 +68,29 @@
 }
 
 .work-timeline-color {
+    color: var(--matops-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--matops-color);
+    border:  calc(var(--multiplier) * .2) solid var(--matops-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+}
 
+.intern-color {
+    color: var(--intern-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--intern-color);
+    border:  calc(var(--multiplier) * .2) solid var(--intern-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.matops-color {
+    color: var(--matops-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--matops-color);
+    border:  calc(var(--multiplier) * .2) solid var(--matops-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.contract-color {
+    color: var(--contract-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--contract-color);
+    border:  calc(var(--multiplier) * .2) solid var(--contract-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }

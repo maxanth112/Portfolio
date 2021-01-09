@@ -213,7 +213,6 @@ function createCourseCards(arr, saveRoot) {
 function createEducHeadersButtons() {
 
     educationHeaderArray.forEach(arrElement => {
-
         var element = document.createElement('div');
         element.classList.add(arrElement.id + '-header-color',
             'education-header', 
@@ -233,10 +232,7 @@ function createEducHeadersButtons() {
         button.innerHTML = '<p>See Courses</p>';
 
         element.appendChild(button);
-        element = new THREE.CSS3DObject(element);
-        roots["educHeader"].objects.push(element);
-        roots["educHeader"].root.add(element);
-
+        pushRootandObjArr('educHeader', element);
         button.addEventListener('click', function addButtonSpecs(x) {
 
             revertAllFlippedCards();
@@ -336,18 +332,16 @@ function createEducationSummary() {
 function createMenuButtons() {
 
     menuButtonArray.forEach(arrElement => {
-
         var button = document.createElement('button');
         button.classList.add("menu-button");
         button.id = arrElement.id;
         button.innerHTML = arrElement.label;
     
         button.addEventListener('click', function (x) {
-            
+    
             revertAllFlippedCards();
             updateWorkSelected("home");
             updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
-            
             if (roots[arrElement.toggle].toggle) {
                 
                 setMotionAndToggleFalse();
@@ -363,10 +357,7 @@ function createMenuButtons() {
                 addInViewClass(arrElement.add, timeoutTime);
             }
         });
-
-        button = new THREE.CSS3DObject(button);
-        roots["stationary"].root.add(button);
-        roots["stationary"].objects.push(button);
+        pushRootandObjArr('stationary', button);
     });
 }
 
@@ -575,10 +566,7 @@ function createImgCards(arr, saveRoot) {
             element.appendChild(elementHeader);
             element.appendChild(elementP);
         }
-
-        element = new THREE.CSS3DObject(element);
-        roots[saveRoot].objects.push(element);
-        roots[saveRoot].root.add(element);
+        pushRootandObjArr(saveRoot, element);
     });
 }
 
@@ -586,9 +574,8 @@ function createWorkHeaderCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.className = 'work-header-element';
-        element.innerHTML =
-            '<div class="work-top">' +
+        element.classList.add(workElement.id + '-color', 'work-header-element');
+        element.innerHTML = '<div class="work-top">' +
             '<h5 class="work-top-name">' +
             workElement.title +
             '</h5>' +
@@ -596,10 +583,7 @@ function createWorkHeaderCards() {
             workElement.comit +
             '</h3>' +
             '</div>';
-
-        element = new THREE.CSS3DObject(element);
-        roots[workElement.id].root.add(element);
-        roots[workElement.id].objects.push(element);
+        pushRootandObjArr(workElement.id, element);
     });
 }
 
@@ -607,10 +591,8 @@ function createWorkContentCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add('work-element');
-        element.classList.add(workElement.id);
-        element.innerHTML =
-            '<div class="work-header">' +
+        element.classList.add(workElement.id + '-color', 'work-element');
+        element.innerHTML = '<div class="work-header">' +
             '<h5 class="work-name">' +
             workElement.timeline +
             '</h5>' +
@@ -618,92 +600,46 @@ function createWorkContentCards() {
             workElement.description +
             '</p>' +
             '</div>';
-
-        element = new THREE.CSS3DObject(element);
-        roots[workElement.id].root.add(element);
-        roots[workElement.id].objects.push(element);
+        pushRootandObjArr(workElement.id, element);
     });
 }
 
 function createWorkToolsCards() {
 
-    // var toolCategories = ["intern", "matops", "contract"];
-    // toolCategories.forEach(category => {
-    //     workToolsArray.forEach(arrElement => {
-    //         var element = document.createElement('div');
-    //         element.classList.add('work-tools', category + '-color');
-    //         element.id = category;
-
-    //         var hide = arrElement.score[category] ? "" : "hide";
-    //         var toolHtml = '<ul class="tool-row ' + hide + '">' +
-    //             '<img class="tool-row-img ' + arrElement.id + '" src="' +
-    //             arrElement.image + '">' + '<div class="all-tools">';
-
-    //         for (var i = 0; i < 10; i++) {
-    //             if (i < arrElement.score[category]) {
-    //                 toolHtml += '<li class="active">' + '</li>';
-    //             } else {
-    //                 toolHtml += '<li></li>';
-    //             }
-    //         }
-
-    //         toolHtml += '</div>' + '</ul>';
-    //         element.innerHtml = toolHtml;
-    //         element = new THREE.CSS3DObject(element);
-    //         roots[category].root.add(element);
-    //         roots[category].objects.push(element);
-    //     });
-    // });
-    for (var k = 0; k < toolCategories.length; k += 1) {
-
-        // for each element in the tools array
-        for (var i = 0; i < workToolsArray.length; i += 1) {
-
-            var workToolsDiv = document.createElement('div');
-            workToolsDiv.classList.add('work-tools');
-            workToolsDiv.classList.add('-color');
-            workToolsDiv.id = toolCategories[k];
-
-            // the tool div inner html
-            var hide = workToolsArray[i].score[toolCategories[k]] ? "" : "hide";
+    var toolCategories = ["intern", "matops", "contract"];
+    toolCategories.forEach(category => {
+        workToolsArray.forEach(arrElement => {
+            var element = document.createElement('div');
+            element.classList.add('work-tools', category + '-color');
+            element.id = category;
+            var hide = arrElement.score[category] ? "" : "hide";
             var toolHtml = '<ul class="tool-row ' + hide + '">' +
-                '<img class="tool-row-img ' + workToolsArray[i].id + '" src="' +
-                workToolsArray[i].image +
-                '">' + '<div class="all-tools">';
+                '<img class="tool-row-img ' + arrElement.id + '" src="' +
+                arrElement.image + '">' + '<div class="all-tools">';
 
-            // build the rankings 
-            for (var j = 0; j < 10; j += 1) {
-
-                if (j < workToolsArray[i].score[toolCategories[k]]) {
-
+            for (var i = 0; i < 10; i++) {
+                if (i < arrElement.score[category]) {
                     toolHtml += '<li class="active">' + '</li>';
                 } else {
-
                     toolHtml += '<li></li>';
                 }
-            }
-
+            }    
             toolHtml += '</div>' + '</ul>';
-            workToolsDiv.innerHTML = toolHtml;
-            var workToolsObj = new THREE.CSS3DObject(workToolsDiv);
-            roots[toolCategories[k]].root.add(workToolsObj);
-            roots[toolCategories[k]].objects.push(workToolsObj);
-        }
-    }
+            element.innerHTML = toolHtml;
+            console.log(element);
+            pushRootandObjArr(category, element);
+        });
+    });
 }
 
 function createWorkToolsContainer() {
 
     var toolCategories = ["intern", "matops", "contract"];
-
     toolCategories.forEach(tool => {
-
         var element = document.createElement('div');
         element.classList.add(tool + '-color');
         element.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
-        element = new THREE.CSS3DObject(element);
-        roots[tool].root.add(element);
-        roots[tool].objects.push(element);
+        pushRootandObjArr(tool, element);
     });
 }
 
@@ -718,18 +654,14 @@ function createWorkTimelineCards() {
     workContentArray.forEach(arrElement => {
 
         var element = document.createElement('div');
-        element.classList.add("timeline-events");
-        element.classList.add('work-timeline-color');
+        element.classList.add("timeline-events", 'work-timeline-color');
         element.id = arrElement.id + "-timeline-event";
         element.innerHTML = '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
             '<h2>' + arrElement.timeline + '</h2>' +
             '<h3>' + arrElement.company + '</h3>' +
             '<h4>' + arrElement.title + '</h4>' +
             '</div>';
-
-        element = new THREE.CSS3DObject(element);
-        roots["workTimeline"].objects.push(element);
-        roots["workTimeline"].root.add(element);
+        pushRootandObjArr('workTimeline', element);
     });
 
     // timeline bar 
@@ -740,10 +672,7 @@ function createWorkTimelineCards() {
         '<li class="tyears">2020</li>' +
         '<li class="tyears">2021</li>' +
         '</ul>';
-
-    element = new THREE.CSS3DObject(element);
-    roots["workTimeline"].objects.push(element);
-    roots["workTimeline"].root.add(element);
+    pushRootandObjArr('workTimeline', element);
 
     // home button 
     element = document.createElement('div');
@@ -752,10 +681,7 @@ function createWorkTimelineCards() {
     element.innerHTML = '<div id="' + '" class="timeline-months-' + 3 + '">' +
         '<h4>' + 'Home Page' + '</h4>' +
         '</div>';
-
-    element = new THREE.CSS3DObject(element);
-    roots["workTimeline"].objects.push(element);
-    roots["workTimeline"].root.add(element);
+    pushRootandObjArr('workTimeline', element);
 }
 
 function createWorkButtons() {
@@ -787,16 +713,13 @@ function createWorkButtons() {
                 }
             }
         }, false);
-        button = new THREE.CSS3DObject(button);
-        roots["workTimeline"].objects.push(button);
-        roots["workTimeline"].root.add(button);
+    pushRootandObjArr('workTimeline', button);
     });   
 }
 
 function updateWorkSelected(newSelected) {
 
     document.getElementById(newSelected + '-timeline-event').classList.toggle('selected-timeline');
-
     var notSelected = ['contract', 'home', 'matops', 'intern'].filter(x => x != newSelected);
     notSelected.forEach(id => {
         document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');
@@ -849,6 +772,13 @@ function updateRotations() {
             roots[rootName].root.rotation.z += roots[rootName].rotationZ;
         }
     });
+}
+
+function pushRootandObjArr(rootName, element) {
+
+    element = new THREE.CSS3DObject(element);
+    roots[rootName].objects.push(element);
+    roots[rootName].root.add(element);
 }
 
 function setMotionAndToggleFalse(rootNameArr = "nada") {
@@ -918,15 +848,11 @@ function concatCoordinates(inViewArr, ignoreArr = []) {
 
     var coordinates = [];
     inViewArr.push("stationary");
-
     rootNames.forEach(rootName => {
         if (ignoreArr.includes(rootName)) {
-
         } else if (inViewArr.includes(rootName)) {
-
             coordinates = coordinates.concat(roots[rootName].coordinates.view);
         } else {
-
             coordinates = coordinates.concat(roots[rootName].coordinates.rotate);
         }
     });
@@ -957,10 +883,8 @@ function createAllTwirlingCoordinates() {
 
     rootNames.forEach(rootName => {
         if (rootName == "stationary") {
-
             createTwirlingCoordinates("stationary", 50, 50, 0);
         } else if (rootName != "educSelect") {
-
             createTwirlingCoordinates(rootName);
         }
     });
