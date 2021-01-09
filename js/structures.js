@@ -32,6 +32,24 @@ var allEducationColors = removeEducationColors.concat([
 
 var specificEducationColors = allEducationColors.filter(color => color != 'education-main-color');
 
+var removeWorkColors = [
+    'workDefault-color',
+    'intern-color',
+    'matops-color',
+    'contract-color'
+];
+
+var workTimelineColors = [
+    'workDefault-timeline-color',
+    'intern-timeline-color',
+    'matops-timeline-color',
+    'contract-timeline-color'
+];
+
+
+var allWorkColors = removeWorkColors.concat(workTimelineColors);
+
+var allColors = allEducationColors.concat(allWorkColors);
 
 var roots = {
     stationary: {
@@ -326,7 +344,7 @@ var menuButtonArray = [{
         label: "Professional",
         id: "work-button",
         toggle: 'workDefault',
-        add: ['work-main-color'],
+        add: ['workDefault-color', 'workDefault-timeline-color'],
         setTrue: ["workDefault", "workTimeline"],
         buttonLinked: ['work-button', 'education-button', 'bio-button'],
         toggleFalse: ["educSummary", "bioDefault", "educHeader", "pic1", "pic2"],
@@ -393,7 +411,6 @@ var educationHeaderArray = [{
 var educSelectedX = -1.45;
 var educSelectedY = 2.1;
 var educSelectedStepY = 2;
-
 var EducationHeaderSelectedArray = [{
         position: [educSelectedX, educSelectedY]
     },
@@ -413,7 +430,6 @@ var educSummaryY = -.2;
 var educSummaryYStart = 0.12;
 var educSummaryLeftY = 1.95;
 var educSummaryRightY = 1.3;
-
 var educationSummaryArray = [{
         id: "lax",
         claddNum: 1,
@@ -869,12 +885,7 @@ var workButtonArray = [
     }, 
 ];
 
-
-
-
-
-
-var toolsX = -1.43;
+var toolsX = -1.46;
 var toolsGap = 0.66;
 var toolsRowOne = 1.65;
 var toolContainerX = -1.53;
@@ -887,8 +898,6 @@ var toolsRowSix = toolsRowOne - 5 * toolsGap;
 var toolsRowSeven = toolsRowOne - 6 * toolsGap;
 
 var exclude = 0;
-
-
 var workViewDisplayArrayIntern = workViewDisplayArray.concat([{
         tool: "SQL",
         position: [toolsX, toolsRowThree]

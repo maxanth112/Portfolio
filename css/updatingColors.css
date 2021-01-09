@@ -1,10 +1,11 @@
 :root {
+    --all-color: white;
     --educ-color: white;
     --computer-color: rgba(255, 204, 255, 0.8);
     --math-color: rgba(66, 236, 245, 0.8);
     --econ-color: rgba(129, 66, 245, 0.8);
 
-    --work-default-color: rgba(121, 248, 36, 0.8);
+    --workDefault-color: white;
     --intern-color: rgba(218, 0, 0, 0.8);
     --matops-color: rgba(0, 204, 255, 0.8);
     --contract-color: rgba(255, 0, 234, 0.8);
@@ -14,11 +15,29 @@
 .education-main-color, 
 .computer-color,
 .math-color,
-.econ-color {
-    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
-    border: 2px solid rgba(127, 255, 255, 0.25);
+.econ-color, 
+.workDefault-color,
+.intern-color,
+.matops-color,
+.contract-color {
+    box-shadow: 0px 0px 12px var(--all-color);
+    border: 2px solid var(--all-color);
     color: black;
     background-color: rgba(0, 0, 0, .7);
+    box-shadow: 6px 6px 15px var(--all-color);
+}
+
+.workDefault-timeline-color div h2,
+.workDefault-timeline-color div h3, 
+.workDefault-timeline-color div h4 {
+    color: black;
+    box-shadow: 2px solid var(--all-color);
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.workDefault-timeline-color div {
+    box-shadow: 0px 0px 12px var(--all-color);
+    border: 2px solid var(--all-color);
 }
 
 .education-main-color-active, 
@@ -60,37 +79,112 @@
 }
 
 /* WORK HISTORY */
-.work-default-color {
-    color: var(--work-default-color);
-    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--work-default-color);
-    border:  calc(var(--multiplier) * .2) solid var(--work-default-color);
+
+/* WORK DEFAULT */
+.workDefault-color-active {
+    color: var(--workDefault-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--workDefault-color);
+    border:  calc(var(--multiplier) * .2) solid var(--workDefault-color);
     text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
 
-.work-timeline-color {
-    color: var(--matops-color);
-    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--matops-color);
-    border:  calc(var(--multiplier) * .2) solid var(--matops-color);
-    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+.workDefault-timeline-color-active div {
+    text-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: calc(var(--multiplier) * 0.8) solid var(--workDefault-color);
 }
 
-.intern-color {
+.workDefault-timeline-color-active div h2,
+.workDefault-timeline-color-active div h3, 
+.workDefault-timeline-color-active div h4 {
+    color: rgb(255, 255, 255);
+}
+
+/* INTERN */
+.intern-color-active {
     color: var(--intern-color);
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--intern-color);
     border:  calc(var(--multiplier) * .2) solid var(--intern-color);
     text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
 
-.matops-color {
+.intern-timeline-color-active div {
+    text-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: calc(var(--multiplier) * 0.8) solid var(--intern-color);
+}
+
+/* MATOPS */
+.matops-color-active {
     color: var(--matops-color);
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--matops-color);
     border:  calc(var(--multiplier) * .2) solid var(--matops-color);
     text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
 
-.contract-color {
+.matops-timeline-color-active div {
+    text-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: calc(var(--multiplier) * 0.8) solid var(--matops-color);
+}
+
+/* CONTRACT */
+.contract-color-active { 
     color: var(--contract-color);
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--contract-color);
     border:  calc(var(--multiplier) * .2) solid var(--contract-color);
     text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.contract-timeline-color-active div {
+    text-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: calc(var(--multiplier) * 0.8) solid var(--contract-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tool-container { 
+    background-color: transparent;
 }

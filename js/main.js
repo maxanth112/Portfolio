@@ -245,10 +245,8 @@ function createEducHeadersButtons() {
                 updateLinkedThreesText('', 'See Courses', arrElement.buttonLinked, 'default-all');
 
                 transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
-                specificEducationColors.forEach(toRemove => {
-                    removeInViewClass(toRemove); 
-                });
-                addInViewClass("education-main-color", timeoutTime);
+                removeInViewClass(specificEducationColors); 
+                addInViewClass(["education-main-color"]);
             } else {
 
                 setMotionAndToggleFalse();
@@ -258,33 +256,34 @@ function createEducHeadersButtons() {
                 updateLinkedThreesText('Main View', 'See Courses', arrElement.buttonLinked, 'first');
                 
                 transform(allObjects, roots[arrElement.id].coordinates.viewFinal, toInterval);
-                removeEducationColors.forEach(toRemove => {
-                    removeInViewClass(toRemove);
-                });
-                arrElement.add.forEach(toAdd => {
-                    addInViewClass(toAdd);
-                });
+                removeInViewClass(removeEducationColors);
+                addInViewClass(arrElement.add);
             }
         });
     });
 }
 
-function addInViewClass(updateClass, time = timeoutTime) {
+function addInViewClass(classArr, time = timeoutTime) {
 
-    setTimeout(function(x) {
-        var updateClassList = document.getElementsByClassName(updateClass);
-        for (var i = 0; i < updateClassList.length; i++) {
-            updateClassList[i].classList.add(updateClass + "-active");
-        }    
-    }, time);
+    classArr.forEach(className => {
+
+        setTimeout( function(x) {
+            var classElements = document.getElementsByClassName(className);
+            for (let classElement of classElements) {
+                classElement.classList.add(className + "-active");
+            }    
+        }, time);
+    });
 }
 
-function removeInViewClass(updateClass) {
+function removeInViewClass(classArr) {
 
-    var updateClassList = document.getElementsByClassName(updateClass);
-    for (var i = 0; i < updateClassList.length; i++) {
-        updateClassList[i].classList.remove(updateClass + "-active");
-    }
+    classArr.forEach(className => {
+        var classElements = document.getElementsByClassName(className);
+        for (let classElement of classElements) {
+            classElement.classList.remove(className + '-active');
+        }
+    });
 }
 
 function createEducationSummary() {
@@ -340,27 +339,26 @@ function createMenuButtons() {
         button.addEventListener('click', function (x) {
     
             revertAllFlippedCards();
-            updateWorkSelected("home");
+            updateWorkSelected("workDefault");
             updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
             if (roots[arrElement.toggle].toggle) {
                 
                 setMotionAndToggleFalse();
                 transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
+
+                removeInViewClass(allColors);
             } else {
                 setMotionAndToggleFalse();
                 stopRotationSetTrue(arrElement.setTrue);
                 transform(allObjects, roots[arrElement.toggle].coordinates.viewFinal, toInterval);
                 
-                allEducationColors.forEach(colorClass => {
-                    removeInViewClass(colorClass);
-                });
-                addInViewClass(arrElement.add, timeoutTime);
+                removeInViewClass(allColors);
+                addInViewClass(arrElement.add);
             }
         });
         pushRootandObjArr('stationary', button);
     });
 }
-
 
 function createBioDefaultCards() {
 
@@ -610,7 +608,7 @@ function createWorkToolsCards() {
     toolCategories.forEach(category => {
         workToolsArray.forEach(arrElement => {
             var element = document.createElement('div');
-            element.classList.add('work-tools', category + '-color');
+            element.classList.add('work-tools');
             element.id = category;
             var hide = arrElement.score[category] ? "" : "hide";
             var toolHtml = '<ul class="tool-row ' + hide + '">' +
@@ -619,7 +617,7 @@ function createWorkToolsCards() {
 
             for (var i = 0; i < 10; i++) {
                 if (i < arrElement.score[category]) {
-                    toolHtml += '<li class="active">' + '</li>';
+                    toolHtml += '<li class="active ' + category + '-color">' + '</li>';
                 } else {
                     toolHtml += '<li></li>';
                 }
@@ -637,8 +635,8 @@ function createWorkToolsContainer() {
     var toolCategories = ["intern", "matops", "contract"];
     toolCategories.forEach(tool => {
         var element = document.createElement('div');
-        element.classList.add(tool + '-color');
-        element.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
+        element.classList.add(tool + '-color', 'tool-container');
+        element.innerHTML = '<h1 class="tools-header">Software/Tools Used:</h1>';
         pushRootandObjArr(tool, element);
     });
 }
@@ -652,9 +650,10 @@ function createSocialMedia() {
 function createWorkTimelineCards() {
 
     workContentArray.forEach(arrElement => {
-
         var element = document.createElement('div');
-        element.classList.add("timeline-events", 'work-timeline-color');
+        element.classList.add(arrElement.id + '-timeline-color',
+            "timeline-events",
+            "workDefault-timeline-color");
         element.id = arrElement.id + "-timeline-event";
         element.innerHTML = '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
             '<h2>' + arrElement.timeline + '</h2>' +
@@ -676,8 +675,8 @@ function createWorkTimelineCards() {
 
     // home button 
     element = document.createElement('div');
-    element.classList.add("timeline-events", "work-default-colors");
-    element.id = "home-timeline-event";
+    element.classList.add("timeline-events", "workDefault-timeline-color");
+    element.id = "workDefault-timeline-event";
     element.innerHTML = '<div id="' + '" class="timeline-months-' + 3 + '">' +
         '<h4>' + 'Home Page' + '</h4>' +
         '</div>';
@@ -689,7 +688,7 @@ function createWorkButtons() {
     workButtonArray.forEach(arrElement => {
         var button = document.createElement('div');
         button.classList.add(arrElement.id + '-arrow',
-            'work-timeline-color',
+            'workDefault-color',
             'flex-container');
         button.id = arrElement.id;
         button.innerHTML = '<i class="fa fa-arrow-' + arrElement.id + ' fa-5x icon-3d"></i>';
@@ -697,16 +696,21 @@ function createWorkButtons() {
         button.addEventListener('click', function(x) {
             var pages = ['workDefault', 'matops', 'contract', 'intern'];
             for (let currPage of pages) {
-                
-                var id = this.id;                
+
                 if (roots[currPage].toggle) {
-                    
                     setMotionAndToggleFalse();
-                    if ( ( (currPage == 'intern') && (id == 'left') ) || ( (currPage == 'contract' ) && ( id == 'right') ) ) {
-                        updateWorkSelected('home');
+                    
+                    if (arrElement[currPage] ==  'workDefault') {
+
+                        removeInViewClass(allWorkColors);
+                        addInViewClass(['workDefault-color', 'workDefault-timeline-color']);
                     } else {
-                        updateWorkSelected(arrElement[currPage]);
+
+                        removeInViewClass(removeWorkColors);
+                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'), timeoutTime + 1000);
                     }
+                    
+                    updateWorkSelected(arrElement[currPage]);
                     stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
                     transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
                     break;
@@ -720,7 +724,7 @@ function createWorkButtons() {
 function updateWorkSelected(newSelected) {
 
     document.getElementById(newSelected + '-timeline-event').classList.toggle('selected-timeline');
-    var notSelected = ['contract', 'home', 'matops', 'intern'].filter(x => x != newSelected);
+    var notSelected = ['contract', 'workDefault', 'matops', 'intern'].filter(x => x != newSelected);
     notSelected.forEach(id => {
         document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');
     });
@@ -730,17 +734,17 @@ function createWorkDefaultCards() {
 
     workDefaultArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add('work-default-color');
+        element.classList.add('workDefault-color');
         element.id = workElement.id;
 
         if ((workElement.id != "data-code") && (workElement.id != "comp-code")) {
 
-            element.classList.add('work-default');
+            element.classList.add('workDefault');
             element.innerHTML =
-                '<h3 class="work-default-header">' +
+                '<h3 class="workDefault-header">' +
                 workElement.header +
                 '</h3>' +
-                '<p class="work-default-description">' +
+                '<p class="workDefault-description">' +
                 workElement.description +
                 '</p>';
         }
