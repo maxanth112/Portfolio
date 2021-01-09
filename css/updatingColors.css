@@ -3,20 +3,23 @@
     --computer-color: rgba(255, 204, 255, 0.8);
     --math-color: rgba(66, 236, 245, 0.8);
     --econ-color: rgba(129, 66, 245, 0.8);
+
+    --work-default-color: rgba(121, 248, 36, 0.8);
 }
 
-.education-main-in-view, 
-.computer-in-view,
-.math-in-view,
-.econ-in-view {
+/* EDUCATION */
+.education-main-color, 
+.computer-color,
+.math-color,
+.econ-color {
     box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
     border: 2px solid rgba(127, 255, 255, 0.25);
     color: black;
     background-color: rgba(0, 0, 0, .7);
 }
 
-.education-main-in-view-active, 
-.education-main-in-view-active .menu-button {
+.education-main-color-active, 
+.education-main-color-active .educ-button {
     color: var(--educ-color);
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--educ-color);
     border:  calc(var(--multiplier) * .2) solid var(--educ-color);
@@ -25,9 +28,9 @@
                  0 0 12px rgba(55,255,255,.8);
 }
 
-.computer-in-view-active,
-.computer-header-in-view-active,
-.computer-header-in-view-active .menu-button {
+.computer-color-active,
+.computer-header-color-active,
+.computer-header-color-active .educ-button {
     color: var(--computer-color);
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--computer-color);
     border:  calc(var(--multiplier) * .2) solid var(--computer-color);
@@ -35,24 +38,32 @@
 }
 
 
-.math-in-view-active,
-.math-header-in-view-active,
-.math-header-in-view-active .menu-button {
+.math-color-active,
+.math-header-color-active,
+.math-header-color-active .educ-button {
     color: var(--math-color);
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--math-color);
     border:  calc(var(--multiplier) * .2) solid var(--math-color);
     text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
 
-.econ-in-view-active,
-.econ-header-in-view-active,
-.econ-header-in-view-active .menu-button {
+.econ-color-active,
+.econ-header-color-active,
+.econ-header-color-active .educ-button {
     color: var(--econ-color);
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--econ-color);
     border:  calc(var(--multiplier) * .2) solid var(--econ-color);
     text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
 
-.computer-in-view {}
+/* WORK HISTORY */
+.work-default-color {
+    color: var(--work-default-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--work-default-color);
+    border:  calc(var(--multiplier) * .2) solid var(--work-default-color);
+    text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+}
 
-.econ-in-view {}
+.work-timeline-color {
+
+}

@@ -1,9 +1,6 @@
 /* WORK HISTORY TIMELINE */
 .work-top-name {
-    color: rgba(255, 255, 255, 0.75);
     font-size: calc(var(--multiplier) * 3);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
-    color: rgba(127, 255, 255, 0.75);
     margin: 
         calc(var(--multiplier) * 2)
         calc(var(--multiplier) * 0)
@@ -13,10 +10,7 @@
 }
 
 .work-top-span {
-    color: rgba(255, 255, 255, 0.75);
     font-size: calc(var(--multiplier) * 2);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
-    color: rgba(127, 255, 255, 0.75);
     margin: 
         calc(var(--multiplier) * 2.5)
         calc(var(--multiplier) * 3)
@@ -26,10 +20,7 @@
 }
 
 .work-name, .tools-header {
-    color: rgba(255, 255, 255, 0.75);
     font-size: calc(var(--multiplier) * 2);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
-    color: rgba(127, 255, 255, 0.75);
     margin: 
         calc(var(--multiplier) * 2)
         calc(var(--multiplier) * 3)
@@ -44,15 +35,11 @@
         calc(var(--multiplier) * 2)
         calc(var(--multiplier) * 3);
     font-size: calc(var(--multiplier) * 1.8);
-    color: rgba(127, 255, 255, 0.75);
 }
 
 .work-header-element {
     width: calc(var(--multiplier) * 120);
     height: calc(var(--multiplier) * 8);
-    box-shadow: 0 0 calc(var(--multiplier) * .2) rgba(0, 255, 255, 0.5);
-    border: calc(var(--multiplier) * .2) solid rgba(127, 255, 255, 0.25);
-    color: rgba(127, 255, 255, 0.75);
     text-align: left;
     background-color: rgba(0, 0, 0, .8);
 }
@@ -60,9 +47,6 @@
 .work-element {
     width: calc(var(--multiplier) * 95);;
     height: calc(var(--multiplier) * 50);
-    box-shadow: 0 0 calc(var(--multiplier) * .2) rgba(0, 255, 255, 0.5);
-    border: calc(var(--multiplier) * .2) solid rgba(127, 255, 255, 0.25);
-    background-color: rgba(0, 0, 0, .8);
 }
 
 .work-tools li {
@@ -172,17 +156,9 @@ ul img {
     width: calc(var(--multiplier) * 23.5);
     height: calc(var(--multiplier) * 50);
     background-color: transparent;
-    box-shadow: 0px 0px 3px rgba(0, 255, 255, 0.5);
-    border: 4px solid rgba(127, 255, 255, 0.25);
 }
 
 /* WORK DEFAULT VIEW */
-
-.work-default {
-    background-color: transparent;
-    box-shadow: 0 0 calc(var(--multiplier) * .2) rgba(0, 255, 255, 0.5);
-    border: calc(var(--multiplier) * .2) solid rgba(127, 255, 255, 0.25);
-}
 
 #dataAnalysis img,
 #computer img
@@ -209,7 +185,6 @@ ul img {
     font-weight: 800;
     text-align: center;
     font-size: 30px;
-    color: rgba(0, 255, 255, 0.95);
 }
 
 .tool-img-default {
@@ -300,7 +275,7 @@ ul img {
     margin-top: calc(var(--multiplier) * -2);
 }
 
-#home-button h4 {
+#home-timeline-event h4 {
     margin: calc(var(--multiplier) * 1) calc(var(--multiplier) * 1) 0 calc(var(--multiplier) * 1);
 }
 
@@ -317,6 +292,5 @@ ul img {
 #comp-code {
     width: calc(var(--multiplier) * 36);
     height: calc(var(--multiplier) * 27);
-    border: 3px solid red;
     padding: calc(var(--multiplier) * 1.5);
 }

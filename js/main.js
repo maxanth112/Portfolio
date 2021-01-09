@@ -26,10 +26,10 @@ function init() {
 
 function checkToggles() {
 
-    // console.clear();
-    // rootNames.forEach(rootName => {
-    //     console.log(rootName + ": " + roots[rootName].toggle);
-    // });
+    console.clear();
+    rootNames.forEach(rootName => {
+        console.log(rootName + ": " + roots[rootName].toggle);
+    });
 }
 
 // main threejs rendering functions 
@@ -151,23 +151,36 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function addInViewClass(updateClass, time) {
+// managing buttons and toggles 
+function updateLinkedThreesClass(updateClass, idArr, update = 'first') {
 
-    setTimeout(function(x) {
-        var updateClassList = document.getElementsByClassName(updateClass);
-        for (var i = 0; i < updateClassList.length; i++) {
-            
-            updateClassList[i].classList.add(updateClass + "-active");
-        }    
-    }, time);
+    // first element in id array gets active added, others get removed 
+    updateClass.forEach(newClass => {
+        for (var i = 0; i < idArr.length; i++) {
+            var element = document.getElementById(idArr[i]);
+            if ( (i == 0) && (update == 'first') ) {
+                element.classList.toggle(newClass);
+            } else if ( (i == 1 || i == 2) && (update == "last-two") ) {
+                element.classList.add(newClass); 
+            } else if (update == "add-all") {
+                element.classList.add(newClass);
+            } else { // remove all for 'remove-all'
+                element.classList.remove(newClass);
+            } 
+        }
+    });
 }
 
-function removeInViewClass(updateClass) {
+function updateLinkedThreesText(updateText, defaultText, idArr, update = 'first') {
 
-    var updateClassList = document.getElementsByClassName(updateClass);
-    console.log(updateClassList);
-    for (var i = 0; i < updateClassList.length; i++) {
-        updateClassList[i].classList.remove(updateClass + "-active");
+    // first element in id array gets active added, others get removed 
+    for (var i = 0; i < idArr.length; i++) {
+        var element = document.getElementById(idArr[i]);
+        if ( (i == 0) && (update == 'first') ) {
+            element.innerHTML = updateText;
+        } else { // make all default
+            element.innerHTML = defaultText;
+        } 
     }
 }
 
@@ -178,7 +191,7 @@ function createCourseCards(arr, saveRoot) {
         var element = document.createElement('div');
         element.classList.add('course-element');
         element.innerHTML =
-            '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-in-view' + '" onclick="flip(' + arrElement.number + ')">' +
+            '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-color' + '" onclick="flip(' + arrElement.number + ')">' +
             '<div class="front">' +
             '<h5 class="front-header">' + arrElement.name + '</h5>' +
             '</div>' +
@@ -197,148 +210,85 @@ function createCourseCards(arr, saveRoot) {
     });
 }
 
-function createEducationHeaderCards() {
+function createEducHeadersButtons() {
 
-    educationHeaderArray.forEach(arrHeader => {
+    educationHeaderArray.forEach(arrElement => {
+
         var element = document.createElement('div');
-        element.classList.add('education-header');
-        element.classList.add('education-main-in-view');
-        element.classList.add(arrHeader.cardId + '-in-view');
-        element.id = arrHeader.cardId;
-
-        var elementButton = document.createElement('button');
-        elementButton.id = arrHeader.id;
-        elementButton.innerHTML = '<p>' + arrHeader.label + '</p>';
-        elementButton.classList.add('menu-button');
-
-        if (elementButton.id == 'computer-button') {
-
-            elementButton.addEventListener('click', function (x) {
-                setEducationButtonSelects("computer-button");
-
-                if (roots["computer"].toggle) {
-
-                    setMotionAndToggleFalse();
-                    stopRotationSetTrue(["educSummary", "educHeader"]);
-                    clearAllNotSelected();
-
-                    transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
-                    
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("math-in-view");
-                    removeInViewClass("econ-in-view");
-                    removeInViewClass("math-header-in-view");
-                    removeInViewClass("computer-header-in-view");  
-                    removeInViewClass("econ-header-in-view");
-                    addInViewClass("education-main-in-view", timeoutTime);  
-                    // addInViewClass('')
-                } else {
-
-                    setMotionAndToggleFalse();
-                    stopRotationSetTrue(["computer", "educHeader"]); // stop rotation
-                    manageButton("computer");
-
-                    transform(allObjects, roots.computer.coordinates.viewFinal, toInterval);
-
-                    
-                    removeInViewClass("education-main-in-view");
-                    removeInViewClass("econ-in-view");  
-                    removeInViewClass("math-in-view");
-                    addInViewClass("computer-in-view", timeoutTime);  
-                    addInViewClass("computer-header-in-view", timeoutTime);
-                    addInViewClass("math-header-in-view", timeoutTime);
-                    addInViewClass("econ-header-in-view", timeoutTime);
-                }
-            }, false);
-
-        } else if (elementButton.id == 'math-button') {
-
-            elementButton.addEventListener('click', function (x) {
-                setEducationButtonSelects("math-button");
-
-                if (roots["math"].toggle) {
-
-                    setMotionAndToggleFalse();
-                    stopRotationSetTrue(["educSummary", "educHeader"]);
-                    clearAllNotSelected();
-
-                    transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("math-in-view");
-                    removeInViewClass("econ-in-view");
-                    removeInViewClass("math-header-in-view");
-                    removeInViewClass("computer-header-in-view");  
-                    removeInViewClass("econ-header-in-view");
-                    addInViewClass("education-main-in-view", timeoutTime);  
-                } else {
-
-                    setMotionAndToggleFalse();
-                    stopRotationSetTrue(["educHeader", "math"]);
-                    manageButton("math");
-
-                    transform(allObjects, roots.math.coordinates.viewFinal, toInterval);
-                    
-                    removeInViewClass("education-main-in-view");
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("econ-in-view");
-                    addInViewClass("math-in-view", timeoutTime);  
-                    addInViewClass("computer-header-in-view", timeoutTime);
-                    addInViewClass("math-header-in-view", timeoutTime);
-                    addInViewClass("econ-header-in-view", timeoutTime);
-                }
-            }, false);
-        } else if (elementButton.id == 'econ-button') {
-
-            elementButton.addEventListener('click', function (x) {
-                setEducationButtonSelects("econ-button");
-
-                if (roots["econ"].toggle) {
-
-                    setMotionAndToggleFalse();
-                    stopRotationSetTrue(["educSummary", "educHeader"]);
-                    clearAllNotSelected();
-
-                    transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("math-in-view");
-                    removeInViewClass("econ-in-view");
-                    removeInViewClass("math-header-in-view");
-                    removeInViewClass("computer-header-in-view");  
-                    removeInViewClass("econ-header-in-view");
-                    addInViewClass("education-main-in-view", timeoutTime);  
-                } else {
-
-                    setMotionAndToggleFalse();
-                    stopRotationSetTrue(["econ", "educHeader"]);
-                    manageButton("econ");
-
-                    transform(allObjects, roots.econ.coordinates.viewFinal, toInterval);
-
-                    removeInViewClass("education-main-in-view");
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("math-in-view");
-                    addInViewClass("computer-header-in-view", timeoutTime);
-                    addInViewClass("math-header-in-view", timeoutTime);
-                    addInViewClass("econ-in-view", timeoutTime);  
-                    addInViewClass("econ-header-in-view", timeoutTime);
-                }
-            }, false);
-        }
-
-
-        element.innerHTML =
-            '<div class="education-card">' +
-            '<h4 class="major">' + arrHeader.major + '</h4>' +
+        element.classList.add(arrElement.id + '-header-color',
+            'education-header', 
+            'education-main-color');
+        element.id = arrElement.id + '-header';
+        element.innerHTML = '<div class="education-card">' +
+            '<h4 class="major">' + arrElement.major + '</h4>' +
             '<p class="ba">' + 'Bachelor of Arts' + '</p>' +
-            '<h5 class="college">' + arrHeader.college + '</h5>' +
-            '<h5 class="subcollege">' + arrHeader.subcollege + '</h5>' +
-            '<p class="track">' + arrHeader.focus + '</p>' +
+            '<h5 class="college">University of Colorado Bounder,</h5>' +
+            '<h5 class="subcollege">' + arrElement.subcollege + '</h5>' +
+            '<p class="track">' + arrElement.focus + '</p>' +
             '</div>';
-        element.appendChild(elementButton);
+
+        var button = document.createElement('button');
+        button.classList.add('educ-button');
+        button.id = arrElement.id + '-button';
+        button.innerHTML = '<p>See Courses</p>';
+
+        element.appendChild(button);
         element = new THREE.CSS3DObject(element);
         roots["educHeader"].objects.push(element);
         roots["educHeader"].root.add(element);
+
+        button.addEventListener('click', function addButtonSpecs(x) {
+
+            revertAllFlippedCards();
+            if (roots[arrElement.id].toggle) {
+                
+                setMotionAndToggleFalse();
+                stopRotationSetTrue(["educSummary", "educHeader"]);
+                updateLinkedThreesClass(['education-header-selected', 
+                    'education-header-active'], arrElement.headerLinked, 'remove-all');
+                updateLinkedThreesText('', 'See Courses', arrElement.buttonLinked, 'default-all');
+
+                transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
+                specificEducationColors.forEach(toRemove => {
+                    removeInViewClass(toRemove); 
+                });
+                addInViewClass("education-main-color", timeoutTime);
+            } else {
+
+                setMotionAndToggleFalse();
+                stopRotationSetTrue(arrElement.setTrue); 
+                updateLinkedThreesClass(['education-header-selected'], arrElement.headerLinked, 'last-two');
+                updateLinkedThreesClass(['education-header-active'], arrElement.headerLinked, 'first');
+                updateLinkedThreesText('Main View', 'See Courses', arrElement.buttonLinked, 'first');
+                
+                transform(allObjects, roots[arrElement.id].coordinates.viewFinal, toInterval);
+                removeEducationColors.forEach(toRemove => {
+                    removeInViewClass(toRemove);
+                });
+                arrElement.add.forEach(toAdd => {
+                    addInViewClass(toAdd);
+                });
+            }
+        });
     });
+}
+
+function addInViewClass(updateClass, time = timeoutTime) {
+
+    setTimeout(function(x) {
+        var updateClassList = document.getElementsByClassName(updateClass);
+        for (var i = 0; i < updateClassList.length; i++) {
+            updateClassList[i].classList.add(updateClass + "-active");
+        }    
+    }, time);
+}
+
+function removeInViewClass(updateClass) {
+
+    var updateClassList = document.getElementsByClassName(updateClass);
+    for (var i = 0; i < updateClassList.length; i++) {
+        updateClassList[i].classList.remove(updateClass + "-active");
+    }
 }
 
 function createEducationSummary() {
@@ -351,7 +301,7 @@ function createEducationSummary() {
 
             element.classList.add('summary-card');
             element.innerHTML =
-                '<div class="summary-flip ' + elementSummary.id + ' education-main-in-view' + `" onclick='flip("` + elementSummary.id + `")'>` +
+                '<div class="summary-flip ' + elementSummary.id + ' education-main-color' + `" onclick='flip("` + elementSummary.id + `")'>` +
                 '<div class="front">' +
                 '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
                 '<p class="club-position">' + elementSummary.role + '</p>' +
@@ -365,14 +315,12 @@ function createEducationSummary() {
         } else if (elementSummary.id == "degree" || elementSummary.id == "extra") {
 
 
-            element.classList.add('education-main-in-view');
-            element.classList.add(elementSummary.id);
+            element.classList.add('education-main-color', elementSummary.id);
             element.innerHTML = '<h2>' + elementSummary.role + '</h2>';
         } else {
 
 
-            element.classList.add('education-main-in-view');
-            element.classList.add('summary-card');
+            element.classList.add('education-main-color', 'summary-card');
             element.innerHTML =
                 '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
                 '<p class="club-position">' + elementSummary.role + '</p>' +
@@ -387,144 +335,41 @@ function createEducationSummary() {
 
 function createMenuButtons() {
 
-    for (var i = 0; i < menuButtonArray.length; i += 1) {
+    menuButtonArray.forEach(arrElement => {
 
-        var menuButton = document.createElement('button');
-        menuButton.id = menuButtonArray[i].id;
-        menuButton.classList.add("menu-button");
-        menuButton.innerHTML = menuButtonArray[i].label;
+        var button = document.createElement('button');
+        button.classList.add("menu-button");
+        button.id = arrElement.id;
+        button.innerHTML = arrElement.label;
+    
+        button.addEventListener('click', function (x) {
+            
+            revertAllFlippedCards();
+            updateWorkSelected("home");
+            updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
+            
+            if (roots[arrElement.toggle].toggle) {
+                
+                setMotionAndToggleFalse();
+                transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
+            } else {
+                setMotionAndToggleFalse();
+                stopRotationSetTrue(arrElement.setTrue);
+                transform(allObjects, roots[arrElement.toggle].coordinates.viewFinal, toInterval);
+                
+                allEducationColors.forEach(colorClass => {
+                    removeInViewClass(colorClass);
+                });
+                addInViewClass(arrElement.add, timeoutTime);
+            }
+        });
 
-        var menuButtonObj = new THREE.CSS3DObject(menuButton);
-        roots["stationary"].root.add(menuButtonObj);
-        roots["stationary"].objects.push(menuButtonObj);
-
-        if (menuButton.id == 'education-button') {
-
-            menuButton.addEventListener('click', function (x) {
-
-                this.classList.toggle("button-active");
-                document.getElementById("work-button").classList.remove("button-active");
-                document.getElementById("bio-button").classList.remove("button-active");
-
-                // education reset 
-                resetAllButtonText();
-                clearAllSelected();
-                clearAllNotSelected();
-                clearAllActiveButtons();
-                eliminateCourseFlipClass();
-                updateWorkSelected("home");
-                setMotionAndToggleFalse(["workTimeline", "workDefault", "bioDefault", "pic1", "pic2"]);
-
-                if (roots["educSummary"].toggle) {
-
-                    setMotionAndToggleFalse();
-                    transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
-
-                    removeInViewClass('education-main-in-view');
-                    removeInViewClass("math-in-view");
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("econ-in-view");
-                    removeInViewClass("math-header-in-view");
-                    removeInViewClass("computer-header-in-view");  
-                    removeInViewClass("econ-header-in-view");
-                } else {
-
-                    stopRotationSetTrue(["educSummary", "educHeader"]);
-                    transform(allObjects, roots.educSummary.coordinates.viewFinal, toInterval);
-
-                    removeInViewClass("math-in-view");
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("econ-in-view");
-                    removeInViewClass("math-header-in-view");
-                    removeInViewClass("computer-header-in-view");  
-                    removeInViewClass("econ-header-in-view");
-                    addInViewClass('education-main-in-view', timeoutTime);
-                }
-                checkToggles();
-            }, false);
-        } else if (menuButton.id == 'work-button') {
-
-            menuButton.addEventListener('click', function (x) {
-
-                this.classList.toggle("button-active");
-                document.getElementById("education-button").classList.remove("button-active");
-                document.getElementById("bio-button").classList.remove("button-active");
-
-                // education reset 
-                resetAllButtonText();
-                clearAllSelected();
-                clearAllNotSelected();
-                clearAllActiveButtons();
-                eliminateCourseFlipClass();
-                updateWorkSelected("home");
-                setMotionAndToggleFalse(["educSummary", "bioDefault", "educHeader", "pic1", "pic2"]);
-
-                if (roots["workTimeline"].toggle) {
-
-                    setMotionAndToggleFalse();
-                    transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
-                } else {
-
-                    stopRotationSetTrue(["workDefault", "workTimeline"]);
-                    transform(allObjects, roots.workDefault.coordinates.viewFinal, toInterval);
-                    startCompText();
-
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("math-in-view");
-                    removeInViewClass("econ-in-view");
-                    removeInViewClass("math-header-in-view");
-                    removeInViewClass("computer-header-in-view");  
-                    removeInViewClass("econ-header-in-view");
-                    removeInViewClass("education-main-in-view");
-                }
-                checkToggles();
-            }, false);
-        } else if (menuButton.id == 'bio-button') {
-
-            menuButton.addEventListener('click', function (x) {
-
-                this.classList.toggle("button-active");
-                document.getElementById("education-button").classList.remove("button-active");
-                document.getElementById("work-button").classList.remove("button-active");
-
-                // education reset 
-                resetAllButtonText();
-                clearAllSelected();
-                clearAllNotSelected();
-                clearAllActiveButtons();
-                eliminateCourseFlipClass();
-                updateWorkSelected("home");
-                setMotionAndToggleFalse(["workTimeline", "educSummary", "educHeader", "workDefault"]);
-
-                if (roots["bioDefault"].toggle) {
-
-                    setMotionAndToggleFalse();
-                    resetBioButtons();
-                    transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
-
-                } else {
-
-                    resetBioButtons();
-                    interestPage = 0;
-                    currentInterest = 0;
-                    pic2Obj = travel2;
-
-                    stopRotationSetTrue(["pic1", "bioDefault"]);
-                    transform(allObjects, roots.pic1.coordinates.viewFinal, toInterval);
-                    
-                    removeInViewClass("computer-in-view");  
-                    removeInViewClass("math-in-view");
-                    removeInViewClass("econ-in-view");
-                    removeInViewClass("math-header-in-view");
-                    removeInViewClass("computer-header-in-view");  
-                    removeInViewClass("econ-header-in-view");
-                    removeInViewClass("education-main-in-view");
-                }
-                checkToggles();
-            }, false);
-        }
-    }
+        button = new THREE.CSS3DObject(button);
+        roots["stationary"].root.add(button);
+        roots["stationary"].objects.push(button);
+    });
 }
+
 
 function createBioDefaultCards() {
 
@@ -790,6 +635,7 @@ function createWorkToolsCards() {
 
             var workToolsDiv = document.createElement('div');
             workToolsDiv.classList.add('work-tools');
+            workToolsDiv.classList.add('work-defult-color');
             workToolsDiv.id = toolCategories[k];
 
             // the tool div inner html
@@ -827,6 +673,7 @@ function createWorkToolsContainer() {
     toolCategories.forEach(tool => {
 
         var element = document.createElement('div');
+        element.classList.add('work-' + tool + '-color');
         element.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
         element = new THREE.CSS3DObject(element);
         roots[tool].root.add(element);
@@ -846,6 +693,7 @@ function createWorkTimelineCards() {
 
         var element = document.createElement('div');
         element.classList.add("timeline-events");
+        element.classList.add('work-timeline-color');
         element.id = arrElement.id + "-timeline-event";
         element.innerHTML =
             '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
@@ -875,8 +723,8 @@ function createWorkTimelineCards() {
 
     // home button 
     element = document.createElement('div');
-    element.classList.add("timeline-events");
-    element.id = "home-button";
+    element.classList.add("timeline-events", "work-default-colors");
+    element.id = "home-timeline-event";
     element.innerHTML =
         '<div id="' + '" class="timeline-months-' + 3 + '">' +
         '<h4>' + 'Home Page' + '</h4>' +
@@ -889,131 +737,54 @@ function createWorkTimelineCards() {
 
 function createWorkButtons() {
 
-    var leftButton = document.createElement('div');
-    var rightButton = document.createElement('div');
+    workButtonArray.forEach(arrElement => {
+        var button = document.createElement('div');
+        button.classList.add(arrElement.id + '-arrow',
+            'work-timeline-color',
+            'flex-container');
+        button.id = arrElement.id;
+        button.innerHTML = '<i class="fa fa-arrow-' + arrElement.id + ' fa-5x icon-3d"></i>';
 
-    leftButton.classList.add("flex-container");
-    rightButton.classList.add("flex-container");
-    leftButton.classList.add('left-arrow');
-    rightButton.classList.add('right-arrow');
-
-    leftButton.innerHTML = '<i class="fa fa-arrow-left fa-5x icon-3d"></i>';
-    rightButton.innerHTML = '<i class="fa fa-arrow-right fa-5x icon-3d"></i>';
-
-    var leftButtonObj = new THREE.CSS3DObject(leftButton);
-    var rightButtonObj = new THREE.CSS3DObject(rightButton);
-
-    leftButton.addEventListener('click', function (x) {
-
-
-        if (roots["workDefault"].toggle) { // default -> contract
-
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("contract");
-            stopRotationSetTrue(["contract", "workTimeline"]);
-            transform(allObjects, roots.contract.coordinates.viewFinal, backInterval);
-        } else if (roots["matops"].toggle) { // matops -> intern
-
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("intern");
-            stopRotationSetTrue(["intern", "workTimeline"]);
-            transform(allObjects, roots.intern.coordinates.viewFinal, backInterval);
-        } else if (roots["contract"].toggle) { // contract -> matops 
-
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("matops");
-            stopRotationSetTrue(["matops", "workTimeline"]);
-            transform(allObjects, roots.matops.coordinates.viewFinal, backInterval);
-        } else if (roots["intern"].toggle) { // intern -> default
-
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("home");
-            stopRotationSetTrue(["workDefault", "workTimeline"]);
-
-            transform(allObjects, roots.workDefault.coordinates.viewFinal, backInterval);
-        }
-    }, false);
-
-    rightButton.addEventListener('click', function (x) {
-
-        if (roots["workDefault"].toggle) { // default -> intern 
-
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("intern");
-            stopRotationSetTrue(["intern", "workTimeline"]);
-            transform(allObjects, roots.intern.coordinates.viewFinal, backInterval);
-        } else if (roots["matops"].toggle) { // matops -> contract
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("contract");
-            stopRotationSetTrue(["contract", "workTimeline"]);
-            transform(allObjects, roots.contract.coordinates.viewFinal, backInterval);
-        } else if (roots["contract"].toggle) { // contract -> default
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("home");
-            stopRotationSetTrue(["workDefault", "workTimeline"]);
-            transform(allObjects, roots.workDefault.coordinates.viewFinal, backInterval);
-        } else if (roots["intern"].toggle) { // intern -> matops
-
-            setMotionAndToggleFalse();
-            updateWorkSelected("matops");
-            stopRotationSetTrue(["matops", "workTimeline"]);
-            transform(allObjects, roots.matops.coordinates.viewFinal, backInterval);
-        }
-    }, false);
-
-
-    roots["workTimeline"].objects.push(leftButtonObj);
-    roots["workTimeline"].objects.push(rightButtonObj);
-    roots["workTimeline"].root.add(leftButtonObj);
-    roots["workTimeline"].root.add(rightButtonObj);
+        button.addEventListener('click', function(x) {
+            var pages = ['workDefault', 'matops', 'contract', 'intern'];
+            for (let currPage of pages) {
+                
+                var id = this.id;                
+                if (roots[currPage].toggle) {
+                    
+                    setMotionAndToggleFalse();
+                    if ( ( (currPage == 'intern') && (id == 'left') ) || ( (currPage == 'contract' ) && ( id == 'right') ) ) {
+                        updateWorkSelected('home');
+                    } else {
+                        updateWorkSelected(arrElement[currPage]);
+                    }
+                    stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
+                    transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
+                    break;
+                }
+            }
+        }, false);
+        button = new THREE.CSS3DObject(button);
+        roots["workTimeline"].objects.push(button);
+        roots["workTimeline"].root.add(button);
+    });   
 }
 
 function updateWorkSelected(newSelected) {
 
-    if (newSelected == "home") {
+    document.getElementById(newSelected + '-timeline-event').classList.toggle('selected-timeline');
 
-        document.getElementById("home-button").classList.toggle("selected-timeline");
-        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
-    } else if (newSelected == "intern") {
-
-        document.getElementById("intern-timeline-event").classList.toggle("selected-timeline");
-        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("home-button").classList.remove("selected-timeline");
-    } else if (newSelected == "matops") {
-
-        document.getElementById("matops-timeline-event").classList.toggle("selected-timeline");
-        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("home-button").classList.remove("selected-timeline");
-    } else if (newSelected == "contract") {
-
-        document.getElementById("contract-timeline-event").classList.toggle("selected-timeline");
-        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("home-button").classList.remove("selected-timeline");
-    } else {
-
-        document.getElementById("contract-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("intern-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("matops-timeline-event").classList.remove("selected-timeline");
-        document.getElementById("home-button").classList.remove("selected-timeline");
-    }
+    var notSelected = ['contract', 'home', 'matops', 'intern'].filter(x => x != newSelected);
+    notSelected.forEach(id => {
+        document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');
+    });
 }
 
 function createWorkDefaultCards() {
 
     workDefaultArray.forEach(workElement => {
         var element = document.createElement('div');
+        element.classList.add('work-default-color');
         element.id = workElement.id;
 
         if ((workElement.id != "data-code") && (workElement.id != "comp-code")) {
@@ -1032,103 +803,6 @@ function createWorkDefaultCards() {
         roots["workDefault"].objects.push(element);
         roots["workTimeline"].root.add(element);
     });
-}
-
-// managing buttons and toggles 
-function clearAllNotSelected() {
-
-    var b1 = document.getElementById("computer-button").parentElement;
-    var b2 = document.getElementById("math-button").parentElement;
-    var b3 = document.getElementById("econ-button").parentElement;
-
-    b1.classList.remove("not-selected-header");
-    b2.classList.remove("not-selected-header");
-    b3.classList.remove("not-selected-header");
-}
-
-function clearAllSelected() {
-
-    var b1 = document.getElementById("computer-button").parentElement;
-    var b2 = document.getElementById("math-button").parentElement;
-    var b3 = document.getElementById("econ-button").parentElement;
-
-    b1.classList.remove("selected-header");
-    b2.classList.remove("selected-header");
-    b3.classList.remove("selected-header");
-}
-
-function clearAllActiveButtons() {
-
-    var b1 = document.getElementById("computer-button");
-    var b2 = document.getElementById("math-button");
-    var b3 = document.getElementById("econ-button");
-
-    b1.classList.remove("button-active");
-    b2.classList.remove("button-active");
-    b3.classList.remove("button-active");
-
-}
-
-function setNotSelected(selected) {
-
-    var b1 = document.getElementById("computer-button").parentElement;
-    var b2 = document.getElementById("math-button").parentElement;
-    var b3 = document.getElementById("econ-button").parentElement;
-
-    b1.classList.add("not-selected-header");
-    b2.classList.add("not-selected-header");
-    b3.classList.add("not-selected-header");
-
-    if (selected == "computer") {
-        b1.classList.remove("not-selected-header");
-    } else if (selected == "math") {
-        b2.classList.remove("not-selected-header");
-    } else {
-        b3.classList.remove("not-selected-header");
-    }
-}
-
-function replaceButtonText(buttonId) {
-
-    document.getElementById(buttonId).innerHTML = "Main View";
-}
-
-function resetAllButtonText() {
-
-    document.getElementById("computer-button").innerHTML = "See Courses";
-    document.getElementById("math-button").innerHTML = "See Courses";
-    document.getElementById("econ-button").innerHTML = "See Courses";
-}
-
-function manageButton(id) {
-
-    flipToggles(id);
-    setNotSelected(id);
-    replaceButtonText(id + "-button");
-}
-
-function setEducationButtonSelects(mainButton) {
-
-    var buttons = ["computer-button", "math-button", "econ-button"];
-    buttons = buttons.filter(function removeMain(button) {
-        return button != mainButton
-    });
-
-    var b1 = document.getElementById(mainButton);
-    var b2 = document.getElementById(buttons[0]);
-    var b3 = document.getElementById(buttons[1]);
-
-    b1.classList.toggle("button-active");
-    b1.parentElement.classList.toggle("selected-header");
-
-    b2.classList.remove("button-active");
-    b2.parentElement.classList.remove("selected-header");
-
-    b3.classList.remove("button-active");
-    b3.parentElement.classList.remove("selected-header");
-
-    resetAllButtonText();
-    eliminateCourseFlipClass();
 }
 
 // managing rotations and toggles 
@@ -1171,7 +845,7 @@ function setMotionAndToggleFalse(rootNameArr = "nada") {
 
 };
 
-function flipToggles(toggle) {
+function flipToggle(toggle) {
 
     roots[toggle].toggle = true;
 }
@@ -1181,7 +855,7 @@ function flip(element) {
     $('.' + element).toggleClass('flipped');
 }
 
-function eliminateCourseFlipClass() {
+function revertAllFlippedCards() {
     $('.course-card').removeClass('flipped');
     $('.summary-flip').removeClass('flipped');
 }
@@ -1195,7 +869,7 @@ function createAllCards() {
     createCourseCards(mathArray, "math");
     createCourseCards(computerArray, "computer");
     createCourseCards(econArray, "econ");
-    createEducationHeaderCards();
+    createEducHeadersButtons();
     createEducationSummary();
 
     createWorkTimelineCards();

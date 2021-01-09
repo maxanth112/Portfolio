@@ -127,42 +127,42 @@
   visibility: hidden;
 }
 
-.selected-header,
-.not-selected-header {
+.education-header-active, 
+.education-header-selected {
   height: calc(var(--multiplier) * 23);
 } 
 
-.selected-header {
+.education-header-active {
   width: calc(var(--multiplier) * 33);
   margin: 0 0 0 calc(var(--multiplier) * 1.5);
 
 }
 
-.not-selected-header {
+.education-header-selected {
   width: calc(var(--multiplier) * 30);
 }
 
-.selected-header>.education-card>.college {
+.education-header-active>.education-card>.college {
   font-size: calc(var(--multiplier) * 1.9);
 }
 
-.selected-header>.education-card>.ba {
+.education-header-active>.education-card>.ba {
   font-size: calc(var(--multiplier) * 1.7);
 }
 
-.selected-header>.education-card>.subcollege {
+.education-header-active>.education-card>.subcollege {
   font-size: calc(var(--multiplier) * 1.6);
 }
 
-.selected-header>.education-card>.track {
+.education-header-active>.education-card>.track {
   font-size: calc(var(--multiplier) * 1.5);
 }
 
-.not-selected-header>.education-card>.major {
+.education-header-selected>.education-card>.major {
   font-size: calc(var(--multiplier) * 2.1);
 }
 
-.selected-header>#computer-button {
+.education-header-active>#computer-button {
   margin-top: calc(var(--multiplier) * -3);
 }
 
@@ -170,12 +170,21 @@
   transition: margin-top 1s;
 }
 
-.menu-button {
+.educ-button {
 	font-weight: 600;
   width: calc(var(--multiplier) * 10);
   height: calc(var(--multiplier) * 2.9);
 	font-size: calc(var(--multiplier) * 1.3);
   margin: calc(var(--multiplier) * 0.3) calc(var(--multiplier) * 1.5);
   cursor: pointer;
+  background: transparent;
+}
+
+.menu-button {
+  color: red;
+}
+
+.menu-button-active {
+  color: blue;
   background: transparent;
 }

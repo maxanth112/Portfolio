@@ -18,6 +18,21 @@ var rootNames = [
     "workTimeline", "intern", "matops", "contract", "workDefault", 
     "bioDefault", "pic1", "pic2"
 ];
+
+var removeEducationColors = [
+    'education-main-color',
+    'computer-color', 
+    'math-color', 
+    'econ-color']
+
+var allEducationColors = removeEducationColors.concat([
+    'computer-header-color',
+    'math-header-color', 
+    'econ-header-color']);
+
+var specificEducationColors = allEducationColors.filter(color => color != 'education-main-color');
+
+
 var roots = {
     stationary: {
         root: '',
@@ -42,7 +57,7 @@ var roots = {
         toggle: '',
         motion: '',
         inViewClass: '',
-        classToUpdate: ['math-in-view'],
+        classToUpdate: ['math-color'],
         objects: [],
         coordinates: {
             view: [],
@@ -60,7 +75,7 @@ var roots = {
         toggle: '',
         motion: '',
         inViewClass: '',
-        classToUpdate: ['computer-in-view'],
+        classToUpdate: ['computer-color'],
         objects: [],
         coordinates: {
             view: [],
@@ -78,7 +93,7 @@ var roots = {
         toggle: '',
         motion: '',
         inViewClass: '',
-        classToUpdate: ['econ-in-view'],
+        classToUpdate: ['econ-color'],
         objects: [],
         coordinates: {
             view: [],
@@ -114,7 +129,7 @@ var roots = {
         toggle: '',
         motion: '',
         inViewClass: '',
-        classToUpdate: ['education-main-in-view'],
+        classToUpdate: ['education-main-color'],
         objects: [],
         coordinates: {
             view: [],
@@ -132,7 +147,7 @@ var roots = {
         toggle: '',
         motion: '',
         inViewClass: '',
-        classToUpdate: ['education-main-in-view'],
+        classToUpdate: ['education-main-color'],
         objects: [],
         coordinates: {
             view: [],
@@ -300,19 +315,34 @@ var stationaryButtonY = -135;
 var menuButtonArray = [{
         label: "Education",
         id: "education-button",
+        toggle: 'educSummary',
+        add: ['education-main-color'],
+        setTrue: ['educSummary', 'educHeader'],
+        buttonLinked: ['education-button', 'work-button', 'bio-button'],
+        toggleFalse: ["workTimeline", "workDefault", "bioDefault", "pic1", "pic2"],
         position: [-0.2, stationaryButtonY]
     },
     {
         label: "Professional",
         id: "work-button",
+        toggle: 'workDefault',
+        add: ['work-main-color'],
+        setTrue: ["workDefault", "workTimeline"],
+        buttonLinked: ['work-button', 'education-button', 'bio-button'],
+        toggleFalse: ["educSummary", "bioDefault", "educHeader", "pic1", "pic2"],
         position: [0, stationaryButtonY]
     },
     {
         label: "Bio",
         id: "bio-button",
+        toggle: 'pic1',
+        add: ['bio-color'],
+        setTrue: ["pic1", "bioDefault"],
+        buttonLinked: ['bio-button', 'education-button', 'work-button'],
+        toggleFalse: ["workTimeline", "educSummary", "educHeader", "workDefault"],
         position: [0.2, stationaryButtonY]
     }
-]
+];
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                      education headers                          ////////
@@ -320,42 +350,42 @@ var menuButtonArray = [{
 
 var educHeaderY = 2.2;
 var educationHeaderArray = [{
+        id: "computer",
         major: "Computer Science",
-        college: "University of Colorado Boulder,",
         focus: "[Computer]",
         subcollege: "College of Engineering and Applied Science",
         dates: "January 2020 - May 2021",
-        GPA: "4.0",
-        label: "See Courses",
-        cardId: "computer-header",
-        img: "",
-        id: "computer-button",
+        setTrue: ["computer", "educHeader"],
+        headerLinked: ['computer-header', 'math-header', 'econ-header'],
+        buttonLinked: ['computer-button', 'math-button', 'econ-button'],
+        add: ['computer-color', 'math-header-color', 'econ-header-color',
+            'computer-header-color'],
         position: [-1.3, educHeaderY]
     },
     {
+        id: "math",
         major: "Mathematics",
         focus: "[Computational Mathematics Track]",
-        college: "University of Colorado Boulder,",
         subcollege: "College of Arts and Sciences",
         dates: "January 2020 - May 2021",
-        cardId: "math-header",
-        GPA: "3.2",
-        id: "math-button",
-        img: "",
-        label: "See Courses",
+        setTrue: ["math", "educHeader"],
+        headerLinked: ['math-header', 'computer-header', 'econ-header'],
+        buttonLinked: ['math-button', 'econ-button', 'computer-button'],
+        add: ['math-color', 'math-header-color', 'econ-header-color',
+            'computer-header-color'],
         position: [0, educHeaderY],
     },
     {
+        id: "econ",
         major: "Economics",
         focus: "[International Economics Track]",
-        college: "University of Colorado Boulder,",
         subcollege: "College of Arts and Sciences",
         dates: "August 2015 - May 2019",
-        GPA: "3.2",
-        label: "See Courses",
-        cardId: "econ-header",
-        id: "econ-button",
-        img: "",
+        setTrue: ["econ", "educHeader"],
+        headerLinked: ['econ-header', 'math-header', 'computer-header'],
+        buttonLinked: ['econ-button', 'math-button', 'computer-button'],
+        add: ['econ-color', 'math-header-color', 'econ-header-color',
+            'computer-header-color'],
         position: [1.3, educHeaderY],
     }
 ];
@@ -775,7 +805,7 @@ var workToolsArray = [{
             matops: 0,
             contract: 0
         },
-        image: './../img/numpy.png'
+        image: './../img/wood.jpg'
     }
 ];
 
@@ -821,6 +851,28 @@ var workTimelineDisplayArray = [{
         position: [homeButtons, timelineElement]
     }
 ];
+
+var workButtonArray = [
+    {
+        id: 'left', 
+        workDefault: 'contract',
+        matops: 'intern',
+        contract: 'matops', 
+        intern: 'workDefault',
+    }, 
+    {
+        id: 'right', 
+        workDefault: 'intern',
+        matops: 'contract',
+        contract: 'workDefault', 
+        intern: 'matops',
+    }, 
+];
+
+
+
+
+
 
 var toolsX = -1.43;
 var toolsGap = 0.66;
