@@ -627,7 +627,33 @@ function createWorkContentCards() {
 
 function createWorkToolsCards() {
 
-    var toolCategories = ["intern", "matops", "contract"];
+    // var toolCategories = ["intern", "matops", "contract"];
+    // toolCategories.forEach(category => {
+    //     workToolsArray.forEach(arrElement => {
+    //         var element = document.createElement('div');
+    //         element.classList.add('work-tools', category + '-color');
+    //         element.id = category;
+
+    //         var hide = arrElement.score[category] ? "" : "hide";
+    //         var toolHtml = '<ul class="tool-row ' + hide + '">' +
+    //             '<img class="tool-row-img ' + arrElement.id + '" src="' +
+    //             arrElement.image + '">' + '<div class="all-tools">';
+
+    //         for (var i = 0; i < 10; i++) {
+    //             if (i < arrElement.score[category]) {
+    //                 toolHtml += '<li class="active">' + '</li>';
+    //             } else {
+    //                 toolHtml += '<li></li>';
+    //             }
+    //         }
+
+    //         toolHtml += '</div>' + '</ul>';
+    //         element.innerHtml = toolHtml;
+    //         element = new THREE.CSS3DObject(element);
+    //         roots[category].root.add(element);
+    //         roots[category].objects.push(element);
+    //     });
+    // });
     for (var k = 0; k < toolCategories.length; k += 1) {
 
         // for each element in the tools array
@@ -635,7 +661,7 @@ function createWorkToolsCards() {
 
             var workToolsDiv = document.createElement('div');
             workToolsDiv.classList.add('work-tools');
-            workToolsDiv.classList.add('work-defult-color');
+            workToolsDiv.classList.add('-color');
             workToolsDiv.id = toolCategories[k];
 
             // the tool div inner html
@@ -673,7 +699,7 @@ function createWorkToolsContainer() {
     toolCategories.forEach(tool => {
 
         var element = document.createElement('div');
-        element.classList.add('work-' + tool + '-color');
+        element.classList.add(tool + '-color');
         element.innerHTML = '<div class="tool-container"><h1 class="tools-header">Software/Tools Used:</h1></div>';
         element = new THREE.CSS3DObject(element);
         roots[tool].root.add(element);
@@ -695,8 +721,7 @@ function createWorkTimelineCards() {
         element.classList.add("timeline-events");
         element.classList.add('work-timeline-color');
         element.id = arrElement.id + "-timeline-event";
-        element.innerHTML =
-            '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
+        element.innerHTML = '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
             '<h2>' + arrElement.timeline + '</h2>' +
             '<h3>' + arrElement.company + '</h3>' +
             '<h4>' + arrElement.title + '</h4>' +
@@ -710,8 +735,7 @@ function createWorkTimelineCards() {
     // timeline bar 
     var element = document.createElement('ul');
     element.classList.add("timeline-years");
-    element.innerHTML =
-        '<div class="timelines-years">' +
+    element.innerHTML = '<div class="timelines-years">' +
         '<li class="tyears">2019</li>' +
         '<li class="tyears">2020</li>' +
         '<li class="tyears">2021</li>' +
@@ -725,8 +749,7 @@ function createWorkTimelineCards() {
     element = document.createElement('div');
     element.classList.add("timeline-events", "work-default-colors");
     element.id = "home-timeline-event";
-    element.innerHTML =
-        '<div id="' + '" class="timeline-months-' + 3 + '">' +
+    element.innerHTML = '<div id="' + '" class="timeline-months-' + 3 + '">' +
         '<h4>' + 'Home Page' + '</h4>' +
         '</div>';
 
