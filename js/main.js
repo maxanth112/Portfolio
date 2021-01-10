@@ -215,8 +215,7 @@ function createEducHeadersButtons() {
     educationHeaderArray.forEach(arrElement => {
         var element = document.createElement('div');
         element.classList.add(arrElement.id + '-header-color',
-            'education-header', 
-            'education-main-color');
+            'education-header');
         element.id = arrElement.id + '-header';
         element.innerHTML = '<div class="education-card">' +
             '<h4 class="major">' + arrElement.major + '</h4>' +
@@ -245,7 +244,7 @@ function createEducHeadersButtons() {
                 updateLinkedThreesText('', 'See Courses', arrElement.buttonLinked, 'default-all');
 
                 transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
-                removeInViewClass(specificEducationColors); 
+                removeInViewClass(educationCourseColors); 
                 addInViewClass(["education-main-color"]);
             } else {
 
@@ -256,23 +255,25 @@ function createEducHeadersButtons() {
                 updateLinkedThreesText('Main View', 'See Courses', arrElement.buttonLinked, 'first');
                 
                 transform(allObjects, roots[arrElement.id].coordinates.viewFinal, toInterval);
-                removeInViewClass(removeEducationColors);
+                removeInViewClass(educationCourseColors.concat('education-main-color'));
                 addInViewClass(arrElement.add);
             }
         });
     });
 }
 
-function addInViewClass(classArr, time = timeoutTime) {
+function addInViewClass(classArr, type = "single", time = timeoutTime) {
 
-    classArr.forEach(className => {
-
+    var timeDelay = 1;
+    
+    classArr.forEach(className => {    
         setTimeout( function(x) {
             var classElements = document.getElementsByClassName(className);
             for (let classElement of classElements) {
                 classElement.classList.add(className + "-active");
             }    
-        }, time);
+        }, time * timeDelay);
+        if (type != "single") { timeDelay++; }
     });
 }
 
@@ -353,7 +354,7 @@ function createMenuButtons() {
                 transform(allObjects, roots[arrElement.toggle].coordinates.viewFinal, toInterval);
                 
                 removeInViewClass(allColors);
-                addInViewClass(arrElement.add);
+                addInViewClass(arrElement.add, "delay");
             }
         });
         pushRootandObjArr('stationary', button);
@@ -707,7 +708,9 @@ function createWorkButtons() {
                     } else {
 
                         removeInViewClass(removeWorkColors);
-                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'), timeoutTime + 1000);
+                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'), 
+                            "single", 
+                            timeoutTime + 1000);
                     }
                     
                     updateWorkSelected(arrElement[currPage]);

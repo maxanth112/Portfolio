@@ -5,7 +5,7 @@
     --math-color: rgba(66, 236, 245, 0.8);
     --econ-color: rgba(129, 66, 245, 0.8);
 
-    --workDefault-color: white;
+    --workDefault-color: blue;
     --intern-color: rgba(218, 0, 0, 0.8);
     --matops-color: rgba(0, 204, 255, 0.8);
     --contract-color: rgba(255, 0, 234, 0.8);
@@ -13,6 +13,9 @@
 
 /* EDUCATION */
 .education-main-color, 
+.computer-header-color,
+.math-header-color,
+.econ-header-color,
 .computer-color,
 .math-color,
 .econ-color, 
@@ -25,6 +28,12 @@
     color: black;
     background-color: rgba(0, 0, 0, .7);
     box-shadow: 6px 6px 15px var(--all-color);
+}
+
+.computer-header-color div button,
+.math-header-color div button,
+.econ-header-color div button {
+    display: hidden;
 }
 
 .workDefault-timeline-color div h2,

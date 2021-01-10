@@ -19,16 +19,20 @@ var rootNames = [
     "bioDefault", "pic1", "pic2"
 ];
 
-var removeEducationColors = [
-    'education-main-color',
+var educationHeaderColors = [
+    'computer-header-color',
+    'math-header-color',
+    'econ-header-color'
+];
+
+var educationCourseColors = [
     'computer-color', 
     'math-color', 
     'econ-color']
 
-var allEducationColors = removeEducationColors.concat([
-    'computer-header-color',
-    'math-header-color', 
-    'econ-header-color']);
+var allEducationColors = educationHeaderColors
+    .concat(educationCourseColors)
+    .concat('education-main-color');
 
 var specificEducationColors = allEducationColors.filter(color => color != 'education-main-color');
 
@@ -334,7 +338,8 @@ var menuButtonArray = [{
         label: "Education",
         id: "education-button",
         toggle: 'educSummary',
-        add: ['education-main-color'],
+        add: ['education-main-color', 'computer-header-color', 
+            'math-header-color', 'econ-header-color'],
         setTrue: ['educSummary', 'educHeader'],
         buttonLinked: ['education-button', 'work-button', 'bio-button'],
         toggleFalse: ["workTimeline", "workDefault", "bioDefault", "pic1", "pic2"],
@@ -521,7 +526,9 @@ var mathArray = [{
         type: "MATH",
         number: "3430",
         name: "Ordinary Differential Equations",
-        description: "",
+        description: "Covered first/second order ODE's, systems, Dirac delta function, \
+            Heavyside, discontinuities, solutions of real/complex/repeating roots. \
+            Wrote my final project on solving systems of engineering circuits using Laplace Transforms.",
         language: "LaTeX",
         position: [right, firstRow]
     },
