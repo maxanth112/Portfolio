@@ -342,22 +342,236 @@ function createMenuButtons() {
             revertAllFlippedCards();
             updateWorkSelected("workDefault");
             updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
+            updateLinkedThreesClass(educationResetClasses, educationHeaderClasses, 'remove-all');
+            updateLinkedThreesText('', 'See Courses', educationButtonClasses, 'default-all');
+            removeInViewClass(allColors);
             if (roots[arrElement.toggle].toggle) {
                 
                 setMotionAndToggleFalse();
-                transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
 
-                removeInViewClass(allColors);
+                transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
             } else {
                 setMotionAndToggleFalse();
                 stopRotationSetTrue(arrElement.setTrue);
-                transform(allObjects, roots[arrElement.toggle].coordinates.viewFinal, toInterval);
-                
-                removeInViewClass(allColors);
-                addInViewClass(arrElement.add, "delay");
+
+                transform(allObjects, roots[arrElement.sendTo].coordinates.viewFinal, toInterval);
+                addInViewClass(arrElement.add, "delay", 500);
             }
         });
         pushRootandObjArr('stationary', button);
+    });
+}
+
+function createImgCards(arr, saveRoot) {
+
+    arr.forEach(arrElement => {
+        var element = document.createElement('div');
+        element.classList.add(arrElement.id);
+
+        if (arrElement.card == "s") {
+            var elementImg = document.createElement('img');
+            elementImg.src = arrElement.img;
+            elementImg.id = arrElement.newid + '-img';
+
+            element.appendChild(elementImg);
+        } else {
+            var elementHeader = document.createElement('h3');
+            elementHeader.id = arrElement.newid + '-h3';
+            elementHeader.classList.add("img-loc");
+            elementHeader.innerHTML = arrElement.header;
+
+            var elementP = document.createElement('p');
+            elementP.id = arrElement.newid + '-p';
+            elementP.innerHTML = arrElement.description;
+
+            element.appendChild(elementHeader);
+            element.appendChild(elementP);
+        }
+        pushRootandObjArr(saveRoot, element);
+    });
+}
+
+function createWorkHeaderCards() {
+
+    workContentArray.forEach(workElement => {
+        var element = document.createElement('div');
+        element.classList.add(workElement.id + '-color', 'work-header-element');
+        element.innerHTML = '<div class="work-top">' +
+            '<h5 class="work-top-name">' +
+            workElement.title +
+            '</h5>' +
+            '<h3 class="work-top-span">' +
+            workElement.comit +
+            '</h3>' +
+            '</div>';
+        pushRootandObjArr(workElement.id, element);
+    });
+}
+
+function createWorkContentCards() {
+
+    workContentArray.forEach(workElement => {
+        var element = document.createElement('div');
+        element.classList.add(workElement.id + '-color', 'work-element');
+        element.innerHTML = '<div class="work-header">' +
+            '<h5 class="work-name">' +
+            workElement.timeline +
+            '</h5>' +
+            '<p class="work-details">' +
+            workElement.description +
+            '</p>' +
+            '</div>';
+        pushRootandObjArr(workElement.id, element);
+    });
+}
+
+function createWorkToolsCards() {
+
+    var toolCategories = ["intern", "matops", "contract"];
+    toolCategories.forEach(category => {
+        workToolsArray.forEach(arrElement => {
+            var element = document.createElement('div');
+            element.classList.add('work-tools');
+            element.id = category;
+            var hide = arrElement.score[category] ? "" : "hide";
+            var toolHtml = '<ul class="tool-row ' + hide + '">' +
+                '<img class="tool-row-img ' + arrElement.id + '" src="' +
+                arrElement.image + '">' + '<div class="all-tools">';
+
+            for (var i = 0; i < 10; i++) {
+                if (i < arrElement.score[category]) {
+                    toolHtml += '<li class="active ' + category + '-color">' + '</li>';
+                } else {
+                    toolHtml += '<li></li>';
+                }
+            }    
+            toolHtml += '</div>' + '</ul>';
+            element.innerHTML = toolHtml;
+            console.log(element);
+            pushRootandObjArr(category, element);
+        });
+    });
+}
+
+function createWorkToolsContainer() {
+
+    var toolCategories = ["intern", "matops", "contract"];
+    toolCategories.forEach(tool => {
+        var element = document.createElement('div');
+        element.classList.add(tool + '-color', 'tool-container');
+        element.innerHTML = '<h1 class="tools-header">Software/Tools Used:</h1>';
+        pushRootandObjArr(tool, element);
+    });
+}
+
+function createSocialMedia() {
+    var html = '<div class="flex-center">' +
+        '<i class="fa fa-github fa-4x icon-3d">' + '</i>' +
+        '</div>';
+}
+
+function createWorkTimelineCards() {
+
+    workContentArray.forEach(arrElement => {
+        var element = document.createElement('div');
+        
+        element.classList.add(arrElement.id + '-timeline-color',
+            "timeline-events");
+        element.id = arrElement.id + "-timeline-event";
+        element.innerHTML = '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
+            '<h2>' + arrElement.timeline + '</h2>' +
+            '<h3>' + arrElement.company + '</h3>' +
+            '<h4>' + arrElement.title + '</h4>' +
+            '</div>';
+        pushRootandObjArr('workTimeline', element);
+    });
+
+    // timeline bar 
+    var element = document.createElement('ul');
+    element.classList.add("timeline-years", "workDefault-timeline-color");
+    element.innerHTML = '<div class="timelines-years">' +
+        '<li class="tyears">2019</li>' +
+        '<li class="tyears">2020</li>' +
+        '<li class="tyears">2021</li>' +
+        '</ul>';
+    pushRootandObjArr('workTimeline', element);
+
+    // home button 
+    element = document.createElement('div');
+    element.classList.add("timeline-events", "workDefault-timeline-color");
+    element.id = "workDefault-timeline-event";
+    element.innerHTML = '<div id="' + '" class="timeline-months-' + 3 + '">' +
+        '<h4>' + 'Home Page' + '</h4>' +
+        '</div>';
+    pushRootandObjArr('workTimeline', element);
+}
+
+function createWorkButtons() {
+
+    workButtonArray.forEach(arrElement => {
+        var button = document.createElement('div');
+        button.classList.add(arrElement.id + '-arrow', 'flex-container');
+        button.id = arrElement.id;
+        button.innerHTML = '<i class="fa fa-arrow-' + arrElement.id + ' fa-5x icon-3d"></i>';
+        button.addEventListener('click', function(x) {
+            var pages = ['workDefault', 'matops', 'contract', 'intern'];
+            for (let currPage of pages) {
+                if (roots[currPage].toggle) {
+                    setMotionAndToggleFalse();
+                    
+                    if (arrElement[currPage] ==  'workDefault') {
+
+                        removeInViewClass(removeWorkColors);
+                        addInViewClass(['workDefault-color', 'workDefault-timeline-color']);
+                    } else {
+
+                        removeInViewClass(removeWorkColors);
+                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'), 
+                            "single", 
+                            timeoutTime + 1000);
+                    }
+                    updateWorkSelected(arrElement[currPage]);
+                    stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
+                    transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
+                    break;
+                }
+            }
+        }, false);
+    pushRootandObjArr('workTimeline', button);
+    });   
+}
+
+function updateWorkSelected(newSelected) {
+
+    document.getElementById(newSelected + '-timeline-event').classList.toggle('selected-timeline');
+    var notSelected = ['contract', 'workDefault', 'matops', 'intern'].filter(x => x != newSelected);
+    notSelected.forEach(id => {
+        document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');
+    });
+}
+
+function createWorkDefaultCards() {
+
+    workDefaultArray.forEach(workElement => {
+        var element = document.createElement('div');
+        element.classList.add('workDefault-color');
+        element.id = workElement.id;
+
+        if ((workElement.id != "data-code") && (workElement.id != "comp-code")) {
+
+            element.classList.add('workDefault');
+            element.innerHTML =
+                '<h3 class="workDefault-header">' +
+                workElement.header +
+                '</h3>' +
+                '<p class="workDefault-description">' +
+                workElement.description +
+                '</p>';
+        }
+
+        element = new THREE.CSS3DObject(element);
+        roots["workDefault"].objects.push(element);
+        roots["workTimeline"].root.add(element);
     });
 }
 
@@ -538,224 +752,6 @@ function resetBioButtons() {
     travelButton.innerHTML = "Like Em'?";
     woodButton.innerHTML = "See Pics";
     bikesButton.innerHTML = "See Pics";
-}
-
-function createImgCards(arr, saveRoot) {
-
-    arr.forEach(arrElement => {
-        var element = document.createElement('div');
-        element.classList.add(arrElement.id);
-
-        if (arrElement.card == "s") {
-            var elementImg = document.createElement('img');
-            elementImg.src = arrElement.img;
-            elementImg.id = arrElement.newid + '-img';
-
-            element.appendChild(elementImg);
-        } else {
-            var elementHeader = document.createElement('h3');
-            elementHeader.id = arrElement.newid + '-h3';
-            elementHeader.classList.add("img-loc");
-            elementHeader.innerHTML = arrElement.header;
-
-            var elementP = document.createElement('p');
-            elementP.id = arrElement.newid + '-p';
-            elementP.innerHTML = arrElement.description;
-
-            element.appendChild(elementHeader);
-            element.appendChild(elementP);
-        }
-        pushRootandObjArr(saveRoot, element);
-    });
-}
-
-function createWorkHeaderCards() {
-
-    workContentArray.forEach(workElement => {
-        var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-header-element');
-        element.innerHTML = '<div class="work-top">' +
-            '<h5 class="work-top-name">' +
-            workElement.title +
-            '</h5>' +
-            '<h3 class="work-top-span">' +
-            workElement.comit +
-            '</h3>' +
-            '</div>';
-        pushRootandObjArr(workElement.id, element);
-    });
-}
-
-function createWorkContentCards() {
-
-    workContentArray.forEach(workElement => {
-        var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-element');
-        element.innerHTML = '<div class="work-header">' +
-            '<h5 class="work-name">' +
-            workElement.timeline +
-            '</h5>' +
-            '<p class="work-details">' +
-            workElement.description +
-            '</p>' +
-            '</div>';
-        pushRootandObjArr(workElement.id, element);
-    });
-}
-
-function createWorkToolsCards() {
-
-    var toolCategories = ["intern", "matops", "contract"];
-    toolCategories.forEach(category => {
-        workToolsArray.forEach(arrElement => {
-            var element = document.createElement('div');
-            element.classList.add('work-tools');
-            element.id = category;
-            var hide = arrElement.score[category] ? "" : "hide";
-            var toolHtml = '<ul class="tool-row ' + hide + '">' +
-                '<img class="tool-row-img ' + arrElement.id + '" src="' +
-                arrElement.image + '">' + '<div class="all-tools">';
-
-            for (var i = 0; i < 10; i++) {
-                if (i < arrElement.score[category]) {
-                    toolHtml += '<li class="active ' + category + '-color">' + '</li>';
-                } else {
-                    toolHtml += '<li></li>';
-                }
-            }    
-            toolHtml += '</div>' + '</ul>';
-            element.innerHTML = toolHtml;
-            console.log(element);
-            pushRootandObjArr(category, element);
-        });
-    });
-}
-
-function createWorkToolsContainer() {
-
-    var toolCategories = ["intern", "matops", "contract"];
-    toolCategories.forEach(tool => {
-        var element = document.createElement('div');
-        element.classList.add(tool + '-color', 'tool-container');
-        element.innerHTML = '<h1 class="tools-header">Software/Tools Used:</h1>';
-        pushRootandObjArr(tool, element);
-    });
-}
-
-function createSocialMedia() {
-    var html = '<div class="flex-center">' +
-        '<i class="fa fa-github fa-4x icon-3d">' + '</i>' +
-        '</div>';
-}
-
-function createWorkTimelineCards() {
-
-    workContentArray.forEach(arrElement => {
-        var element = document.createElement('div');
-        element.classList.add(arrElement.id + '-timeline-color',
-            "timeline-events",
-            "workDefault-timeline-color");
-        element.id = arrElement.id + "-timeline-event";
-        element.innerHTML = '<div id="' + '" class="timeline-months-' + arrElement.months + '">' +
-            '<h2>' + arrElement.timeline + '</h2>' +
-            '<h3>' + arrElement.company + '</h3>' +
-            '<h4>' + arrElement.title + '</h4>' +
-            '</div>';
-        pushRootandObjArr('workTimeline', element);
-    });
-
-    // timeline bar 
-    var element = document.createElement('ul');
-    element.classList.add("timeline-years");
-    element.innerHTML = '<div class="timelines-years">' +
-        '<li class="tyears">2019</li>' +
-        '<li class="tyears">2020</li>' +
-        '<li class="tyears">2021</li>' +
-        '</ul>';
-    pushRootandObjArr('workTimeline', element);
-
-    // home button 
-    element = document.createElement('div');
-    element.classList.add("timeline-events", "workDefault-timeline-color");
-    element.id = "workDefault-timeline-event";
-    element.innerHTML = '<div id="' + '" class="timeline-months-' + 3 + '">' +
-        '<h4>' + 'Home Page' + '</h4>' +
-        '</div>';
-    pushRootandObjArr('workTimeline', element);
-}
-
-function createWorkButtons() {
-
-    workButtonArray.forEach(arrElement => {
-        var button = document.createElement('div');
-        button.classList.add(arrElement.id + '-arrow',
-            'workDefault-color',
-            'flex-container');
-        button.id = arrElement.id;
-        button.innerHTML = '<i class="fa fa-arrow-' + arrElement.id + ' fa-5x icon-3d"></i>';
-
-        button.addEventListener('click', function(x) {
-            var pages = ['workDefault', 'matops', 'contract', 'intern'];
-            for (let currPage of pages) {
-
-                if (roots[currPage].toggle) {
-                    setMotionAndToggleFalse();
-                    
-                    if (arrElement[currPage] ==  'workDefault') {
-
-                        removeInViewClass(allWorkColors);
-                        addInViewClass(['workDefault-color', 'workDefault-timeline-color']);
-                    } else {
-
-                        removeInViewClass(removeWorkColors);
-                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'), 
-                            "single", 
-                            timeoutTime + 1000);
-                    }
-                    
-                    updateWorkSelected(arrElement[currPage]);
-                    stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
-                    transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
-                    break;
-                }
-            }
-        }, false);
-    pushRootandObjArr('workTimeline', button);
-    });   
-}
-
-function updateWorkSelected(newSelected) {
-
-    document.getElementById(newSelected + '-timeline-event').classList.toggle('selected-timeline');
-    var notSelected = ['contract', 'workDefault', 'matops', 'intern'].filter(x => x != newSelected);
-    notSelected.forEach(id => {
-        document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');
-    });
-}
-
-function createWorkDefaultCards() {
-
-    workDefaultArray.forEach(workElement => {
-        var element = document.createElement('div');
-        element.classList.add('workDefault-color');
-        element.id = workElement.id;
-
-        if ((workElement.id != "data-code") && (workElement.id != "comp-code")) {
-
-            element.classList.add('workDefault');
-            element.innerHTML =
-                '<h3 class="workDefault-header">' +
-                workElement.header +
-                '</h3>' +
-                '<p class="workDefault-description">' +
-                workElement.description +
-                '</p>';
-        }
-
-        element = new THREE.CSS3DObject(element);
-        roots["workDefault"].objects.push(element);
-        roots["workTimeline"].root.add(element);
-    });
 }
 
 // managing rotations and toggles 

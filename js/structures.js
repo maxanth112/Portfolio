@@ -3,8 +3,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 // tweening globals 
-var toInterval = 1000;
-var backInterval = 1800;
+var toInterval = 400;
+var backInterval = 600;
 var timeoutTime = 1700;
 var sphereSize = 1000;
 
@@ -18,6 +18,17 @@ var rootNames = [
     "workTimeline", "intern", "matops", "contract", "workDefault", 
     "bioDefault", "pic1", "pic2"
 ];
+
+var educationHeaderClasses = ['computer-header', 
+    'math-header', 
+    'econ-header'];
+
+var educationResetClasses = ['education-header-selected', 
+    'education-header-active'];
+
+var educationButtonClasses = ['math-button', 
+    'econ-button', 
+    'computer-button'];
 
 var educationHeaderColors = [
     'computer-header-color',
@@ -337,7 +348,8 @@ var stationaryButtonY = -135;
 var menuButtonArray = [{
         label: "Education",
         id: "education-button",
-        toggle: 'educSummary',
+        toggle: 'educHeader',
+        sendTo: 'educSummary',
         add: ['education-main-color', 'computer-header-color', 
             'math-header-color', 'econ-header-color'],
         setTrue: ['educSummary', 'educHeader'],
@@ -348,8 +360,10 @@ var menuButtonArray = [{
     {
         label: "Professional",
         id: "work-button",
-        toggle: 'workDefault',
-        add: ['workDefault-color', 'workDefault-timeline-color'],
+        toggle: 'workTimeline',
+        sendTo: 'workDefault',
+        add: ['workDefault-color', 'workDefault-timeline-color', 'intern-timeline-color',
+        'matops-timeline-color', 'contract-timeline-color'],
         setTrue: ["workDefault", "workTimeline"],
         buttonLinked: ['work-button', 'education-button', 'bio-button'],
         toggleFalse: ["educSummary", "bioDefault", "educHeader", "pic1", "pic2"],
@@ -359,6 +373,7 @@ var menuButtonArray = [{
         label: "Bio",
         id: "bio-button",
         toggle: 'pic1',
+        sendTo: 'pic1',
         add: ['bio-color'],
         setTrue: ["pic1", "bioDefault"],
         buttonLinked: ['bio-button', 'education-button', 'work-button'],
@@ -528,7 +543,7 @@ var mathArray = [{
         name: "Ordinary Differential Equations",
         description: "Covered first/second order ODE's, systems, Dirac delta function, \
             Heavyside, discontinuities, solutions of real/complex/repeating roots. \
-            Wrote my final project on solving systems of engineering circuits using Laplace Transforms.",
+            Wrote my final project in solving systems of engineering circuits using Laplace Transforms.",
         language: "LaTeX",
         position: [right, firstRow]
     },
@@ -843,8 +858,8 @@ var workViewDisplayArray = [{
 ];
 
 var homeButtons = 1.7;
-var timelineY = -1.25;
-var timelineElement = timelineY - 1.35;
+var timelineY = -1.15;
+var timelineElement = timelineY - 1.5;
 var workTimelineDisplayArray = [{
         title: 'intern',
         position: [-0.82, timelineElement]

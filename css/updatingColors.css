@@ -1,9 +1,9 @@
 :root {
     --all-color: white;
     --educ-color: white;
-    --computer-color: rgba(255, 204, 255, 0.8);
-    --math-color: rgba(66, 236, 245, 0.8);
-    --econ-color: rgba(129, 66, 245, 0.8);
+    --computer-color: rgba(255, 252, 180, 0.8);
+    --math-color:  rgba(255, 252, 180, 0.8);
+    --econ-color:  rgba(255, 252, 180, 0.8);
 
     --workDefault-color: blue;
     --intern-color: rgba(218, 0, 0, 0.8);
@@ -30,11 +30,11 @@
     box-shadow: 6px 6px 15px var(--all-color);
 }
 
-.computer-header-color div button,
+/* .computer-header-color div button,
 .math-header-color div button,
 .econ-header-color div button {
     display: hidden;
-}
+} */
 
 .workDefault-timeline-color div h2,
 .workDefault-timeline-color div h3, 
