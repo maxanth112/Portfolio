@@ -66,6 +66,8 @@ var allWorkColors = removeWorkColors.concat(workTimelineColors);
 
 var allColors = allEducationColors.concat(allWorkColors);
 
+var bioResetButtonLinked = ['travel-button', 'wood-button', 'bikes-button'];
+
 var roots = {
     stationary: {
         root: '',
@@ -372,7 +374,7 @@ var menuButtonArray = [{
     {
         label: "Bio",
         id: "bio-button",
-        toggle: 'pic1',
+        toggle: 'bioDefault',
         sendTo: 'pic1',
         add: ['bio-color'],
         setTrue: ["pic1", "bioDefault"],
@@ -1078,53 +1080,55 @@ var interestButtonDist = 1.1;
 var bioDefaultArray = [{
         id: "bio-header",
         position: [0, 3.2],
-        description: "About Me",
+        inner: "<h3>About Me</h3>",
     },
     {
         id: "bio-main",
         position: [0.47, 1.5],
-        description: "call me big pappa.",
+        inner: "<p>call me big pappa.</p>",
     },
     {
         id: "bio-pic",
         position: [-1.45, 1.5],
-        img: "./../img/me.png",
-        description: "",
+        inner: '<img class="bio-img" src="./../img/me.png">'
     },
     {
         id: "interests",
         position: [0, -.16],
-        description: "Interests",
+        inner: "<h3>Interests</h3>",
     },
     {
         id: "wood",
         position: [interestsX, interestsYStart - interestsStep],
-        img: "",
-        description: "Woodworking",
+        inner: "<h3>Woodworking</h3>",
+        interestPage: 1,
+        buttonLinked: ['wood-button', 'bikes-button', 'travel-button']
     },
     {
         id: "travel",
         position: [interestsX, interestsYStart],
-        img: "",
-        description: "Travel",
+        inner: "<h3>Travel</h3>",
+        interestPage: 0,
+        buttonLinked: ['travel-button', 'wood-button', 'bikes-button']
     },
     {
         id: "bikes",
         position: [interestsX, interestsYStart - (2 * interestsStep)],
-        img: "",
-        description: "Bikes",
+        inner: "<h3>Bikes</h3>",
+        interestPage: 2,
+        buttonLinked: ['bikes-button', 'wood-button', 'travel-button']
     },
     {
         id: "bio-button-down",
+        direction: 'down',
         position: [interestsButtonX, interestButtonMid - interestButtonDist],
-        img: "",
-        description: "",
+        changeRate: -1
     },
     {
         id: "bio-button-up",
+        direction: 'up',
         position: [interestsButtonX, interestButtonMid + interestButtonDist],
-        img: "",
-        description: "",
+        changeRate: 1
     }
 ];
 
@@ -1719,5 +1723,8 @@ var allInterestObjs = [
     ]
 ];
 
-var pic1Obj;
-var pic2Obj;
+var alternatingScenes = {
+    pic1: travel1,
+    pic2: travel2
+}
+    

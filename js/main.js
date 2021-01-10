@@ -152,27 +152,29 @@ function getRandomInt(max) {
 }
 
 // managing buttons and toggles 
-function updateLinkedThreesClass(updateClass, idArr, update = 'first') {
-
+function updateLinkedThreesClass(updateClass, idArr, update = 'first', parent = "no") {
     // first element in id array gets active added, others get removed 
     updateClass.forEach(newClass => {
         for (var i = 0; i < idArr.length; i++) {
             var element = document.getElementById(idArr[i]);
-            if ( (i == 0) && (update == 'first') ) {
+            if ( ( (i == 0) && (update == 'first') ) && ( parent == "yes") ) {
+                element.parentElement.classList.add(newClass);
+            } else if ( (i == 0) && (update == 'first') ) {
                 element.classList.toggle(newClass);
             } else if ( (i == 1 || i == 2) && (update == "last-two") ) {
                 element.classList.add(newClass); 
             } else if (update == "add-all") {
                 element.classList.add(newClass);
+            } else if (parent == "yes") { 
+                element.parentElement.classList.remove(newClass);
             } else { // remove all for 'remove-all'
                 element.classList.remove(newClass);
-            } 
+        } 
         }
     });
 }
 
 function updateLinkedThreesText(updateText, defaultText, idArr, update = 'first') {
-
     // first element in id array gets active added, others get removed 
     for (var i = 0; i < idArr.length; i++) {
         var element = document.getElementById(idArr[i]);
@@ -335,8 +337,7 @@ function createMenuButtons() {
         var button = document.createElement('button');
         button.classList.add("menu-button");
         button.id = arrElement.id;
-        button.innerHTML = arrElement.label;
-    
+        button.innerHTML = arrElement.label;    
         button.addEventListener('click', function (x) {
     
             revertAllFlippedCards();
@@ -345,49 +346,20 @@ function createMenuButtons() {
             updateLinkedThreesClass(educationResetClasses, educationHeaderClasses, 'remove-all');
             updateLinkedThreesText('', 'See Courses', educationButtonClasses, 'default-all');
             removeInViewClass(allColors);
+            resetBioScenes();
             if (roots[arrElement.toggle].toggle) {
                 
                 setMotionAndToggleFalse();
-
                 transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
             } else {
+
                 setMotionAndToggleFalse();
                 stopRotationSetTrue(arrElement.setTrue);
-
                 transform(allObjects, roots[arrElement.sendTo].coordinates.viewFinal, toInterval);
                 addInViewClass(arrElement.add, "delay", 500);
             }
         });
         pushRootandObjArr('stationary', button);
-    });
-}
-
-function createImgCards(arr, saveRoot) {
-
-    arr.forEach(arrElement => {
-        var element = document.createElement('div');
-        element.classList.add(arrElement.id);
-
-        if (arrElement.card == "s") {
-            var elementImg = document.createElement('img');
-            elementImg.src = arrElement.img;
-            elementImg.id = arrElement.newid + '-img';
-
-            element.appendChild(elementImg);
-        } else {
-            var elementHeader = document.createElement('h3');
-            elementHeader.id = arrElement.newid + '-h3';
-            elementHeader.classList.add("img-loc");
-            elementHeader.innerHTML = arrElement.header;
-
-            var elementP = document.createElement('p');
-            elementP.id = arrElement.newid + '-p';
-            elementP.innerHTML = arrElement.description;
-
-            element.appendChild(elementHeader);
-            element.appendChild(elementP);
-        }
-        pushRootandObjArr(saveRoot, element);
     });
 }
 
@@ -577,181 +549,114 @@ function createWorkDefaultCards() {
 
 function createBioDefaultCards() {
 
-    pic1Obj = travel1;
-    for (var i = 0; i < bioDefaultArray.length; i += 1) {
+    bioDefaultArray.forEach(arrElement => {
+        var element = document.createElement('div');
+        element.id = arrElement.id;
+        element.classList.add('bio-default');
 
-        var bioDiv = document.createElement('div');
-        bioDiv.id = bioDefaultArray[i].id;
-        bioDiv.classList.add("bio-default");
+        var element = document.createElement('div');
+        element.id = arrElement.id;
+        element.classList.add("bio-default");
 
-        if (bioDefaultArray[i].id == "bio-pic") {
+        if ( ( (arrElement.id == "bio-pic") || (arrElement.id == "bio-header") ) || 
+            ( (arrElement.id == "bio-main") || (arrElement.id == "interests") ) ) {
 
-            bioDiv.innerHTML = '<img class="bio-img" src="' + bioDefaultArray[i].img + '">';
-        } else if (bioDefaultArray[i].id == "bio-button-down") {
+            element.innerHTML = arrElement.inner;
+        } else if (arrElement.id.includes('button')) { // arrow buttons
 
-            bioDiv.addEventListener('click', function (x) {
-
-                updateInterestPage(-1);
+            element.classList.add("flex-container", "up-arrow");
+            element.innerHTML = '<i class="fa fa-arrow-' + arrElement.direction + ' fa-5x icon-3d"></i>';
+            element.addEventListener('click', function (x) {
+                updateInterestPage(arrElement.changeRate);
             }, false);
+        } else { // new interest buttons 
+            element.classList.add('interest-cards', 'bio-button-header');
+            element.innerHTML = arrElement.inner;
 
-            bioDiv.classList.add("flex-container");
-            bioDiv.classList.add("down-arrow");
-            bioDiv.innerHTML = '<i class="fa fa-arrow-down fa-5x icon-3d"></i>';
-        } else if (bioDefaultArray[i].id == "bio-button-up") {
+            var button = document.createElement('button');
+            button.id = arrElement.id + "-button";
+            button.innerHTML = "See Pics";
+            button.addEventListener('click', function(x) {
+                currentPage = 0;
+                interestPage = arrElement.interestPage;
+                updateInterestPage(0);
+                updateLinkedThreesClass(['interest-selected'], arrElement.buttonLinked, 'first', 'yes');
+                updateLinkedThreesText('Like Em\'?', 'See Pics', arrElement.buttonLinked, 'first');
+            });
+            element.appendChild(button);
+        }
+        pushRootandObjArr('bioDefault', element);
+    });
+}
 
-            bioDiv.addEventListener('click', function (x) {
+function createImgCards(arr, saveRoot) {
 
-                updateInterestPage(1);
-            }, false);
+    arr.forEach(arrElement => {
+        var element = document.createElement('div');
+        element.classList.add(arrElement.id);
 
-            bioDiv.classList.add("flex-container");
-            bioDiv.classList.add("up-arrow");
-            bioDiv.innerHTML = '<i class="fa fa-arrow-up fa-5x icon-3d"></i>';
-        } else if (bioDefaultArray[i].id == "bio-main") {
+        if (arrElement.card == "s") {
+            var elementImg = document.createElement('img');
+            elementImg.src = arrElement.img;
+            elementImg.id = arrElement.newid + '-img';
 
-            bioDiv.innerHTML = '<p>' + bioDefaultArray[i].description + '</p>';
-        } else if (bioDefaultArray[i].id == "bio-header" || bioDefaultArray[i].id == "interests") {
-
-            bioDiv.innerHTML = '<h3>' + bioDefaultArray[i].description + '</h3>';
+            element.appendChild(elementImg);
         } else {
+            var elementHeader = document.createElement('h3');
+            elementHeader.id = arrElement.newid + '-h3';
+            elementHeader.classList.add("img-loc");
+            elementHeader.innerHTML = arrElement.header;
 
-            bioDiv.classList.add('interest-cards');
-            bioDiv.innerHTML = '<h3 class="bio-button-header">' + bioDefaultArray[i].description + '</h3>';
+            var elementP = document.createElement('p');
+            elementP.id = arrElement.newid + '-p';
+            elementP.innerHTML = arrElement.description;
 
-            var interestButton = document.createElement('button');
-            interestButton.id = bioDefaultArray[i].id + "-button";
-            interestButton.innerHTML = "See Pics";
-
-            if (bioDefaultArray[i].id == "travel") {
-
-                bioDiv.classList.add('interest-selected');
-                interestButton.innerHTML = "Like Em'?";
-                roots["pic1"].toggle = true;
-
-                interestButton.addEventListener('click', function (x) {
-
-                    var woodButton = document.getElementById("wood-button");
-                    var bikesButton = document.getElementById("bikes-button");
-                    updateBioInterestButtons(this, bikesButton, woodButton);
-                    currentPage = 0;
-                    interestPage = 0;
-                    updateInterestPage(0);
-                }, false);
-
-            } else if (bioDefaultArray[i].id == "wood") {
-
-                interestButton.addEventListener('click', function (x) {
-
-                    var bikesButton = document.getElementById("bikes-button");
-                    var travelButton = document.getElementById("travel-button");
-                    updateBioInterestButtons(this, bikesButton, travelButton);
-                    currentPage = 0;
-                    interestPage = 1;
-                    updateInterestPage(0);
-                }, false);
-
-            } else if (bioDefaultArray[i].id == "bikes") {
-
-                interestButton.addEventListener('click', function (x) {
-
-                    var woodButton = document.getElementById("wood-button");
-                    var travelButton = document.getElementById("travel-button");
-                    updateBioInterestButtons(this, woodButton, travelButton);
-                    currentPage = 0;
-                    interestPage = 2;
-                    updateInterestPage(0);
-                }, false);
-            }
-
-            bioDiv.appendChild(interestButton);
+            element.appendChild(elementHeader);
+            element.appendChild(elementP);
         }
-        var bioDivObj = new THREE.CSS3DObject(bioDiv);
-        roots["bioDefault"].objects.push(bioDivObj);
-        roots["bioDefault"].root.add(bioDivObj);
-    }
+        pushRootandObjArr(saveRoot, element);
+    });
 }
 
-function updateInterestPage(pageChange) {
+function updateInterestPage(pageChange, reset = "no") {
+
     currentPage += pageChange;
-
-    if ((interestPage == 0) && (currentPage == 4)) { // currently on last travel page, taking to first
-
-        currentPage = 0;
-    } else if ((interestPage == 0) && (currentPage == -1)) { // currently on last travel page, taking to first
-
-        currentPage = 3;
-    } else if ((interestPage != 0) && (currentPage == 3)) { // on wood or bikes last page, taking to first 
-
-        currentPage = 0;
-    } else if ((interestPage != 0) && (currentPage == -1)) { // on wood or bikes last page, taking to first 
-
-        currentPage = 2;
-    }
-
-    newObj = allInterestObjs[interestPage][currentPage];
-
-    if (roots["pic1"].toggle) {
-
-        for (var i = 0; i < newObj.length; i += 1) {
-
-            if (i < 3) {
-
-                document.getElementById(pic2Obj[i].newid + "-img").src = newObj[i].img;
-            } else {
-
-                document.getElementById(pic2Obj[i].newid + "-p").innerHTML = newObj[i].description;
-                document.getElementById(pic2Obj[i].newid + "-h3").innerHTML = newObj[i].header;
-            }
-        }
-
-        transform(allObjects, roots.pic2.coordinates.viewFinal, toInterval);
-
-        setMotionAndToggleFalse();
-        stopRotationSetTrue(["pic2", "bioDefault"]);
+    if (!interestPage) {
+        if (currentPage == 4) currentPage = 0;
+        else if (currentPage == -1) currentPage = 3;
     } else {
+        if (currentPage == 3) currentPage = 0;
+        else if (currentPage == -1) currentPage = 2;
+    }
+    var newScene = allInterestObjs[interestPage][currentPage];
+    var currSceneToggle = roots.pic1.toggle ? 'pic1' : 'pic2';
+    var toSceneToggle = currSceneToggle == 'pic1' ? 'pic2' : 'pic1';
 
-        for (var i = 0; i < newObj.length; i += 1) {
-
-            if (i < 3) {
-
-                document.getElementById(pic1Obj[i].newid + "-img").src = pic1Obj[i].img;
-            } else {
-
-                document.getElementById(pic1Obj[i].newid + "-p").innerHTML = newObj[i].description;
-                document.getElementById(pic1Obj[i].newid + "-h3").innerHTML = newObj[i].header;
-            }
+    for (var i = 0; i < newScene.length; i++) {
+        if (newScene[i].card == 's') {
+            document.getElementById(alternatingScenes[toSceneToggle][i].newid + "-img").src = newScene[i].img;
+        } else {
+            document.getElementById(alternatingScenes[toSceneToggle][i].newid + "-p").innerHTML = newScene[i].description;
+            document.getElementById(alternatingScenes[toSceneToggle][i].newid + "-h3").innerHTML = newScene[i].header;
         }
-
-        transform(allObjects, roots.pic1.coordinates.viewFinal, toInterval);
+    }
+    if (reset == 'no') {
+        transform(allObjects, roots[toSceneToggle].coordinates.viewFinal, toInterval);
         setMotionAndToggleFalse();
-        stopRotationSetTrue(["pic1", "bioDefault"]);
+        stopRotationSetTrue([toSceneToggle, "bioDefault"]);
     }
 }
 
-function updateBioInterestButtons(selected, not1, not2) {
-
-    not1.innerHTML = "See Pics";
-    not2.innerHTML = "See Pics";
-    selected.innerHTML = "Like Em'?";
-
-    not1.parentElement.classList.remove('interest-selected');
-    not2.parentElement.classList.remove('interest-selected');
-    selected.parentElement.classList.toggle('interest-selected');
-}
-
-function resetBioButtons() {
-
-    var woodButton = document.getElementById("wood-button");
-    var travelButton = document.getElementById("travel-button");
-    var bikesButton = document.getElementById("bikes-button");
-
-    woodButton.parentElement.classList.remove('interest-selected');
-    bikesButton.parentElement.classList.remove('interest-selected');
-    travelButton.parentElement.classList.add('interest-selected');
-
-    travelButton.innerHTML = "Like Em'?";
-    woodButton.innerHTML = "See Pics";
-    bikesButton.innerHTML = "See Pics";
+function resetBioScenes() {
+    interestPage = 0;
+    currentPage = 0;
+    alternatingScenes = {
+        pic1: travel1,
+        pic2: travel2
+    }
+    updateLinkedThreesClass(['interest-selected'], bioResetButtonLinked, 'first', 'yes');
+    updateLinkedThreesText('Like Em\'?', 'See Pics', bioResetButtonLinked, 'first');
+    updateInterestPage(0, 'yes');
 }
 
 // managing rotations and toggles 
