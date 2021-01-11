@@ -552,11 +552,7 @@ function createBioDefaultCards() {
     bioDefaultArray.forEach(arrElement => {
         var element = document.createElement('div');
         element.id = arrElement.id;
-        element.classList.add('bio-default');
-
-        var element = document.createElement('div');
-        element.id = arrElement.id;
-        element.classList.add("bio-default");
+        element.classList.add('bio-default-color');
 
         if ( ( (arrElement.id == "bio-pic") || (arrElement.id == "bio-header") ) || 
             ( (arrElement.id == "bio-main") || (arrElement.id == "interests") ) ) {
@@ -564,18 +560,18 @@ function createBioDefaultCards() {
             element.innerHTML = arrElement.inner;
         } else if (arrElement.id.includes('button')) { // arrow buttons
 
-            element.classList.add("flex-container", "up-arrow");
+            element.classList.add('bio-button', "up-arrow");
             element.innerHTML = '<i class="fa fa-arrow-' + arrElement.direction + ' fa-5x icon-3d"></i>';
             element.addEventListener('click', function (x) {
                 updateInterestPage(arrElement.changeRate);
             }, false);
         } else { // new interest buttons 
-            element.classList.add('interest-cards', 'bio-button-header');
+            element.classList.add('interest-cards');
             element.innerHTML = arrElement.inner;
 
             var button = document.createElement('button');
+            button.classList.add('bio-button', arrElement.id + '-button-color');
             button.id = arrElement.id + "-button";
-            button.innerHTML = "See Pics";
             button.addEventListener('click', function(x) {
                 currentPage = 0;
                 interestPage = arrElement.interestPage;
@@ -593,14 +589,14 @@ function createImgCards(arr, saveRoot) {
 
     arr.forEach(arrElement => {
         var element = document.createElement('div');
-        element.classList.add(arrElement.id);
+        element.classList.add(arrElement.id, 'bio-default-color');
 
         if (arrElement.card == "s") {
             var elementImg = document.createElement('img');
             elementImg.src = arrElement.img;
             elementImg.id = arrElement.newid + '-img';
-
             element.appendChild(elementImg);
+
         } else {
             var elementHeader = document.createElement('h3');
             elementHeader.id = arrElement.newid + '-h3';

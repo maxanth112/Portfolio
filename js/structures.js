@@ -1100,21 +1100,21 @@ var bioDefaultArray = [{
     {
         id: "wood",
         position: [interestsX, interestsYStart - interestsStep],
-        inner: "<h3>Woodworking</h3>",
+        inner: '<h3 class="bio-button-header">Woodworking</h3>',
         interestPage: 1,
         buttonLinked: ['wood-button', 'bikes-button', 'travel-button']
     },
     {
         id: "travel",
         position: [interestsX, interestsYStart],
-        inner: "<h3>Travel</h3>",
+        inner: '<h3 class="bio-button-header">Travel</h3>',
         interestPage: 0,
         buttonLinked: ['travel-button', 'wood-button', 'bikes-button']
     },
     {
         id: "bikes",
         position: [interestsX, interestsYStart - (2 * interestsStep)],
-        inner: "<h3>Bikes</h3>",
+        inner: '<h3 class="bio-button-header">Bikes</h3>',
         interestPage: 2,
         buttonLinked: ['bikes-button', 'wood-button', 'travel-button']
     },
@@ -1131,40 +1131,6 @@ var bioDefaultArray = [{
         changeRate: 1
     }
 ];
-
-var defaultBioRoot;
-var interestPic1Root, interestPic2Root;
-
-var defaultBioRootMotion = false;
-var interestPic1Motion = false;
-var interestPic2Motion = false;
-
-// bio objects 
-var allBioObjects = [];
-var defaultBioObjects = [];
-
-var interestPic1Objects = [];
-var interestPic2Objects = [];
-
-var travel1Objects = [];
-var travel2Objects = [];
-var travel3Objects = [];
-var travel4Objects = [];
-
-var wood1Objects = [];
-var wood2Objects = [];
-var wood1Objects = [];
-
-var bike1Objects = [];
-var bike1Objects = [];
-var bike1Objects = [];
-
-var bioDefaultToggle = false;
-
-var interestPic1Toggle = false;
-var interestPic2Toggle = false;
-
-var currentPage = "";
 
 var slideXStep = 1;
 var slide1X = -.8;
@@ -1702,11 +1668,6 @@ var bike3 = [{
         img: "./../img/travel.jpg"
     },
 ];
-
-
-var travelPage = 0;
-var woodPage = 1;
-var bikePage = 2;
 
 var interestPage = 0;
 var currentPage = 0;
