@@ -1,5 +1,3 @@
-/* EDUCATION HEADER, EDUCATION SUMMARY  */
-
 .education-header,
 .summary-card {
   width: calc(var(--multiplier) * 40);

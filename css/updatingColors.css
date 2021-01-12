@@ -5,17 +5,17 @@
     --math-color:  rgba(255, 252, 180, 0.8);
     --econ-color:  rgba(255, 252, 180, 0.8);
 
-    --workDefault-color: blue;
+    --workDefault-color: white;
     --intern-color: rgba(218, 0, 0, 0.8);
-    --matops-color: rgba(0, 204, 255, 0.8);
-    --contract-color: rgba(255, 0, 234, 0.8);
+    --matops-color:  rgba(218, 0, 0, 0.8);
+    --contract-color: rgba(218, 0, 0, 0.8);
 }
 
 /* EDUCATION */
 .education-main-color, 
 .computer-header-color,
 .math-header-color,
-/* .econ-header-color, */
+.econ-header-color,
 .computer-color,
 .math-color,
 .econ-color, 
@@ -87,36 +87,11 @@
     border:  calc(var(--multiplier) * .2) solid var(--econ-color);
     text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
 }
-/* .education-card {
-    height: 98%;
-    width: 98%;
-}
-/* The animation starts here */
-/* .econ-header-color-active {
 
-    transform: rotate(-45deg);
-    overflow: hidden;
-    background: linear-gradient(to right, #fff 20%, #fff 40%, #ECD08C 50%, #ECD08C 55%, #fff 70%, #fff 100%);
-    background-size: 200% auto;
-    
-    animation: shine 3s linear infinite;
+ 
+.econ-header-color-active {
+
   }
-   */
-  /*Begin shimmer code*/
-  
-  @keyframes shine {
-      to {
-        background-position: 200% center;
-      }
-    } */
-
-
-
-
-
-
-
-
 
 
 
@@ -191,6 +166,13 @@
     border: none;
     border-bottom: calc(var(--multiplier) * 0.8) solid var(--contract-color);
 }
+
+
+
+
+
+
+
 
 
 

@@ -341,6 +341,48 @@ var roots = {
     }
 };
 
+
+var introRoot;
+var nameRoot; 
+
+var introRootObjects = [];
+var nameObject;
+
+var introElementsView = [];
+var introElementsSphere = [];
+
+var introSphereToggle = false;
+
+var rowStep = 0.3;
+var row1X = 1.5;
+var row2X = row1X - rowStep;
+
+var introElements = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         navigation menu                         ////////
 /////////////////////////////////////////////////////////////////////////////////

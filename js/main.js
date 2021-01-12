@@ -12,11 +12,13 @@ function init() {
     initCamera();
     initControls();
 
-    createAllCards();
-    createAllTwirlingCoordinates();
-    createAllViewCoordinates();
+    introduction();
 
-    startTransformAllCourseObjects();
+    // createAllCards();
+    // createAllTwirlingCoordinates();
+    // createAllViewCoordinates();
+
+    // startTransformAllCourseObjects();
 
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
@@ -42,6 +44,12 @@ function initRoots() {
         roots[rootObj].toggle = false;
         roots[rootObj].motion = false;
     });
+
+    introRoot = new THREE.Object3D();
+    scene.add(introRoot);
+
+    nameRoot = new THREE.Object3D();
+    scene.add(nameRoot);
 }
 
 function initCamera() {
@@ -129,6 +137,7 @@ function animate() {
     render();
 
     requestAnimationFrame(animate);
+    startSphereRotation(introSphereToggle);
     // updateRotations();
 }
 
@@ -207,8 +216,7 @@ function createCourseCards(arr, saveRoot) {
             '</div>';
 
         element = new THREE.CSS3DObject(element);
-        roots[saveRoot].objects.push(element);
-        roots[saveRoot].root.add(element);
+        pushRootandObjArr(saveRoot, element);
     });
 }
 
@@ -717,6 +725,137 @@ function revertAllFlippedCards() {
     $('.summary-flip').removeClass('flipped');
 }
 
+// INTRODUCTION 
+function createColumn(iStart, rowCount = 2, scale = [0, 0, 0, 0]) {
+
+    var exclude = ['2-2', '2-1', '2-0', '2-6', '3-6', 
+        '3-5', '3-1', '3-0', '4-6', '4-2', '4-1', '4-0', 
+        '10-0', '11-0', '10-1', '11-1', '10-3', '11-3', 
+        '10-4', '11-4', '11-5', '11-5', '12-4', '12-3',
+        '12-0', '12-1', '13-6', '14-5', '14-6', '16-2', 
+        '16-3', '16-4', '17-3', '18-0', '18-6', '19-0', 
+        '19-1', '19-5', '19-6', '20-0', '20-6', '21-3', 
+        '22-3', '22-4', '22-2', '8-6', '9-6', '8-5'];
+    var scaleX = 0.15 + scale[0];
+    var scaleY = 0.34 + scale[1];
+    var shiftX = -1.48 + scale[2];
+    var shiftY = -1.09 + scale[3];
+
+    for (var i = iStart; i < iStart + rowCount; i++) {
+        for (var j = 0; j < 7; j++) {
+
+            if (exclude.includes(i + '-' + j)) { continue; }
+            var obj = { content: String(i) + String(j) };
+            introElements.push(obj);
+
+            var viewObj = new THREE.Object3D();
+            viewObj.position.x =  ( (i * scaleX) + shiftX ) * 500;
+            viewObj.position.y = ( (j * scaleY) + shiftY ) * 200;
+            viewObj.position.z = 1800;
+            introElementsView.push(viewObj);
+        }
+    }
+}
+function initIntroElements() {
+
+    createColumn(0, 2, [-0.002, 0, 0, 0]);
+    createColumn(2,  1, [-0.003, 0, -0.03, 0]);
+    createColumn(3,  1, [-0.015, 0.02, 0, -0.06]);
+    createColumn(4, 1, [-0.003, 0, -0.05, 0]);
+    createColumn(5, 2, [0.002, 0, -0.1, 0]);
+
+    createColumn(8, 2, [-0.009, 0.005, -0.06, -0.0007]);
+    createColumn(10, 2, [-0.009, 0.005, -0.07, -0.007]);
+    createColumn(12, 3, [-0.009, 0.005, -0.11, -0.007]);
+
+    createColumn(16, 3, [-0.009, 0, -0.14, -0.008]);
+    createColumn(19, 1, [-0.009, 0, -0.16, 0]);
+    createColumn(20, 3, [-0.009, 0, -0.17, -0.008]);
+}
+
+function initNameElement() {
+
+    var element = document.createElement('div');
+    element.classList.add('name-container');
+    element.innerHTML = '<h1 class="name" data-text="Max" contenteditable>MAX</h1>' + 
+        '<div class="gradient"></div>' + 
+        '<div class="spotlight"></div>';
+
+    element = new THREE.CSS3DObject(element);
+    introRootObjects.push(element);
+    nameRoot.add(element);
+
+    //view position 
+    var nameObj = new THREE.Object3D();
+    nameObj.position.x = 25;
+    nameObj.position.y = 0;
+    nameObj.position.z = 1775;
+
+    introElementsView.push(nameObj);
+}
+
+function introSphereElements() {
+    
+    var vector = new THREE.Vector3();
+    var len = introElements.length;
+    var scale = 1800;
+
+    for (var i = 0; i < len; i++) {
+
+        var phi = Math.acos( -1 + ( 2 * i ) / len );
+		var theta = Math.sqrt( len * Math.PI ) * phi;
+        var sphereObj = new THREE.Object3D();
+
+		sphereObj.position.x = scale * Math.cos( theta ) * Math.sin( phi );
+		sphereObj.position.y = scale * Math.sin( theta ) * Math.sin( phi );
+		sphereObj.position.z = scale * Math.cos( phi );
+
+		vector.copy( sphereObj.position ).multiplyScalar( 2 );
+
+	    sphereObj.lookAt( vector );
+        introElementsSphere.push(sphereObj);        
+    }
+}
+
+function introRandomElements() {
+
+
+}
+
+function startSphereRotation(toggle) {
+
+    if (toggle) {
+
+        var speed = 0.02;
+        var shrink = 10;
+        introRoot.rotation.x += speed;
+        introRoot.rotation.y += speed;
+        introRoot.rotation.z += speed;
+    }
+}
+
+function introduction() {
+
+    initIntroElements();
+    introSphereElements();
+    introElements.forEach(arrElement => {
+        var element = document.createElement('div');
+        element.classList.add('intro-card');
+        element.innerHTML = '<p></p>';
+        
+        element = new THREE.CSS3DObject(element);
+        introRootObjects.push(element);
+        introRoot.add(element);
+    });
+    
+    initNameElement();
+    transform(introRootObjects, introElementsView, 500);
+
+    // transform(introRootObjects, introElementsSphere, 500);
+    
+    // animate();
+}
+
 // calling all create/coordinate functions 
 function createAllCards() {
     // creates the divs (cards) and saves them to the respective objects arrays and all objects
@@ -797,7 +936,6 @@ function createAllTwirlingCoordinates() {
 function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
 
     arr.forEach(element => {
-        console.log(saveRoot);
         var obj = new THREE.Object3D();
         obj.position.x = element.position[0] * x;
         obj.position.y = element.position[1] * y;
