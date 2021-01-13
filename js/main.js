@@ -908,6 +908,15 @@ function introduction() {
     }, tweenSplit * 160);
 
     setTimeout(() => {
+        
+        var everyThird = 0;
+        document.querySelectorAll('.intro-card').forEach(element => {
+            if (everyThird % 3 == 0) {
+                element.click();
+            }
+            everyThird++;
+        });
+        
         document.querySelectorAll('.intro-card').forEach(e => e.classList.add('hide'));
     }, 8000);
 
@@ -923,10 +932,8 @@ var prefixes = ["webkit", "moz", "ms", ""];
 function prefixedEvent(element, type, callback) {
     for (var p = 0; p < prefixes.length; p++) {
         if (!prefixes[p]) type = type.toLowerCase();
-        
-        document.querySelectorAll('.intro-card').forEach(e => e.addEventListener(prefixes[p] + type, callback, false));
 
-        // element.addEventListener(prefixes[p] + type, callback, false);
+        element.addEventListener(prefixes[p] + type, callback, false);
     }
 }
 
@@ -990,9 +997,8 @@ function explode(container) {
 function exolpodeGroup(x, y, trans) {
     var container = document.createElement('div');
     container.className = 'container';
-    container.style.top = y + 'px';
-    container.style.left = x + 'px';
-
+    container.style.top = 'calc(var(--multiplier)' + y + ')';
+    container.style.left = 'calc(var(--multiplier)' + x + ')';
     transformExplode(container, trans.x, trans.y, trans.scale, trans.r, true);
     explode(container);
     return container;
@@ -1001,34 +1007,58 @@ function exolpodeGroup(x, y, trans) {
 function sparcle(event) {
     var explosions = [];
 
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+    //     scale: 1,
+    //     x: -50,
+    //     y: -50,
+    //     r: 0
+    // }));
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+    //     scale: .5,
+    //     x: -30,
+    //     y: -50,
+    //     r: 180
+    // }));
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+    //     scale: .5,
+    //     x: -50,
+    //     y: -20,
+    //     r: -90
+    // }));
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+    //     scale: .5,
+    //     x: -30,
+    //     y: -70,
+    //     r: 180
+    // }));
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+    //     scale: 1.5,
+    //     x: 0,
+    //     y: -20,
+    //     r: 180
+    // }));
     explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: 1,
-        x: -50,
-        y: -50,
-        r: 0
-    }));
-    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: .5,
-        x: -30,
-        y: -50,
-        r: 180
-    }));
-    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: .5,
-        x: -50,
-        y: -20,
-        r: -90
-    }));
-    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: .5,
-        x: -30,
-        y: -70,
+        scale: 1.5,
+        x: 300,
+        y: 200,
         r: 180
     }));
     explosions.push(exolpodeGroup(event.pageX, event.pageY, {
         scale: 1.5,
-        x: 0,
-        y: -20,
+        x: 120,
+        y: 220,
+        r: 180
+    }));
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+        scale: 1.5,
+        x: 140,
+        y: 240,
+        r: 180
+    }));
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+        scale: 1.5,
+        x: 260,
+        y: 260,
         r: 180
     }));
 
