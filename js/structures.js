@@ -360,10 +360,18 @@ var row2X = row1X - rowStep;
 var introElements = [];
 
 
+var parsedTweenCoordinates = {
+    first: [],
+    second: [],
+    third: [],
+    fourth: [],
+    fifth: []
+};
 
 
-
-
+var introTweeningArray = [];
+var step = 2;
+var tweenSplit;
 
 
 

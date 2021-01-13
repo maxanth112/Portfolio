@@ -81,6 +81,7 @@ function initMouseSceneMenu() {
 function transform(start, end, duration) {
 
     TWEEN.removeAll();
+
     for (var i = 0; i < start.length; i++) {
 
         var object = start[i];
@@ -106,11 +107,11 @@ function transform(start, end, duration) {
             .easing(TWEEN.Easing.Exponential.InOut)
             .start();
     }
-
     new TWEEN.Tween(this)
         .to({}, duration * 2)
         .onUpdate(render)
         .start();
+
 }
 
 function createCssRenderer() {
@@ -166,19 +167,19 @@ function updateLinkedThreesClass(updateClass, idArr, update = 'first', parent = 
     updateClass.forEach(newClass => {
         for (var i = 0; i < idArr.length; i++) {
             var element = document.getElementById(idArr[i]);
-            if ( ( (i == 0) && (update == 'first') ) && ( parent == "yes") ) {
+            if (((i == 0) && (update == 'first')) && (parent == "yes")) {
                 element.parentElement.classList.add(newClass);
-            } else if ( (i == 0) && (update == 'first') ) {
+            } else if ((i == 0) && (update == 'first')) {
                 element.classList.toggle(newClass);
-            } else if ( (i == 1 || i == 2) && (update == "last-two") ) {
-                element.classList.add(newClass); 
+            } else if ((i == 1 || i == 2) && (update == "last-two")) {
+                element.classList.add(newClass);
             } else if (update == "add-all") {
                 element.classList.add(newClass);
-            } else if (parent == "yes") { 
+            } else if (parent == "yes") {
                 element.parentElement.classList.remove(newClass);
             } else { // remove all for 'remove-all'
                 element.classList.remove(newClass);
-        } 
+            }
         }
     });
 }
@@ -187,11 +188,11 @@ function updateLinkedThreesText(updateText, defaultText, idArr, update = 'first'
     // first element in id array gets active added, others get removed 
     for (var i = 0; i < idArr.length; i++) {
         var element = document.getElementById(idArr[i]);
-        if ( (i == 0) && (update == 'first') ) {
+        if ((i == 0) && (update == 'first')) {
             element.innerHTML = updateText;
         } else { // make all default
             element.innerHTML = defaultText;
-        } 
+        }
     }
 }
 
@@ -246,24 +247,25 @@ function createEducHeadersButtons() {
 
             revertAllFlippedCards();
             if (roots[arrElement.id].toggle) {
-                
+
                 setMotionAndToggleFalse();
                 stopRotationSetTrue(["educSummary", "educHeader"]);
-                updateLinkedThreesClass(['education-header-selected', 
-                    'education-header-active'], arrElement.headerLinked, 'remove-all');
+                updateLinkedThreesClass(['education-header-selected',
+                    'education-header-active'
+                ], arrElement.headerLinked, 'remove-all');
                 updateLinkedThreesText('', 'See Courses', arrElement.buttonLinked, 'default-all');
 
                 transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
-                removeInViewClass(educationCourseColors); 
+                removeInViewClass(educationCourseColors);
                 addInViewClass(["education-main-color"]);
             } else {
 
                 setMotionAndToggleFalse();
-                stopRotationSetTrue(arrElement.setTrue); 
+                stopRotationSetTrue(arrElement.setTrue);
                 updateLinkedThreesClass(['education-header-selected'], arrElement.headerLinked, 'last-two');
                 updateLinkedThreesClass(['education-header-active'], arrElement.headerLinked, 'first');
                 updateLinkedThreesText('Main View', 'See Courses', arrElement.buttonLinked, 'first');
-                
+
                 transform(allObjects, roots[arrElement.id].coordinates.viewFinal, toInterval);
                 removeInViewClass(educationCourseColors.concat('education-main-color'));
                 addInViewClass(arrElement.add);
@@ -275,15 +277,17 @@ function createEducHeadersButtons() {
 function addInViewClass(classArr, type = "single", time = timeoutTime) {
 
     var timeDelay = 1;
-    
-    classArr.forEach(className => {    
-        setTimeout( function(x) {
+
+    classArr.forEach(className => {
+        setTimeout(function (x) {
             var classElements = document.getElementsByClassName(className);
             for (let classElement of classElements) {
                 classElement.classList.add(className + "-active");
-            }    
+            }
         }, time * timeDelay);
-        if (type != "single") { timeDelay++; }
+        if (type != "single") {
+            timeDelay++;
+        }
     });
 }
 
@@ -345,9 +349,9 @@ function createMenuButtons() {
         var button = document.createElement('button');
         button.classList.add("menu-button");
         button.id = arrElement.id;
-        button.innerHTML = arrElement.label;    
+        button.innerHTML = arrElement.label;
         button.addEventListener('click', function (x) {
-    
+
             revertAllFlippedCards();
             updateWorkSelected("workDefault");
             updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
@@ -356,7 +360,7 @@ function createMenuButtons() {
             removeInViewClass(allColors);
             resetBioScenes();
             if (roots[arrElement.toggle].toggle) {
-                
+
                 setMotionAndToggleFalse();
                 transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
             } else {
@@ -424,7 +428,7 @@ function createWorkToolsCards() {
                 } else {
                     toolHtml += '<li></li>';
                 }
-            }    
+            }
             toolHtml += '</div>' + '</ul>';
             element.innerHTML = toolHtml;
             console.log(element);
@@ -454,7 +458,7 @@ function createWorkTimelineCards() {
 
     workContentArray.forEach(arrElement => {
         var element = document.createElement('div');
-        
+
         element.classList.add(arrElement.id + '-timeline-color',
             "timeline-events");
         element.id = arrElement.id + "-timeline-event";
@@ -493,21 +497,21 @@ function createWorkButtons() {
         button.classList.add(arrElement.id + '-arrow', 'flex-container');
         button.id = arrElement.id;
         button.innerHTML = '<i class="fa fa-arrow-' + arrElement.id + ' fa-5x icon-3d"></i>';
-        button.addEventListener('click', function(x) {
+        button.addEventListener('click', function (x) {
             var pages = ['workDefault', 'matops', 'contract', 'intern'];
             for (let currPage of pages) {
                 if (roots[currPage].toggle) {
                     setMotionAndToggleFalse();
-                    
-                    if (arrElement[currPage] ==  'workDefault') {
+
+                    if (arrElement[currPage] == 'workDefault') {
 
                         removeInViewClass(removeWorkColors);
                         addInViewClass(['workDefault-color', 'workDefault-timeline-color']);
                     } else {
 
                         removeInViewClass(removeWorkColors);
-                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'), 
-                            "single", 
+                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'),
+                            "single",
                             timeoutTime + 1000);
                     }
                     updateWorkSelected(arrElement[currPage]);
@@ -517,8 +521,8 @@ function createWorkButtons() {
                 }
             }
         }, false);
-    pushRootandObjArr('workTimeline', button);
-    });   
+        pushRootandObjArr('workTimeline', button);
+    });
 }
 
 function updateWorkSelected(newSelected) {
@@ -562,8 +566,8 @@ function createBioDefaultCards() {
         element.id = arrElement.id;
         element.classList.add('bio-default-color');
 
-        if ( ( (arrElement.id == "bio-pic") || (arrElement.id == "bio-header") ) || 
-            ( (arrElement.id == "bio-main") || (arrElement.id == "interests") ) ) {
+        if (((arrElement.id == "bio-pic") || (arrElement.id == "bio-header")) ||
+            ((arrElement.id == "bio-main") || (arrElement.id == "interests"))) {
 
             element.innerHTML = arrElement.inner;
         } else if (arrElement.id.includes('button')) { // arrow buttons
@@ -580,7 +584,7 @@ function createBioDefaultCards() {
             var button = document.createElement('button');
             button.classList.add('bio-button', arrElement.id + '-button-color');
             button.id = arrElement.id + "-button";
-            button.addEventListener('click', function(x) {
+            button.addEventListener('click', function (x) {
                 currentPage = 0;
                 interestPage = arrElement.interestPage;
                 updateInterestPage(0);
@@ -728,14 +732,15 @@ function revertAllFlippedCards() {
 // INTRODUCTION 
 function createColumn(iStart, rowCount = 2, scale = [0, 0, 0, 0]) {
 
-    var exclude = ['2-2', '2-1', '2-0', '2-6', '3-6', 
-        '3-5', '3-1', '3-0', '4-6', '4-2', '4-1', '4-0', 
-        '10-0', '11-0', '10-1', '11-1', '10-3', '11-3', 
+    var exclude = ['2-2', '2-1', '2-0', '2-6', '3-6',
+        '3-5', '3-1', '3-0', '4-6', '4-2', '4-1', '4-0',
+        '10-0', '11-0', '10-1', '11-1', '10-3', '11-3',
         '10-4', '11-4', '11-5', '11-5', '12-4', '12-3',
-        '12-0', '12-1', '13-6', '14-5', '14-6', '16-2', 
-        '16-3', '16-4', '17-3', '18-0', '18-6', '19-0', 
-        '19-1', '19-5', '19-6', '20-0', '20-6', '21-3', 
-        '22-3', '22-4', '22-2', '8-6', '9-6', '8-5'];
+        '12-0', '12-1', '13-6', '14-5', '14-6', '16-2',
+        '16-3', '16-4', '17-3', '18-0', '18-6', '19-0',
+        '19-1', '19-5', '19-6', '20-0', '20-6', '21-3',
+        '22-3', '22-4', '22-2', '8-6', '9-6', '8-5'
+    ];
     var scaleX = 0.15 + scale[0];
     var scaleY = 0.34 + scale[1];
     var shiftX = -1.48 + scale[2];
@@ -744,30 +749,39 @@ function createColumn(iStart, rowCount = 2, scale = [0, 0, 0, 0]) {
     for (var i = iStart; i < iStart + rowCount; i++) {
         for (var j = 0; j < 7; j++) {
 
-            if (exclude.includes(i + '-' + j)) { continue; }
-            var obj = { content: String(i) + String(j) };
+            if (exclude.includes(i + '-' + j)) {
+                continue;
+            }
+            var obj = {
+                content: String(i) + String(j)
+            };
             introElements.push(obj);
 
             var viewObj = new THREE.Object3D();
-            viewObj.position.x =  ( (i * scaleX) + shiftX ) * 500;
-            viewObj.position.y = ( (j * scaleY) + shiftY ) * 200;
+            viewObj.name = 'view-coordinate';
+
+            viewObj.position.x = ((i * scaleX) + shiftX) * 500;
+            viewObj.position.y = ((j * scaleY) + shiftY) * 200;
             viewObj.position.z = 1800;
             introElementsView.push(viewObj);
+
+
         }
     }
 }
-function initIntroElements() {
 
+function initIntroElements() {
+    // M
     createColumn(0, 2, [-0.002, 0, 0, 0]);
-    createColumn(2,  1, [-0.003, 0, -0.03, 0]);
-    createColumn(3,  1, [-0.015, 0.02, 0, -0.06]);
+    createColumn(2, 1, [-0.003, 0, -0.03, 0]);
+    createColumn(3, 1, [-0.015, 0.02, 0, -0.06]);
     createColumn(4, 1, [-0.003, 0, -0.05, 0]);
     createColumn(5, 2, [0.002, 0, -0.1, 0]);
-
+    // A
     createColumn(8, 2, [-0.009, 0.005, -0.06, -0.0007]);
     createColumn(10, 2, [-0.009, 0.005, -0.07, -0.007]);
     createColumn(12, 3, [-0.009, 0.005, -0.11, -0.007]);
-
+    // X
     createColumn(16, 3, [-0.009, 0, -0.14, -0.008]);
     createColumn(19, 1, [-0.009, 0, -0.16, 0]);
     createColumn(20, 3, [-0.009, 0, -0.17, -0.008]);
@@ -776,9 +790,10 @@ function initIntroElements() {
 function initNameElement() {
 
     var element = document.createElement('div');
-    element.classList.add('name-container');
-    element.innerHTML = '<h1 class="name" data-text="Max" contenteditable>MAX</h1>' + 
-        '<div class="gradient"></div>' + 
+    element.id = 'name-hide';
+    element.classList.add('name-container', 'hidde');
+    element.innerHTML = '<h1 class="name" data-text="Max" contenteditable>MAX</h1>' +
+        '<div class="gradient"></div>' +
         '<div class="spotlight"></div>';
 
     element = new THREE.CSS3DObject(element);
@@ -794,26 +809,49 @@ function initNameElement() {
     introElementsView.push(nameObj);
 }
 
+function initParsedTweenCoordinates() {
+
+    var introTweenLength = introElementsSphere.length;
+    tweenSplit = introTweenLength / step;
+    var rightLimit = step;
+
+    for (var i = 0; i < tweenSplit; i++) {
+
+        introTweeningArray.push([]);
+        var j = 0;
+
+        while (j < rightLimit) {
+
+            introTweeningArray[i][j] = introElementsView[j];
+            j++;
+        }
+        introTweeningArray[i].push(...introElementsSphere.slice(rightLimit, introTweenLength));
+        rightLimit += step;
+    }
+}
+
 function introSphereElements() {
-    
+
     var vector = new THREE.Vector3();
     var len = introElements.length;
     var scale = 1800;
 
+
     for (var i = 0; i < len; i++) {
 
-        var phi = Math.acos( -1 + ( 2 * i ) / len );
-		var theta = Math.sqrt( len * Math.PI ) * phi;
+        var phi = Math.acos(-1 + (2 * i) / len);
+        var theta = Math.sqrt(len * Math.PI) * phi;
         var sphereObj = new THREE.Object3D();
+        sphereObj.name = "sphere-coordinate";
 
-		sphereObj.position.x = scale * Math.cos( theta ) * Math.sin( phi );
-		sphereObj.position.y = scale * Math.sin( theta ) * Math.sin( phi );
-		sphereObj.position.z = scale * Math.cos( phi );
+        sphereObj.position.x = scale * Math.cos(theta) * Math.sin(phi);
+        sphereObj.position.y = scale * Math.sin(theta) * Math.sin(phi);
+        sphereObj.position.z = scale * Math.cos(phi);
 
-		vector.copy( sphereObj.position ).multiplyScalar( 2 );
+        vector.copy(sphereObj.position).multiplyScalar(2);
 
-	    sphereObj.lookAt( vector );
-        introElementsSphere.push(sphereObj);        
+        sphereObj.lookAt(vector);
+        introElementsSphere.push(sphereObj);
     }
 }
 
@@ -834,6 +872,13 @@ function startSphereRotation(toggle) {
     }
 }
 
+function transformDelay(i) {
+
+    setTimeout(() => {
+        transform(introRootObjects, introTweeningArray[i], 40);
+    }, i * 80);
+} 
+
 function introduction() {
 
     initIntroElements();
@@ -841,20 +886,186 @@ function introduction() {
     introElements.forEach(arrElement => {
         var element = document.createElement('div');
         element.classList.add('intro-card');
-        element.innerHTML = '<p></p>';
-        
+
         element = new THREE.CSS3DObject(element);
         introRootObjects.push(element);
         introRoot.add(element);
     });
-    
-    initNameElement();
-    transform(introRootObjects, introElementsView, 500);
 
-    // transform(introRootObjects, introElementsSphere, 500);
-    
+    initParsedTweenCoordinates();
+    transform(introRootObjects, introElementsSphere, 1000);
+
+
+    setTimeout(() => {
+        for (var i = 0; i < tweenSplit; i++) { 
+            transformDelay(i); 
+        }
+    }, 2000);
+
+    setTimeout(() => {
+        initNameElement();
+        transform(introRootObjects, introElementsView, 1);
+    }, tweenSplit * 160);
+
+    setTimeout(() => {
+        document.querySelectorAll('.intro-card').forEach(e => e.classList.add('hide'));
+    }, 8000);
+
     // animate();
 }
+
+
+
+var mp3explosion = '';
+
+var prefixes = ["webkit", "moz", "ms", ""];
+
+function prefixedEvent(element, type, callback) {
+    for (var p = 0; p < prefixes.length; p++) {
+        if (!prefixes[p]) type = type.toLowerCase();
+        
+        document.querySelectorAll('.intro-card').forEach(e => e.addEventListener(prefixes[p] + type, callback, false));
+
+        // element.addEventListener(prefixes[p] + type, callback, false);
+    }
+}
+
+function transformExplode(explode, x, y, scale, rotation, percent) {
+    x = x || 0;
+    y = y || 0;
+    scale = scale || 1;
+    unit = percent ? '%' : 'px';
+    rotation = rotation || 0;
+
+    transfromString = 'translate(' + x + unit + ', ' + y + unit + ') ' +
+        'scale(' + scale + ') ' +
+        'rotate(' + rotation + 'deg)';
+
+    explode.style.webkitTransform = transfromString;
+    explode.style.MozTransform = transfromString;
+    explode.style.transform = transfromString;
+}
+
+function createParticle(x, y, scale) {
+    var particle = document.createElement('i');
+    var sparcle = document.createElement('i');
+
+    particle.className = 'particle';
+    sparcle.className = 'sparcle';
+
+    transformExplode(particle, x, y, scale);
+    particle.appendChild(sparcle);
+
+    return particle;
+}
+
+function explode(container) {
+    var particles = [];
+
+    particles.push(createParticle(0, 0, 1));
+    particles.push(createParticle(50, -15, 0.4));
+    particles.push(createParticle(50, -105, 0.2));
+    particles.push(createParticle(-10, -60, 0.8));
+    particles.push(createParticle(-10, 60, 0.4));
+    particles.push(createParticle(-50, -60, 0.2));
+    particles.push(createParticle(-50, -15, 0.75));
+    particles.push(createParticle(-100, -15, 0.4));
+    particles.push(createParticle(-100, -15, 0.2));
+    particles.push(createParticle(-100, -115, 0.2));
+    particles.push(createParticle(80, -15, 0.1));
+
+    particles.forEach(function (particle) {
+        container.appendChild(particle);
+        prefixedEvent(particle, "AnimationEnd", function () {
+            var self = this;
+            setTimeout(function () {
+                requestAnimationFrame(function () {
+                    container.removeChild(self);
+                });
+            }, 100);
+        });
+    });
+}
+
+function exolpodeGroup(x, y, trans) {
+    var container = document.createElement('div');
+    container.className = 'container';
+    container.style.top = y + 'px';
+    container.style.left = x + 'px';
+
+    transformExplode(container, trans.x, trans.y, trans.scale, trans.r, true);
+    explode(container);
+    return container;
+}
+
+function sparcle(event) {
+    var explosions = [];
+
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+        scale: 1,
+        x: -50,
+        y: -50,
+        r: 0
+    }));
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+        scale: .5,
+        x: -30,
+        y: -50,
+        r: 180
+    }));
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+        scale: .5,
+        x: -50,
+        y: -20,
+        r: -90
+    }));
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+        scale: .5,
+        x: -30,
+        y: -70,
+        r: 180
+    }));
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
+        scale: 1.5,
+        x: 0,
+        y: -20,
+        r: 180
+    }));
+
+    requestAnimationFrame(function () {
+        explosions.forEach(function (boum, i) {
+            setTimeout(function () {
+                document.body.appendChild(boum);
+            }, i * 100);
+        });
+    });
+}
+
+var interactionEvent = 'click';
+if ('ontouchstart' in document.documentElement) {
+    interactionEvent = 'touchstart';
+}
+
+document.addEventListener(interactionEvent, sparcle);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // calling all create/coordinate functions 
 function createAllCards() {
@@ -892,8 +1103,7 @@ function concatCoordinates(inViewArr, ignoreArr = []) {
     var coordinates = [];
     inViewArr.push("stationary");
     rootNames.forEach(rootName => {
-        if (ignoreArr.includes(rootName)) {
-        } else if (inViewArr.includes(rootName)) {
+        if (ignoreArr.includes(rootName)) {} else if (inViewArr.includes(rootName)) {
             coordinates = coordinates.concat(roots[rootName].coordinates.view);
         } else {
             coordinates = coordinates.concat(roots[rootName].coordinates.rotate);
