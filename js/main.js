@@ -12,7 +12,8 @@ function init() {
     initCamera();
     initControls();
 
-    introduction();
+    // introduction();
+    addButton();
 
     // createAllCards();
     // createAllTwirlingCoordinates();
@@ -757,15 +758,26 @@ function createColumn(iStart, rowCount = 2, scale = [0, 0, 0, 0]) {
             };
             introElements.push(obj);
 
+            // view object
             var viewObj = new THREE.Object3D();
             viewObj.name = 'view-coordinate';
 
-            viewObj.position.x = ((i * scaleX) + shiftX) * 500;
-            viewObj.position.y = ((j * scaleY) + shiftY) * 200;
+            var xPosition = ((i * scaleX) + shiftX) * 500;
+            var yPosition = ((j * scaleY) + shiftY) * 200;
+
+            viewObj.position.x = xPosition;
+            viewObj.position.y = yPosition;
             viewObj.position.z = 1800;
             introElementsView.push(viewObj);
 
+            // dropped object 
+            var droppedObj = new THREE.Object3D();
+            droppedObj.name = 'dropped-coordinate';
 
+            droppedObj.position.x = xPosition;
+            droppedObj.position.y = yPosition - 1000;
+            droppedObj.position.z = 1800;
+            introElementsDropped.push(droppedObj);
         }
     }
 }
@@ -830,11 +842,32 @@ function initParsedTweenCoordinates() {
     }
 }
 
+function initDroppingCoordinates() {
+
+    var introTweenLength = introElementsSphere.length;
+    dropSplit = introTweenLength / dropStep;
+    var rightLimit = dropStep;
+
+    for (var i = 0; i < dropSplit; i++) {
+
+        dropTweeningArray.push([]);
+        var j = 0;
+
+        while (j < rightLimit) {
+
+            dropTweeningArray[i][j] = introElementsDropped[j];
+            j++;
+        }
+        dropTweeningArray[i].push(...introElementsView.slice(rightLimit, introTweenLength));
+        rightLimit += dropStep;
+    }
+}
+
 function introSphereElements() {
 
     var vector = new THREE.Vector3();
     var len = introElements.length;
-    var scale = 1800;
+    var scale = 1500;
 
 
     for (var i = 0; i < len; i++) {
@@ -864,26 +897,23 @@ function startSphereRotation(toggle) {
 
     if (toggle) {
 
-        var speed = 0.02;
-        var shrink = 10;
+        var speed = 0.035;
         introRoot.rotation.x += speed;
         introRoot.rotation.y += speed;
         introRoot.rotation.z += speed;
     }
 }
 
-function transformDelay(i) {
+function transformDelay(counter, toPosition, tweenSpeed, delayTime) {
 
     setTimeout(() => {
-        transform(introRootObjects, introTweeningArray[i], 40);
-    }, i * 80);
+        transform(introRootObjects, toPosition[counter], tweenSpeed);
+    }, counter * delayTime);
 } 
 
-function introduction() {
+function createIntroElements() {
 
-    initIntroElements();
-    introSphereElements();
-    introElements.forEach(arrElement => {
+    introElements.forEach(() => {
         var element = document.createElement('div');
         element.classList.add('intro-card');
 
@@ -891,24 +921,79 @@ function introduction() {
         introRootObjects.push(element);
         introRoot.add(element);
     });
+}
 
+function addButton() {
+
+    var button = document.createElement('div');
+    button.id = 'start-button';
+    button.addEventListener('click', () => {
+        button.classList.add('pressed');
+        setTimeout(() => {
+
+            button.classList.remove("pressed");
+        }, 300);
+        setTimeout(() => {
+            introduction();
+        }, 1000);
+    }, false);
+
+    button.innerHTML = '<span>CLICK ME</span>';
+    document.body.appendChild(button);
+}
+
+function addClassDelay(element, counter, className, delaySpeed) {
+    setTimeout( () => {
+        element.classList.add(className);
+        console.log(element);
+    }, counter * delaySpeed);
+}
+
+function introduction() {
+
+    var delayMultiplyer = 700;
+
+    initIntroElements();
+    introSphereElements();
     initParsedTweenCoordinates();
-    transform(introRootObjects, introElementsSphere, 1000);
+    initDroppingCoordinates();
+    document.body.style.backgroundColor = 'black';
+    
+    setTimeout( () => {
 
+        document.getElementById('start-button').remove();
+    }, delayMultiplyer);
+    
+    setTimeout( () => {
 
+        createIntroElements();
+        // put at the starting sphere position 
+        transform(introRootObjects, introElementsSphere, 1000);
+        introSphereToggle = true;
+        animate();
+    }, delayMultiplyer * 2);
+
+    // start to change color of all intro cards
+    // setTimeout( () => {
+        // var elementList = document.getElementsByClassName('intro-card');
+        // for (var i = 0; i < elementList.length; i++) {
+        //     addClassDelay(elementList[i], i, 'change-intro-color', 30);
+    //     }
+    // }, delayMultiplyer * 5);
+
+    // start the incremental transform of all of the intro-cards
+    // setTimeout(() => {
+    //     introRoot.rotation.x = 0;
+    //     introRoot.rotation.y = 0;
+    //     introRoot.rotation.z = 0;
+    //     introSphereToggle = false;
+    //     for (var i = 0; i < tweenSplit; i++) { 
+    //         transformDelay(i, introTweeningArray, 35, 70); 
+    //     }
+    // }, delayMultiplyer * 11)
+
+    // start the exploding animation 
     setTimeout(() => {
-        for (var i = 0; i < tweenSplit; i++) { 
-            transformDelay(i); 
-        }
-    }, 2000);
-
-    setTimeout(() => {
-        initNameElement();
-        transform(introRootObjects, introElementsView, 1);
-    }, tweenSplit * 160);
-
-    setTimeout(() => {
-        
         var everyThird = 0;
         document.querySelectorAll('.intro-card').forEach(element => {
             if (everyThird % 3 == 0) {
@@ -919,17 +1004,33 @@ function introduction() {
         
         document.querySelectorAll('.intro-card').forEach(e => e.classList.add('hide'));
     }, 8000);
+        // document.querySelectorAll('.intro-card').forEach(e => e.classList.add('hide'));
+        
 
-    // animate();
+    // setTimeout(() => {
+    //     initNameElement();
+    //     transform(introRootObjects, introElementsView, 1);
+    // }, tweenSplit * 200);
+
+    // // start the incremental dropping transformation of all of the intro-cards
+    // setTimeout(() => {
+    //     for (var i = 0; i < dropSplit; i++) { 
+    //         transformDelay(i, dropTweeningArray, 2000, 20); 
+    //     }
+    // }, 8000);
+
+
+    // add the name in there behind all the aligned intro-cards
+
 }
 
 
 
-var mp3explosion = '';
 
-var prefixes = ["webkit", "moz", "ms", ""];
-
+document.addEventListener('click', sparcle);
 function prefixedEvent(element, type, callback) {
+    
+    var prefixes = ["webkit", "moz", "ms", ""];
     for (var p = 0; p < prefixes.length; p++) {
         if (!prefixes[p]) type = type.toLowerCase();
 
@@ -1007,60 +1108,33 @@ function exolpodeGroup(x, y, trans) {
 function sparcle(event) {
     var explosions = [];
 
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-    //     scale: 1,
-    //     x: -50,
-    //     y: -50,
-    //     r: 0
-    // }));
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-    //     scale: .5,
-    //     x: -30,
-    //     y: -50,
-    //     r: 180
-    // }));
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-    //     scale: .5,
-    //     x: -50,
-    //     y: -20,
-    //     r: -90
-    // }));
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-    //     scale: .5,
-    //     x: -30,
-    //     y: -70,
-    //     r: 180
-    // }));
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-    //     scale: 1.5,
-    //     x: 0,
-    //     y: -20,
-    //     r: 180
-    // }));
-    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: 1.5,
-        x: 300,
-        y: 200,
-        r: 180
-    }));
-    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: 1.5,
-        x: 120,
-        y: 220,
-        r: 180
-    }));
-    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: 1.5,
-        x: 140,
-        y: 240,
-        r: 180
-    }));
-    explosions.push(exolpodeGroup(event.pageX, event.pageY, {
-        scale: 1.5,
-        x: 260,
-        y: 260,
-        r: 180
-    }));
+    for (var i = 0; i < 4; i++) {
+
+        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // large one in the middle 
+            scale: 1.5,
+            x: 100 + (100 * i), // left most on M
+            y: 100, // in middle of MAX
+            r: 180
+        }));
+        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // small on bottom 
+            scale: 0.5,
+            x: 100 + (100 * i), 
+            y: 160, 
+            r: 180
+        }));
+        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // small on bottom 
+            scale: 0.5,
+            x: 100 + (100 * i), 
+            y: 60, 
+            r: 180
+        }));
+        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // small on bottom 
+            scale: 0.5,
+            x: 0, 
+            y: 0, 
+            r: 10
+        }));
+    }
 
     requestAnimationFrame(function () {
         explosions.forEach(function (boum, i) {
@@ -1070,17 +1144,6 @@ function sparcle(event) {
         });
     });
 }
-
-var interactionEvent = 'click';
-if ('ontouchstart' in document.documentElement) {
-    interactionEvent = 'touchstart';
-}
-
-document.addEventListener(interactionEvent, sparcle);
-
-
-
-
 
 
 

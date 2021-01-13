@@ -1,13 +1,20 @@
+@font-face {
+    font-family: nameFont;
+    src: url('./../ARCADE_I.TTF');
+}
 
- @font-face { font-family: nameFont; src: url('./../ARCADE_I.TTF'); } 
- 
- .intro-card {    
+.intro-card {
     height: calc(var(--multiplier) * 6);
     width: calc(var(--multiplier) * 7);
     border: 3px solid red;
     color: red;
     border-radius: 10%;
     background-color: white;
+}
+
+.change-intro-color {
+    background-color: blue;
+    border: 3px solid white;
 }
 
 .name {
@@ -35,7 +42,8 @@
     margin: 0;
 }
 
-.name::before, .name::after {
+.name::before,
+.name::after {
     content: attr(data-text);
     color: white;
     filter: blur(0.008em);
@@ -49,7 +57,8 @@
     mix-blend-mode: exclusion;
 }
 
-.gradient, .spotlight {
+.gradient,
+.spotlight {
     position: absolute;
     top: 0;
     left: 0;
@@ -82,24 +91,48 @@
 @keyframes light {
     100% {
         transform: translate3d(50%, 50%, 0);
-   }
+    }
+}
+
+
+/* BUTTON TO START */
+
+#start-button {
+    margin-top: 35vh;
+    border-radius: 50%;
+    width: calc(var(--multiplier) * 16);
+    height: calc(var(--multiplier) * 16);
+    font-family: Avenir, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    background: red;
+    text-shadow: 0 3px 1px rgba(122, 17, 8, .8);
+    box-shadow: 0 8px 0 rgb(183, 9, 0),
+        0 15px 20px rgba(0, 0, 0, .35);
+    transition: .4s all ease-in;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#start-button span {
+    position: relative;
+    margin-left: calc(var(--multiplier) * 1);
+    line-height: calc(var(--multiplier) * 16.3);
+}
+
+.pressed {
+    padding-top: 3px;
+    transform: translateY(10px);
+    box-shadow: 0 4px 0 rgb(183, 0, 0),
+        0 8px 6px rgba(0, 0, 0, .45);
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* EXPLOSIONS */
 
 .container {
     position: absolute;
@@ -117,12 +150,13 @@
     display: block;
     width: 2rem;
     height: 2rem;
-    /* background: rgba(0, 0, 0, .25); */
+    background: rgba(0, 0, 0, .25);
     transform: rotate(45deg);
-    /* outline: 10px solid rgba(0, 0, 0, .1); */
+    outline: 10px solid rgba(0, 0, 0, .1);
 }
 
-.container:nth-child(4n):before, .container:nth-child(7n):before {
+.container:nth-child(4n):before,
+.container:nth-child(7n):before {
     display: none;
 }
 
@@ -134,66 +168,87 @@
     width: 0;
     height: 0;
 }
+
 .particle:nth-child(1) .sparcle {
     animation-delay: 0ms;
 }
+
 .particle:nth-child(2) .sparcle {
     animation-delay: 50ms;
 }
+
 .particle:nth-child(3) .sparcle {
     animation-delay: 100ms;
 }
+
 .particle:nth-child(4) .sparcle {
     animation-delay: 150ms;
 }
+
 .particle:nth-child(5) .sparcle {
     animation-delay: 200ms;
 }
+
 .particle:nth-child(6) .sparcle {
     animation-delay: 250ms;
 }
+
 .particle:nth-child(7) .sparcle {
     animation-delay: 300ms;
 }
+
 .particle:nth-child(8) .sparcle {
     animation-delay: 350ms;
 }
+
 .particle:nth-child(9) .sparcle {
     animation-delay: 400ms;
 }
+
 .particle:nth-child(10) .sparcle {
     animation-delay: 450ms;
 }
+
 .particle:nth-child(11) .sparcle {
     animation-delay: 500ms;
 }
+
 .particle:nth-child(12) .sparcle {
     animation-delay: 550ms;
 }
+
 .particle:nth-child(13) .sparcle {
     animation-delay: 600ms;
 }
+
 .particle:nth-child(14) .sparcle {
     animation-delay: 650ms;
 }
+
 .particle:nth-child(15) .sparcle {
     animation-delay: 700ms;
 }
+
 .particle:nth-child(16) .sparcle {
     animation-delay: 750ms;
 }
+
 .particle:nth-child(17) .sparcle {
     animation-delay: 800ms;
 }
+
 .particle:nth-child(18) .sparcle {
     animation-delay: 850ms;
 }
+
 .particle:nth-child(19) .sparcle {
     animation-delay: 900ms;
 }
+
 .particle:nth-child(20) .sparcle {
     animation-delay: 950ms;
 }
+
 .particle:nth-child(21) .sparcle {
     animation-delay: 1000ms;
 }
@@ -217,26 +272,31 @@
         background-color: #e4f9fa;
         transform: rotate(45deg) scale(1.2) translateZ(0);
         box-shadow: 0 0 0 0 #fde655;
-   }
+    }
+
     40% {
         background-color: rgba(228, 249, 250, .1);
-   }
+    }
+
     50% {
         transform: rotate(45deg) scale(1) translateZ(0);
         box-shadow: 0 0 0 10px #8fff8b;
         background-color: rgba(228, 249, 250, 0);
-   }
+    }
+
     60% {
         box-shadow: 0 0 0 50px #3dabff;
         transform: rotate(45deg) scale(0.5) translateZ(0);
-   }
+    }
+
     70% {
         background-color: rgba(228, 249, 250, 0);
         box-shadow: 0 0 0 30px #3d8aff;
-   }
+    }
+
     100% {
         background-color: #39ff39;
         box-shadow: 0 0 0 0 #0026ff;
         transform: rotate(45deg) scale(0.25) translateZ(0);
-   }
+    }
 }

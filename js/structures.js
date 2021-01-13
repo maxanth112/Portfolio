@@ -350,6 +350,7 @@ var nameObject;
 
 var introElementsView = [];
 var introElementsSphere = [];
+var introElementsDropped = [];
 
 var introSphereToggle = false;
 
@@ -373,6 +374,9 @@ var introTweeningArray = [];
 var step = 2;
 var tweenSplit;
 
+var dropTweeningArray = [];
+var dropStep = 10;
+var dropSplit;
 
 
 
