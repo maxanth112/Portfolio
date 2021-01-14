@@ -12,9 +12,22 @@
     background-color: white;
 }
 
-.change-intro-color {
-    background-color: blue;
+
+.intro-color-0 {
+    background-color: rgba(42, 255, 113, 0.9);
+}
+.intro-color-1 {
+    background-color: rgba(0, 255, 21, 0.9);
     border: 3px solid white;
+}
+.intro-color-2 {
+    background-color: rgba(0, 174, 255, 0.9);
+}
+.intro-color-3 {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.intro-color-4 {
+    background-color: rgba(29, 74, 255, 0.9);
 }
 
 .name {
@@ -150,9 +163,9 @@
     display: block;
     width: 2rem;
     height: 2rem;
-    background: rgba(0, 0, 0, .25);
+    /* background: rgba(0, 0, 0, .25); */
     transform: rotate(45deg);
-    outline: 10px solid rgba(0, 0, 0, .1);
+    /* outline: 10px solid rgba(0, 0, 0, .1); */
 }
 
 .container:nth-child(4n):before,
