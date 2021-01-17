@@ -788,9 +788,18 @@ function createIntroElements() {
     var element = document.createElement('div');
     element.id = 'name-hide';
     element.classList.add('name-container', 'hide');
-    element.innerHTML = '<h1 class="name" data-text="Max" contenteditable>MAX</h1>' +
-        '<div class="gradient"></div>' +
-        '<div class="spotlight"></div>';
+    var innerName = '<h1 class="name" id="shrink-name" data-text="Max" contenteditable>MAX</h1>' +
+    '<div class="gradient"></div>' +
+    '<div class="spotlight"></div>';
+    element.innerHTML = innerName;
+    // big name absolute 
+    var container = document.getElementById('absoluteContainer');
+    container.innerHTML = '<div class="hide name-container" id="name-absolute">' + 
+    '<h1 class="name" data-text="Max Wiesner" contenteditable>MAX WIESNER</h1>' +
+    '<div class="gradient"></div>' +
+    '<div class="spotlight"></div>' + 
+    '</div>';
+
     element = new THREE.CSS3DObject(element);
     introRootObjects.unshift(element);
     nameRoot.add(element);
@@ -882,6 +891,12 @@ function addClassDelay(element, counter, className, delaySpeed, prevDelay) {
     }, (counter * delaySpeed) + prevDelay);
 }
 
+function tweenName() {
+    var name = document.createElement('div');
+    name.id = "absolute-name";
+    name.innerHTML = '<h1>'
+}
+
 function introduction() {
     var delayMultiplyer = 700;
 
@@ -912,12 +927,14 @@ function introduction() {
 
         for (var i = 0; i < elementList.length; i++) { 
             for (var j = 0; j < colorLength; j++) {
-                if (j % 2 == 0 && i % 2 == 0) addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime, totalDelay * j);
-                // else addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime, totalDelay * j);
+                addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime, totalDelay * j);
             }
         }
-        
     }, delayMultiplyer * 4);
+
+    setTimeout(() => {
+        document.getElementById('name-absolute').classList.remove('hide');
+    }, delayMultiplyer * 10);
 
     setTimeout(() => { // start the incremental transform to view of all of the intro-cards
         introRoot.rotation.x = 0;
@@ -932,16 +949,23 @@ function introduction() {
         var nameObj = document.getElementById('name-hide');
         nameObj.click();
         
-        setTimeout( () => { nameObj.classList.remove('hide'); }, 1000);  // remove the containers fronm explosion
-        setTimeout(() => {
-            document.querySelectorAll('.container').forEach(element => { element.remove(); });
-        }, 2000);
-    }, delayMultiplyer * 19);
+        setTimeout( () => { nameObj.classList.remove('hide'); }, 1000);  // unhide the big name 
+    }, delayMultiplyer * 17);
 
     setTimeout(() => { // start the incremental dropping transformation 
         for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
     }, delayMultiplyer * 19);
 
+    setTimeout(() => { // remove all of the explosion containers, hide intro cards, and remove click event listener
+        document.removeEventListener('click', sparcle);
+        document.querySelectorAll('.container').forEach(element => { element.remove(); });
+        document.querySelectorAll('.intro-card').forEach(element => { element.classList.add('hide'); });
+    }, delayMultiplyer * 25);
+
+    setTimeout(() => { // shrink the big name and tween to top left 
+       document.getElementById('shrink-name').classList.add('shrink-size');
+       
+    }, delayMultiplyer * 25);
 }
 
 function prefixedEvent(element, type, callback) {
@@ -960,7 +984,6 @@ function transformExplode(explode, x, y, scale, rotation, percent) {
     scale = scale || 1;
     unit = percent ? '%' : 'rem';
     rotation = rotation || 0;
-
     transfromString = 'translate(' + x + unit + ', ' + y + unit + ') ' +
         'scale(' + scale + ') ' +
         'rotate(' + rotation + 'deg)';
@@ -973,19 +996,16 @@ function transformExplode(explode, x, y, scale, rotation, percent) {
 function createParticle(x, y, scale) {
     var particle = document.createElement('i');
     var sparcle = document.createElement('i');
-
     particle.className = 'particle';
     sparcle.className = 'sparcle';
 
     transformExplode(particle, x, y, scale);
     particle.appendChild(sparcle);
-
     return particle;
 }
 
 function explode(container) {
     var particles = [];
-
     particles.push(createParticle(0, 0, 1));
     particles.push(createParticle(20, -15, 0.4));
     particles.push(createParticle(20, -10, 0.2));
@@ -1024,7 +1044,7 @@ function exolpodeGroup(x, y, trans) {
 function sparcle(event) {
     var explosions = [];
 
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 5; i++) {
 
         explosions.push(exolpodeGroup(event.pageX, event.pageY, { // large one in the middle 
             scale: 1.5,

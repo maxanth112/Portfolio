@@ -2,13 +2,15 @@
   --multiplier: 1rem; 
 }
 
-
+* {
+  margin: 0;
+}
 body {
   margin: 0;
   /* font-family: 'VT323', monospace; */
   font-family: 'IBM Plex Mono', monospace;
   overflow: hidden;
-  /* background-color: black; */
+  background-color: black;
 }
 
 #cssContainer, #glContainer {
@@ -16,8 +18,14 @@ body {
   height: 100%;
   position: absolute;
   top: 0; left: 0;
+  margin: 0;
 }
 
 #glContainer {
   pointer-events: none;
+}
+
+#absoluteContainer {
+  margin: calc(var(--multiplier) * -.9) 
+    0 0 calc(var(--multiplier) * -.5);
 }
