@@ -788,19 +788,11 @@ function createIntroElements() {
     var element = document.createElement('div');
     element.id = 'name-hide';
     element.classList.add('name-container', 'hide');
-    var innerName = '<h1 class="name" id="shrink-name" data-text="Max" contenteditable>MAX</h1>' +
+    element.innerHTML = '<h1 class="name" id="shrink-name" data-text="Max" contenteditable>MAX</h1>' +
     '<div class="gradient"></div>' +
     '<div class="spotlight"></div>';
-    element.innerHTML = innerName;
-    // big name absolute 
-    var container = document.getElementById('absoluteContainer');
-    container.innerHTML = '<div class="hide name-container" id="name-absolute">' + 
-    '<h1 class="name" data-text="Max Wiesner" contenteditable>MAX WIESNER</h1>' +
-    '<div class="gradient"></div>' +
-    '<div class="spotlight"></div>' + 
-    '</div>';
-
     element = new THREE.CSS3DObject(element);
+    nameElement = element;
     introRootObjects.unshift(element);
     nameRoot.add(element);
 
@@ -810,6 +802,13 @@ function createIntroElements() {
     element.position.y = 0;
     element.position.z = 1775;
     nameCoordinate = element;
+
+    // big name shrink coordinate
+    var element = new THREE.Object3D();
+    element.position.x = -750;
+    element.position.y = 530;
+    element.position.z = 1950;
+    shrinkCoordinate = element;
 }
 
 function createIteratedCoordinates(start, end, saveArr, step) {
@@ -891,14 +890,23 @@ function addClassDelay(element, counter, className, delaySpeed, prevDelay) {
     }, (counter * delaySpeed) + prevDelay);
 }
 
-function tweenName() {
-    var name = document.createElement('div');
-    name.id = "absolute-name";
-    name.innerHTML = '<h1>'
+function addAbsoluteName() {
+    var abs = document.createElement('div');
+    abs.id = 'absoluteContainer';
+    document.body.appendChild(abs);
+
+    var container = document.getElementById('absoluteContainer');
+    container.innerHTML = '<div class="hide name-container" id="name-absolute">' + 
+    '<h1 class="name" data-text="Max Wiesner" contenteditable>MAX WIESNER</h1>' +
+    '<div class="gradient"></div>' +
+    '<div class="spotlight"></div>' + 
+    '</div>';
+
 }
 
 function introduction() {
     var delayMultiplyer = 700;
+    addAbsoluteName();
 
     document.body.style.backgroundColor = 'black'; // background goes black
     setTimeout( () => { document.getElementById('start-button').remove(); }, delayMultiplyer); // remove button 
@@ -933,7 +941,7 @@ function introduction() {
     }, delayMultiplyer * 4);
 
     setTimeout(() => {
-        document.getElementById('name-absolute').classList.remove('hide');
+        // document.getElementById('name-absolute').classList.remove('hide');
     }, delayMultiplyer * 10);
 
     setTimeout(() => { // start the incremental transform to view of all of the intro-cards
@@ -949,12 +957,12 @@ function introduction() {
         var nameObj = document.getElementById('name-hide');
         nameObj.click();
         
-        setTimeout( () => { nameObj.classList.remove('hide'); }, 1000);  // unhide the big name 
-    }, delayMultiplyer * 17);
+        setTimeout( () => { nameObj.classList.remove('hide'); }, 0);  // unhide the big name 
+    }, delayMultiplyer * 19);
 
     setTimeout(() => { // start the incremental dropping transformation 
         for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
-    }, delayMultiplyer * 19);
+    }, delayMultiplyer * 18.5);
 
     setTimeout(() => { // remove all of the explosion containers, hide intro cards, and remove click event listener
         document.removeEventListener('click', sparcle);
@@ -964,8 +972,19 @@ function introduction() {
 
     setTimeout(() => { // shrink the big name and tween to top left 
        document.getElementById('shrink-name').classList.add('shrink-size');
-       
     }, delayMultiplyer * 25);
+
+    setTimeout(() => { 
+        
+        introSphereCoordinates.unshift(shrinkCoordinate);
+        transform(introRootObjects, introSphereCoordinates, 1500);
+        setTimeout(() => {
+            document.getElementById('name-absolute').classList.remove('hide');
+            document.querySelectorAll('.intro-card').forEach(element => { element.remove(); });
+            scene.removeAll();
+        }, 2000);
+     }, delayMultiplyer * 25);
+
 }
 
 function prefixedEvent(element, type, callback) {

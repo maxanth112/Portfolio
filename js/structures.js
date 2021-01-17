@@ -352,7 +352,11 @@ var cardElements = [];
 var introViewCoordinates = [];
 var introSphereCoordinates = [];
 var introDropCoordinates = [];
+
+var nameElement;
 var nameCoordinate;
+var shrinkCoordinate;
+var shrinkCoordinates;
 
 var iteratedIntroView = [];
 var iteratedIntroDrop = [];

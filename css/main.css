@@ -28,4 +28,7 @@ body {
 #absoluteContainer {
   margin: calc(var(--multiplier) * -.9) 
     0 0 calc(var(--multiplier) * -.5);
+  background: transparent;
+  height: calc(var(--multiplier) * 2.5);
+  width: calc(var(--multiplier) * 29);
 }
