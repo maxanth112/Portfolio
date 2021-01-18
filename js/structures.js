@@ -341,16 +341,17 @@ var roots = {
     }
 };
 
-
+var delayMultiplyer = 700;
 var introRoot;
 var nameRoot; 
-var introSphereToggle = false;
+var introSphereToggle = 0;
 
 var introRootObjects = [];
 var cardElements = [];
 
 var introViewCoordinates = [];
 var introSphereCoordinates = [];
+var discoSphereCoordinates = [];
 var introDropCoordinates = [];
 
 var nameElement;
@@ -632,7 +633,7 @@ var mathArray = [{
         language: "LaTeX",
         position: [midRight, thirdRow]
     }
-]
+];
 
 var computerArray = [{
         type: "CSCI",
@@ -706,7 +707,7 @@ var computerArray = [{
         language: "C, C++",
         position: [right, thirdRow]
     },
-]
+];
 
 var econArray = [{
         type: "ECON",

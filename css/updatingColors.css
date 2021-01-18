@@ -1,4 +1,4 @@
-/* :root {
+:root {
     --all-color: white;
     --educ-color: white;
     --computer-color: rgba(255, 252, 180, 0.8);
@@ -9,7 +9,7 @@
     --intern-color: rgba(218, 0, 0, 0.8);
     --matops-color:  rgba(218, 0, 0, 0.8);
     --contract-color: rgba(218, 0, 0, 0.8);
-}
+} 
 
 /* EDUCATION */
 .education-main-color, 
@@ -31,6 +31,7 @@
     box-shadow: 0 0 calc(var(--multiplier) * .7) rgba(255,255,255,.8),
                  0 0 calc(var(--multiplier) * 1.2) rgba(255,255,255,.8);
 }
+
 /* .computer-header-color div button,
 .math-header-color div button,
 .econ-header-color div button {
@@ -221,4 +222,4 @@
 
 .tool-container { 
     background-color: transparent;
-} */
+} 

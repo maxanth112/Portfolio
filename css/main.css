@@ -2,33 +2,18 @@
   --multiplier: 1rem; 
 }
 
-* {
-  margin: 0;
-}
 body {
   margin: 0;
   /* font-family: 'VT323', monospace; */
   font-family: 'IBM Plex Mono', monospace;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: black;
 }
 
-#cssContainer, #glContainer {
+#cssContainer {
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0; left: 0;
-  margin: 0;
-}
-
-#glContainer {
-  pointer-events: none;
-}
-
-#absoluteContainer {
-  margin: calc(var(--multiplier) * -.9) 
-    0 0 calc(var(--multiplier) * -.5);
-  background: transparent;
-  height: calc(var(--multiplier) * 2.5);
-  width: calc(var(--multiplier) * 29);
+  overflow: hidden;
+  /* position: absolute;
+  top: 0; left: 0; */
 }

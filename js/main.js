@@ -4,25 +4,26 @@
 init();
 
 function init() {
-
+    
     cssRenderer = createCssRenderer();
-
     initMouseSceneMenu();
     initRoots();
     initCamera();
     initControls();
-
-    // introduction();
-    addButton();
-
-    // createAllCards();
-    // createAllTwirlingCoordinates();
-    // createAllViewCoordinates();
-
-    // startTransformAllCourseObjects();
-
+    
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
+    addButton();
+}
+
+function startStatic() {
+
+    createAllCards();
+    createAllTwirlingCoordinates();
+    createAllViewCoordinates();
+
+    startTransformAllCourseObjects();
+
 
     animate();
 }
@@ -135,7 +136,7 @@ function animate() {
 
     scene.updateMatrixWorld();
     TWEEN.update();
-    controls.update();
+    // controls.update();
     render();
 
     requestAnimationFrame(animate);
@@ -200,6 +201,7 @@ function updateLinkedThreesText(updateText, defaultText, idArr, update = 'first'
 // creating cards and divs 
 function createCourseCards(arr, saveRoot) {
 
+    console.log(arr);
     arr.forEach(arrElement => {
         var element = document.createElement('div');
         element.classList.add('course-element');
@@ -216,8 +218,6 @@ function createCourseCards(arr, saveRoot) {
             '<p class="course-description">' + arrElement.description + '</p>' +
             '</div>' +
             '</div>';
-
-        element = new THREE.CSS3DObject(element);
         pushRootandObjArr(saveRoot, element);
     });
 }
@@ -784,31 +784,50 @@ function createIntroElements() {
         introRoot.add(element);
     });
     
-    // big name 
-    var element = document.createElement('div');
-    element.id = 'name-hide';
-    element.classList.add('name-container', 'hide');
-    element.innerHTML = '<h1 class="name" id="shrink-name" data-text="Max" contenteditable>MAX</h1>' +
+    createNames();
+}
+
+function createNames() {
+    // first name 
+    var firstName = document.createElement('div');
+    firstName.id = 'firstName';
+    firstName.classList.add('name-container', 'hide');
+    firstName.innerHTML = '<h1 class="name" id="shrink-name" data-text="Max" contenteditable>MAX</h1>' +
     '<div class="gradient"></div>' +
     '<div class="spotlight"></div>';
-    element = new THREE.CSS3DObject(element);
-    nameElement = element;
-    introRootObjects.unshift(element);
-    nameRoot.add(element);
 
-    // big name view coordinate
+    firstName = new THREE.CSS3DObject(firstName);
+    nameElement = firstName;
+    introRootObjects.unshift(firstName);
+    nameRoot.add(firstName);
+
+    // view coordinate
     element = new THREE.Object3D();
     element.position.x = 25;
     element.position.y = 0;
     element.position.z = 1775;
     nameCoordinate = element;
 
-    // big name shrink coordinate
+    // shrink coordinate
     var element = new THREE.Object3D();
     element.position.x = -750;
     element.position.y = 530;
     element.position.z = 1950;
     shrinkCoordinate = element;
+
+    // last name 
+    var lastName = document.createElement('div');
+    lastName.id = 'lastName';
+    lastName.classList.add('name-container', 'hide');
+    lastName.innerHTML = '<h1 class="name" data-text="Wiesner" contenteditable>WIESNER</h1>' +
+    '<div class="gradient"></div>' +
+    '<div class="spotlight"></div>';
+
+    lastName = new THREE.CSS3DObject(lastName);
+    lastName.position.x = -610;
+    lastName.position.y = 530;
+    lastName.position.z = 1950;
+    nameRoot.add(lastName);
 }
 
 function createIteratedCoordinates(start, end, saveArr, step) {
@@ -831,11 +850,10 @@ function createIteratedCoordinates(start, end, saveArr, step) {
     }
 }
 
-function createSphereCoordinates() {
+function createSphereCoordinates(scale, saveArr) {
 
     var vector = new THREE.Vector3();
     var len = introRootObjects.length - 1;
-    var scale = 1500;
     for (var i = 0; i < len; i++) {
 
         var phi = Math.acos(-1 + (2 * i) / len);
@@ -848,19 +866,24 @@ function createSphereCoordinates() {
 
         vector.copy(element.position).multiplyScalar(2);
         element.lookAt(vector);
-        introSphereCoordinates.push(element);
+        saveArr.push(element);
     }
 }
 
 function startSphereRotation(toggle) {
+    
+    var speed = 0.035;
+    if (toggle === 1) {
 
-    if (toggle) {
-
-        var speed = 0.035;
         introRoot.rotation.x += speed;
         introRoot.rotation.y += speed;
         introRoot.rotation.z += speed;
-    }
+    } else if (toggle === 2) {
+
+        introRoot.rotation.x = 0;
+        introRoot.rotation.y += speed;
+        introRoot.rotation.z = 0;
+    } 
 }
 
 function transformDelay(counter, toPosition, tweenSpeed, delayTime) {
@@ -871,7 +894,7 @@ function transformDelay(counter, toPosition, tweenSpeed, delayTime) {
 } 
 
 function addButton() {
-
+// 
     var button = document.createElement('div');
     button.innerHTML = '<span>CLICK ME</span>';
     button.id = 'start-button';
@@ -886,63 +909,87 @@ function addButton() {
 
 function addClassDelay(element, counter, className, delaySpeed, prevDelay) {
     setTimeout( () => {
+        if (delaySpeed <= 10) {
+            element.classList.add(className + '-rand');
+        } 
         element.classList.add(className);
     }, (counter * delaySpeed) + prevDelay);
 }
 
-function addAbsoluteName() {
-    var abs = document.createElement('div');
-    abs.id = 'absoluteContainer';
-    document.body.appendChild(abs);
+function colorSphere() {
 
-    var container = document.getElementById('absoluteContainer');
-    container.innerHTML = '<div class="hide name-container" id="name-absolute">' + 
-    '<h1 class="name" data-text="Max Wiesner" contenteditable>MAX WIESNER</h1>' +
-    '<div class="gradient"></div>' +
-    '<div class="spotlight"></div>' + 
-    '</div>';
+    document.body.style.backgroundColor = 'black'; 
+    document.getElementById('start-button').remove(); // remove button 
 
+   
+    createIntroElements(); // all 100 cards/big name are in introRootObjects and dropped/view coordinates are made 
+    createSphereCoordinates(1500, introSphereCoordinates); // all 100 now have sphere coordinates in introSphereCoordinates array
+
+    createIteratedCoordinates(introSphereCoordinates, introViewCoordinates, iteratedIntroView, 2);
+    createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
+    introSphereCoordinates.unshift(nameCoordinate);
+
+    transform(introRootObjects, introSphereCoordinates, 1000);
+    introSphereToggle = 1;
+    animate();
+  
+    document.addEventListener('click', sparcle);
+    
+    var elementList = document.getElementsByClassName('intro-card');
+    var elementListLength = elementList.length;
+   
+    
+    function changeColorClass(colorNumber, prevNumber = 0) {
+
+        var newClass = 'intro-color-' + colorNumber;
+        var prevClass = 'intro-color-' + prevNumber;
+        for (var i = 0; i < elementListLength; i++) {
+            elementList[i].classList.remove(prevClass);
+            elementList[i].classList.add(newClass, 'intro-card');
+        }
+    }
+    
+    var flashDelay = 400;
+    setTimeout(changeColorClass, flashDelay, 0);
+    setTimeout(changeColorClass, flashDelay * 2, 1);
+    setTimeout(changeColorClass, flashDelay * 3, 0, 1);
+    setTimeout(changeColorClass, flashDelay * 4, 1);
+    setTimeout(changeColorClass, flashDelay * 5, 0, 1);
+
+    createSphereCoordinates(500, discoSphereCoordinates);
+    discoSphereCoordinates.unshift(nameCoordinate);
+    
+    setTimeout(() => {
+        introSphereToggle = 2;
+        transform(introRootObjects, discoSphereCoordinates, 400);
+        
+        setTimeout(changeColorClass, flashDelay * 6, 10, 0);
+        for (var i = 0; i < elementListLength; i++) {
+
+            addClassDelay(elementList[i], i, 'intro-color-10', getRandomInt(100), 0);
+        }
+    }, flashDelay * 5.5);
+    
+//     var delayTime = 4;
+//     // var totalDelay = delayTime *  elementList.length;
+//     var colorLength = 5;
+        
+
+//         for (var i = 0; i < elementList.length; i++) { 
+//             for (var j = 0; j < colorLength; j++) {
+//                 addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime, totalDelay * j);
+//             }
+//         }
 }
 
 function introduction() {
-    var delayMultiplyer = 700;
-    addAbsoluteName();
-
-    document.body.style.backgroundColor = 'black'; // background goes black
-    setTimeout( () => { document.getElementById('start-button').remove(); }, delayMultiplyer); // remove button 
     
-    setTimeout( () => { // put cards in view 
-        createIntroElements(); // all 100 cards/big name are in introRootObjects and dropped/view coordinates are made 
-        createSphereCoordinates(); // all 100 now have sphere coordinates in introSphereCoordinates array
-    }, delayMultiplyer * 1.1);
-     
-    setTimeout( () => { // put cards in sphere and begin rotation 
-        createIteratedCoordinates(introSphereCoordinates, introViewCoordinates, iteratedIntroView, 2);
-        createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
-        introSphereCoordinates.unshift(nameCoordinate);
-
-        transform(introRootObjects, introSphereCoordinates, 1000);
-        introSphereToggle = true;
-        animate();
-    }, delayMultiplyer * 2);
-
+    colorSphere();
+         
     setTimeout( () => { // start changing cards colors 
         document.addEventListener('click', sparcle);
-        var elementList = document.getElementsByClassName('intro-card');
-        var delayTime = 4;
-        var totalDelay = delayTime *  elementList.length;
-        var colorLength = 5;
-
-        for (var i = 0; i < elementList.length; i++) { 
-            for (var j = 0; j < colorLength; j++) {
-                addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime, totalDelay * j);
-            }
-        }
+      
     }, delayMultiplyer * 4);
-
-    setTimeout(() => {
-        // document.getElementById('name-absolute').classList.remove('hide');
-    }, delayMultiplyer * 10);
 
     setTimeout(() => { // start the incremental transform to view of all of the intro-cards
         introRoot.rotation.x = 0;
@@ -954,7 +1001,7 @@ function introduction() {
     }, delayMultiplyer * 10)
     
     setTimeout(() => {  // start the exploding animation 
-        var nameObj = document.getElementById('name-hide');
+        var nameObj = document.getElementById('firstName');
         nameObj.click();
         
         setTimeout( () => { nameObj.classList.remove('hide'); }, 0);  // unhide the big name 
@@ -970,20 +1017,25 @@ function introduction() {
         document.querySelectorAll('.intro-card').forEach(element => { element.classList.add('hide'); });
     }, delayMultiplyer * 25);
 
-    setTimeout(() => { // shrink the big name and tween to top left 
-       document.getElementById('shrink-name').classList.add('shrink-size');
-    }, delayMultiplyer * 25);
-
     setTimeout(() => { 
-        
+        document.getElementById('shrink-name').classList.add('shrink');
         introSphereCoordinates.unshift(shrinkCoordinate);
         transform(introRootObjects, introSphereCoordinates, 1500);
         setTimeout(() => {
-            document.getElementById('name-absolute').classList.remove('hide');
-            document.querySelectorAll('.intro-card').forEach(element => { element.remove(); });
-            scene.removeAll();
+            var lastName = document.getElementById('lastName');
+            lastName.classList.remove('hide');
+            lastName.classList.add('faded');
+            setTimeout(() => {
+                document.getElementById('lastName').classList.remove('faded');
+            }, 5000)
+
+
+            document.querySelectorAll('.intro-card').forEach(element => { element.remove(); });  
+            startStatic();
         }, 2000);
      }, delayMultiplyer * 25);
+
+
 
 }
 
