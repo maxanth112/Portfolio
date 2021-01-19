@@ -973,7 +973,7 @@ function colorSphere() {
             for (var i = 0; i < elementListLength; i++) { 
                 elementList[i].classList.remove('intro-color-10', 'intro-color-10-rand');
             }
-            
+                        
             setTimeout(changeColorClass, flashDelay, 2, 1);
             setTimeout(changeColorClass, flashDelay * 2, 1, 2);
             setTimeout(changeColorClass, flashDelay * 3, 2, 1);
@@ -991,21 +991,12 @@ function colorSphere() {
             var delayTime = 15;
             
             for (var i = 0; i < elementListLength; i++) { 
-                for (var j = 3; j < 6; j++) {
-                    
-                    addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime);
-                }
+                addClassDelay(elementList[i], i, 'intro-color-3', delayTime);
             }
-        }, flashDelay * 17.5);
-    }
-    
-  
-    // document.addEventListener('click', sparcle);
-    
-    
 
-    
-    
+        }, flashDelay * 17);
+    }
+    // document.addEventListener('click', sparcle);  
 }
 
 function introduction() {
