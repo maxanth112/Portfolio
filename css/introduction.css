@@ -12,53 +12,66 @@
 }
 
 .intro-color-0 {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: none;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: calc(var(--multiplier) * 0.5) solid white;
 }
 .intro-color-1 {
     background-color: rgba(0, 0, 0, 0.9);
-    border: calc(var(--multiplier) * .2) solid white;
+    border: calc(var(--multiplier) * 0.5) solid rgb(40, 205, 255);
 }
 
-.intro-color-5 {
-    background-color: rgba(0, 174, 255, 0.9);
+.intro-color-2 {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: calc(var(--multiplier) * 0.5) solid rgba(30, 255, 0, 0.9);
 }
-.intro-color-6 {
-    background-color: rgba(255, 255, 255, 0.9);
+.intro-color-3 {
+    background-color: rgba(30, 255, 0, 0.7);
+    border: none;
 }
-.intro-color-7 {
-    background-color: rgba(29, 74, 255);
+.intro-color-4 {
+    background-color: rgba(40, 205, 255, 0.7);
+    border: none;
+}
+.intro-color-4 {
+    background-color: rgb(30, 255, 0);
+    border: none;
 }
 
 /* DISCO BALL */
 .intro-color-10 {
-    animation: reflect 2s linear infinite;
+    
+    opacity: .7;
+    animation: reflect 1.2s linear infinite;
 }
 
 .intro-color-10-rand {
-    animation: randColor 3s linear infinite;
-}
-
-@-webkit-keyframes reflect {
-    0% {-webkit-filter: brightness(60%);}
-    50% {-webkit-filter: brightness(120%);}  
-    100% {-webkit-filter: brightness(90%);}  
+    
+    height: calc(var(--multiplier) * 6);
+    width: calc(var(--multiplier) * 7);
+    opacity: .7;
+    animation: randColor 1.5s linear infinite;
 }
 
 @keyframes reflect {
-    0% {opacity: 1;}
+    0% {opacity: 0.8;}
     50% {opacity: 0.4;}  
-    100% {opacity: 1;}  
+    100% {opacity: 0.8;}  
+}
+
+@keyframes reflect-background {
+    0% {opacity: 0.2;}
+    50% {opacity: 0.3;}  
+    100% {opacity: 0.2;}  
 }
 
 @keyframes randColor {
-    0% { border: calc(var(--multiplier) * 1) solid red; }
-    20% { border: calc(var(--multiplier) * 1) solid blue; }
-    40% { border: calc(var(--multiplier) * 1) solid green; }
-    60% { border: calc(var(--multiplier) * 1) solid orange; }
-    80% { border: calc(var(--multiplier) * 1) solid indigo; }
-    100% { border: calc(var(--multiplier) * 1) solid yellow; }
+    0% { background-color: rgb(255, 7, 222); }
+    25% { background-color: rgb(123, 255, 0); }
+    50% { background-color: rgb(255, 11, 11);  }
+    75% { background-color: rgb(35, 130, 255);  }
+    100% { background-color: rgb(255, 232, 23);  }
 }
+
 /* NAME ANIMATION */
 .name-container {
     overflow: hidden;

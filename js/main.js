@@ -872,7 +872,7 @@ function createSphereCoordinates(scale, saveArr) {
 
 function startSphereRotation(toggle) {
     
-    var speed = 0.035;
+    var speed = 0.05;
     if (toggle === 1) {
 
         introRoot.rotation.x += speed;
@@ -880,10 +880,23 @@ function startSphereRotation(toggle) {
         introRoot.rotation.z += speed;
     } else if (toggle === 2) {
 
+        speed = 0.02;
         introRoot.rotation.x = 0;
         introRoot.rotation.y += speed;
         introRoot.rotation.z = 0;
-    } 
+    } else if (toggle === 3) {
+
+        speed = 0.04;
+        introRoot.rotation.x += speed;
+        introRoot.rotation.y = 0;
+        introRoot.rotation.z = 0;
+    } else if (toggle === 4) {
+
+        speed = 0.06;
+        introRoot.rotation.x = 0;
+        introRoot.rotation.y = 0;
+        introRoot.rotation.z += speed;
+    }
 }
 
 function transformDelay(counter, toPosition, tweenSpeed, delayTime) {
@@ -907,133 +920,163 @@ function addButton() {
     }, false);
 }
 
-function addClassDelay(element, counter, className, delaySpeed, prevDelay) {
+function addClassDelay(element, counter, className, delaySpeed) {
     setTimeout( () => {
-        if (delaySpeed <= 10) {
+        if (delaySpeed <= 5) {
             element.classList.add(className + '-rand');
-        } 
-        element.classList.add(className);
-    }, (counter * delaySpeed) + prevDelay);
+        } else {
+            element.classList.add(className);
+        }
+    }, counter * delaySpeed);
+}
+
+function changeColorClass(colorNumber, prevNumber = 0) {
+
+    var elementList = document.getElementsByClassName('intro-card');
+    var elementListLength = elementList.length;     
+    var newClass = 'intro-color-' + colorNumber;
+    var prevClass = 'intro-color-' + prevNumber;
+
+    for (var i = 0; i < elementListLength; i++) {
+        elementList[i].classList.remove(prevClass);
+        elementList[i].classList.add(newClass, 'intro-card');
+    }
 }
 
 function colorSphere() {
 
-    document.body.style.backgroundColor = 'black'; 
-    document.getElementById('start-button').remove(); // remove button 
-
-   
-    createIntroElements(); // all 100 cards/big name are in introRootObjects and dropped/view coordinates are made 
-    createSphereCoordinates(1500, introSphereCoordinates); // all 100 now have sphere coordinates in introSphereCoordinates array
-
-    createIteratedCoordinates(introSphereCoordinates, introViewCoordinates, iteratedIntroView, 2);
-    createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
-    introSphereCoordinates.unshift(nameCoordinate);
-
-    transform(introRootObjects, introSphereCoordinates, 1000);
-    introSphereToggle = 1;
-    animate();
-  
-    document.addEventListener('click', sparcle);
-    
-    var elementList = document.getElementsByClassName('intro-card');
-    var elementListLength = elementList.length;
-   
-    
-    function changeColorClass(colorNumber, prevNumber = 0) {
-
-        var newClass = 'intro-color-' + colorNumber;
-        var prevClass = 'intro-color-' + prevNumber;
-        for (var i = 0; i < elementListLength; i++) {
-            elementList[i].classList.remove(prevClass);
-            elementList[i].classList.add(newClass, 'intro-card');
-        }
+    var flashDelay = 500;
+    { // put into large sphere coordinates and make starting color
+        changeColorClass(0);
+        setTimeout(() => { transform(introRootObjects, sphereLarge, flashDelay * 1.5) }, flashDelay * 1.5);
     }
     
-    var flashDelay = 400;
-    setTimeout(changeColorClass, flashDelay, 0);
-    setTimeout(changeColorClass, flashDelay * 2, 1);
-    setTimeout(changeColorClass, flashDelay * 3, 0, 1);
-    setTimeout(changeColorClass, flashDelay * 4, 1);
-    setTimeout(changeColorClass, flashDelay * 5, 0, 1);
-
-    createSphereCoordinates(500, discoSphereCoordinates);
-    discoSphereCoordinates.unshift(nameCoordinate);
-    
-    setTimeout(() => {
-        introSphereToggle = 2;
-        transform(introRootObjects, discoSphereCoordinates, 400);
+    { // add disco ball colors and make small 
+        setTimeout(() => { transform(introRootObjects, sphereSmall, flashDelay * 1) }, flashDelay * 3);
+        var elementList = document.getElementsByClassName('intro-card');
+        var elementListLength = elementList.length;     
         
-        setTimeout(changeColorClass, flashDelay * 6, 10, 0);
-        for (var i = 0; i < elementListLength; i++) {
+        setTimeout(() => { 
+            introSphereToggle = 2;
+            for (var i = 0; i < elementListLength; i++) {
+                addClassDelay(elementList[i], i, 'intro-color-10', getRandomInt(20));
+            }
+            changeColorClass(100, 0);
+        }, flashDelay * 4.5);
+    }
 
-            addClassDelay(elementList[i], i, 'intro-color-10', getRandomInt(100), 0);
-        }
-    }, flashDelay * 5.5);
+    { // change to larger sphere and do initial color quick switches 
+        setTimeout(() => {
+            transform(introRootObjects, sphereMedium, 1500);
+            introSphereToggle = 1;
+
+            for (var i = 0; i < elementListLength; i++) { 
+                elementList[i].classList.remove('intro-color-10', 'intro-color-10-rand');
+            }
+            
+            setTimeout(changeColorClass, flashDelay, 2, 1);
+            setTimeout(changeColorClass, flashDelay * 2, 1, 2);
+            setTimeout(changeColorClass, flashDelay * 3, 2, 1);
+            setTimeout(changeColorClass, flashDelay * 4, 1, 2);
+            setTimeout(changeColorClass, flashDelay * 5, 2, 1);
+            setTimeout(changeColorClass, flashDelay * 6, 1, 2);
+            setTimeout(changeColorClass, flashDelay * 7, 2, 1);
+        }, flashDelay * 10);
+    }
+
+    {
+        setTimeout(() => {
+            var elementList = document.getElementsByClassName('intro-card');
+            var elementListLength = elementList.length;     
+            var delayTime = 15;
+            
+            for (var i = 0; i < elementListLength; i++) { 
+                for (var j = 3; j < 6; j++) {
+                    
+                    addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime);
+                }
+            }
+        }, flashDelay * 17.5);
+    }
     
-//     var delayTime = 4;
-//     // var totalDelay = delayTime *  elementList.length;
-//     var colorLength = 5;
-        
+  
+    // document.addEventListener('click', sparcle);
+    
+    
 
-//         for (var i = 0; i < elementList.length; i++) { 
-//             for (var j = 0; j < colorLength; j++) {
-//                 addClassDelay(elementList[i], i, 'intro-color-' + j, delayTime, totalDelay * j);
-//             }
-//         }
+    
+    
 }
 
 function introduction() {
     
+    document.body.style.backgroundColor = 'black'; 
+    document.getElementById('start-button').remove(); // remove button 
+
+    createIntroElements(); // all 100 cards/big name are in introRootObjects and dropped/view coordinates are made 
+    createSphereCoordinates(1500, sphereMedium); // all 100 now have sphere coordinates in sphereMedium array
+
+    createIteratedCoordinates(sphereMedium, introViewCoordinates, iteratedIntroView, 2);
+    createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
+    sphereMedium.unshift(nameCoordinate);
+
+    createSphereCoordinates(700, sphereSmall);
+    sphereSmall.unshift(nameCoordinate);
+
+    createSphereCoordinates(3500, sphereLarge);
+    sphereLarge.unshift(nameCoordinate);
+
+    animate();
     colorSphere();
          
-    setTimeout( () => { // start changing cards colors 
-        document.addEventListener('click', sparcle);
+    // setTimeout( () => { // start changing cards colors 
+    //     document.addEventListener('click', sparcle);
       
-    }, delayMultiplyer * 4);
+    // }, delayMultiplyer * 4);
 
-    setTimeout(() => { // start the incremental transform to view of all of the intro-cards
-        introRoot.rotation.x = 0;
-        introRoot.rotation.y = 0;
-        introRoot.rotation.z = 0;
-        introSphereToggle = false;
+    // setTimeout(() => { // start the incremental transform to view of all of the intro-cards
+    //     introRoot.rotation.x = 0;
+    //     introRoot.rotation.y = 0;
+    //     introRoot.rotation.z = 0;
+    //     introSphereToggle = false;
 
-        for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
-    }, delayMultiplyer * 10)
+    //     for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
+    // }, delayMultiplyer * 10)
     
-    setTimeout(() => {  // start the exploding animation 
-        var nameObj = document.getElementById('firstName');
-        nameObj.click();
+    // setTimeout(() => {  // start the exploding animation 
+    //     var nameObj = document.getElementById('firstName');
+    //     nameObj.click();
         
-        setTimeout( () => { nameObj.classList.remove('hide'); }, 0);  // unhide the big name 
-    }, delayMultiplyer * 19);
+    //     setTimeout( () => { nameObj.classList.remove('hide'); }, 0);  // unhide the big name 
+    // }, delayMultiplyer * 19);
 
-    setTimeout(() => { // start the incremental dropping transformation 
-        for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
-    }, delayMultiplyer * 18.5);
+    // setTimeout(() => { // start the incremental dropping transformation 
+    //     for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
+    // }, delayMultiplyer * 18.5);
 
-    setTimeout(() => { // remove all of the explosion containers, hide intro cards, and remove click event listener
-        document.removeEventListener('click', sparcle);
-        document.querySelectorAll('.container').forEach(element => { element.remove(); });
-        document.querySelectorAll('.intro-card').forEach(element => { element.classList.add('hide'); });
-    }, delayMultiplyer * 25);
+    // setTimeout(() => { // remove all of the explosion containers, hide intro cards, and remove click event listener
+    //     document.removeEventListener('click', sparcle);
+    //     document.querySelectorAll('.container').forEach(element => { element.remove(); });
+    //     document.querySelectorAll('.intro-card').forEach(element => { element.classList.add('hide'); });
+    // }, delayMultiplyer * 25);
 
-    setTimeout(() => { 
-        document.getElementById('shrink-name').classList.add('shrink');
-        introSphereCoordinates.unshift(shrinkCoordinate);
-        transform(introRootObjects, introSphereCoordinates, 1500);
-        setTimeout(() => {
-            var lastName = document.getElementById('lastName');
-            lastName.classList.remove('hide');
-            lastName.classList.add('faded');
-            setTimeout(() => {
-                document.getElementById('lastName').classList.remove('faded');
-            }, 5000)
+    // setTimeout(() => { 
+    //     document.getElementById('shrink-name').classList.add('shrink');
+    //     sphereMedium.unshift(shrinkCoordinate);
+    //     transform(introRootObjects, sphereMedium, 1500);
+    //     setTimeout(() => {
+    //         var lastName = document.getElementById('lastName');
+    //         lastName.classList.remove('hide');
+    //         lastName.classList.add('faded');
+    //         setTimeout(() => {
+    //             document.getElementById('lastName').classList.remove('faded');
+    //         }, 5000)
 
 
-            document.querySelectorAll('.intro-card').forEach(element => { element.remove(); });  
-            startStatic();
-        }, 2000);
-     }, delayMultiplyer * 25);
+    //         document.querySelectorAll('.intro-card').forEach(element => { element.remove(); });  
+    //         startStatic();
+    //     }, 2000);
+    //  }, delayMultiplyer * 25);
 
 
 

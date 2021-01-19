@@ -350,8 +350,9 @@ var introRootObjects = [];
 var cardElements = [];
 
 var introViewCoordinates = [];
-var introSphereCoordinates = [];
-var discoSphereCoordinates = [];
+var sphereMedium = [];
+var sphereSmall = [];
+var sphereLarge = [];
 var introDropCoordinates = [];
 
 var nameElement;
