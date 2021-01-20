@@ -140,7 +140,7 @@ function animate() {
     render();
 
     requestAnimationFrame(animate);
-    startSphereRotation(introSphereToggle);
+    updateIntroSphere();
     // updateRotations();
 }
 
@@ -870,33 +870,15 @@ function createSphereCoordinates(scale, saveArr) {
     }
 }
 
-function startSphereRotation(toggle) {
-    
-    var speed = 0.05;
-    if (toggle === 1) {
+function updateIntroSphere() {
 
-        introRoot.rotation.x += speed;
-        introRoot.rotation.y += speed;
-        introRoot.rotation.z += speed;
-    } else if (toggle === 2) {
-
-        speed = 0.02;
-        introRoot.rotation.x = 0;
-        introRoot.rotation.y += speed;
-        introRoot.rotation.z = 0;
-    } else if (toggle === 3) {
-
-        speed = 0.04;
-        introRoot.rotation.x += speed;
-        introRoot.rotation.y = 0;
-        introRoot.rotation.z = 0;
-    } else if (toggle === 4) {
-
-        speed = 0.06;
-        introRoot.rotation.x = 0;
-        introRoot.rotation.y = 0;
-        introRoot.rotation.z += speed;
+    var rot = introRoot.rotation;
+    if (speeds[3] == 1) {
+        rot.x = rot.y = rot.z = 0;
     }
+    rot.x += speeds[0];
+    rot.y += speeds[1];
+    rot.z += speeds[2];
 }
 
 function transformDelay(counter, toPosition, tweenSpeed, delayTime) {
@@ -916,141 +898,132 @@ function addButton() {
     button.addEventListener('click', () => {
         button.classList.add('pressed');
         setTimeout(() => { button.classList.remove("pressed"); }, 300);
-        setTimeout(() => { introduction(); }, 1000);
+        setTimeout(introduction, 1000);
     }, false);
 }
 
-function addClassDelay(element, counter, className, delaySpeed) {
-    setTimeout( () => {
-        if (delaySpeed <= 5) {
-            element.classList.add(className + '-rand');
-        } else {
-            element.classList.add(className);
-        }
-    }, counter * delaySpeed);
+function introSwapClass(addClass, removeClass, delay = 0) {
+    
+    var elementList = document.getElementsByClassName('intro-card');
+    var iterator = addClass == 'ic-11' ? 5 : 1;
+    
+    for (var i = 0; i < elementList.length; i += iterator) {
+        
+        setTimeout(swapHelper, delay * i, elementList[i], addClass, removeClass);
+    }
 }
 
-function changeColorClass(colorNumber, prevNumber = 0) {
-
-    var elementList = document.getElementsByClassName('intro-card');
-    var elementListLength = elementList.length;     
-    var newClass = 'intro-color-' + colorNumber;
-    var prevClass = 'intro-color-' + prevNumber;
-
-    for (var i = 0; i < elementListLength; i++) {
-        elementList[i].classList.remove(prevClass);
-        elementList[i].classList.add(newClass, 'intro-card');
-    }
+function swapHelper(element, addClass, removeClass) {
+    
+    element.classList.remove(removeClass);
+    element.classList.add(addClass);            
 }
 
 function colorSphere() {
-
-    var flashDelay = 500;
+    
     { // put into large sphere coordinates and make starting color
-        changeColorClass(0);
-        setTimeout(() => { transform(introRootObjects, sphereLarge, flashDelay * 1.5) }, flashDelay * 1.5);
+        setTimeout(() => { 
+            introSwapClass('ic-0', 'none');
+            transformCreateSphere(spheres.large, 3500, delay);
+        }, delay * 1);
     }
     
-    { // add disco ball colors and make small 
-        setTimeout(() => { transform(introRootObjects, sphereSmall, flashDelay * 1) }, flashDelay * 3);
-        var elementList = document.getElementsByClassName('intro-card');
-        var elementListLength = elementList.length;     
+    { // add disco ball colors and make sphere small 
+        setTimeout(() => { 
+            transformCreateSphere(spheres.small, 700, delay);
+        }, delay * 2);
         
         setTimeout(() => { 
-            introSphereToggle = 2;
-            for (var i = 0; i < elementListLength; i++) {
-                addClassDelay(elementList[i], i, 'intro-color-10', getRandomInt(20));
-            }
-            changeColorClass(100, 0);
-        }, flashDelay * 4.5);
+            introSwapClass('ic-10', 'ic-0', getRandomInt(15));            
+            introSwapClass('ic-11', 'ic-10', getRandomInt(15));
+            speeds = [0, 0.02, 0];
+        }, delay * 3);
     }
-
-    { // change to larger sphere and do initial color quick switches 
+    
+    { // change to larger sphere and do initial color quick switches         
+        setTimeout(introSwapClass, delay * 10, 'ic-1', 'ic-11', 2.5);
         setTimeout(() => {
-            transform(introRootObjects, sphereMedium, 1500);
-            introSphereToggle = 1;
-
-            for (var i = 0; i < elementListLength; i++) { 
-                elementList[i].classList.remove('intro-color-10', 'intro-color-10-rand');
-            }
-                        
-            setTimeout(changeColorClass, flashDelay, 2, 1);
-            setTimeout(changeColorClass, flashDelay * 2, 1, 2);
-            setTimeout(changeColorClass, flashDelay * 3, 2, 1);
-            setTimeout(changeColorClass, flashDelay * 4, 1, 2);
-            setTimeout(changeColorClass, flashDelay * 5, 2, 1);
-            setTimeout(changeColorClass, flashDelay * 6, 1, 2);
-            setTimeout(changeColorClass, flashDelay * 7, 2, 1);
-        }, flashDelay * 10);
-    }
-
-    {
+            introSwapClass('none', 'ic-10');
+            transformCreateSphere(spheres.medLarge, 1300, delay);
+            speeds = [-0.02, 0, 0];
+        }, delay * 12);
+        
+        setTimeout(introSwapClass, delay * 13, 'ic-2', 'ic-1', 2.5);
         setTimeout(() => {
-            var elementList = document.getElementsByClassName('intro-card');
-            var elementListLength = elementList.length;     
-            var delayTime = 15;
-            
-            for (var i = 0; i < elementListLength; i++) { 
-                addClassDelay(elementList[i], i, 'intro-color-3', delayTime);
-            }
-
-        }, flashDelay * 17);
+            transformCreateSphere(spheres.medLarge, 1450, delay);
+            speeds = [0, 0.02, 0];
+        }, delay * 15);
+        
+        setTimeout(introSwapClass, delay * 16, 'ic-3', 'ic-2', 2.5);
+        setTimeout(() => {
+            transformCreateSphere(spheres.medLarge, 1600, delay * 2);
+            speeds = [0, -0.02, 0];
+        }, delay * 18);
+        
+        setTimeout(introSwapClass, delay * 19, 'ic-4', 'ic-3', 2.5);
+        setTimeout(() => {
+            introSwapClass('ic-5', 'ic-4');
+            speeds = [0, 0, 0, 1];  
+        }, delay * 21);
+        
+        setTimeout(introSwapClass, delay * 23, 'ic-6', 'ic-5');
     }
-    // document.addEventListener('click', sparcle);  
+}
+
+function transformCreateSphere(sphereName, size, time) {
+    
+    sphereName = [];
+    createSphereCoordinates(size, sphereName);
+    sphereName.unshift(nameCoordinate);
+    transform(introRootObjects, sphereName, time);
+}
+
+function throwName() {
+    
+    setTimeout( () => { // add sparkle listener
+        document.addEventListener('click', sparcle);
+        createIteratedCoordinates(introRootObjects, introViewCoordinates, iteratedIntroView, 2);
+        createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
+
+
+        
+        for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
+    }, delay * 23);
+    
+    
 }
 
 function introduction() {
     
-    document.body.style.backgroundColor = 'black'; 
     document.getElementById('start-button').remove(); // remove button 
-
+    
     createIntroElements(); // all 100 cards/big name are in introRootObjects and dropped/view coordinates are made 
-    createSphereCoordinates(1500, sphereMedium); // all 100 now have sphere coordinates in sphereMedium array
-
-    createIteratedCoordinates(sphereMedium, introViewCoordinates, iteratedIntroView, 2);
-    createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
-    sphereMedium.unshift(nameCoordinate);
-
-    createSphereCoordinates(700, sphereSmall);
-    sphereSmall.unshift(nameCoordinate);
-
-    createSphereCoordinates(3500, sphereLarge);
-    sphereLarge.unshift(nameCoordinate);
-
+    
     animate();
     colorSphere();
-         
-    // setTimeout( () => { // start changing cards colors 
-    //     document.addEventListener('click', sparcle);
-      
-    // }, delayMultiplyer * 4);
-
-    // setTimeout(() => { // start the incremental transform to view of all of the intro-cards
-    //     introRoot.rotation.x = 0;
-    //     introRoot.rotation.y = 0;
-    //     introRoot.rotation.z = 0;
-    //     introSphereToggle = false;
-
-    //     for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
-    // }, delayMultiplyer * 10)
+    throwName();
+    
+    
+    
+    
     
     // setTimeout(() => {  // start the exploding animation 
     //     var nameObj = document.getElementById('firstName');
     //     nameObj.click();
-        
+    
     //     setTimeout( () => { nameObj.classList.remove('hide'); }, 0);  // unhide the big name 
     // }, delayMultiplyer * 19);
-
+    
     // setTimeout(() => { // start the incremental dropping transformation 
     //     for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
     // }, delayMultiplyer * 18.5);
-
+    
     // setTimeout(() => { // remove all of the explosion containers, hide intro cards, and remove click event listener
     //     document.removeEventListener('click', sparcle);
     //     document.querySelectorAll('.container').forEach(element => { element.remove(); });
     //     document.querySelectorAll('.intro-card').forEach(element => { element.classList.add('hide'); });
     // }, delayMultiplyer * 25);
-
+    
     // setTimeout(() => { 
     //     document.getElementById('shrink-name').classList.add('shrink');
     //     sphereMedium.unshift(shrinkCoordinate);

@@ -11,45 +11,55 @@
     background-color: white;
 }
 
-.intro-color-0 {
+.ic-0 {
     background-color: rgba(0, 0, 0, 0.9);
     border: calc(var(--multiplier) * 0.5) solid white;
 }
-.intro-color-1 {
-    background-color: rgba(0, 0, 0, 0.9);
-    border: calc(var(--multiplier) * 0.5) solid rgb(40, 205, 255);
+.ic-1 {
+    background-color: rgb(40, 205, 255);
+    border: none;
+    animation: reflect2 1.3s linear infinite;
 }
 
-.intro-color-2 {
-    background-color: rgba(0, 0, 0, 0.9);
-    border: calc(var(--multiplier) * 0.5) solid rgba(30, 255, 0, 0.9);
+.ic-2 {
+    background-color:  rgba(30, 255, 0, 0.9);
+    border: none;
+    animation: reflect2 1.3s linear infinite;
 }
-.intro-color-3 {
-    background-color: rgba(30, 255, 0, 0.7);
+.ic-3 {
+    background-color: rgba(255, 58, 23, 0.7);
+    border: none;
+    animation: reflect2 1.3s linear infinite;
+    transition: background-color 1s, border 1s;
+}
+.ic-4 {
+    background-color: rgba(62, 255, 175, 0.7);
+    border: none;
+    animation: reflect2 1.3s linear infinite;
+}
+
+.ic-5 {
+    background-color: black;
     border: none;
 }
-.intro-color-4 {
-    background-color: rgba(40, 205, 255, 0.7);
-    border: none;
-}
-.intro-color-4 {
-    background-color: rgb(30, 255, 0);
+
+.ic-6 {
+    background-color: rgb(0, 255, 255);
     border: none;
 }
 
 /* DISCO BALL */
-.intro-color-10 {
-    
+.ic-10 {
     opacity: .7;
     animation: reflect 1.2s linear infinite;
 }
 
-.intro-color-10-rand {
+.ic-11 {
     
     height: calc(var(--multiplier) * 6);
     width: calc(var(--multiplier) * 7);
     opacity: .7;
-    animation: randColor 1.5s linear infinite;
+    animation: randColor 1.3s linear infinite;
 }
 
 @keyframes reflect {
@@ -58,10 +68,10 @@
     100% {opacity: 0.8;}  
 }
 
-@keyframes reflect-background {
-    0% {opacity: 0.2;}
-    50% {opacity: 0.3;}  
-    100% {opacity: 0.2;}  
+@keyframes reflect2 {
+    0% {opacity: 0.4;}
+    50% {opacity: 0.9;}  
+    100% {opacity: 0.4;}  
 }
 
 @keyframes randColor {

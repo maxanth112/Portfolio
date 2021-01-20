@@ -344,16 +344,24 @@ var roots = {
 var delayMultiplyer = 700;
 var introRoot;
 var nameRoot; 
-var introSphereToggle = 0;
+var delay = 300;
 
 var introRootObjects = [];
 var cardElements = [];
 
 var introViewCoordinates = [];
-var sphereMedium = [];
-var sphereSmall = [];
-var sphereLarge = [];
 var introDropCoordinates = [];
+
+var speeds = [0, 0, 0];
+var spheres = {
+    small: [],
+    smallMed: [],
+    med: [], 
+    medLarge: [],
+    large: [],
+};
+
+
 
 var nameElement;
 var nameCoordinate;
