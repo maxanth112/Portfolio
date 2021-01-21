@@ -986,7 +986,7 @@ function throwName() {
         createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
 
 
-        
+        sdsfdsdfsd
         for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
     }, delay * 23);
     
