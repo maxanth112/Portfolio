@@ -1139,6 +1139,11 @@ function explode(container, number) {
     // particles.push(createParticle(-40, -15, 0.2));
     // particles.push(createParticle(10, -15, 0.1));
 
+    
+    // particles.push(createParticle(-30, -15, 0.2));
+    // particles.push(createParticle(-40, -15, 0.2));
+    // particles.push(createParticle(10, -15, 0.1));
+
     particles.forEach(function (particle) {
         container.appendChild(particle);
         prefixedEvent(particle, "AnimationEnd", function () {
