@@ -361,7 +361,7 @@ var spheres = {
     large: [],
 };
 
-
+var finalSphere = [];
 
 var nameElement;
 var nameCoordinate;

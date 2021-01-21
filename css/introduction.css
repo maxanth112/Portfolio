@@ -45,6 +45,7 @@
 
 .ic-6 {
     background-color: rgb(0, 255, 255);
+    border: calc(var(--multiplier) * 0.2) solid white;
     border: none;
 }
 

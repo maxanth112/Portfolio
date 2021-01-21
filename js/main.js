@@ -979,16 +979,28 @@ function transformCreateSphere(sphereName, size, time) {
 }
 
 function throwName() {
+    var delay = 10; // while editing use this one 
     
     setTimeout( () => { // add sparkle listener
         document.addEventListener('click', sparcle);
-        createIteratedCoordinates(introRootObjects, introViewCoordinates, iteratedIntroView, 2);
+
+        createSphereCoordinates(1600, finalSphere); // temporary
+        finalSphere.unshift(nameCoordinate);
+
+        createIteratedCoordinates(finalSphere, introViewCoordinates, iteratedIntroView, 2);
         createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
 
-
-        sdsfdsdfsd
-        for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
+        // for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
+        
+        for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 0, 0); }
     }, delay * 23);
+
+    setTimeout(() => {  // start the exploding animation 
+            var nameObj = document.getElementById('firstName');
+            nameObj.classList.remove('hide'); // unhide the big name 
+
+            nameObj.click();
+        }, delay * 30);
     
     
 }
@@ -1000,19 +1012,14 @@ function introduction() {
     createIntroElements(); // all 100 cards/big name are in introRootObjects and dropped/view coordinates are made 
     
     animate();
-    colorSphere();
+    // colorSphere();
     throwName();
     
     
     
     
     
-    // setTimeout(() => {  // start the exploding animation 
-    //     var nameObj = document.getElementById('firstName');
-    //     nameObj.click();
-    
-    //     setTimeout( () => { nameObj.classList.remove('hide'); }, 0);  // unhide the big name 
-    // }, delayMultiplyer * 19);
+   
     
     // setTimeout(() => { // start the incremental dropping transformation 
     //     for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
@@ -1082,19 +1089,55 @@ function createParticle(x, y, scale) {
     return particle;
 }
 
-function explode(container) {
+function explode(container, number) {
+
     var particles = [];
-    particles.push(createParticle(0, 0, 1));
-    particles.push(createParticle(20, -15, 0.4));
-    particles.push(createParticle(20, -10, 0.2));
-    particles.push(createParticle(-10, -20, 0.8));
-    particles.push(createParticle(-10, 20, 0.4));
-    particles.push(createParticle(-20, -20, 0.2));
-    particles.push(createParticle(-20, -15, 0.75));
-    particles.push(createParticle(-30, -15, 0.4));
-    particles.push(createParticle(-30, -15, 0.2));
-    particles.push(createParticle(-40, -15, 0.2));
-    particles.push(createParticle(10, -15, 0.1));
+    switch(number) {
+
+        case 1: {
+            particles.push(createParticle(0, 0, 1));
+            particles.push(createParticle(10, -10, 0.5));
+            break;
+        }
+        case 2: {
+            particles.push(createParticle(0, 0, 1));
+            particles.push(createParticle(10, -10, 0.8));
+            break;
+        }
+        case 3: {
+            particles.push(createParticle(0, 0, 0.5));
+            particles.push(createParticle(10, -10, 0.7));
+            particles.push(createParticle(10, -10, 0.6));
+            break;
+        }
+        case 4: {
+            particles.push(createParticle(5, 0, 0.9));
+            particles.push(createParticle(-5, -5, 0.4));
+            particles.push(createParticle(-5, 5, 0.4));
+            particles.push(createParticle(5, 5, 0.45));
+            particles.push(createParticle(10, -2, 1));
+            break;
+        }
+        case 5: {
+            
+            particles.push(createParticle(0, 0, 1));
+            particles.push(createParticle(10, -10, 0.5));
+            particles.push(createParticle(15, -10, 0.2));
+            particles.push(createParticle(10, 10, 0.2));
+            break;
+        }
+        case 6: {
+            
+            particles.push(createParticle(0, -5, 1));
+            // particles.push(createParticle(5, 10, 0.7));
+            // particles.push(createParticle(-5, -15, 1));
+            // particles.push(createParticle(10, -15, 0.9));
+        }
+    }
+    // particles.push(createParticle(-30, -15, 0.4));
+    // particles.push(createParticle(-30, -15, 0.2));
+    // particles.push(createParticle(-40, -15, 0.2));
+    // particles.push(createParticle(10, -15, 0.1));
 
     particles.forEach(function (particle) {
         container.appendChild(particle);
@@ -1109,58 +1152,76 @@ function explode(container) {
     });
 }
 
-function exolpodeGroup(x, y, trans) {
+function exolpodeGroup(x, y, trans, number) {
     var container = document.createElement('div');
     container.className = 'container';
     container.style.top = y + 'rem';
     container.style.left = x + 'rem';
     transformExplode(container, trans.x, trans.y, trans.scale, trans.r, true);
-    explode(container);
+    explode(container, number);
     return container;
 }
 
 function sparcle(event) {
     var explosions = [];
+    var delays = [];
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 4; i++) {
+
+        // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // large one in the middle 
+        //     scale: 1.5,
+        //     x: 50 + (100 * i), // left most on M
+        //     y: 100, // in middle of MAX
+        //     r: 180
+        // }, 5));
+        // delays.push(0);
 
         explosions.push(exolpodeGroup(event.pageX, event.pageY, { // large one in the middle 
             scale: 1.5,
-            x: 50 + (100 * i), // left most on M
-            y: 100, // in middle of MAX
+            x: 150, // left most on M
+            y: 10, // in middle of MAX
             r: 180
-        }));
-        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
-            scale: 1.5,
-            x: 100 + (100 * i), 
-            y: 200, 
-            r: 180
-        }));
-        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // medium on top
-            scale: 1,
-            x: 120 + (80 * i), 
-            y: 180, 
-            r: 180
-        }));
-        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // small on bottom left to right
-            scale: 0.5,
-            x: 120 + (85 * i), 
-            y: 280, 
-            r: 180
-        }));
-        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // small on bottom right to left
-            scale: 0.5,
-            x: 540 - (85 * i), 
-            y: 280, 
-            r: 180
-        }));
+        }, 6));
+        delays.push(0);
     }
+
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+    //     scale: 1,
+    //     x: 60, 
+    //     y: 0, 
+    //     r: 180
+    // }, 1));
+    // delays.push(300);
+        
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+    //     scale: 1.5,
+    //     x: 260, 
+    //     y: 100, 
+    //     r: 180
+    // }, 2));
+    // delays.push(1300);
+
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+    //     scale: 1.2,
+    //     x: 380, 
+    //     y: 30, 
+    //     r: 180
+    // }, 3));
+    // delays.push(1700);
+
+    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+    //     scale: 0.8,
+    //     x: 50, 
+    //     y: 150, 
+    //     r: 180
+    // }, 4));
+    // delays.push(1800);
 
     requestAnimationFrame(function () {
         explosions.forEach(function (boum, i) {
             setTimeout(function () {
                 document.body.appendChild(boum);
-            }, i * 100);
+            }, i * 100 + delays[i]);
         });
     });
 }
