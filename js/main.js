@@ -13,7 +13,10 @@ function init() {
     
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    addButton();
+    // addButton();
+
+    startStatic();
+
 }
 
 function startStatic() {
@@ -141,7 +144,7 @@ function animate() {
 
     requestAnimationFrame(animate);
     updateIntroSphere();
-    // updateRotations();
+    updateRotations();
 }
 
 // general event listeners 
@@ -979,7 +982,7 @@ function transformCreateSphere(sphereName, size, time) {
 }
 
 function throwName() {
-    var delay = 10; // while editing use this one 
+    // var delay = 10; // while editing use this one 
     
     setTimeout( () => { // add sparkle listener
         document.addEventListener('click', sparcle);
@@ -990,9 +993,9 @@ function throwName() {
         createIteratedCoordinates(finalSphere, introViewCoordinates, iteratedIntroView, 2);
         createIteratedCoordinates(introViewCoordinates, introDropCoordinates, iteratedIntroDrop, 10);
 
-        // for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
+        for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 35, 70); }
         
-        for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 0, 0); }
+        // for (var i = 0; i < 50; i++) { transformDelay(i, iteratedIntroView, 0, 0); }
     }, delay * 23);
 
     setTimeout(() => {  // start the exploding animation 
@@ -1012,7 +1015,7 @@ function introduction() {
     createIntroElements(); // all 100 cards/big name are in introRootObjects and dropped/view coordinates are made 
     
     animate();
-    // colorSphere();
+    colorSphere();
     throwName();
     
     
@@ -1021,33 +1024,33 @@ function introduction() {
     
    
     
-    // setTimeout(() => { // start the incremental dropping transformation 
-    //     for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
-    // }, delayMultiplyer * 18.5);
+    setTimeout(() => { // start the incremental dropping transformation 
+        for (var i = 0; i < 10; i++) { transformDelay(i, iteratedIntroDrop, 2000, 20); }
+    }, delay * 36);
     
-    // setTimeout(() => { // remove all of the explosion containers, hide intro cards, and remove click event listener
-    //     document.removeEventListener('click', sparcle);
-    //     document.querySelectorAll('.container').forEach(element => { element.remove(); });
-    //     document.querySelectorAll('.intro-card').forEach(element => { element.classList.add('hide'); });
-    // }, delayMultiplyer * 25);
+    setTimeout(() => { // remove all of the explosion containers, hide intro cards, and remove click event listener
+        document.removeEventListener('click', sparcle);
+        document.querySelectorAll('.container').forEach(element => { element.remove(); });
+        document.querySelectorAll('.intro-card').forEach(element => { element.classList.add('hide'); });
+    }, delay * 36);
     
-    // setTimeout(() => { 
-    //     document.getElementById('shrink-name').classList.add('shrink');
-    //     sphereMedium.unshift(shrinkCoordinate);
-    //     transform(introRootObjects, sphereMedium, 1500);
-    //     setTimeout(() => {
-    //         var lastName = document.getElementById('lastName');
-    //         lastName.classList.remove('hide');
-    //         lastName.classList.add('faded');
-    //         setTimeout(() => {
-    //             document.getElementById('lastName').classList.remove('faded');
-    //         }, 5000)
+    setTimeout(() => { 
+        document.getElementById('shrink-name').classList.add('shrink');
+        sphereMedium.unshift(shrinkCoordinate);
+        transform(introRootObjects, sphereMedium, 1500);
+        setTimeout(() => {
+            var lastName = document.getElementById('lastName');
+            lastName.classList.remove('hide');
+            lastName.classList.add('faded');
+            setTimeout(() => {
+                document.getElementById('lastName').classList.remove('faded');
+            }, 5000)
 
 
-    //         document.querySelectorAll('.intro-card').forEach(element => { element.remove(); });  
-    //         startStatic();
-    //     }, 2000);
-    //  }, delayMultiplyer * 25);
+            document.querySelectorAll('.intro-card').forEach(element => { element.remove(); });  
+            startStatic();
+        }, 2000);
+     }, delay * 47);
 
 
 
@@ -1129,8 +1132,8 @@ function explode(container, number) {
         case 6: {
             
             particles.push(createParticle(0, -5, 1));
-            // particles.push(createParticle(5, 10, 0.7));
-            // particles.push(createParticle(-5, -15, 1));
+            particles.push(createParticle(5, 10, 0.7));
+            particles.push(createParticle(-5, -15, 1));
             // particles.push(createParticle(10, -15, 0.9));
         }
     }
@@ -1173,13 +1176,13 @@ function sparcle(event) {
 
     for (var i = 0; i < 4; i++) {
 
-        // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // large one in the middle 
-        //     scale: 1.5,
-        //     x: 50 + (100 * i), // left most on M
-        //     y: 100, // in middle of MAX
-        //     r: 180
-        // }, 5));
-        // delays.push(0);
+        explosions.push(exolpodeGroup(event.pageX, event.pageY, { // large one in the middle 
+            scale: 1.5,
+            x: 50 + (100 * i), // left most on M
+            y: 100, // in middle of MAX
+            r: 180
+        }, 5));
+        delays.push(0);
 
         explosions.push(exolpodeGroup(event.pageX, event.pageY, { // large one in the middle 
             scale: 1.5,
@@ -1190,37 +1193,37 @@ function sparcle(event) {
         delays.push(0);
     }
 
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
-    //     scale: 1,
-    //     x: 60, 
-    //     y: 0, 
-    //     r: 180
-    // }, 1));
-    // delays.push(300);
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+        scale: 1,
+        x: 60, 
+        y: 0, 
+        r: 180
+    }, 1));
+    delays.push(300);
         
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
-    //     scale: 1.5,
-    //     x: 260, 
-    //     y: 100, 
-    //     r: 180
-    // }, 2));
-    // delays.push(1300);
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+        scale: 1.5,
+        x: 260, 
+        y: 100, 
+        r: 180
+    }, 2));
+    delays.push(1300);
 
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
-    //     scale: 1.2,
-    //     x: 380, 
-    //     y: 30, 
-    //     r: 180
-    // }, 3));
-    // delays.push(1700);
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+        scale: 1.2,
+        x: 380, 
+        y: 30, 
+        r: 180
+    }, 3));
+    delays.push(1700);
 
-    // explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
-    //     scale: 0.8,
-    //     x: 50, 
-    //     y: 150, 
-    //     r: 180
-    // }, 4));
-    // delays.push(1800);
+    explosions.push(exolpodeGroup(event.pageX, event.pageY, { // big in middle 
+        scale: 0.8,
+        x: 50, 
+        y: 150, 
+        r: 180
+    }, 4));
+    delays.push(1800);
 
     requestAnimationFrame(function () {
         explosions.forEach(function (boum, i) {

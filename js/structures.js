@@ -344,7 +344,7 @@ var roots = {
 var delayMultiplyer = 700;
 var introRoot;
 var nameRoot; 
-var delay = 300;
+var delay = 500;
 
 var introRootObjects = [];
 var cardElements = [];
