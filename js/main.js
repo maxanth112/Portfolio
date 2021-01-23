@@ -458,6 +458,7 @@ function createSocialMedia() {
         '</div>';
 }
 
+
 function createWorkTimelineCards() {
 
     workContentArray.forEach(arrElement => {
