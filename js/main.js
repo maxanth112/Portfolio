@@ -1281,6 +1281,15 @@ function createGroupCouts() {
     console.log(groups);
 }
 
+function createGroupRotations() {
+
+    groupNames = ['course', 'pic', 'default', 'work', 'weird', 'none', 'menu'];
+    groupNames.forEach(groupName => {
+        
+    })
+
+}
+
 function concatCoordinates(inViewArr, ignoreArr = []) {
 
     var coordinates = [];
