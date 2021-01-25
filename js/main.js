@@ -23,6 +23,7 @@ function startStatic() {
 
     createAllCards();
     createGroupCouts();
+    createGroupRotations();
     createAllTwirlingCoordinates();
     createAllViewCoordinates();
 
@@ -660,7 +661,7 @@ function updateInterestPage(pageChange, reset = "no") {
     }
 }
 
-function resetBioScenes() {
+function resetBioScenes() { 
     interestPage = 0;
     currentPage = 0;
     alternatingScenes = {
@@ -688,9 +689,11 @@ function updateRotations() {
 
     rootNames.forEach(rootName => {
         if (!roots[rootName].motion) {
-            roots[rootName].root.rotation.x += roots[rootName].rotationX;
-            roots[rootName].root.rotation.y += roots[rootName].rotationY;
-            roots[rootName].root.rotation.z += roots[rootName].rotationZ;
+            var rotate = roots[rootName].root.rotation;
+            var group = roots[rootName].group;
+            rotate.x += groups[group + '-rotX'];
+            rotate.y += groups[group + '-rotY'];
+            rotate.z += groups[group + '-rotZ'];
         }
     });
 }
@@ -1285,9 +1288,36 @@ function createGroupRotations() {
 
     groupNames = ['course', 'pic', 'default', 'work', 'weird', 'none', 'menu'];
     groupNames.forEach(groupName => {
-        
-    })
 
+        var rotX, rotY, rotZ, sizeX, sizeY;
+        rotX = rotY = rotZ = sizeX = sizeY = 0;
+        switch (groupName) {
+
+            case 'course': 
+                sizeX = sizeY = 0;
+                break;
+            case 'pic': 
+                sizeX = sizeY = 0;
+                break;
+            case 'default': 
+                sizeX = sizeY = 1200;
+                rotX = rotY = 0.005;
+                break;   
+            case 'work': 
+                // sizeX = sizeY = 0;
+                // rotX = rotY = 0.005;
+                break;   
+            case 'weird': 
+                sizeX = sizeY = 0;
+                break;           
+        }
+
+        groups[groupName + '-rotX'] = rotX;
+        groups[groupName + '-rotY'] = rotY;
+        groups[groupName + '-rotZ'] = rotZ;
+        groups[groupName + '-sizeX'] = sizeX;
+        groups[groupName + '-sizeY'] = sizeY;
+    });
 }
 
 function concatCoordinates(inViewArr, ignoreArr = []) {
@@ -1304,10 +1334,14 @@ function concatCoordinates(inViewArr, ignoreArr = []) {
     return coordinates;
 }
 
-function createTwirlingCoordinates(rootName, x = sphereSizeX, y = sphereSizeY, z = 0) {
+function createTwirlingCoordinates(rootName) {
+
+    var len = groups[roots[rootName].group];
+    var x = groups[roots[rootName].group + '-sizeX'];
+    var y = groups[roots[rootName].group + '-sizeY'];
+    var z = 0;
 
     var vector = new THREE.Vector3();
-    var len = groups[roots[rootName].group];
     roots[rootName].objects.forEach(element => {
         var formula = 2 * Math.PI * (groups[roots[rootName].group + '-counter']++) / len;
 
@@ -1315,6 +1349,8 @@ function createTwirlingCoordinates(rootName, x = sphereSizeX, y = sphereSizeY, z
         obj.position.x = (x * Math.cos(formula));
         obj.position.y = (y * Math.sin(formula));
         obj.position.z = (z * Math.sin(formula));
+
+        obj.rotation
 
         vector.copy(obj.position).multiplyScalar(2);
         obj.lookAt(vector);
@@ -1326,8 +1362,8 @@ function createTwirlingCoordinates(rootName, x = sphereSizeX, y = sphereSizeY, z
 function createAllTwirlingCoordinates() {
 
     rootNames.forEach(rootName => {
-        if (rootName != "educSelect") {
-            createTwirlingCoordinates(rootName, roots[rootName].sphereSizeX, roots[rootName].sphereSizeY);
+        if (rootName != "educSelect") { // replace w groups here
+            createTwirlingCoordinates(rootName); 
         }
     });
 }

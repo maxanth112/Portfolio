@@ -86,11 +86,6 @@ var roots = {
             exclude: ["educSelect"]
         },
         group: 'menu',
-        sphereSizeX: 50,
-        sphereSizeY: 50,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     },
     math: {
         root: '',
@@ -107,11 +102,6 @@ var roots = {
             exclude: ["educHeader"]
         },
         group: 'course',
-        sphereSizeX: 1000,
-        sphereSizeY: 1000,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     },
     computer: {
         root: '',
@@ -128,11 +118,6 @@ var roots = {
             exclude: ["educHeader"]
         },
         group: 'course',
-        sphereSizeX: 1000,
-        sphereSizeY: 1000,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     },
     econ: {
         root: '',
@@ -149,11 +134,6 @@ var roots = {
             exclude: ["educHeader"]
         },
         group: 'course',
-        sphereSizeX: 1000,
-        sphereSizeY: 1000,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     },
     educSelect: {
         root: '',
@@ -169,12 +149,7 @@ var roots = {
             include: [],
             exclude: []
         },
-        group: 'none',
-        sphereSizeX: 0,
-        sphereSizeY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
+        group: 'none'
     },
     educHeader: {
         root: '',
@@ -190,12 +165,7 @@ var roots = {
             include: ["educSelect"],
             exclude: ["educSelect"]
         },
-        group: 'weird',
-        sphereSizeX: 0,
-        sphereSizeY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
+        group: 'weird'
     },
     educSummary: {
         root: '',
@@ -211,12 +181,7 @@ var roots = {
             include: ["educSummary", "educHeader"],
             exclude: ["educSelect"]
         },
-        group: 'default',
-        sphereSizeX: 0,
-        sphereSizeY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
+        group: 'default'
     },
     workTimeline: {
         root:'',
@@ -232,12 +197,7 @@ var roots = {
             include: [],
             exclude: []
         },
-        group: 'weird',
-        sphereSizeX: 0,
-        sphereSizeY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
+        group: 'default'
     },
     intern: {
         root: '',
@@ -253,12 +213,7 @@ var roots = {
             include: ["workTimeline", "intern"],
             exclude: ["educSelect"]
         },
-        group: 'work',
-        sphereSizeX: 0,
-        sphereSizeY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
+        group: 'work'
     },
     matops: {
         root: '',
@@ -274,12 +229,7 @@ var roots = {
             include: ["workTimeline", "matops"],
             exclude: ["educSelect"]
         },
-        group: 'work',
-        sphereSizeX: 0,
-        sphereSizeY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
+        group: 'work'
     },
     contract: {
         root: '',
@@ -295,12 +245,7 @@ var roots = {
             include: ["workTimeline", "contract"],
             exclude: ["educSelect"]
         },
-        group: 'work',
-        sphereSizeX: 0,
-        sphereSizeY: 0,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
+        group: 'work'
     },
     workDefault: {
         root: '',
@@ -317,11 +262,6 @@ var roots = {
             exclude: ["educSelect"]
         },
         group: 'default',
-        sphereSizeX: 10,
-        sphereSizeY: 10,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     },
     bioDefault: {
         root:'',
@@ -338,11 +278,6 @@ var roots = {
             exclude: []
         },
         group: 'default',
-        sphereSizeX: 10,
-        sphereSizeY: 10,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     },
     pic1: {
         root: '',
@@ -359,11 +294,6 @@ var roots = {
             exclude: ["educSelect"]
         },
         group: 'pic',
-        sphereSizeX: 1400,
-        sphereSizeY: 1400,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     },
     pic2: {
         root: '',
@@ -380,11 +310,6 @@ var roots = {
             exclude: ["educSelect"]
         },
         group: 'pic',
-        sphereSizeX: 1400,
-        sphereSizeY: 1400,
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
     }
 };
 
