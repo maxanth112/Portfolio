@@ -206,7 +206,6 @@ function updateLinkedThreesText(updateText, defaultText, idArr, update = 'first'
 // creating cards and divs 
 function createCourseCards(arr, saveRoot) {
 
-    console.log(arr);
     arr.forEach(arrElement => {
         var element = document.createElement('div');
         element.classList.add('course-element');
@@ -437,7 +436,6 @@ function createWorkToolsCards() {
             }
             toolHtml += '</div>' + '</ul>';
             element.innerHTML = toolHtml;
-            console.log(element);
             pushRootandObjArr(category, element);
         });
     });
@@ -690,10 +688,15 @@ function updateRotations() {
     rootNames.forEach(rootName => {
         if (!roots[rootName].motion) {
             var rotate = roots[rootName].root.rotation;
-            var group = roots[rootName].group;
-            rotate.x += groups[group + '-rotX'];
-            rotate.y += groups[group + '-rotY'];
-            rotate.z += groups[group + '-rotZ'];
+            var group = groups[roots[rootName].group];
+
+            group.rotX += group.addX;
+            group.rotY += group.addY;
+            group.rotZ += group.addZ;
+                        
+            rotate.x = group.rotX;
+            rotate.y = group.rotY;
+            rotate.z = group.rotZ;
         }
     });
 }
@@ -1273,50 +1276,49 @@ function createGroupCouts() {
     rootNames.forEach(rootName => {
         if (groups[roots[rootName].group]) {
 
-            groups[roots[rootName].group] += roots[rootName].objects.length;
+            groups[roots[rootName].group].count += roots[rootName].objects.length;
         } else {
 
-            groups[roots[rootName].group + '-counter'] = 0;
-            groups[roots[rootName].group] = roots[rootName].objects.length;
+            groups[roots[rootName].group] = {
+                count: roots[rootName].objects.length,
+                iterator: 0,
+                sizeX: 0, sizeY: 0,
+                rotX: 0, rotY: 0, rotZ: 0,
+                addX: 0, addY: 0, addZ: 0,
+            };
         }
-        console.log(roots[rootName].group + ': ' + groups[roots[rootName].group]);
     });
-    console.log(groups);
 }
 
 function createGroupRotations() {
 
     groupNames = ['course', 'pic', 'default', 'work', 'weird', 'none', 'menu'];
     groupNames.forEach(groupName => {
-
-        var rotX, rotY, rotZ, sizeX, sizeY;
-        rotX = rotY = rotZ = sizeX = sizeY = 0;
-        switch (groupName) {
-
-            case 'course': 
-                sizeX = sizeY = 0;
-                break;
-            case 'pic': 
-                sizeX = sizeY = 0;
-                break;
-            case 'default': 
-                sizeX = sizeY = 1200;
-                rotX = rotY = 0.005;
-                break;   
-            case 'work': 
-                // sizeX = sizeY = 0;
-                // rotX = rotY = 0.005;
-                break;   
-            case 'weird': 
-                sizeX = sizeY = 0;
-                break;           
+        var addX = addY = addZ = sizeX = sizeY = 0;
+       
+        if (groupName == 'course') {
+            sizeX = sizeY = 1200;
+            addX = addZ = 0.004;
+        } else if (groupName == 'pic') {
+            sizeX = sizeY = 1000;
+            addZ = addY = 0.003;
+        } else if (groupName == 'default') {
+            sizeX = sizeY = 0;
+            addX = addY = 0;
+        } else if (groupName == 'work') {
+            sizeX = sizeY = 1500;
+            addX = addY = 0.003;
+        } else if (groupName == 'weird') {
+            sizeX = sizeY = 0;
+            addX = addY = 0;
         }
 
-        groups[groupName + '-rotX'] = rotX;
-        groups[groupName + '-rotY'] = rotY;
-        groups[groupName + '-rotZ'] = rotZ;
-        groups[groupName + '-sizeX'] = sizeX;
-        groups[groupName + '-sizeY'] = sizeY;
+        var group = groups[groupName];
+        group.addX = addX;
+        group.addY = addY;
+        group.addZ = addZ;
+        group.sizeX = sizeX;
+        group.sizeY = sizeY;
     });
 }
 
@@ -1336,21 +1338,19 @@ function concatCoordinates(inViewArr, ignoreArr = []) {
 
 function createTwirlingCoordinates(rootName) {
 
-    var len = groups[roots[rootName].group];
-    var x = groups[roots[rootName].group + '-sizeX'];
-    var y = groups[roots[rootName].group + '-sizeY'];
+    var len = groups[roots[rootName].group].count;
+    var x = groups[roots[rootName].group].sizeX;
+    var y = groups[roots[rootName].group].sizeY;
     var z = 0;
 
     var vector = new THREE.Vector3();
     roots[rootName].objects.forEach(element => {
-        var formula = 2 * Math.PI * (groups[roots[rootName].group + '-counter']++) / len;
+        var formula = 2 * Math.PI * (groups[roots[rootName].group].iterator++) / len;
 
         var obj = new THREE.Object3D();
         obj.position.x = (x * Math.cos(formula));
         obj.position.y = (y * Math.sin(formula));
         obj.position.z = (z * Math.sin(formula));
-
-        obj.rotation
 
         vector.copy(obj.position).multiplyScalar(2);
         obj.lookAt(vector);
@@ -1418,4 +1418,9 @@ function startTransformAllCourseObjects() {
     setMotionAndToggleFalse();
     transform(allObjects, roots.stationary.coordinates.viewFinal, 500);
     // console.log(allObjects);
+}
+
+function createRootsArray() {
+
+    // tbd
 }
