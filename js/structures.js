@@ -6,7 +6,7 @@
 var toInterval = 400;
 var backInterval = 600;
 var timeoutTime = 1700;
-var sphereSize = 1000;
+var sphereSizeX = 10;
 
 // renderers, cameras, etc.
 var controls, camera, scene, cssRenderer;
@@ -68,6 +68,8 @@ var allColors = allEducationColors.concat(allWorkColors);
 
 var bioResetButtonLinked = ['travel-button', 'wood-button', 'bikes-button'];
 
+var groups = {};
+
 var roots = {
     stationary: {
         root: '',
@@ -83,6 +85,9 @@ var roots = {
             include: [],
             exclude: ["educSelect"]
         },
+        group: 'menu',
+        sphereSizeX: 50,
+        sphereSizeY: 50,
         rotationX: 0,
         rotationY: 0,
         rotationZ: 0,
@@ -101,9 +106,12 @@ var roots = {
             include: ["educSelect", "math"],
             exclude: ["educHeader"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'course',
+        sphereSizeX: 1000,
+        sphereSizeY: 1000,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     computer: {
         root: '',
@@ -119,9 +127,12 @@ var roots = {
             include: ["educSelect", "computer"],
             exclude: ["educHeader"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'course',
+        sphereSizeX: 1000,
+        sphereSizeY: 1000,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     econ: {
         root: '',
@@ -137,9 +148,12 @@ var roots = {
             include: ["educSelect", "econ"],
             exclude: ["educHeader"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'course',
+        sphereSizeX: 1000,
+        sphereSizeY: 1000,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     educSelect: {
         root: '',
@@ -155,9 +169,12 @@ var roots = {
             include: [],
             exclude: []
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'none',
+        sphereSizeX: 0,
+        sphereSizeY: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     educHeader: {
         root: '',
@@ -173,9 +190,12 @@ var roots = {
             include: ["educSelect"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'weird',
+        sphereSizeX: 0,
+        sphereSizeY: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     educSummary: {
         root: '',
@@ -191,9 +211,12 @@ var roots = {
             include: ["educSummary", "educHeader"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'default',
+        sphereSizeX: 0,
+        sphereSizeY: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     workTimeline: {
         root:'',
@@ -209,9 +232,12 @@ var roots = {
             include: [],
             exclude: []
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'weird',
+        sphereSizeX: 0,
+        sphereSizeY: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     intern: {
         root: '',
@@ -227,9 +253,12 @@ var roots = {
             include: ["workTimeline", "intern"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'work',
+        sphereSizeX: 0,
+        sphereSizeY: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     matops: {
         root: '',
@@ -245,9 +274,12 @@ var roots = {
             include: ["workTimeline", "matops"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'work',
+        sphereSizeX: 0,
+        sphereSizeY: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     contract: {
         root: '',
@@ -263,9 +295,12 @@ var roots = {
             include: ["workTimeline", "contract"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'work',
+        sphereSizeX: 0,
+        sphereSizeY: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     workDefault: {
         root: '',
@@ -281,9 +316,12 @@ var roots = {
             include: ["workDefault", "workTimeline"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'default',
+        sphereSizeX: 10,
+        sphereSizeY: 10,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     bioDefault: {
         root:'',
@@ -299,9 +337,12 @@ var roots = {
             include: [],
             exclude: []
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'default',
+        sphereSizeX: 10,
+        sphereSizeY: 10,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     pic1: {
         root: '',
@@ -317,9 +358,12 @@ var roots = {
             include: ["bioDefault", "pic1"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'pic',
+        sphereSizeX: 1400,
+        sphereSizeY: 1400,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     },
     pic2: {
         root: '',
@@ -335,9 +379,12 @@ var roots = {
             include: ["bioDefault", "pic2"],
             exclude: ["educSelect"]
         },
-        rotationX: 0.0002,
-        rotationY: 0.0015,
-        rotationZ: 0.0003,
+        group: 'pic',
+        sphereSizeX: 1400,
+        sphereSizeY: 1400,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
     }
 };
 

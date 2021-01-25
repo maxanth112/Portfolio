@@ -22,6 +22,7 @@ function init() {
 function startStatic() {
 
     createAllCards();
+    createGroupCouts();
     createAllTwirlingCoordinates();
     createAllViewCoordinates();
 
@@ -139,7 +140,7 @@ function animate() {
 
     scene.updateMatrixWorld();
     TWEEN.update();
-    // controls.update();
+    controls.update();
     render();
 
     requestAnimationFrame(animate);
@@ -457,7 +458,6 @@ function createSocialMedia() {
         '<i class="fa fa-github fa-4x icon-3d">' + '</i>' +
         '</div>';
 }
-
 
 function createWorkTimelineCards() {
 
@@ -1235,25 +1235,9 @@ function sparcle(event) {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // calling all create/coordinate functions 
 function createAllCards() {
     // creates the divs (cards) and saves them to the respective objects arrays and all objects
-
     createMenuButtons();
 
     createCourseCards(mathArray, "math");
@@ -1281,6 +1265,22 @@ function createAllCards() {
     });
 }
 
+function createGroupCouts() {
+
+    rootNames.forEach(rootName => {
+        if (groups[roots[rootName].group]) {
+
+            groups[roots[rootName].group] += roots[rootName].objects.length;
+        } else {
+
+            groups[roots[rootName].group + '-counter'] = 0;
+            groups[roots[rootName].group] = roots[rootName].objects.length;
+        }
+        console.log(roots[rootName].group + ': ' + groups[roots[rootName].group]);
+    });
+    console.log(groups);
+}
+
 function concatCoordinates(inViewArr, ignoreArr = []) {
 
     var coordinates = [];
@@ -1295,13 +1295,12 @@ function concatCoordinates(inViewArr, ignoreArr = []) {
     return coordinates;
 }
 
-function createTwirlingCoordinates(rootName, x = sphereSize, y = sphereSize, z = 0) {
+function createTwirlingCoordinates(rootName, x = sphereSizeX, y = sphereSizeY, z = 0) {
 
     var vector = new THREE.Vector3();
-    var counter = 0;
-    var len = roots[rootName].objects.length;
+    var len = groups[roots[rootName].group];
     roots[rootName].objects.forEach(element => {
-        var formula = 2 * Math.PI * (counter++) / len;
+        var formula = 2 * Math.PI * (groups[roots[rootName].group + '-counter']++) / len;
 
         var obj = new THREE.Object3D();
         obj.position.x = (x * Math.cos(formula));
@@ -1318,10 +1317,8 @@ function createTwirlingCoordinates(rootName, x = sphereSize, y = sphereSize, z =
 function createAllTwirlingCoordinates() {
 
     rootNames.forEach(rootName => {
-        if (rootName == "stationary") {
-            createTwirlingCoordinates("stationary", 50, 50, 0);
-        } else if (rootName != "educSelect") {
-            createTwirlingCoordinates(rootName);
+        if (rootName != "educSelect") {
+            createTwirlingCoordinates(rootName, roots[rootName].sphereSizeX, roots[rootName].sphereSizeY);
         }
     });
 }
