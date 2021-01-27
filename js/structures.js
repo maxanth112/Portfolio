@@ -3,8 +3,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 // tweening globals 
-var toInterval = 400;
-var backInterval = 600;
+var toInterval = 1200;
+var backInterval = 1600;
 var timeoutTime = 1700;
 var sphereSizeX = 10;
 
@@ -486,7 +486,12 @@ var educationSummaryArray = [{
         dates: "August 2015 - May 2016",
         role: "Student Athelete",
         position: [educSummaryLeftX, educSummaryY],
-        description: "All - Conference Award, MCLA D1 Player of the Week Award. "
+        descriptionFront: "All - Conference player as a freshmen in the Rocky Mountain Lacorsse Conference. Earned the Player of the Week award \
+            in the opening week of games acrosse the entire MCLA - D1 league. Opening week we took on two top teams defeating the University of \
+            Arizona, and loosing by one against the former national champions, Grand Canyon University; I had hat-tricks in both games (3 goals a piece). \
+            CU Mens Lacrosse was a full time team, practices were six days a week during season and on occasion seven days when traveling on the weekends. \
+            During off season we had four days a week practices which included two-a-days which required   =>",
+        descriptionBack: '6AM morning weight training three times weekly. '
     },
     {
         id: "capa",
@@ -495,7 +500,8 @@ var educationSummaryArray = [{
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
         position: [educSummaryLeftX, educSummaryY - educSummaryLeftY],
-        description: "Photo Contest Winner, student farting around in europe. "
+        descriptionFront: "Photo Contest Winner, student farting around in europe. ",
+        descriptionBack: "", 
     },
     {
         id: "sigep",
@@ -503,7 +509,7 @@ var educationSummaryArray = [{
         dates: "August 2016 - July 2018",
         role: "Brother",
         position: [educSummaryRightX, educSummaryYStart],
-        description: "Participated in fundraising events like the Jimmy V."
+        description: "Participated in philanthropies and helped fundraise for multiple causes like Jimmy V."
     },
     {
         id: "econclub",

@@ -146,7 +146,7 @@ function animate() {
 
     requestAnimationFrame(animate);
     updateIntroSphere();
-    updateRotations();
+    // updateRotations();
 }
 
 // general event listeners 
@@ -321,10 +321,10 @@ function createEducationSummary() {
                 '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
                 '<p class="club-position">' + elementSummary.role + '</p>' +
                 '<p class="club-dates">' + elementSummary.dates + '</p>' +
-                '<p class="club-description">' + elementSummary.description + '</p>' +
+                '<p class="club-description">' + elementSummary.descriptionFront + '</p>' +
                 '</div>' +
                 '<div class="back">' +
-                '<p class="club-description">' + elementSummary.description + '</p>' +
+                '<p class="club-description description-back">' + elementSummary.descriptionBack + '</p>' +
                 '</div>' +
                 '</div>';
         } else if (elementSummary.id == "degree" || elementSummary.id == "extra") {
@@ -384,7 +384,7 @@ function createWorkHeaderCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-header-element');
+        element.classList.add(workElement.id + '-color', 'work-header-element', 'out-view');
         element.innerHTML = '<div class="work-top">' +
             '<h5 class="work-top-name">' +
             workElement.title +
@@ -401,7 +401,7 @@ function createWorkContentCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-element');
+        element.classList.add(workElement.id + '-color', 'work-element', 'out-view');
         element.innerHTML = '<div class="work-header">' +
             '<h5 class="work-name">' +
             workElement.timeline +
@@ -446,7 +446,7 @@ function createWorkToolsContainer() {
     var toolCategories = ["intern", "matops", "contract"];
     toolCategories.forEach(tool => {
         var element = document.createElement('div');
-        element.classList.add(tool + '-color', 'tool-container');
+        element.classList.add(tool + '-color', 'tool-container', 'out-view');
         element.innerHTML = '<h1 class="tools-header">Software/Tools Used:</h1>';
         pushRootandObjArr(tool, element);
     });

@@ -42,11 +42,13 @@
     height: calc(var(--multiplier) * 8);
     text-align: left;
     background-color: rgba(0, 0, 0, .8);
+    transition: height 1s, width 1s;
 }
 
 .work-element {
     width: calc(var(--multiplier) * 95);;
     height: calc(var(--multiplier) * 50);
+    transition: height 1s, width 1s;
 }
 
 .work-tools li {
@@ -83,19 +85,19 @@
 @keyframes icon3d {
     0% {
         text-shadow: 5px 4px rgba(244, 67, 54, 1), -5px -6px rgba(33, 150, 243, 1);
-   }
+    }
     25% {
         text-shadow: -5px -6px rgba(244, 67, 54, 1), 5px 4px rgba(33, 150, 243, 1);
-   }
+    }
     50% {
         text-shadow: 5px -4px rgba(244, 67, 54, 1), -8px 4px rgba(33, 150, 243, 1);
    }
-    75% {
+   75% {
         text-shadow: -8px -4px rgba(244, 67, 54, 1), -5px -4px rgba(33, 150, 243, 1);
-   }
+    }
     100% {
         text-shadow: -5px 0 rgba(244, 67, 54, 1), 5px -4px rgba(33, 150, 243, 1);
-   }
+    }
 }
 
 /* TOOLS */
@@ -156,6 +158,7 @@ ul img {
     width: calc(var(--multiplier) * 23.5);
     height: calc(var(--multiplier) * 50);
     background-color: transparent;
+    transition: height 1s, width 1s;
 }
 
 /* WORK DEFAULT VIEW */
@@ -163,21 +166,21 @@ ul img {
 #dataAnalysis img,
 #computer img
  {
-    width: calc(var(--multiplier) * 25);
-    max-height: calc(var(--multiplier) * 30);
-    box-shadow: none; 
-    border: none; 
-    filter: brightness(100);
-    filter: invert(1);
-}
-
-#thusfar {
-    width: calc(var(--multiplier) * 121);
-    height: calc(var(--multiplier) * 6);
-}
-
-#been, #going {
-    width: calc(var(--multiplier) * 80);
+     width: calc(var(--multiplier) * 25);
+     max-height: calc(var(--multiplier) * 30);
+     box-shadow: none; 
+     border: none; 
+     filter: brightness(100);
+     filter: invert(1);
+    }
+    
+    #thusfar {
+        width: calc(var(--multiplier) * 121);
+        height: calc(var(--multiplier) * 6);
+    }
+    
+    #been, #going {
+        width: calc(var(--multiplier) * 80);
     height: calc(var(--multiplier) * 27.5);
 }
 
@@ -293,4 +296,10 @@ ul img {
     width: calc(var(--multiplier) * 36);
     height: calc(var(--multiplier) * 27);
     padding: calc(var(--multiplier) * 1.5);
+}
+
+.out-view {
+    height: calc(var(--multiplier) * 20);
+    width: calc(var(--multiplier) * 20);
+    overflow: hidden;
 }

@@ -104,11 +104,16 @@
 .club-dates {
   margin: 
     calc(var(--multiplier) * 0) 
-    calc(var(--multiplier) * 1) 
+    calc(var(--multiplier) * 1.45) 
     calc(var(--multiplier) * 0) 
     calc(var(--multiplier) * 1.45);
   font-size: calc(var(--multiplier) * 1.4);
   transition: font-size 1s;
+}
+
+.description-back {
+  margin: 
+  calc(var(--multiplier) * 1.45);
 }
 
 .track {
@@ -186,3 +191,4 @@
   color: blue;
   background: transparent;
 }
+
