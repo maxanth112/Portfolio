@@ -500,7 +500,7 @@ var educationSummaryArray = [{
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
         position: [educSummaryLeftX, educSummaryY - educSummaryLeftY],
-        descriptionFront: "Photo Contest Winner, student farting around in europe. ",
+        descriptionFront: "Photo Contest Winner, student farting around in europe. Here is the photo you filthy animals  ",
         descriptionBack: "", 
     },
     {
