@@ -279,7 +279,7 @@ function createEducHeadersButtons() {
     });
 }
 
-function addInViewClass(classArr, type = "single", time = timeoutTime) {
+function addInViewClass(classArr, type = "single") {
 
     var timeDelay = 1;
 
@@ -289,7 +289,7 @@ function addInViewClass(classArr, type = "single", time = timeoutTime) {
             for (let classElement of classElements) {
                 classElement.classList.add(className + "-active");
             }
-        }, time * timeDelay);
+        }, timeoutTime * timeDelay);
         if (type != "single") {
             timeDelay++;
         }

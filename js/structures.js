@@ -5,7 +5,7 @@
 // tweening globals 
 var toInterval = 300;
 var backInterval = 300;
-var timeoutTime = 1700;
+var timeoutTime = 0;
 var sphereSizeX = 10;
 
 // renderers, cameras, etc.
