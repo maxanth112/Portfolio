@@ -314,9 +314,9 @@ function createEducationSummary() {
 
         if (elementSummary.id == "capa" || elementSummary.id == "lax") {
 
-            element.classList.add('summary-card');
+            element.classList.add('summary-card', 'education-main-color');
             element.innerHTML =
-                '<div class="summary-flip ' + elementSummary.id + ' education-main-color' + `" onclick='flip("` + elementSummary.id + `")'>` +
+                '<div class="summary-flip ' + elementSummary.id + `" onclick='flip("` + elementSummary.id + `")'>` +
                 '<div class="front">' +
                 '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
                 '<p class="club-position">' + elementSummary.role + '</p>' +
@@ -328,7 +328,6 @@ function createEducationSummary() {
                 '</div>' +
                 '</div>';
         } else if (elementSummary.id == "degree" || elementSummary.id == "extra") {
-
 
             element.classList.add('education-main-color', elementSummary.id);
             element.innerHTML = '<h2>' + elementSummary.role + '</h2>';
@@ -384,7 +383,7 @@ function createWorkHeaderCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-header-element', 'out-view', 'work-resize');
+        element.classList.add(workElement.id + '-color', 'work-header-element');
         element.innerHTML = '<div class="work-top">' +
             '<h5 class="work-top-name">' +
             workElement.title +
@@ -401,7 +400,7 @@ function createWorkContentCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-element', 'out-view', 'work-resize');
+        element.classList.add(workElement.id + '-color', 'work-element');
         element.innerHTML = '<div class="work-header">' +
             '<h5 class="work-name">' +
             workElement.timeline +
@@ -446,7 +445,7 @@ function createWorkToolsContainer() {
     var toolCategories = ["intern", "matops", "contract"];
     toolCategories.forEach(tool => {
         var element = document.createElement('div');
-        element.classList.add(tool + '-color', 'tool-container', 'out-view', 'work-resize');
+        element.classList.add(tool + '-color', 'tool-container');
         element.innerHTML = '<h1 class="tools-header">Software/Tools Used:</h1>';
         pushRootandObjArr(tool, element);
     });
@@ -538,15 +537,6 @@ function updateWorkSelected(newSelected) {
     });
 }
 
-function resizeByClass(classList) {
-
-    var outViewList = ['workDefault', 'intern-header', 'intern-']
-    classList.forEach(className => {
-        var classElement = document.getElementsByClassName(className);
-        
-    });
-}
-
 function createWorkDefaultCards() {
 
     workDefaultArray.forEach(workElement => {
@@ -577,7 +567,7 @@ function createBioDefaultCards() {
     bioDefaultArray.forEach(arrElement => {
         var element = document.createElement('div');
         element.id = arrElement.id;
-        element.classList.add('bio-default-color');
+        element.classList.add('bioDefault-color');
 
         if (((arrElement.id == "bio-pic") || (arrElement.id == "bio-header")) ||
             ((arrElement.id == "bio-main") || (arrElement.id == "interests"))) {
@@ -614,7 +604,7 @@ function createImgCards(arr, saveRoot) {
 
     arr.forEach(arrElement => {
         var element = document.createElement('div');
-        element.classList.add(arrElement.id, 'bio-default-color');
+        element.classList.add(arrElement.id, 'bioDefault-color');
 
         if (arrElement.card == "s") {
             var elementImg = document.createElement('img');
@@ -1263,6 +1253,7 @@ function createAllCards() {
 
     createWorkTimelineCards();
     createWorkButtons();
+    
     createWorkHeaderCards();
     createWorkContentCards();
     createWorkToolsCards();
@@ -1301,7 +1292,7 @@ function createGroupCouts() {
 
 function createGroupRotations() {
 
-    groupNames = ['course', 'pic', 'default', 'work', 'weird', 'none', 'menu'];
+    groupNames = ['course', 'pic', 'default', 'work', 'educDefault', 'none', 'menu'];
     groupNames.forEach(groupName => {
         var addX = addY = addZ = sizeX = sizeY = 0;
        
@@ -1312,13 +1303,13 @@ function createGroupRotations() {
             sizeX = sizeY = 1000;
             addZ = addY = 0.003;
         } else if (groupName == 'default') {
-            sizeX = sizeY = 0;
+            sizeX = sizeY = 1700;
             addX = addY = 0;
         } else if (groupName == 'work') {
             sizeX = sizeY = 1500;
             addX = addY = 0.003;
-        } else if (groupName == 'weird') {
-            sizeX = sizeY = 0;
+        } else if (groupName == 'educDefault') {
+            sizeX = sizeY = 700;
             addX = addY = 0;
         }
 

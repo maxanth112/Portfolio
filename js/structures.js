@@ -64,7 +64,7 @@ var workTimelineColors = [
 
 var allWorkColors = removeWorkColors.concat(workTimelineColors);
 
-var allColors = allEducationColors.concat(allWorkColors);
+var allColors = allEducationColors.concat(allWorkColors).concat('bioDefault-color');
 
 var bioResetButtonLinked = ['travel-button', 'wood-button', 'bikes-button'];
 
@@ -165,7 +165,7 @@ var roots = {
             include: ["educSelect"],
             exclude: ["educSelect"]
         },
-        group: 'weird'
+        group: 'educDefault'
     },
     educSummary: {
         root: '',
@@ -181,7 +181,7 @@ var roots = {
             include: ["educSummary", "educHeader"],
             exclude: ["educSelect"]
         },
-        group: 'default'
+        group: 'educDefault'
     },
     workTimeline: {
         root:'',
@@ -246,7 +246,7 @@ var roots = {
             exclude: ["educSelect"]
         },
         group: 'work'
-    },
+    },    
     workDefault: {
         root: '',
         toggle:'',
@@ -354,19 +354,6 @@ var introCardExclude = ['2-2', '2-1', '2-0', '2-6', '3-6',
     '22-3', '22-4', '22-2', '8-6', '9-6', '8-5'
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////
 ////////                         navigation menu                         ////////
 /////////////////////////////////////////////////////////////////////////////////
@@ -402,7 +389,7 @@ var menuButtonArray = [{
         id: "bio-button",
         toggle: 'bioDefault',
         sendTo: 'pic1',
-        add: ['bio-color'],
+        add: ['bioDefault-color'],
         setTrue: ["pic1", "bioDefault"],
         buttonLinked: ['bio-button', 'education-button', 'work-button'],
         toggleFalse: ["workTimeline", "educSummary", "educHeader", "workDefault"],
@@ -806,7 +793,16 @@ var workContentArray = [{
             automatically triggered requisitions to sell back unwanted inventory. Organize parts by plane to \
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. "
-    }
+    },
+    // {
+    //     title: "Student Researcher",
+    //     timeline: "Jan '21 - Presant",
+    //     months: 5,
+    //     comit: "[Part - Time]",
+    //     company: "Experimental Math Lab",
+    //     id: "lab",
+    //     description: "I DID MATHS!!!"
+    // }
 ]
 
 var workToolsArray = [{

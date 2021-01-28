@@ -2,12 +2,17 @@
 /* BIO DEFAULT */
 
 #bio-header, #interests {
-    width: calc(var(--multiplier) * 120);
+    width: calc(var(--multiplier) * 20);
     height: calc(var(--multiplier) * 6);
     background-color: transparent;
-    /* color: rgba(0, 255, 255, 0.5);
-    box-shadow: 0px 0px 3px rgba(0, 255, 255, 0.5);
-    border: 4px solid rgba(127, 255, 255, 0.25); */
+    transition: width 1s, height 1s;
+    overflow: hidden
+}
+
+#bio-header.bioDefault-color-active,
+#interests.bioDefault-color-active {
+    width: calc(var(--multiplier) * 120);
+    height: calc(var(--multiplier) * 6);
 }
 
 #bio-header h3,
@@ -19,12 +24,16 @@
 }
 
 #bio-main {
+    width: calc(var(--multiplier) * 20);
+    height: calc(var(--multiplier) * 20);
+    background-color: transparent;
+    transition: width 1s, height 1s;
+    overflow: hidden
+}
+
+#bio-main.bioDefault-color-active {    
     width: calc(var(--multiplier) * 90);
     height: calc(var(--multiplier) * 35);
-    background-color: transparent;
-    /* color: rgba(0, 255, 255, 0.5);
-    box-shadow: 0px 0px 3px rgba(0, 255, 255, 0.5);
-    border: 4px solid rgba(127, 255, 255, 0.25); */
 }
 
 #bio-main p {
