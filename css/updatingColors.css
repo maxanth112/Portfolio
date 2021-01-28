@@ -23,6 +23,7 @@
 .intern-color,
 .matops-color,
 .contract-color, 
+.lab-color,
 .bioDefault-color {
     box-shadow: 0px 0px 12px var(--all-color);
     border: calc(var(--multiplier) * .1) solid var(--all-color);

@@ -15,7 +15,7 @@ var allObjects = [];
 var rootNames = [
     "stationary", 
     "math", "computer", "econ", "educSelect", "educHeader", "educSummary", 
-    "workTimeline", "intern", "matops", "contract", "workDefault", 
+    "workTimeline", "intern", "matops", "contract", "lab", "workDefault", 
     "bioDefault", "pic1", "pic2"
 ];
 
@@ -51,14 +51,16 @@ var removeWorkColors = [
     'workDefault-color',
     'intern-color',
     'matops-color',
-    'contract-color'
+    'contract-color',
+    'lab-color'
 ];
 
 var workTimelineColors = [
     'workDefault-timeline-color',
     'intern-timeline-color',
     'matops-timeline-color',
-    'contract-timeline-color'
+    'contract-timeline-color',
+    'lab-timeline-color'
 ];
 
 
@@ -243,6 +245,22 @@ var roots = {
             rotate: [],
             viewFinal: [],
             include: ["workTimeline", "contract"],
+            exclude: ["educSelect"]
+        },
+        group: 'work'
+    },    
+    lab: {
+        root: '',
+        toggle: '',
+        motion:'',
+        inViewClass: '',
+        classToUpdate: [],
+        objects: [],
+        coordinates: {
+            view: [],
+            rotate: [],
+            viewFinal: [],
+            include: ["workTimeline", "lab"],
             exclude: ["educSelect"]
         },
         group: 'work'
@@ -794,15 +812,15 @@ var workContentArray = [{
             phase out inventory levels for aircrafts reaching retirement. Participated in the implementation of \
             uploading new requisitions derived from the new process created. "
     },
-    // {
-    //     title: "Student Researcher",
-    //     timeline: "Jan '21 - Presant",
-    //     months: 5,
-    //     comit: "[Part - Time]",
-    //     company: "Experimental Math Lab",
-    //     id: "lab",
-    //     description: "I DID MATHS!!!"
-    // }
+    {
+        title: "Student Researcher",
+        timeline: "Jan '21 - Presant",
+        months: 7,
+        comit: "[Part - Time]",
+        company: "Experimental Math Lab",
+        id: "lab",
+        description: "I DID MATHS!!!"
+    }
 ]
 
 var workToolsArray = [{
@@ -811,7 +829,8 @@ var workToolsArray = [{
         score: {
             intern: 5,
             matops: 8,
-            contract: 10
+            contract: 10,
+            lab: 5
         },
         image: './../img/sql.png'
     },
@@ -821,7 +840,8 @@ var workToolsArray = [{
         score: {
             intern: 6,
             matops: 10,
-            contract: 10
+            contract: 10,
+            lab: 5
         },
         image: './../img/powerbi.png'
     },
@@ -831,7 +851,8 @@ var workToolsArray = [{
         score: {
             intern: 0,
             matops: 8,
-            contract: 0
+            contract: 0,
+            lab: 5
         },
         image: './../img/python.png'
     },
@@ -841,7 +862,8 @@ var workToolsArray = [{
         score: {
             intern: 0,
             matops: 0,
-            contract: 3
+            contract: 3,
+            lab: 5
         },
         image: './../img/powerapps.png'
     },
@@ -851,29 +873,10 @@ var workToolsArray = [{
         score: {
             intern: 10,
             matops: 7,
-            contract: 4
+            contract: 4,
+            lab: 5
         },
         image: './../img/excel.png'
-    },
-    {
-        tool: "Pandas (Python Library)",
-        id: "pandas",
-        score: {
-            intern: 0,
-            matops: 8,
-            contract: 0
-        },
-        image: './../img/pandas.jpg'
-    },
-    {
-        tool: "NumPy (Python Library)",
-        id: "numpy",
-        score: {
-            intern: 0,
-            matops: 0,
-            contract: 0
-        },
-        image: './../img/wood.jpg'
     }
 ];
 
@@ -887,28 +890,32 @@ var workViewDisplayArray = [{
     }
 ];
 
-var homeButtons = 1.7;
+var homeButtons = 1.95;
 var timelineY = -1.15;
-var timelineElement = timelineY - 1.5;
+var timelineElement = timelineY - 1.55;
 var workTimelineDisplayArray = [{
         title: 'intern',
-        position: [-0.82, timelineElement]
+        position: [-1.19, timelineElement]
     },
     {
         title: 'matops',
-        position: [-0.28, timelineElement]
+        position: [-0.63, timelineElement]
     },
     {
         title: 'contract',
-        position: [0.63, timelineElement]
+        position: [0.48, timelineElement]
+    },
+    {
+        title: 'lab',
+        position: [1, timelineElement]
     },
     {
         title: 'timeline',
-        position: [-1.598, timelineY]
+        position: [-1.93, timelineY]
     },
     {
         title: 'home-button',
-        position: [-1.28, timelineElement]
+        position: [-1.64, timelineElement]
     },
     {
         title: 'left-arrow',
@@ -923,7 +930,8 @@ var workTimelineDisplayArray = [{
 var workButtonArray = [
     {
         id: 'left', 
-        workDefault: 'contract',
+        workDefault: 'lab',
+        lab: 'contract',
         matops: 'intern',
         contract: 'matops', 
         intern: 'workDefault',
@@ -932,8 +940,10 @@ var workButtonArray = [
         id: 'right', 
         workDefault: 'intern',
         matops: 'contract',
-        contract: 'workDefault', 
+        lab: 'workDefault', 
         intern: 'matops',
+        contract: 'lab'
+
     }, 
 ];
 
@@ -971,14 +981,6 @@ var workViewDisplayArrayIntern = workViewDisplayArray.concat([{
         position: [toolsX, toolsRowOne]
     },
     {
-        tool: "Pandas",
-        position: [toolsX, exclude]
-    },
-    {
-        tool: "NumPy",
-        position: [toolsX, exclude]
-    },
-    {
         tool: "Container",
         position: [toolContainerX, toolContainerY]
     }
@@ -986,7 +988,7 @@ var workViewDisplayArrayIntern = workViewDisplayArray.concat([{
 
 var workViewDisplayArrayMatOps = workViewDisplayArray.concat([{
         tool: "SQL",
-        position: [toolsX, toolsRowFour]
+        position: [toolsX, toolsRowThree]
     },
     {
         tool: "Power BI",
@@ -1002,15 +1004,7 @@ var workViewDisplayArrayMatOps = workViewDisplayArray.concat([{
     },
     {
         tool: "Excel",
-        position: [toolsX, toolsRowFive]
-    },
-    {
-        tool: "Pandas",
-        position: [toolsX, toolsRowThree]
-    },
-    {
-        tool: "NumPy",
-        position: [toolsX, exclude]
+        position: [toolsX, toolsRowFour]
     },
     {
         tool: "Container",
@@ -1039,18 +1033,37 @@ var workViewDisplayArrayContract = workViewDisplayArray.concat([{
         position: [toolsX, toolsRowThree]
     },
     {
-        tool: "Pandas",
-        position: [toolsX, exclude]
-    },
-    {
-        tool: "NumPy",
-        position: [toolsX, exclude]
-    },
-    {
         tool: "Container",
         position: [toolContainerX, toolContainerY]
     }
 ]);
+
+var workViewDisplayArrayLab = workViewDisplayArray.concat([{
+    tool: "SQL",
+    position: [toolsX, toolsRowOne]
+},
+{
+    tool: "Power BI",
+    position: [toolsX, toolsRowTwo]
+},
+{
+    tool: "Python",
+    position: [toolsX, exclude]
+},
+{
+    tool: "PowerApps",
+    position: [toolsX, toolsRowFour]
+},
+{
+    tool: "Excel",
+    position: [toolsX, toolsRowThree]
+},
+{
+    tool: "Container",
+    position: [toolContainerX, toolContainerY]
+}
+]);
+
 
 var imageX = 1.3;
 var imageY = 1.8;

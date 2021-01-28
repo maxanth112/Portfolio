@@ -415,7 +415,7 @@ function createWorkContentCards() {
 
 function createWorkToolsCards() {
 
-    var toolCategories = ["intern", "matops", "contract"];
+    var toolCategories = ["intern", "matops", "contract", "lab"];
     toolCategories.forEach(category => {
         workToolsArray.forEach(arrElement => {
             var element = document.createElement('div');
@@ -442,7 +442,7 @@ function createWorkToolsCards() {
 
 function createWorkToolsContainer() {
 
-    var toolCategories = ["intern", "matops", "contract"];
+    var toolCategories = ["intern", "matops", "contract", "lab"];
     toolCategories.forEach(tool => {
         var element = document.createElement('div');
         element.classList.add(tool + '-color', 'tool-container');
@@ -487,7 +487,7 @@ function createWorkTimelineCards() {
     element = document.createElement('div');
     element.classList.add("timeline-events", "workDefault-timeline-color");
     element.id = "workDefault-timeline-event";
-    element.innerHTML = '<div id="' + '" class="timeline-months-' + 3 + '">' +
+    element.innerHTML = '<div id="' + '" class="timeline-months-' + 4 + '">' +
         '<h4>' + 'Home Page' + '</h4>' +
         '</div>';
     pushRootandObjArr('workTimeline', element);
@@ -501,7 +501,7 @@ function createWorkButtons() {
         button.id = arrElement.id;
         button.innerHTML = '<i class="fa fa-arrow-' + arrElement.id + ' fa-5x icon-3d"></i>';
         button.addEventListener('click', function (x) {
-            var pages = ['workDefault', 'matops', 'contract', 'intern'];
+            var pages = ['workDefault', 'matops', 'contract', 'intern', 'lab'];
             for (let currPage of pages) {
                 if (roots[currPage].toggle) {
                     setMotionAndToggleFalse();
@@ -531,7 +531,7 @@ function createWorkButtons() {
 function updateWorkSelected(newSelected) {
 
     document.getElementById(newSelected + '-timeline-event').classList.toggle('selected-timeline');
-    var notSelected = ['contract', 'workDefault', 'matops', 'intern'].filter(x => x != newSelected);
+    var notSelected = ['contract', 'workDefault', 'matops', 'intern', 'lab'].filter(x => x != newSelected);
     notSelected.forEach(id => {
         document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');
     });
@@ -1253,7 +1253,7 @@ function createAllCards() {
 
     createWorkTimelineCards();
     createWorkButtons();
-    
+
     createWorkHeaderCards();
     createWorkContentCards();
     createWorkToolsCards();
@@ -1396,6 +1396,7 @@ function createAllViewCoordinates() {
     createViewCoordinates(workViewDisplayArrayIntern, "intern");
     createViewCoordinates(workViewDisplayArrayMatOps, "matops");
     createViewCoordinates(workViewDisplayArrayContract, "contract");
+    createViewCoordinates(workViewDisplayArrayLab, "lab");
     createViewCoordinates(workTimelineDisplayArray, "workTimeline");
     createViewCoordinates(workDefaultArray, "workDefault");
     // bio
