@@ -384,7 +384,7 @@ function createWorkHeaderCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-header-element', 'out-view');
+        element.classList.add(workElement.id + '-color', 'work-header-element', 'out-view', 'work-resize');
         element.innerHTML = '<div class="work-top">' +
             '<h5 class="work-top-name">' +
             workElement.title +
@@ -401,7 +401,7 @@ function createWorkContentCards() {
 
     workContentArray.forEach(workElement => {
         var element = document.createElement('div');
-        element.classList.add(workElement.id + '-color', 'work-element', 'out-view');
+        element.classList.add(workElement.id + '-color', 'work-element', 'out-view', 'work-resize');
         element.innerHTML = '<div class="work-header">' +
             '<h5 class="work-name">' +
             workElement.timeline +
@@ -446,7 +446,7 @@ function createWorkToolsContainer() {
     var toolCategories = ["intern", "matops", "contract"];
     toolCategories.forEach(tool => {
         var element = document.createElement('div');
-        element.classList.add(tool + '-color', 'tool-container', 'out-view');
+        element.classList.add(tool + '-color', 'tool-container', 'out-view', 'work-resize');
         element.innerHTML = '<h1 class="tools-header">Software/Tools Used:</h1>';
         pushRootandObjArr(tool, element);
     });
@@ -535,6 +535,15 @@ function updateWorkSelected(newSelected) {
     var notSelected = ['contract', 'workDefault', 'matops', 'intern'].filter(x => x != newSelected);
     notSelected.forEach(id => {
         document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');
+    });
+}
+
+function resizeByClass(classList) {
+
+    var outViewList = ['workDefault', 'intern-header', 'intern-']
+    classList.forEach(className => {
+        var classElement = document.getElementsByClassName(className);
+        
     });
 }
 

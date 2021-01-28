@@ -3,8 +3,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 // tweening globals 
-var toInterval = 1200;
-var backInterval = 1600;
+var toInterval = 300;
+var backInterval = 300;
 var timeoutTime = 1700;
 var sphereSizeX = 10;
 

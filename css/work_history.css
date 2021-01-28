@@ -42,13 +42,11 @@
     height: calc(var(--multiplier) * 8);
     text-align: left;
     background-color: rgba(0, 0, 0, .8);
-    transition: height 1s, width 1s;
 }
 
 .work-element {
     width: calc(var(--multiplier) * 95);;
     height: calc(var(--multiplier) * 50);
-    transition: height 1s, width 1s;
 }
 
 .work-tools li {
@@ -158,7 +156,6 @@ ul img {
     width: calc(var(--multiplier) * 23.5);
     height: calc(var(--multiplier) * 50);
     background-color: transparent;
-    transition: height 1s, width 1s;
 }
 
 /* WORK DEFAULT VIEW */

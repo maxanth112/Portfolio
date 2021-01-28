@@ -112,8 +112,7 @@
 }
 
 .description-back {
-  margin: 
-  calc(var(--multiplier) * 1.45);
+  margin: calc(var(--multiplier) * 1.45);
 }
 
 .track {
