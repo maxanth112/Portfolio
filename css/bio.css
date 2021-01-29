@@ -1,6 +1,12 @@
 
 /* BIO DEFAULT */
 
+br {
+    display: block; /* makes it have a width */
+    content: ""; /* clears default height */
+    margin-top: calc(var(--multiplier) * 0.8); /* change this to whatever height you want it */
+}
+
 #bio-header, #interests {
     width: calc(var(--multiplier) * 20);
     height: calc(var(--multiplier) * 6);
@@ -26,9 +32,9 @@
 #bio-main {
     width: calc(var(--multiplier) * 20);
     height: calc(var(--multiplier) * 20);
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.8);
     transition: width 1s, height 1s;
-    overflow: hidden
+    overflow: hidden;
 }
 
 #bio-main.bioDefault-color-active {    
@@ -37,9 +43,9 @@
 }
 
 #bio-main p {
-    font-size: calc(var(--multiplier) * 2);
+    font-size: calc(var(--multiplier) * 1.35);
     margin: 
-        calc(var(--multiplier) * 2)
+        calc(var(--multiplier) * 1.3)
         calc(var(--multiplier) * 2);
 }
 

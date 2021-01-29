@@ -139,6 +139,13 @@
     border-bottom: calc(var(--multiplier) * 0.8) solid var(--intern-color);
 }
 
+.lab-timeline-color-active div {
+    text-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: calc(var(--multiplier) * 0.8) solid var(--intern-color);
+}
+
 /* MATOPS */
 .matops-color-active {
     color: var(--matops-color);
