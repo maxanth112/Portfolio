@@ -1225,8 +1225,9 @@ var travel1 = [{
         id: "uslide-1",
         newid: "t1-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "Postino, Italy",
-        description: "Once I went to postino italy, i liked it very much, they had really good pizza. thanks.",
+        header: "Sao Miguel Island, Azores",
+        description: "The coastline on containing the Ferraria Hot Springs in the middle of the Atlantic. \
+            This is a small chain of islands which are autonomous regions of Portugal.  ",
         img: "./../img/travel.jpg"
     },
     {
