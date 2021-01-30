@@ -1321,7 +1321,7 @@ var travel3 = [{
         newid: "t3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/coast3.jpg"
+        img: "./../img/coast4.jpg"
     },
     {
         card: "s",
@@ -1369,7 +1369,7 @@ var travel4 = [{
         newid: "t4-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/bomb.jpg"
+        img: "./../img/iceland-mnt.jpg"
     },
     {
         card: "s",
@@ -1377,7 +1377,7 @@ var travel4 = [{
         newid: "t4-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/overlook.jpg"
+        img: "./../img/stairs3.jpg"
     },
     {
         card: "s",
@@ -1385,15 +1385,16 @@ var travel4 = [{
         newid: "t4-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/iceland-falls.jpg"
+        img: "./../img/bomb.jpg"
     },
     {
         card: "u",
         id: "uslide-1",
         newid: "t4-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "travl 4",
-        description: "",
+        header: "Vík í Mýrdal, Iceland",
+        description: "This whole drive was riddled with commanding ridges and small churches \
+            tucked into the land. ",
         img: "./../img/travel.jpg"
     },
     {
@@ -1401,8 +1402,9 @@ var travel4 = [{
         id: "uslide-2",
         newid: "t4-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "travl 4",
-        description: "",
+        header: "Haiku Stairs - Oahu, Hawaii",
+        description: "Know as the 'Stairway to Heaven', a now illegal hike to the top of Oahu. Unfortunately \
+            it was cloudy at the top so I couldn't get the shot facing down the stairs. ",
         img: "./../img/travel.jpg"
     },
     {
@@ -1410,12 +1412,65 @@ var travel4 = [{
         id: "uslide-3",
         newid: "t4-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "travel 4",
-        description: "",
+        header: "Hiroshima, Japan",
+        description: "Genbaku Dome in Hiroshima Peace Memorial Park, one of the few structures left standing \
+            near the bomb's hypocenter.",
         img: "./../img/travel.jpg"
     },
 ];
 
+var travel5 = [{
+    card: "s",
+    id: "slide-1",
+    newid: "t4-s1",
+    position: [slide1X, slideY],
+    description: "",
+    img: "./../img/iceland-mnt.jpg"
+},
+{
+    card: "s",
+    id: "slide-2",
+    newid: "t5-s2",
+    position: [slide2X, slideY],
+    description: "",
+    img: "./../img/stairs4.jpg"
+},
+{
+    card: "s",
+    id: "slide-3",
+    newid: "t4-s3",
+    position: [slide3X, slideY],
+    description: "",
+    img: "./../img/bomb.jpg"
+},
+{
+    card: "u",
+    id: "uslide-1",
+    newid: "t5-u1",
+    position: [slide1X, slideY - uSlideDiff],
+    header: "Vík í Mýrdal, Iceland",
+    description: "5",
+    img: "./../img/travel.jpg"
+},
+{
+    card: "u",
+    id: "uslide-2",
+    newid: "t5-u2",
+    position: [slide2X, slideY - uSlideDiff],
+    header: "Haiku Stairs - Oahu, Hawaii",
+    description: "5",
+    img: "./../img/travel.jpg"
+},
+{
+    card: "u",
+    id: "uslide-3",
+    newid: "t5-u3",
+    position: [slide3X, slideY - uSlideDiff],
+    header: "Hiroshima, Japan",
+    description: "5",
+    img: "./../img/travel.jpg"
+},
+];
 
 var wood1 = [{
         card: "s",
@@ -1423,7 +1478,7 @@ var wood1 = [{
         newid: "w1-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/prewood1.jpg"
     },
     {
         card: "s",
@@ -1431,7 +1486,7 @@ var wood1 = [{
         id: "slide-2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/table2.jpg"
     },
     {
         card: "s",
@@ -1439,7 +1494,7 @@ var wood1 = [{
         newid: "w1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/finaltable.jpg"
     },
     {
         card: "u",
@@ -1475,7 +1530,7 @@ var wood2 = [{
         newid: "w2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/bed1.jpg"
     },
     {
         card: "s",
@@ -1483,7 +1538,7 @@ var wood2 = [{
         newid: "w2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/bed2.jpg"
     },
     {
         card: "s",
@@ -1491,7 +1546,7 @@ var wood2 = [{
         newid: "w2-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/travel.jpg"
+        img: "./../img/finalbed.jpg"
     },
     {
         card: "u",
@@ -1738,7 +1793,7 @@ var currentPage = 0;
 
 var allInterestObjs = [
     [
-        travel1, travel2, travel3, travel4
+        travel1, travel2, travel3, travel4, travel5
     ],
     [
         wood1, wood2, wood3

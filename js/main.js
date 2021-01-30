@@ -633,8 +633,8 @@ function updateInterestPage(pageChange, reset = "no") {
 
     currentPage += pageChange;
     if (!interestPage) {
-        if (currentPage == 4) currentPage = 0;
-        else if (currentPage == -1) currentPage = 3;
+        if (currentPage == 5) currentPage = 0;
+        else if (currentPage == -1) currentPage = 4;
     } else {
         if (currentPage == 3) currentPage = 0;
         else if (currentPage == -1) currentPage = 2;
