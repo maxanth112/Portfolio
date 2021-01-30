@@ -137,5 +137,5 @@ br {
     margin: 
         calc(var(--multiplier) * .25)
         calc(var(--multiplier) * 1);
-    font-size: calc(var(--multiplier) * 1);
+    font-size: calc(var(--multiplier) * 1.2);
 }

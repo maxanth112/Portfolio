@@ -1226,8 +1226,8 @@ var travel1 = [{
         newid: "t1-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "Sao Miguel Island, Azores",
-        description: "The coastline on containing the Ferraria Hot Springs in the middle of the Atlantic. \
-            This is a small chain of islands which are autonomous regions of Portugal.  ",
+        description: "The coastline containing the Ferraria Hot Springs on one of a \
+            small chain of islands in the mid-Atlantic.",
         img: "./../img/travel.jpg"
     },
     {
@@ -1235,8 +1235,8 @@ var travel1 = [{
         id: "uslide-2",
         newid: "t1-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "TRAVLE 1",
-        description: "",
+        header: "Chiang Mai, Thailand",
+        description: "This is an elfie (elephant selfie), we didn't ride them, only fed them. ",
         img: "./../img/travel.jpg"
     },
     {
@@ -1244,8 +1244,9 @@ var travel1 = [{
         id: "uslide-3",
         newid: "t1-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "travl 1",
-        description: "kjjkjkjk",
+        header: "Sólheimasandur, Iceland",
+        description: "At the site of the 1973 U.S. Navy DC plane crash on the Icelands southern \
+            coast, dubbed 'Black Sand Beach'.",
         img: "./../img/travel.jpg"
     }
 ];
@@ -1256,7 +1257,7 @@ var travel2 = [{
         newid: "t2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/iceland-falls.jpg"
+        img: "./../img/godzilla.jpg"
     },
     {
         card: "s",
@@ -1264,7 +1265,7 @@ var travel2 = [{
         newid: "t2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/godzilla.jpg"
+        img: "./../img/cabo.jpg"
     },
     {
         card: "s",
@@ -1272,15 +1273,16 @@ var travel2 = [{
         newid: "t2-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/cabo.jpg"
+        img: "./../img/gladiator.jpg"
     },
     {
         card: "u",
         id: "uslide-1",
         newid: "t2-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "travl 2",
-        description: "",
+        header: "Tokyo, Japan",
+        description: "Can you spot godzilla about to attack? (middle of the photo) \
+            I thought this was hilarious. ",
         img: "./../img/travel.jpg"
     },
     {
@@ -1288,8 +1290,9 @@ var travel2 = [{
         id: "uslide-2",
         newid: "t2-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "travl 2",
-        description: "",
+        header: "Cabo San Lucas, Mexico",
+        description: "Snorkling at Lovers Beach. I accidenally dropped the goPro \
+            which ended up taking the best photos of the entire trip. ",
         img: "./../img/travel.jpg"
     },
     {
@@ -1297,8 +1300,9 @@ var travel2 = [{
         id: "uslide-3",
         newid: "t2-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "travle 2",
-        description: "",
+        header: "San Quirico d'Orcia, Italy",
+        description: "The fields where Maximus Desimous Meridious finally got to meet his \
+            family in the afterlife. Gladiator. Russell Crowe. ",
         img: "./../img/travel.jpg"
     },
 ];
@@ -1332,8 +1336,9 @@ var travel3 = [{
         id: "uslide-1",
         newid: "t3-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "travl 3",
-        description: "",
+        header: "Nara Park - Kyoto, Japan",
+        description: "A national park and sacred temple, where the deer are integrated into \
+            normal life. There was probably a 1:1 ratio of deer to people.",
         img: "./../img/travel.jpg"
     },
     {
@@ -1341,8 +1346,9 @@ var travel3 = [{
         id: "uslide-2",
         newid: "t3-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "travl 3",
-        description: "",
+        header: "Cinque Terre, Italy",
+        description: "A very small and quiet fishing town in southern Italy. This was the view from \
+            our one room apartment airBnB.",
         img: "./../img/travel.jpg"
     },
     {
@@ -1350,8 +1356,9 @@ var travel3 = [{
         id: "uslide-3",
         newid: "t3-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "travle 3",
-        description: "",
+        header: "Port Stephens, Australia",
+        description: "Caravanning from the Stockton Sand Dunes to the beach to surf \
+            (on some giant foam boards). ",
         img: "./../img/travel.jpg"
     },
 ];
@@ -1378,7 +1385,7 @@ var travel4 = [{
         newid: "t4-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/gladiator.jpg"
+        img: "./../img/iceland-falls.jpg"
     },
     {
         card: "u",
