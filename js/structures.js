@@ -1126,7 +1126,7 @@ var bioDefaultArray = [{
     {
         id: "bio-main",
         position: [0.47, 1.5],
-        inner: "<p>I am a builder, a athelete, a thinker, and an explorer. I was born and raised in Orange County, California; \
+        inner: "<p>I am a builder, an athelete, a thinker, and an explorer. I was born and raised in Orange County, California; \
         right where they kept the real housewives. I moved with my family to the Denver area in 2011 where I attended highschool and later college. \
         While in school I was a (2x) varsity lacrosse captain, a mathelete/computer nerd, that kid that went abroad for a semester, a frat star, \
         and the slowest kid on the cross country team clocking a 19 minute 5k (which ain't bad). \
