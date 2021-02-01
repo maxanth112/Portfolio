@@ -631,24 +631,26 @@ var mathArray = [{
 var computerArray = [{
         type: "CSCI",
         number: "4593",
-        name: "Computer Organization",
-        description: "",
-        language: "C, Linux",
+        name: "Computer Organization (Architecture)",
+        description: "Implemented an entire RISC-V multicore processor in a simulated cloud enviornment. ",
+        language: "RISC-V",
         position: [mid, firstRow]
     },
     {
         type: "CSCI",
         number: "4448",
         name: "Object Oriented Analysis and Design",
-        description: "",
-        language: "",
+        description: "Applied object-oriented techniques including domain modeling, use cases, architectural design, \
+            and modeling notations.",
+        language: "Java",
         position: [left, firstRow]
     },
     {
         type: "CSCI",
         number: "3202",
         name: "Artificial Intelligence",
-        description: "",
+        description: "Surveyed modern AI techniques of search, knowlage representation and reasoning, probabilistic \
+            inference, maching learning, and natural language. ",
         language: "Python",
         position: [right, firstRow]
     },
@@ -656,15 +658,17 @@ var computerArray = [{
         type: "CSCI",
         number: "3308",
         name: "Software Development Methods and Tools",
-        description: "",
-        language: "JavaScript, HTML, CSS, Linux, SQL",
+        description: "Covers an introduction to full-stack integration, web services, version control, cloud-based deployment \
+            agile methodologies, and other industry standard practices.",
+        language: "Js, HTML, CSS, SQL",
         position: [left, secondRow]
     },
     {
         type: "CSCI",
         number: "3753",
         name: "Design and Analysis of Operating Systems",
-        description: "",
+        description: "Analyzed the software that extends computer hardware, including the role of linkers, file systems, \
+            resource sharing, security and networking. ",
         language: "C, Linux",
         position: [mid, secondRow]
     },
@@ -672,7 +676,8 @@ var computerArray = [{
         type: "CSCI",
         number: "3104",
         name: "Algorithms",
-        description: "",
+        description: "Time/ space complexity of algorithms; algorithms pertaining to sorting, recirrence,\
+             divide and conquer, greedy, dynamic, graph, linear/ and non-linear programming. ",
         language: "C++, Python",
         position: [right, secondRow]
     },
@@ -680,15 +685,18 @@ var computerArray = [{
         type: "CSCI",
         number: "3155",
         name: "Principals of Programming Languages",
-        description: "",
-        language: "Stata",
+        description: "Studied the fundamentals governing the design and analysis of languages \
+            and the excedution models underlying them. Specifically higher order functions, type systems, scoping, \
+            and control structures.",
+        language: "Scala",
         position: [left, thirdRow]
     },
     {
         type: "CSCI",
         number: "2400",
         name: "Computer Systems",
-        description: "Covered in depth virtual memory, exeptional control flow, linking, momory heiarchy, optimization and performance, processor architecture.",
+        description: "Covered in depth virtual memory, exeptional control flow, linking, momory \
+            heiarchy, optimization and performance, processor architecture.",
         language: "C, C++",
         position: [mid, thirdRow]
     },
@@ -696,7 +704,8 @@ var computerArray = [{
         type: "CSCI",
         number: "2270",
         name: "Data Structures",
-        description: "",
+        description: "Implemented from scratch linked lists, binary trees, red-black trees, graphs and graph \
+            algorithms, stacks, queues, hash tables, and dynamically allocating memory at run time.",
         language: "C, C++",
         position: [right, thirdRow]
     },
@@ -730,7 +739,8 @@ var econArray = [{
         type: "ECON",
         number: "4423",
         name: "International Finance",
-        description: "",
+        description: "This class was taught by the former Lead Economist in Development Research Group at the World Bank, it was \
+            a really humbling semester. We looked at balance of payments, foreign exchange markets, income, and capital flows.",
         language: "",
         position: [left, secondRow]
     },
@@ -738,7 +748,8 @@ var econArray = [{
         type: "ECON",
         number: "3080",
         name: "Intermediate Macroeconomic Theory",
-        description: "",
+        description: "Focused on theories of aggregate economic activity including the determination of income, employment, and \
+            prices; economic growth; and fluctuations. Explored these policies in both open and closed economy models. ",
         language: "",
         position: [right, secondRow]
     },
@@ -746,6 +757,15 @@ var econArray = [{
         type: "ECON",
         number: "3070",
         name: "Intermediate Microeconomic Theory",
+        description: "Explored theory and application of models of consumer choice, firm and market organization, and \
+            general equilibrium. Included imtertemporal decisions, uncertainty, externalities, and strategic integration. ",
+        language: "",
+        position: [left, thirdRow]
+    },
+    {
+        type: "ECON",
+        number: "3070",
+        name: "International Economics",
         description: "",
         language: "",
         position: [mid, secondRow]
@@ -754,17 +774,19 @@ var econArray = [{
         type: "ECON",
         number: "2020",
         name: "Principles of Macroeconomics",
-        description: "",
+        description: "Looked at an overview of the economy, examining the flows of resources and outputs, and the factors \
+            determining the levels of income and prices. Focused on economic growth, unemployment, and infaltion. ",
         language: "",
-        position: [midLeft, thirdRow]
+        position: [right, thirdRow]
     },
     {
         type: "ECON",
         number: "2010",
         name: "Principles of Microeconomics",
-        description: "",
+        description: "Studied basic concepts of microeconomics and the behavior and interactions of individuals, \
+            firms, and government. Looked at how consumers and businesses make descisions, how markets work, and how they fail. ",
         language: "",
-        position: [midRight, thirdRow]
+        position: [mid, thirdRow]
     },
 ];
 
