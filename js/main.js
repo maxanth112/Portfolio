@@ -605,7 +605,7 @@ function createImgCards(arr, saveRoot) {
     arr.forEach(arrElement => {
         var element = document.createElement('div');
         element.classList.add(arrElement.id, 'bioDefault-color');
-
+        
         if (arrElement.card == "s") {
             var elementImg = document.createElement('img');
             elementImg.src = arrElement.img;

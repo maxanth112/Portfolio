@@ -1257,7 +1257,7 @@ var travel2 = [{
         newid: "t2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/godzilla.jpg"
+        img: "./../img/deer.jpg"
     },
     {
         card: "s",
@@ -1280,9 +1280,9 @@ var travel2 = [{
         id: "uslide-1",
         newid: "t2-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "Tokyo, Japan",
-        description: "Can you spot godzilla about to attack? (middle of the photo) \
-            I thought this was hilarious. ",
+        header: "Nara Park - Kyoto, Japan",
+        description: "A national park and sacred temple, where the deer are integrated into \
+            normal life. There was probably a 1:1 ratio of deer to people.",
         img: "./../img/travel.jpg"
     },
     {
@@ -1313,7 +1313,7 @@ var travel3 = [{
         newid: "t3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/deer.jpg"
+        img: "./../img/laos.jpg"
     },
     {
         card: "s",
@@ -1336,9 +1336,8 @@ var travel3 = [{
         id: "uslide-1",
         newid: "t3-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "Nara Park - Kyoto, Japan",
-        description: "A national park and sacred temple, where the deer are integrated into \
-            normal life. There was probably a 1:1 ratio of deer to people.",
+        header: "Mekong River, Golden Triangle",
+        description: "A nautious day trip up river to the border town connecting Laos, Myanmar, and Thailand. ",
         img: "./../img/travel.jpg"
     },
     {
@@ -1425,7 +1424,7 @@ var travel5 = [{
     newid: "t4-s1",
     position: [slide1X, slideY],
     description: "",
-    img: "./../img/iceland-mnt.jpg"
+    img: "./../img/frst.jpg"
 },
 {
     card: "s",
@@ -1433,7 +1432,7 @@ var travel5 = [{
     newid: "t5-s2",
     position: [slide2X, slideY],
     description: "",
-    img: "./../img/stairs4.jpg"
+    img: "./../img/buda.jpg"
 },
 {
     card: "s",
@@ -1441,15 +1440,16 @@ var travel5 = [{
     newid: "t4-s3",
     position: [slide3X, slideY],
     description: "",
-    img: "./../img/bomb.jpg"
+    img: "./../img/aby.jpg"
 },
 {
     card: "u",
     id: "uslide-1",
     newid: "t5-u1",
     position: [slide1X, slideY - uSlideDiff],
-    header: "Vík í Mýrdal, Iceland",
-    description: "5",
+    header: "Poca Da Dona Beija, Azores",
+    description: "Hot springs spread accross five or so different pools. The pools deeper into the forest \
+        had warmer temperatures. ",
     img: "./../img/travel.jpg"
 },
 {
@@ -1457,8 +1457,8 @@ var travel5 = [{
     id: "uslide-2",
     newid: "t5-u2",
     position: [slide2X, slideY - uSlideDiff],
-    header: "Haiku Stairs - Oahu, Hawaii",
-    description: "5",
+    header: "Budapest, Hungary",
+    description: "The Hungarian parliment building, taken from the Széchenyi Chain Bridge.",
     img: "./../img/travel.jpg"
 },
 {
@@ -1466,8 +1466,9 @@ var travel5 = [{
     id: "uslide-3",
     newid: "t5-u3",
     position: [slide3X, slideY - uSlideDiff],
-    header: "Hiroshima, Japan",
-    description: "5",
+    header: "Abbey Road, London",
+    description: "Was next to impossible to get a photo without strangers. \
+        After a hour of trying this is my friend Brandon ruining this group of girls near perfect photo.",
     img: "./../img/travel.jpg"
 },
 ];
