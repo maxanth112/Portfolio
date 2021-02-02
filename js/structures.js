@@ -564,8 +564,9 @@ var mathArray = [{
         type: "APPM",
         number: "4650",
         name: "Intermediate Numerical Analysis",
-        description: "",
-        language: "",
+        description: "Focuses on numberical solution of nonlinear equations, interpolation, methods in numerical integration, \
+            numerical solution of linear systems, and matrix eigenvalue problems; using computer application in matlab. ",
+        language: "Matlab",
         position: [left, firstRow]
     },
     {
@@ -573,7 +574,8 @@ var mathArray = [{
         number: "4120",
         name: "Introduction to Operations Research",
         language: "",
-        description: "",
+        description: "Studied linear and nonlinear programming. Focuses on the simplex method, duality, sensitivity, \
+            transportation, network flow, and constrained and unconstrained optimization theory. ",
         position: [mid, firstRow]
     },
     {
@@ -616,7 +618,7 @@ var mathArray = [{
         name: "Linear Algebra for Math Majors",
         description: "",
         language: "LaTeX",
-        position: [midLeft, thirdRow]
+        position: [left, thirdRow]
     },
     {
         type: "MATH",
@@ -624,7 +626,15 @@ var mathArray = [{
         name: "Discrete Mathematics",
         description: "",
         language: "LaTeX",
-        position: [midRight, thirdRow]
+        position: [mid, thirdRow]
+    },
+    {
+        type: "CSCI",
+        number: "2848",
+        name: "Discrete Structures",
+        description: "",
+        language: "Python",
+        position: [right, thirdRow]
     }
 ];
 
@@ -715,15 +725,17 @@ var econArray = [{
         type: "ECON",
         number: "4848",
         name: "Applied Econometrics",
-        description: "",
-        language: "Stata",
+        description: "Focuses on applied regression analysis, and advanced statistical programming. We developed models \
+            using U.S. census data sources, and presented multiple projects analyzing social and economic issues. ",
+        language: "Stata, R",
         position: [left, firstRow]
     },
     {
         type: "ECON",
         number: "3818",
         name: "Statistics with Computer Applications",
-        description: "",
+        description: "Introduces the statistical methods for quantitative economic analysis; such as ANOVA, \
+            probability theory, distributions, sampling theory, estimation, confidence intervals, hypothesis testing, and regression.",
         language: "R",
         position: [right, firstRow]
     },
@@ -731,7 +743,8 @@ var econArray = [{
         type: "ECON",
         number: "4697",
         name: "Industrial Organization Economics",
-        description: "",
+        description: "Explored newclassical theory of the firm, the determinants of industrial structure, and the purposes \
+            and institutions of public policy to control or maintain a competitive enviornment. ",
         language: "",
         position: [mid, firstRow]
     },
@@ -763,10 +776,11 @@ var econArray = [{
         position: [left, thirdRow]
     },
     {
-        type: "ECON",
-        number: "3070",
+        type: "BUSN",
+        number: "3374",
         name: "International Economics",
-        description: "",
+        description: "Studied how global businesses are impacted by real world developments in economics, politics, and \
+            finance; emphasis on globalization, trade and investment, the global marketplace and monetary system. ",
         language: "",
         position: [mid, secondRow]
     },
