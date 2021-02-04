@@ -602,7 +602,7 @@ var mathArray = [{
         type: "MATH",
         number: "3001",
         name: "Analysis 1",
-        description: "",
+        description: "real numbers, local branches, set theory",
         language: "LaTeX",
         position: [mid, secondRow]
     },
