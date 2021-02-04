@@ -592,7 +592,9 @@ var mathArray = [{
         type: "APPM",
         number: "4440",
         name: "Mathematics of Coding and Cryptography",
-        description: "",
+        description: "Studied the algebra/number theory behind modern coding and cryptography; topics included \
+            encryption, RSA algorithms, discrete log problems, digital signatures, elliptic \
+            curves, latticies, error correctionf, and quantum computing.",
         language: "Python, Sage",
         position: [left, secondRow]
     },
