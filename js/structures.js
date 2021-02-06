@@ -618,7 +618,7 @@ var mathArray = [{
         type: "MATH",
         number: "2135",
         name: "Linear Algebra for Math Majors",
-        description: "",
+        description: "this class was really tough",
         language: "LaTeX",
         position: [left, thirdRow]
     },
