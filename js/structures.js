@@ -565,7 +565,7 @@ var mathArray = [{
         number: "4650",
         name: "Intermediate Numerical Analysis",
         description: "Focuses on numberical solution of nonlinear equations, interpolation, methods in numerical integration, \
-            numerical solution of linear systems, and matrix eigenvalue problems; using computer application in matlab. ",
+            numerical solution of linear systems, and matrix eigenvalue problems; using computer application in Matlab. ",
         language: "Matlab",
         position: [left, firstRow]
     },
@@ -594,7 +594,7 @@ var mathArray = [{
         name: "Mathematics of Coding and Cryptography",
         description: "Studied the algebra/number theory behind modern coding and cryptography; topics included \
             encryption, RSA algorithms, discrete log problems, digital signatures, elliptic \
-            curves, latticies, error correctionf, and quantum computing.",
+            curves, latticies, error correctiong, and quantum computing.",
         language: "Python, Sage",
         position: [left, secondRow]
     },
@@ -602,7 +602,8 @@ var mathArray = [{
         type: "MATH",
         number: "3001",
         name: "Analysis 1",
-        description: "real numbers, local branches, set theory",
+        description: "A truely RIGOROUS treatment of results in topology, sequences of numbers, continuous functions, \
+            differentiable functions, and Riemann integrals.",
         language: "LaTeX",
         position: [mid, secondRow]
     },
@@ -610,7 +611,8 @@ var mathArray = [{
         type: "APPM",
         number: "2350",
         name: "Calculus 3 for Engineers",
-        description: "Multivariable calculus, vector fields, Guass, Green, and Stokes",
+        description: "Multivariable calculus, including vectors, three-dimensional analytic geometry, partial differentiation \
+            and multiple integrals, vector analysis, Stokes/Greens equations, and Lagrange multipliers. ",
         language: "",
         position: [right, secondRow]
     },
@@ -618,7 +620,8 @@ var mathArray = [{
         type: "MATH",
         number: "2135",
         name: "Linear Algebra for Math Majors",
-        description: "this class was really tough, not too fun tbh",
+        description: "Examined the properties of systems of linear equations, vector spaces, inner products, linear independance,\
+            dimension, matricies, diagonalization, eigenvalues/vectors, matricies, and determinants.",
         language: "LaTeX",
         position: [left, thirdRow]
     },
@@ -626,7 +629,8 @@ var mathArray = [{
         type: "MATH",
         number: "2001",
         name: "Discrete Mathematics",
-        description: "",
+        description: "This class was an introduction to rigorous proofs. Focused on basics of set theory, existential and universal quantifiers,\
+            discrete probability, and elementary counting.",
         language: "LaTeX",
         position: [mid, thirdRow]
     },
@@ -634,7 +638,8 @@ var mathArray = [{
         type: "CSCI",
         number: "2848",
         name: "Discrete Structures",
-        description: "",
+        description: "Computational discrete mathematics that covered the applications of regular discrete math in the python language. Went \
+            deeper into relations, recurrence, combinatorics, booleam algebra, and graph algorithms. ",
         language: "Python",
         position: [right, thirdRow]
     }
