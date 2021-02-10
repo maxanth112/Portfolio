@@ -1564,7 +1564,7 @@ var wood1 = [{
         newid: "w1-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "travle 1",
-        description: "wood1",
+        description: "wood first page",
         img: "./../img/motorcycle1.jpg"
     },
 ];
