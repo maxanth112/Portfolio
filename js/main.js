@@ -1245,9 +1245,9 @@ function createAllCards() {
     // creates the divs (cards) and saves them to the respective objects arrays and all objects
     createMenuButtons();
 
-    createCourseCards(mathArray, "math");
-    createCourseCards(computerArray, "computer");
-    createCourseCards(econArray, "econ");
+    ["math", "computer", "econ"].forEach(element => {
+        createCourseCards(courseArray[element], element);
+    });
     createEducHeadersButtons();
     createEducationSummary();
 
@@ -1381,22 +1381,43 @@ function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
     });
 }
 
+function createViewCoordinatesWork() {
+
+    j = 0;
+    ["intern", "matops", "contract", "lab"].forEach(saveRoot => {
+        i = 0;
+        workViewDisplayArray.forEach(element => {
+            var obj = new THREE.Object3D();
+            if (i < 2 || i > 6) {
+                obj.position.x = element.position[0] * 500;
+                obj.position.y = element.position[1] * 200;
+            } else {                
+                obj.position.x = -1.46 * 500;
+                obj.position.y = element.position[j] * 200;
+            }
+            obj.position.z = 1800;
+            
+            obj.name = saveRoot + '-view';
+            roots[saveRoot].coordinates.view.push(obj);
+            i++;
+        });
+        j++;
+    });
+}
+
 function createAllViewCoordinates() {
 
     // stationary
     createViewCoordinates(menuButtonArray, "stationary", 1000, 5, 1800);
     // education
-    createViewCoordinates(mathArray, "math");
-    createViewCoordinates(econArray, "econ");
-    createViewCoordinates(computerArray, "computer");
+    ["math", "computer", "econ"].forEach(element => {
+        createViewCoordinates(courseArray[element], element);
+    });
     createViewCoordinates(educationHeaderArray, "educHeader");
     createViewCoordinates(EducationHeaderSelectedArray, "educSelect");
     createViewCoordinates(educationSummaryArray, "educSummary");
     // work history
-    createViewCoordinates(workViewDisplayArrayIntern, "intern");
-    createViewCoordinates(workViewDisplayArrayMatOps, "matops");
-    createViewCoordinates(workViewDisplayArrayContract, "contract");
-    createViewCoordinates(workViewDisplayArrayLab, "lab");
+    createViewCoordinatesWork();
     createViewCoordinates(workTimelineDisplayArray, "workTimeline");
     createViewCoordinates(workDefaultArray, "workDefault");
     // bio

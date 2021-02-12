@@ -569,256 +569,256 @@ var firstRow = 2.1;
 var secondRow = firstRow - (courseTall * 1);
 var thirdRow = firstRow - (courseTall * 2);
 
-var mathArray = [{
-        type: "APPM",
-        number: "4650",
-        name: "Intermediate Numerical Analysis",
-        description: "Focuses on numberical solution of nonlinear equations, interpolation, methods in numerical integration, \
+var courseArray = {
+    math: [{
+            type: "APPM",
+            number: "4650",
+            name: "Intermediate Numerical Analysis",
+            description: "Focuses on numberical solution of nonlinear equations, interpolation, methods in numerical integration, \
             numerical solution of linear systems, and matrix eigenvalue problems; using computer application in Matlab. ",
-        language: "Matlab",
-        position: [left, firstRow]
-    },
-    {
-        type: "APPM",
-        number: "4120",
-        name: "Introduction to Operations Research",
-        language: "",
-        description: "Studied linear and nonlinear programming. Focuses on the simplex method, duality, sensitivity, \
+            language: "Matlab",
+            position: [left, firstRow]
+        },
+        {
+            type: "APPM",
+            number: "4120",
+            name: "Introduction to Operations Research",
+            language: "",
+            description: "Studied linear and nonlinear programming. Focuses on the simplex method, duality, sensitivity, \
             transportation, network flow, and constrained and unconstrained optimization theory. ",
-        position: [mid, firstRow]
-    },
-    {
-        type: "MATH",
-        number: "3430",
-        name: "Ordinary Differential Equations",
-        description: "Covered first/second order ODE's, systems, Dirac delta function, \
+            position: [mid, firstRow]
+        },
+        {
+            type: "MATH",
+            number: "3430",
+            name: "Ordinary Differential Equations",
+            description: "Covered first/second order ODE's, systems, Dirac delta function, \
             Heavyside, discontinuities, solutions of real/complex/repeating roots. \
             Wrote my final project in solving systems of engineering circuits using Laplace Transforms.",
-        language: "LaTeX",
-        position: [right, firstRow]
-    },
-    {
-        type: "APPM",
-        number: "4440",
-        name: "Mathematics of Coding and Cryptography",
-        description: "Studied the algebra/number theory behind modern coding and cryptography; topics included \
+            language: "LaTeX",
+            position: [right, firstRow]
+        },
+        {
+            type: "APPM",
+            number: "4440",
+            name: "Mathematics of Coding and Cryptography",
+            description: "Studied the algebra/number theory behind modern coding and cryptography; topics included \
             encryption, RSA algorithms, discrete log problems, digital signatures, elliptic \
             curves, latticies, error correctiong, and quantum computing.",
-        language: "Python, Sage",
-        position: [left, secondRow]
-    },
-    {
-        type: "MATH",
-        number: "3001",
-        name: "Analysis 1",
-        description: "A truely RIGOROUS treatment of results in topology, sequences of numbers, continuous functions, \
+            language: "Python, Sage",
+            position: [left, secondRow]
+        },
+        {
+            type: "MATH",
+            number: "3001",
+            name: "Analysis 1",
+            description: "A truely RIGOROUS treatment of results in topology, sequences of numbers, continuous functions, \
             differentiable functions, and Riemann integrals.",
-        language: "LaTeX",
-        position: [mid, secondRow]
-    },
-    {
-        type: "APPM",
-        number: "2350",
-        name: "Calculus 3 for Engineers",
-        description: "Multivariable calculus, including vectors, three-dimensional analytic geometry, partial differentiation \
+            language: "LaTeX",
+            position: [mid, secondRow]
+        },
+        {
+            type: "APPM",
+            number: "2350",
+            name: "Calculus 3 for Engineers",
+            description: "Multivariable calculus, including vectors, three-dimensional analytic geometry, partial differentiation \
             and multiple integrals, vector analysis, Stokes/Greens equations, and Lagrange multipliers. ",
-        language: "",
-        position: [right, secondRow]
-    },
-    {
-        type: "MATH",
-        number: "2135",
-        name: "Linear Algebra for Math Majors",
-        description: "Examined the properties of systems of linear equations, vector spaces, inner products, linear independance,\
+            language: "",
+            position: [right, secondRow]
+        },
+        {
+            type: "MATH",
+            number: "2135",
+            name: "Linear Algebra for Math Majors",
+            description: "Examined the properties of systems of linear equations, vector spaces, inner products, linear independance,\
             dimension, matricies, diagonalization, eigenvalues/vectors, matricies, and determinants.",
-        language: "LaTeX",
-        position: [left, thirdRow]
-    },
-    {
-        type: "MATH",
-        number: "2001",
-        name: "Discrete Mathematics",
-        description: "This class was an introduction to rigorous proofs. Focused on basics of set theory, existential and universal quantifiers,\
+            language: "LaTeX",
+            position: [left, thirdRow]
+        },
+        {
+            type: "MATH",
+            number: "2001",
+            name: "Discrete Mathematics",
+            description: "This class was an introduction to rigorous proofs. Focused on basics of set theory, existential and universal quantifiers,\
             discrete probability, and elementary counting.",
-        language: "LaTeX",
-        position: [mid, thirdRow]
-    },
-    {
-        type: "CSCI",
-        number: "2848",
-        name: "Discrete Structures",
-        description: "Computational discrete mathematics that covered the applications of regular discrete math in the python language. Went \
+            language: "LaTeX",
+            position: [mid, thirdRow]
+        },
+        {
+            type: "CSCI",
+            number: "2848",
+            name: "Discrete Structures",
+            description: "Computational discrete mathematics that covered the applications of regular discrete math in the python language. Went \
             deeper into relations, recurrence, combinatorics, booleam algebra, and graph algorithms. ",
-        language: "Python",
-        position: [right, thirdRow]
-    }
-];
-
-var computerArray = [{
-        type: "CSCI",
-        number: "4593",
-        name: "Computer Organization (Architecture)",
-        description: "Implemented an entire RISC-V multicore processor in a simulated cloud enviornment. ",
-        language: "RISC-V",
-        position: [mid, firstRow]
-    },
-    {
-        type: "CSCI",
-        number: "4448",
-        name: "Object Oriented Analysis and Design",
-        description: "Applied object-oriented techniques including domain modeling, use cases, architectural design, \
+            language: "Python",
+            position: [right, thirdRow]
+        }
+    ],
+    computer: [{
+            type: "CSCI",
+            number: "4593",
+            name: "Computer Organization (Architecture)",
+            description: "Implemented an entire RISC-V multicore processor in a simulated cloud enviornment. ",
+            language: "RISC-V",
+            position: [mid, firstRow]
+        },
+        {
+            type: "CSCI",
+            number: "4448",
+            name: "Object Oriented Analysis and Design",
+            description: "Applied object-oriented techniques including domain modeling, use cases, architectural design, \
             and modeling notations.",
-        language: "Java",
-        position: [left, firstRow]
-    },
-    {
-        type: "CSCI",
-        number: "3202",
-        name: "Artificial Intelligence",
-        description: "Surveyed modern AI techniques of search, knowlage representation and reasoning, probabilistic \
+            language: "Java",
+            position: [left, firstRow]
+        },
+        {
+            type: "CSCI",
+            number: "3202",
+            name: "Artificial Intelligence",
+            description: "Surveyed modern AI techniques of search, knowlage representation and reasoning, probabilistic \
             inference, maching learning, natural language processing, and a brief introduction to neural networks. ",
-        language: "Python",
-        position: [right, firstRow]
-    },
-    {
-        type: "CSCI",
-        number: "3308",
-        name: "Software Development Methods and Tools",
-        description: "Covers an introduction to full-stack integration, web services, version control, cloud-based deployment \
+            language: "Python",
+            position: [right, firstRow]
+        },
+        {
+            type: "CSCI",
+            number: "3308",
+            name: "Software Development Methods and Tools",
+            description: "Covers an introduction to full-stack integration, web services, version control, cloud-based deployment \
             agile methodologies, and other industry standard practices.",
-        language: "Js, HTML, CSS, SQL",
-        position: [left, secondRow]
-    },
-    {
-        type: "CSCI",
-        number: "3753",
-        name: "Design and Analysis of Operating Systems",
-        description: "Analyzed the software that extends computer hardware, including the role of linkers, file systems, \
+            language: "Js, HTML, CSS, SQL",
+            position: [left, secondRow]
+        },
+        {
+            type: "CSCI",
+            number: "3753",
+            name: "Design and Analysis of Operating Systems",
+            description: "Analyzed the software that extends computer hardware, including the role of linkers, file systems, \
             resource sharing, security and networking. ",
-        language: "C, Linux",
-        position: [mid, secondRow]
-    },
-    {
-        type: "CSCI",
-        number: "3104",
-        name: "Algorithms",
-        description: "Time/ space complexity of algorithms; algorithms pertaining to sorting, recirrence,\
+            language: "C, Linux",
+            position: [mid, secondRow]
+        },
+        {
+            type: "CSCI",
+            number: "3104",
+            name: "Algorithms",
+            description: "Time/ space complexity of algorithms; algorithms pertaining to sorting, recirrence,\
              divide and conquer, greedy, dynamic, graph, linear/ and non-linear programming. ",
-        language: "C++, Python",
-        position: [right, secondRow]
-    },
-    {
-        type: "CSCI",
-        number: "3155",
-        name: "Principals of Programming Languages",
-        description: "Studied the fundamentals governing the design and analysis of languages \
+            language: "C++, Python",
+            position: [right, secondRow]
+        },
+        {
+            type: "CSCI",
+            number: "3155",
+            name: "Principals of Programming Languages",
+            description: "Studied the fundamentals governing the design and analysis of languages \
             and the excedution models underlying them. Specifically higher order functions, type systems, scoping, \
             and control structures.",
-        language: "Scala",
-        position: [left, thirdRow]
-    },
-    {
-        type: "CSCI",
-        number: "2400",
-        name: "Computer Systems",
-        description: "Covered in depth virtual memory, exeptional control flow, linking, momory \
+            language: "Scala",
+            position: [left, thirdRow]
+        },
+        {
+            type: "CSCI",
+            number: "2400",
+            name: "Computer Systems",
+            description: "Covered in depth virtual memory, exeptional control flow, linking, momory \
             heiarchy, optimization and performance, processor architecture.",
-        language: "C, C++",
-        position: [mid, thirdRow]
-    },
-    {
-        type: "CSCI",
-        number: "2270",
-        name: "Data Structures",
-        description: "Implemented from scratch linked lists, binary trees, red-black trees, graphs and graph \
+            language: "C, C++",
+            position: [mid, thirdRow]
+        },
+        {
+            type: "CSCI",
+            number: "2270",
+            name: "Data Structures",
+            description: "Implemented from scratch linked lists, binary trees, red-black trees, graphs and graph \
             algorithms, stacks, queues, hash tables, and dynamically allocating memory at run time.",
-        language: "C, C++",
-        position: [right, thirdRow]
-    },
-];
-
-var econArray = [{
-        type: "ECON",
-        number: "4848",
-        name: "Applied Econometrics",
-        description: "Focuses on applied regression analysis, and advanced statistical programming. We developed models \
+            language: "C, C++",
+            position: [right, thirdRow]
+        }
+    ],
+    econ: [{
+            type: "ECON",
+            number: "4848",
+            name: "Applied Econometrics",
+            description: "Focuses on applied regression analysis, and advanced statistical programming. We developed models \
             using U.S. census data sources, and presented multiple projects analyzing social and economic issues. ",
-        language: "Stata, R",
-        position: [left, firstRow]
-    },
-    {
-        type: "ECON",
-        number: "3818",
-        name: "Statistics with Computer Applications",
-        description: "Introduces the statistical methods for quantitative economic analysis; such as ANOVA, \
+            language: "Stata, R",
+            position: [left, firstRow]
+        },
+        {
+            type: "ECON",
+            number: "3818",
+            name: "Statistics with Computer Applications",
+            description: "Introduces the statistical methods for quantitative economic analysis; such as ANOVA, \
             probability theory, distributions, sampling theory, estimation, confidence intervals, hypothesis testing, and regression.",
-        language: "R",
-        position: [right, firstRow]
-    },
-    {
-        type: "ECON",
-        number: "4697",
-        name: "Industrial Organization Economics",
-        description: "Explored newclassical theory of the firm, the determinants of industrial structure, and the purposes \
+            language: "R",
+            position: [right, firstRow]
+        },
+        {
+            type: "ECON",
+            number: "4697",
+            name: "Industrial Organization Economics",
+            description: "Explored newclassical theory of the firm, the determinants of industrial structure, and the purposes \
             and institutions of public policy to control or maintain a competitive enviornment. ",
-        language: "",
-        position: [mid, firstRow]
-    },
-    {
-        type: "ECON",
-        number: "4423",
-        name: "International Finance",
-        description: "This class was taught by the former Lead Economist in Development Research Group at the World Bank, it was \
+            language: "",
+            position: [mid, firstRow]
+        },
+        {
+            type: "ECON",
+            number: "4423",
+            name: "International Finance",
+            description: "This class was taught by the former Lead Economist in Development Research Group at the World Bank, it was \
             a really humbling semester. We looked at balance of payments, foreign exchange markets, income, and capital flows.",
-        language: "",
-        position: [left, secondRow]
-    },
-    {
-        type: "ECON",
-        number: "3080",
-        name: "Intermediate Macroeconomic Theory",
-        description: "Focused on theories of aggregate economic activity including the determination of income, employment, and \
+            language: "",
+            position: [left, secondRow]
+        },
+        {
+            type: "ECON",
+            number: "3080",
+            name: "Intermediate Macroeconomic Theory",
+            description: "Focused on theories of aggregate economic activity including the determination of income, employment, and \
             prices; economic growth; and fluctuations. Explored these policies in both open and closed economy models. ",
-        language: "",
-        position: [right, secondRow]
-    },
-    {
-        type: "ECON",
-        number: "3070",
-        name: "Intermediate Microeconomic Theory",
-        description: "Explored theory and application of models of consumer choice, firm and market organization, and \
+            language: "",
+            position: [right, secondRow]
+        },
+        {
+            type: "ECON",
+            number: "3070",
+            name: "Intermediate Microeconomic Theory",
+            description: "Explored theory and application of models of consumer choice, firm and market organization, and \
             general equilibrium. Included imtertemporal decisions, uncertainty, externalities, and strategic integration. ",
-        language: "",
-        position: [left, thirdRow]
-    },
-    {
-        type: "BUSN",
-        number: "3374",
-        name: "International Economics",
-        description: "Studied how global businesses are impacted by real world developments in economics, politics, and \
+            language: "",
+            position: [left, thirdRow]
+        },
+        {
+            type: "BUSN",
+            number: "3374",
+            name: "International Economics",
+            description: "Studied how global businesses are impacted by real world developments in economics, politics, and \
             finance; emphasis on globalization, trade and investment, the global marketplace and monetary system. ",
-        language: "",
-        position: [mid, secondRow]
-    },
-    {
-        type: "ECON",
-        number: "2020",
-        name: "Principles of Macroeconomics",
-        description: "Looked at an overview of the economy, examining the flows of resources and outputs, and the factors \
+            language: "",
+            position: [mid, secondRow]
+        },
+        {
+            type: "ECON",
+            number: "2020",
+            name: "Principles of Macroeconomics",
+            description: "Looked at an overview of the economy, examining the flows of resources and outputs, and the factors \
             determining the levels of income and prices. Focused on economic growth, unemployment, and infaltion. ",
-        language: "",
-        position: [right, thirdRow]
-    },
-    {
-        type: "ECON",
-        number: "2010",
-        name: "Principles of Microeconomics",
-        description: "Studied basic concepts of microeconomics and the behavior and interactions of individuals, \
+            language: "",
+            position: [right, thirdRow]
+        },
+        {
+            type: "ECON",
+            number: "2010",
+            name: "Principles of Microeconomics",
+            description: "Studied basic concepts of microeconomics and the behavior and interactions of individuals, \
             firms, and government. Looked at how consumers and businesses make descisions, how markets work, and how they fail. ",
-        language: "",
-        position: [mid, thirdRow]
-    },
-];
+            language: "",
+            position: [mid, thirdRow]
+        }
+    ]
+};
 
 /////////////////////////////////////////////////////////////////////////////////
 ////////                           work history                          ////////
@@ -936,7 +936,8 @@ var workToolsArray = [{
 var homeButtons = 1.95;
 var timelineY = -1.15;
 var timelineElement = timelineY - 1.55;
-var workTimelineDisplayArray = [{
+var workTimelineDisplayArray = [
+    {
         title: 'intern',
         position: [-1.19, timelineElement]
     },
@@ -990,21 +991,9 @@ var workButtonArray = [{
 ];
 
 var toolsX = -1.46;
-var toolsGap = 0.66;
-var toolsRowOne = 1.65;
-var toolContainerX = -1.53;
-var toolContainerY = 0.585;
-var toolsRowTwo = toolsRowOne - toolsGap;
-var toolsRowThree = toolsRowOne - 2 * toolsGap;
-var toolsRowFour = toolsRowOne - 3 * toolsGap;
-var toolsRowFive = toolsRowOne - 4 * toolsGap;
-var toolsRowSix = toolsRowOne - 5 * toolsGap;
-var toolsRowSeven = toolsRowOne - 6 * toolsGap;
+var toolPos = _.range(4).map(x => 1.65 - x * 0.66);
 
-var exclude = 0;
-
-var workViewDisplayArray = [
-    {
+var workViewDisplayArray = [{
         title: 'header',
         position: [0, 3]
     },
@@ -1012,136 +1001,31 @@ var workViewDisplayArray = [
         title: 'content',
         position: [0.39, 0.583]
     },
-    {   // intern => matops => contract => lab
+    { // intern => matops => contract => lab
         tool: "SQL",
-        position: [toolsX, toolsRowThree]
+        position: [toolPos[2], toolPos[2], toolPos[0], toolPos[0]]
     },
     {
         tool: "Power BI",
-        position: [toolsX, toolsRowTwo]
+        position: [toolPos[1], toolPos[0], toolPos[1], toolPos[1]]
     },
     {
         tool: "Python",
-        position: [toolsX, exclude]
+        position: [0, toolPos[1], 0, toolPos[0]]
     },
     {
         tool: "PowerApps",
-        position: [toolsX, exclude]
+        position: [0, 0, toolPos[3], 0]
     },
     {
         tool: "Excel",
-        position: [toolsX, toolsRowOne]
+        position: [toolPos[0], toolPos[3], toolPos[2], toolPos[1]]
     },
     {
         tool: "Container",
-        position: [toolContainerX, toolContainerY]
-    }
+        position: [-1.53, 0.585]
+    },
 ];
-
-var workViewDisplayArrayIntern = workViewDisplayArray.concat([{
-        tool: "SQL",
-        position: [toolsX, toolsRowThree]
-    },
-    {
-        tool: "Power BI",
-        position: [toolsX, toolsRowTwo]
-    },
-    {
-        tool: "Python",
-        position: [toolsX, exclude]
-    },
-    {
-        tool: "PowerApps",
-        position: [toolsX, exclude]
-    },
-    {
-        tool: "Excel",
-        position: [toolsX, toolsRowOne]
-    },
-    {
-        tool: "Container",
-        position: [toolContainerX, toolContainerY]
-    }
-]);
-
-var workViewDisplayArrayMatOps = workViewDisplayArray.concat([{
-        tool: "SQL",
-        position: [toolsX, toolsRowThree]
-    },
-    {
-        tool: "Power BI",
-        position: [toolsX, toolsRowOne]
-    },
-    {
-        tool: "Python",
-        position: [toolsX, toolsRowTwo]
-    },
-    {
-        tool: "PowerApps",
-        position: [toolsX, exclude]
-    },
-    {
-        tool: "Excel",
-        position: [toolsX, toolsRowFour]
-    },
-    {
-        tool: "Container",
-        position: [toolContainerX, toolContainerY]
-    }
-]);
-
-var workViewDisplayArrayContract = workViewDisplayArray.concat([{
-        tool: "SQL",
-        position: [toolsX, toolsRowOne]
-    },
-    {
-        tool: "Power BI",
-        position: [toolsX, toolsRowTwo]
-    },
-    {
-        tool: "Python",
-        position: [toolsX, exclude]
-    },
-    {
-        tool: "PowerApps",
-        position: [toolsX, toolsRowFour]
-    },
-    {
-        tool: "Excel",
-        position: [toolsX, toolsRowThree]
-    },
-    {
-        tool: "Container",
-        position: [toolContainerX, toolContainerY]
-    }
-]);
-
-var workViewDisplayArrayLab = workViewDisplayArray.concat([{
-        tool: "SQL",
-        position: [toolsX, toolsRowOne]
-    },
-    {
-        tool: "Power BI",
-        position: [toolsX, toolsRowTwo]
-    },
-    {
-        tool: "Python",
-        position: [toolsX, exclude]
-    },
-    {
-        tool: "PowerApps",
-        position: [toolsX, toolsRowFour]
-    },
-    {
-        tool: "Excel",
-        position: [toolsX, toolsRowThree]
-    },
-    {
-        tool: "Container",
-        position: [toolContainerX, toolContainerY]
-    }
-]);
-
 
 var imageX = 1.3;
 var imageY = 1.8;
@@ -1172,8 +1056,7 @@ var workDefaultArray = [{
         id: "comp-code",
         text: "asdf fasdgasdg adgadsga",
         position: [-imageX, -0.4]
-    },
-
+    }
 ];
 
 var toptopY = 2.5;
@@ -1608,7 +1491,7 @@ var wood2 = [{
         id: "slide-1",
         newid: "w2-s1",
         position: [slide1X, slideY],
-        description: "
+        description: "",
         img: "./../img/bed1.jpg"
     },
     {
