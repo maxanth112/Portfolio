@@ -13,22 +13,25 @@ var controls, camera, scene, cssRenderer;
 
 var allObjects = [];
 var rootNames = [
-    "stationary", 
-    "math", "computer", "econ", "educSelect", "educHeader", "educSummary", 
-    "workTimeline", "intern", "matops", "contract", "lab", "workDefault", 
+    "stationary",
+    "math", "computer", "econ", "educSelect", "educHeader", "educSummary",
+    "workTimeline", "intern", "matops", "contract", "lab", "workDefault",
     "bioDefault", "pic1", "pic2"
 ];
 
-var educationHeaderClasses = ['computer-header', 
-    'math-header', 
-    'econ-header'];
+var educationHeaderClasses = ['computer-header',
+    'math-header',
+    'econ-header'
+];
 
-var educationResetClasses = ['education-header-selected', 
-    'education-header-active'];
+var educationResetClasses = ['education-header-selected',
+    'education-header-active'
+];
 
-var educationButtonClasses = ['math-button', 
-    'econ-button', 
-    'computer-button'];
+var educationButtonClasses = ['math-button',
+    'econ-button',
+    'computer-button'
+];
 
 var educationHeaderColors = [
     'computer-header-color',
@@ -37,9 +40,10 @@ var educationHeaderColors = [
 ];
 
 var educationCourseColors = [
-    'computer-color', 
-    'math-color', 
-    'econ-color']
+    'computer-color',
+    'math-color',
+    'econ-color'
+]
 
 var allEducationColors = educationHeaderColors
     .concat(educationCourseColors)
@@ -186,7 +190,7 @@ var roots = {
         group: 'educDefault'
     },
     workTimeline: {
-        root:'',
+        root: '',
         toggle: '',
         motion: '',
         inViewClass: '',
@@ -236,7 +240,7 @@ var roots = {
     contract: {
         root: '',
         toggle: '',
-        motion:'',
+        motion: '',
         inViewClass: '',
         classToUpdate: [],
         objects: [],
@@ -248,11 +252,11 @@ var roots = {
             exclude: ["educSelect"]
         },
         group: 'work'
-    },    
+    },
     lab: {
         root: '',
         toggle: '',
-        motion:'',
+        motion: '',
         inViewClass: '',
         classToUpdate: [],
         objects: [],
@@ -264,10 +268,10 @@ var roots = {
             exclude: ["educSelect"]
         },
         group: 'work'
-    },    
+    },
     workDefault: {
         root: '',
-        toggle:'',
+        toggle: '',
         motion: '',
         inViewClass: '',
         classToUpdate: [],
@@ -282,15 +286,15 @@ var roots = {
         group: 'default',
     },
     bioDefault: {
-        root:'',
-        toggle:'',
+        root: '',
+        toggle: '',
         motion: '',
         inViewClass: '',
         classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
-            rotate: [], 
+            rotate: [],
             viewFinal: [],
             include: [],
             exclude: []
@@ -306,7 +310,7 @@ var roots = {
         objects: [],
         coordinates: {
             view: [],
-            rotate: [], 
+            rotate: [],
             viewFinal: [],
             include: ["bioDefault", "pic1"],
             exclude: ["educSelect"]
@@ -315,14 +319,14 @@ var roots = {
     },
     pic2: {
         root: '',
-        toggle:'',
+        toggle: '',
         motion: '',
         inViewClass: '',
         classToUpdate: [],
         objects: [],
         coordinates: {
             view: [],
-            rotate: [], 
+            rotate: [],
             viewFinal: [],
             include: ["bioDefault", "pic2"],
             exclude: ["educSelect"]
@@ -333,7 +337,7 @@ var roots = {
 
 var delayMultiplyer = 700;
 var introRoot;
-var nameRoot; 
+var nameRoot;
 var delay = 500;
 
 var introRootObjects = [];
@@ -346,7 +350,7 @@ var speeds = [0, 0, 0];
 var spheres = {
     small: [],
     smallMed: [],
-    med: [], 
+    med: [],
     medLarge: [],
     large: [],
     larger: [],
@@ -383,8 +387,9 @@ var menuButtonArray = [{
         id: "education-button",
         toggle: 'educHeader',
         sendTo: 'educSummary',
-        add: ['education-main-color', 'computer-header-color', 
-            'math-header-color', 'econ-header-color'],
+        add: ['education-main-color', 'computer-header-color',
+            'math-header-color', 'econ-header-color'
+        ],
         setTrue: ['educSummary', 'educHeader'],
         buttonLinked: ['education-button', 'work-button', 'bio-button'],
         toggleFalse: ["workTimeline", "workDefault", "bioDefault", "pic1", "pic2"],
@@ -396,7 +401,8 @@ var menuButtonArray = [{
         toggle: 'workTimeline',
         sendTo: 'workDefault',
         add: ['workDefault-color', 'workDefault-timeline-color', 'intern-timeline-color',
-        'matops-timeline-color', 'contract-timeline-color'],
+            'matops-timeline-color', 'contract-timeline-color'
+        ],
         setTrue: ["workDefault", "workTimeline"],
         buttonLinked: ['work-button', 'education-button', 'bio-button'],
         toggleFalse: ["educSummary", "bioDefault", "educHeader", "pic1", "pic2"],
@@ -430,7 +436,8 @@ var educationHeaderArray = [{
         headerLinked: ['computer-header', 'math-header', 'econ-header'],
         buttonLinked: ['computer-button', 'math-button', 'econ-button'],
         add: ['computer-color', 'math-header-color', 'econ-header-color',
-            'computer-header-color'],
+            'computer-header-color'
+        ],
         position: [-1.3, educHeaderY]
     },
     {
@@ -443,7 +450,8 @@ var educationHeaderArray = [{
         headerLinked: ['math-header', 'computer-header', 'econ-header'],
         buttonLinked: ['math-button', 'econ-button', 'computer-button'],
         add: ['math-color', 'math-header-color', 'econ-header-color',
-            'computer-header-color'],
+            'computer-header-color'
+        ],
         position: [0, educHeaderY],
     },
     {
@@ -456,7 +464,8 @@ var educationHeaderArray = [{
         headerLinked: ['econ-header', 'math-header', 'computer-header'],
         buttonLinked: ['econ-button', 'math-button', 'computer-button'],
         add: ['econ-color', 'math-header-color', 'econ-header-color',
-            'computer-header-color'],
+            'computer-header-color'
+        ],
         position: [1.3, educHeaderY],
     }
 ];
@@ -506,7 +515,7 @@ var educationSummaryArray = [{
         role: "Study Abroad",
         position: [educSummaryLeftX, educSummaryY - educSummaryLeftY],
         descriptionFront: "Photo Contest Winner, student farting around in europe. Here is the photo you filthy animals  ",
-        descriptionBack: "", 
+        descriptionBack: "",
     },
     {
         id: "sigep",
@@ -923,15 +932,6 @@ var workToolsArray = [{
     }
 ];
 
-var workViewDisplayArray = [{
-        title: 'header',
-        position: [0, 3]
-    },
-    {
-        title: 'content',
-        position: [0.39, 0.583]
-    }
-];
 
 var homeButtons = 1.95;
 var timelineY = -1.15;
@@ -970,24 +970,23 @@ var workTimelineDisplayArray = [{
     }
 ];
 
-var workButtonArray = [
-    {
-        id: 'left', 
+var workButtonArray = [{
+        id: 'left',
         workDefault: 'lab',
         lab: 'contract',
         matops: 'intern',
-        contract: 'matops', 
+        contract: 'matops',
         intern: 'workDefault',
-    }, 
+    },
     {
-        id: 'right', 
+        id: 'right',
         workDefault: 'intern',
         matops: 'contract',
-        lab: 'workDefault', 
+        lab: 'workDefault',
         intern: 'matops',
         contract: 'lab'
 
-    }, 
+    },
 ];
 
 var toolsX = -1.46;
@@ -1003,6 +1002,42 @@ var toolsRowSix = toolsRowOne - 5 * toolsGap;
 var toolsRowSeven = toolsRowOne - 6 * toolsGap;
 
 var exclude = 0;
+
+var workViewDisplayArray = [
+    {
+        title: 'header',
+        position: [0, 3]
+    },
+    {
+        title: 'content',
+        position: [0.39, 0.583]
+    },
+    {   // intern => matops => contract => lab
+        tool: "SQL",
+        position: [toolsX, toolsRowThree]
+    },
+    {
+        tool: "Power BI",
+        position: [toolsX, toolsRowTwo]
+    },
+    {
+        tool: "Python",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "PowerApps",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "Excel",
+        position: [toolsX, toolsRowOne]
+    },
+    {
+        tool: "Container",
+        position: [toolContainerX, toolContainerY]
+    }
+];
+
 var workViewDisplayArrayIntern = workViewDisplayArray.concat([{
         tool: "SQL",
         position: [toolsX, toolsRowThree]
@@ -1082,29 +1117,29 @@ var workViewDisplayArrayContract = workViewDisplayArray.concat([{
 ]);
 
 var workViewDisplayArrayLab = workViewDisplayArray.concat([{
-    tool: "SQL",
-    position: [toolsX, toolsRowOne]
-},
-{
-    tool: "Power BI",
-    position: [toolsX, toolsRowTwo]
-},
-{
-    tool: "Python",
-    position: [toolsX, exclude]
-},
-{
-    tool: "PowerApps",
-    position: [toolsX, toolsRowFour]
-},
-{
-    tool: "Excel",
-    position: [toolsX, toolsRowThree]
-},
-{
-    tool: "Container",
-    position: [toolContainerX, toolContainerY]
-}
+        tool: "SQL",
+        position: [toolsX, toolsRowOne]
+    },
+    {
+        tool: "Power BI",
+        position: [toolsX, toolsRowTwo]
+    },
+    {
+        tool: "Python",
+        position: [toolsX, exclude]
+    },
+    {
+        tool: "PowerApps",
+        position: [toolsX, toolsRowFour]
+    },
+    {
+        tool: "Excel",
+        position: [toolsX, toolsRowThree]
+    },
+    {
+        tool: "Container",
+        position: [toolContainerX, toolContainerY]
+    }
 ]);
 
 
@@ -1462,58 +1497,58 @@ var travel4 = [{
 ];
 
 var travel5 = [{
-    card: "s",
-    id: "slide-1",
-    newid: "t4-s1",
-    position: [slide1X, slideY],
-    description: "",
-    img: "./../img/frst.jpg"
-},
-{
-    card: "s",
-    id: "slide-2",
-    newid: "t5-s2",
-    position: [slide2X, slideY],
-    description: "",
-    img: "./../img/buda.jpg"
-},
-{
-    card: "s",
-    id: "slide-3",
-    newid: "t4-s3",
-    position: [slide3X, slideY],
-    description: "",
-    img: "./../img/aby.jpg"
-},
-{
-    card: "u",
-    id: "uslide-1",
-    newid: "t5-u1",
-    position: [slide1X, slideY - uSlideDiff],
-    header: "Poca Da Dona Beija, Azores",
-    description: "Hot springs spread accross five or so different pools. The pools deeper into the forest \
+        card: "s",
+        id: "slide-1",
+        newid: "t4-s1",
+        position: [slide1X, slideY],
+        description: "",
+        img: "./../img/frst.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-2",
+        newid: "t5-s2",
+        position: [slide2X, slideY],
+        description: "",
+        img: "./../img/buda.jpg"
+    },
+    {
+        card: "s",
+        id: "slide-3",
+        newid: "t4-s3",
+        position: [slide3X, slideY],
+        description: "",
+        img: "./../img/aby.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-1",
+        newid: "t5-u1",
+        position: [slide1X, slideY - uSlideDiff],
+        header: "Poca Da Dona Beija, Azores",
+        description: "Hot springs spread accross five or so different pools. The pools deeper into the forest \
         had warmer temperatures. ",
-    img: "./../img/motorcycle1.jpg"
-},
-{
-    card: "u",
-    id: "uslide-2",
-    newid: "t5-u2",
-    position: [slide2X, slideY - uSlideDiff],
-    header: "Budapest, Hungary",
-    description: "The Hungarian parliment building, taken from the Széchenyi Chain Bridge.",
-    img: "./../img/motorcycle1.jpg"
-},
-{
-    card: "u",
-    id: "uslide-3",
-    newid: "t5-u3",
-    position: [slide3X, slideY - uSlideDiff],
-    header: "Abbey Road, London",
-    description: "Was next to impossible to get a photo without strangers. \
+        img: "./../img/motorcycle1.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-2",
+        newid: "t5-u2",
+        position: [slide2X, slideY - uSlideDiff],
+        header: "Budapest, Hungary",
+        description: "The Hungarian parliment building, taken from the Széchenyi Chain Bridge.",
+        img: "./../img/motorcycle1.jpg"
+    },
+    {
+        card: "u",
+        id: "uslide-3",
+        newid: "t5-u3",
+        position: [slide3X, slideY - uSlideDiff],
+        header: "Abbey Road, London",
+        description: "Was next to impossible to get a photo without strangers. \
         After a hour of trying this is my friend Brandon ruining this group of girls near perfect photo.",
-    img: "./../img/motorcycle1.jpg"
-},
+        img: "./../img/motorcycle1.jpg"
+    },
 ];
 
 var wood1 = [{
@@ -1573,7 +1608,7 @@ var wood2 = [{
         id: "slide-1",
         newid: "w2-s1",
         position: [slide1X, slideY],
-        description: "",
+        description: "
         img: "./../img/bed1.jpg"
     },
     {
@@ -1851,4 +1886,3 @@ var alternatingScenes = {
     pic1: travel1,
     pic2: travel2
 }
-    
