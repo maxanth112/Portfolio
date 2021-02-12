@@ -415,7 +415,6 @@ function createWorkContentCards() {
 
 function createWorkToolsCards() {
 
-    var toolCategories = ["intern", "matops", "contract", "lab"];
     toolCategories.forEach(category => {
         for (var i = 0; i < workToolsArray.length; i++) {
             var arrElement = workToolsArray[i];
@@ -1257,12 +1256,12 @@ function createAllCards() {
     createWorkTimelineCards();
     createWorkButtons();
 
+    // createWorkToolsCards();
     createWorkHeaderCards();
     createWorkContentCards();
-    createWorkToolsCards();
     createWorkToolsContainer();
     createWorkDefaultCards();
-
+    
     createImgCards(travel1, "pic1");
     createImgCards(travel2, "pic2");
     createBioDefaultCards();
@@ -1380,27 +1379,15 @@ function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
         obj.position.z = z;
 
         obj.name = saveRoot + '-view';
+
         roots[saveRoot].coordinates.view.push(obj);
     });
 }
 
 function createViewCoordinatesWork() {
 
-    ["intern", "matops", "contract", "lab"].forEach(saveRoot => {
-        workViewDisplayArray.forEach(element => {
-
-            var obj = new THREE.Object3D();   
-            obj.position.x = element.position[0] * 500;
-            obj.position.y = element.position[1] * 200;
-            obj.position.z = 1800;
-            
-            obj.name = saveRoot + 'generalstuff-view';
-            roots[saveRoot].coordinates.view.push(obj);
-        });
-    });
-
     j = 0;
-    ["intern", "matops", "contract", "lab"].forEach(saveRoot => {
+    toolCategories.forEach(saveRoot => {
         workToolsArray.forEach(element => {
 
             var obj = new THREE.Object3D();   
@@ -1427,9 +1414,12 @@ function createAllViewCoordinates() {
     createViewCoordinates(EducationHeaderSelectedArray, "educSelect");
     createViewCoordinates(educationSummaryArray, "educSummary");
     // work history
-    createViewCoordinatesWork();
+    toolCategories.forEach(element => {
+        createViewCoordinates(workViewDisplayArray, element);
+    })
     createViewCoordinates(workTimelineDisplayArray, "workTimeline");
     createViewCoordinates(workDefaultArray, "workDefault");
+    createViewCoordinatesWork();
     // bio
     createViewCoordinates(bioDefaultArray, "bioDefault");
     createViewCoordinates(travel1, "pic1");

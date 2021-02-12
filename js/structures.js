@@ -11,6 +11,9 @@ var sphereSizeX = 10;
 // renderers, cameras, etc.
 var controls, camera, scene, cssRenderer;
 
+
+var toolCategories = ["intern", "matops", "contract", "lab"];
+
 var allObjects = [];
 var rootNames = [
     "stationary",
@@ -976,7 +979,7 @@ var workTimelineDisplayArray = [
     {
         title: 'right-arrow',
         position: [homeButtons, timelineElement]
-    }
+    },
 ];
 
 var workButtonArray = [{
