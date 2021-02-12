@@ -875,6 +875,9 @@ var workContentArray = [{
     }
 ]
 
+var toolsX = -1.46;
+var toolPos = _.range(4).map(x => 1.65 - x * 0.66);
+
 var workToolsArray = [{
         tool: "SQL",
         id: "sql",
@@ -884,7 +887,8 @@ var workToolsArray = [{
             contract: 10,
             lab: 5
         },
-        image: './../img/sql.png'
+        image: './../img/sql.png',
+        position: [toolPos[2], toolPos[2], toolPos[0], toolPos[0]]
     },
     {
         tool: "Power BI",
@@ -895,7 +899,8 @@ var workToolsArray = [{
             contract: 10,
             lab: 5
         },
-        image: './../img/powerbi.png'
+        image: './../img/powerbi.png',
+        position: [toolPos[1], toolPos[0], toolPos[1], toolPos[1]]
     },
     {
         tool: "Python",
@@ -906,7 +911,8 @@ var workToolsArray = [{
             contract: 0,
             lab: 5
         },
-        image: './../img/python.png'
+        image: './../img/python.png',
+        position: [0, toolPos[1], 0, toolPos[0]]
     },
     {
         tool: "PowerApps",
@@ -915,9 +921,10 @@ var workToolsArray = [{
             intern: 0,
             matops: 0,
             contract: 3,
-            lab: 5
+            lab: 0
         },
-        image: './../img/powerapps.png'
+        image: './../img/powerapps.png',
+        position: [0, 0, toolPos[3], 0]
     },
     {
         tool: "Excel",
@@ -928,7 +935,8 @@ var workToolsArray = [{
             contract: 4,
             lab: 5
         },
-        image: './../img/excel.png'
+        image: './../img/excel.png',
+        position: [toolPos[0], toolPos[3], toolPos[2], toolPos[1]]
     }
 ];
 
@@ -990,9 +998,6 @@ var workButtonArray = [{
     },
 ];
 
-var toolsX = -1.46;
-var toolPos = _.range(4).map(x => 1.65 - x * 0.66);
-
 var workViewDisplayArray = [{
         title: 'header',
         position: [0, 3]
@@ -1000,26 +1005,6 @@ var workViewDisplayArray = [{
     {
         title: 'content',
         position: [0.39, 0.583]
-    },
-    { // intern => matops => contract => lab
-        tool: "SQL",
-        position: [toolPos[2], toolPos[2], toolPos[0], toolPos[0]]
-    },
-    {
-        tool: "Power BI",
-        position: [toolPos[1], toolPos[0], toolPos[1], toolPos[1]]
-    },
-    {
-        tool: "Python",
-        position: [0, toolPos[1], 0, toolPos[0]]
-    },
-    {
-        tool: "PowerApps",
-        position: [0, 0, toolPos[3], 0]
-    },
-    {
-        tool: "Excel",
-        position: [toolPos[0], toolPos[3], toolPos[2], toolPos[1]]
     },
     {
         tool: "Container",

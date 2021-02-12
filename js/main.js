@@ -417,14 +417,16 @@ function createWorkToolsCards() {
 
     var toolCategories = ["intern", "matops", "contract", "lab"];
     toolCategories.forEach(category => {
-        workToolsArray.forEach(arrElement => {
+        for (var i = 0; i < workToolsArray.length; i++) {
+            var arrElement = workToolsArray[i];
+            
             var element = document.createElement('div');
             element.classList.add('work-tools');
             element.id = category;
             var hide = arrElement.score[category] ? "" : "hide";
             var toolHtml = '<ul class="tool-row ' + hide + '">' +
-                '<img class="tool-row-img ' + arrElement.id + '" src="' +
-                arrElement.image + '">' + '<div class="all-tools">';
+            '<img class="tool-row-img ' + arrElement.id + '" src="' +
+            arrElement.image + '">' + '<div class="all-tools">';
 
             for (var i = 0; i < 10; i++) {
                 if (i < arrElement.score[category]) {
@@ -435,8 +437,9 @@ function createWorkToolsCards() {
             }
             toolHtml += '</div>' + '</ul>';
             element.innerHTML = toolHtml;
-            pushRootandObjArr(category, element);
-        });
+
+            if (arrElement.score[category] != 0) pushRootandObjArr(category, element);
+        }
     });
 }
 
@@ -483,7 +486,7 @@ function createWorkTimelineCards() {
         '</ul>';
     pushRootandObjArr('workTimeline', element);
 
-    // home button 
+    // // home button 
     element = document.createElement('div');
     element.classList.add("timeline-events", "workDefault-timeline-color");
     element.id = "workDefault-timeline-event";
@@ -1383,23 +1386,30 @@ function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
 
 function createViewCoordinatesWork() {
 
-    j = 0;
     ["intern", "matops", "contract", "lab"].forEach(saveRoot => {
-        i = 0;
         workViewDisplayArray.forEach(element => {
-            var obj = new THREE.Object3D();
-            if (i < 2 || i > 6) {
-                obj.position.x = element.position[0] * 500;
-                obj.position.y = element.position[1] * 200;
-            } else {                
-                obj.position.x = -1.46 * 500;
-                obj.position.y = element.position[j] * 200;
-            }
+
+            var obj = new THREE.Object3D();   
+            obj.position.x = element.position[0] * 500;
+            obj.position.y = element.position[1] * 200;
             obj.position.z = 1800;
             
-            obj.name = saveRoot + '-view';
+            obj.name = saveRoot + 'generalstuff-view';
             roots[saveRoot].coordinates.view.push(obj);
-            i++;
+        });
+    });
+
+    j = 0;
+    ["intern", "matops", "contract", "lab"].forEach(saveRoot => {
+        workToolsArray.forEach(element => {
+
+            var obj = new THREE.Object3D();   
+            obj.position.x = -1.46 * 500;
+            obj.position.y = element.position[j] * 200;
+            obj.position.z = 1800;
+            
+            obj.name = saveRoot + '-toolstuff-view';
+            roots[saveRoot].coordinates.view.push(obj);
         });
         j++;
     });
@@ -1430,8 +1440,12 @@ function createAllViewCoordinates() {
         var rootCoords = roots[rootName].coordinates;
         if (rootCoords.include != rootCoords.exclude) {
             rootCoords.viewFinal = concatCoordinates(rootCoords.include, rootCoords.exclude);
+            console.log(rootName + ": \n");
+            console.log(rootCoords.viewFinal);
         }
     });
+
+    
 }
 
 // initial site startup 
