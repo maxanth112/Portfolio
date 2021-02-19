@@ -1,5 +1,13 @@
 {
   "devDependencies": {
     "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.5.1",
+    "three": "^0.125.2",
+    "tween": "^0.9.0",
+    "underscore": "^1.12.0",
+    "webpack": "^5.22.0"
   }
 }

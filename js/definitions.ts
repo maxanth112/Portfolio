@@ -5,8 +5,8 @@ type RotateSpeed = {
 };
 
 interface Coordinates {
-    view: object[];
-    rotating: object[];
+    view: Array<object>;
+    rotating: Array<object>; // generic type declaration of array
     rotateSpeed: RotateSpeed;
 }
 
@@ -18,9 +18,14 @@ interface Position {
     sendView(): void;
 }
 
-class Root { // adding access qualifiers in the constructor will initialize the passed variable to the local class varialbe instantly 
-    static numOfRoots = 0; // shared by all roots
+enum sendTo {
+    RtoV = "T0_VIEW",
+    VtoR = "T0_ROTATE"
+}
 
+class Root { // adding access qualifiers in the constructor will initialize the passed variable to the local class varialbe instantly 
+    static currentView = ''; // shared by all roots
+    static numOfRoots = 0;
     constructor(readonly name : string, // const for classes 
         public group : string,
         public inView: boolean,
@@ -32,21 +37,3 @@ class Root { // adding access qualifiers in the constructor will initialize the 
         Root.numOfRoots++; // access static variables with the class name 
     }
 }
-
-
-stationary: {
-    root: '',
-    toggle: '',
-    motion: '',
-    inViewClass: '',
-    classToUpdate: [],
-    objects: [],
-    coordinates: {
-        view: [],
-        rotate: [],
-        viewFinal: [],
-        include: [],
-        exclude: ["educSelect"]
-    },
-    group: 'menu',
-},
