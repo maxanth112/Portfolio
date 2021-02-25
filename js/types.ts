@@ -58,4 +58,6 @@ class Rectangle implements Comparator<Rectangle> {
     set Width(newWidth: number) {
         this.width = newWidth;
     }
+
+    // added fira
 }
