@@ -25,10 +25,10 @@ function startStatic() {
 
 function checkToggles() {
 
-    console.clear();
-    rootNames.forEach(rootName => {
-        console.log(rootName + ": " + roots[rootName].toggle);
-    });
+    // console.clear();
+    // rootNames.forEach(rootName => {
+    //     // console.log(rootName + ": " + roots[rootName].toggle);
+    // });
 }
 
 

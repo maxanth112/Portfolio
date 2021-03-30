@@ -289,8 +289,8 @@ function createAllViewCoordinates() {
         var rootCoords = roots[rootName].coordinates;
         if (rootCoords.include != rootCoords.exclude) {
             rootCoords.viewFinal = concatCoordinates(rootCoords.include, rootCoords.exclude);
-            console.log(rootName + ": \n");
-            console.log(rootCoords.viewFinal);
+            // console.log(rootName + ": \n");
+            // console.log(rootCoords.viewFinal);
         }
     });
 }
