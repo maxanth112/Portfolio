@@ -91,7 +91,7 @@ var travel1 = [{
         newid: "t1-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./img/coast2.jpg"
+        img: "./img/coast2.JPG"
     },
     {
         card: "s",
@@ -99,7 +99,7 @@ var travel1 = [{
         newid: "t1-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./img/elfie.jpg"
+        img: "./img/elfie.JPG"
     },
     {
         card: "s",
@@ -107,7 +107,7 @@ var travel1 = [{
         newid: "t1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./img/plane1.jpg"
+        img: "./img/plane1.JPG"
     },
     {
         card: "u",
@@ -154,7 +154,7 @@ var travel2 = [{
         newid: "t2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./img/cabo.jpg"
+        img: "./img/cabo.JPG"
     },
     {
         card: "s",
@@ -257,7 +257,7 @@ var travel4 = [{
         newid: "t4-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./img/iceland-mnt.jpg"
+        img: "./img/iceland-mnt.JPG"
     },
     {
         card: "s",
@@ -523,7 +523,7 @@ var bike1 = [{
         newid: "b1-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./img/motorcycle1.jpg"
+        img: "./img/motorcycle1.JPG"
     },
     {
         card: "s",
@@ -531,7 +531,7 @@ var bike1 = [{
         newid: "b1-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./img/bike3.jfif"
+        img: "./img/bike3.PNG"
     },
     {
         card: "s",
