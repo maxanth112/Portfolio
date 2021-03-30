@@ -33,7 +33,7 @@ var bioDefaultArray = [{
     {
         id: "bio-pic",
         position: [-1.45, 1.5],
-        inner: '<img class="bio-img" src="./../img/me.png">'
+        inner: '<img class="bio-img" src="./../../img/me.png">'
     },
     {
         id: "interests",
@@ -91,7 +91,7 @@ var travel1 = [{
         newid: "t1-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/coast2.jpg"
+        img: "./../../img/coast2.jpg"
     },
     {
         card: "s",
@@ -99,7 +99,7 @@ var travel1 = [{
         newid: "t1-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/elfie.jpg"
+        img: "./../../img/elfie.jpg"
     },
     {
         card: "s",
@@ -107,7 +107,7 @@ var travel1 = [{
         newid: "t1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/plane1.jpg"
+        img: "./../../img/plane1.jpg"
     },
     {
         card: "u",
@@ -117,7 +117,7 @@ var travel1 = [{
         header: "Sao Miguel Island, Azores",
         description: "The coastline containing the Ferraria Hot Springs on one of a \
             small chain of islands in the mid-Atlantic.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -126,7 +126,7 @@ var travel1 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "Chiang Mai, Thailand",
         description: "This is an elfie (elephant selfie), we didn't ride them, only fed them. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -136,7 +136,7 @@ var travel1 = [{
         header: "Sólheimasandur, Iceland",
         description: "At the site of the 1973 U.S. Navy DC plane crash on the Icelands southern \
             coast, dubbed 'Black Sand Beach'.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     }
 ];
 
@@ -146,7 +146,7 @@ var travel2 = [{
         newid: "t2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/deer.jpg"
+        img: "./../../img/deer.jpg"
     },
     {
         card: "s",
@@ -154,7 +154,7 @@ var travel2 = [{
         newid: "t2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/cabo.jpg"
+        img: "./../../img/cabo.jpg"
     },
     {
         card: "s",
@@ -162,7 +162,7 @@ var travel2 = [{
         newid: "t2-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/gladiator.jpg"
+        img: "./../../img/gladiator.jpg"
     },
     {
         card: "u",
@@ -172,7 +172,7 @@ var travel2 = [{
         header: "Nara Park - Kyoto, Japan",
         description: "A national park and sacred temple, where the deer are integrated into \
             normal life. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -182,7 +182,7 @@ var travel2 = [{
         header: "Cabo San Lucas, Mexico",
         description: "I accidenally dropped the goPro \
             which ended up taking the best photos of the entire trip. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -192,7 +192,7 @@ var travel2 = [{
         header: "San Quirico d'Orcia, Italy",
         description: "The fields where Maximus Desimous Meridious finally got to meet his \
             family in the afterlife. Gladiator.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
@@ -202,7 +202,7 @@ var travel3 = [{
         newid: "t3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/laos.jpg"
+        img: "./../../img/laos.jpg"
     },
     {
         card: "s",
@@ -210,7 +210,7 @@ var travel3 = [{
         newid: "t3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/coast4.jpg"
+        img: "./../../img/coast4.jpg"
     },
     {
         card: "s",
@@ -218,7 +218,7 @@ var travel3 = [{
         newid: "t3-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/australia.jpg"
+        img: "./../../img/australia.jpg"
     },
     {
         card: "u",
@@ -227,7 +227,7 @@ var travel3 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "Mekong River, Golden Triangle",
         description: "A nautious day trip up river to the border town connecting Laos, Myanmar, and Thailand. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -237,7 +237,7 @@ var travel3 = [{
         header: "Cinque Terre, Italy",
         description: "A very small and quiet fishing town in southern Italy. This was the view from \
             our one room apartment airBnB.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -247,7 +247,7 @@ var travel3 = [{
         header: "Port Stephens, Australia",
         description: "Caravanning from the Stockton Sand Dunes to the beach to surf \
             (on some giant foam boards). ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
@@ -257,7 +257,7 @@ var travel4 = [{
         newid: "t4-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/iceland-mnt.jpg"
+        img: "./../../img/iceland-mnt.jpg"
     },
     {
         card: "s",
@@ -265,7 +265,7 @@ var travel4 = [{
         newid: "t4-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/stairs3.jpg"
+        img: "./../../img/stairs3.jpg"
     },
     {
         card: "s",
@@ -273,7 +273,7 @@ var travel4 = [{
         newid: "t4-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/bomb.jpg"
+        img: "./../../img/bomb.jpg"
     },
     {
         card: "u",
@@ -283,7 +283,7 @@ var travel4 = [{
         header: "Vík í Mýrdal, Iceland",
         description: "This whole drive was riddled with commanding ridges and small churches \
             tucked into the land. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -293,7 +293,7 @@ var travel4 = [{
         header: "Haiku Stairs - Oahu, Hawaii",
         description: "Know as the 'Stairway to Heaven', a hike to the top of Oahu. Unfortunately \
             I went when it was cloudy. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -302,7 +302,7 @@ var travel4 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "Hiroshima, Japan",
         description: "Genbaku Dome in Hiroshima Peace Memorial Park, one of few structures that survived the bomb.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
@@ -312,7 +312,7 @@ var travel5 = [{
         newid: "t4-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/frst.jpg"
+        img: "./../../img/frst.jpg"
     },
     {
         card: "s",
@@ -320,7 +320,7 @@ var travel5 = [{
         newid: "t5-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/buda.jpg"
+        img: "./../../img/buda.jpg"
     },
     {
         card: "s",
@@ -328,7 +328,7 @@ var travel5 = [{
         newid: "t4-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/aby.jpg"
+        img: "./../../img/aby.jpg"
     },
     {
         card: "u",
@@ -338,7 +338,7 @@ var travel5 = [{
         header: "Poca Da Dona Beija, Azores",
         description: "Hot springs spread accross five or so different pools. The pools deeper into the forest \
         had warmer temperatures. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -347,7 +347,7 @@ var travel5 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "Budapest, Hungary",
         description: "The Hungarian parliment building, taken from the Széchenyi Chain Bridge.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -356,7 +356,7 @@ var travel5 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "Abbey Road, London",
         description: "Was next to impossible to get a photo with just our group after hours of trying, still cool for Beatles fans.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
@@ -366,7 +366,7 @@ var wood1 = [{
         newid: "w1-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/prewood1.jpg"
+        img: "./../../img/prewood1.jpg"
     },
     {
         card: "s",
@@ -374,7 +374,7 @@ var wood1 = [{
         id: "slide-2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/table2.jpg"
+        img: "./../../img/table2.jpg"
     },
     {
         card: "s",
@@ -382,7 +382,7 @@ var wood1 = [{
         newid: "w1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/finaltable.jpg"
+        img: "./../../img/finaltable.jpg"
     },
     {
         card: "u",
@@ -391,7 +391,7 @@ var wood1 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "Pt. 1",
         description: "For this project I started with a 14-ish ft. Russian Artic Pine Slab, which they halved for me.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -400,7 +400,7 @@ var wood1 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "Pt. 2",
         description: "Then, I constructed a mould, and gathered 12 gallons of epoxy resin to fill in the middle of the desk.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -409,7 +409,7 @@ var wood1 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "Pt. 3",
         description: "The final product, which I mounted to some cast iron legs. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 var wood2 = [{
@@ -418,7 +418,7 @@ var wood2 = [{
         newid: "w2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/bed1.jpg"
+        img: "./../../img/bed1.jpg"
     },
     {
         card: "s",
@@ -426,7 +426,7 @@ var wood2 = [{
         newid: "w2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/bed2.jpg"
+        img: "./../../img/bed2.jpg"
     },
     {
         card: "s",
@@ -434,7 +434,7 @@ var wood2 = [{
         newid: "w2-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/finalbed.jpg"
+        img: "./../../img/finalbed.jpg"
     },
     {
         card: "u",
@@ -443,7 +443,7 @@ var wood2 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "Pt. 1",
         description: "Building the frame of a bed, while fixing a storage drawer on the left side. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -452,7 +452,7 @@ var wood2 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "Pt. 2",
         description: "Then fixed weathered barn wood on the sides, before ceiling it with clear stain. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -461,7 +461,7 @@ var wood2 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "Pt. 3",
         description: "The final product. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 var wood3 = [{
@@ -470,7 +470,7 @@ var wood3 = [{
         newid: "w3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "s",
@@ -478,7 +478,7 @@ var wood3 = [{
         newid: "w3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "s",
@@ -486,7 +486,7 @@ var wood3 = [{
         newid: "w3-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "u",
@@ -495,7 +495,7 @@ var wood3 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -504,7 +504,7 @@ var wood3 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -513,7 +513,7 @@ var wood3 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
@@ -523,7 +523,7 @@ var bike1 = [{
         newid: "b1-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "s",
@@ -531,7 +531,7 @@ var bike1 = [{
         newid: "b1-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/bike3.jfif"
+        img: "./../../img/bike3.jfif"
     },
     {
         card: "s",
@@ -539,7 +539,7 @@ var bike1 = [{
         newid: "b1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/moped1.jpg"
+        img: "./../../img/moped1.jpg"
     },
     {
         card: "u",
@@ -548,7 +548,7 @@ var bike1 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "Kawasaki Ninja ZX-6R",
         description: "My previous flame. No longer in my life, dont cry because its over, smile because it happened. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -557,7 +557,7 @@ var bike1 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "Super 73 - S1",
         description: "My current flame. More eco-friendly and 'safer'. ",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -566,7 +566,7 @@ var bike1 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "Cherry Red Mopeds",
         description: "Photo contest winning photo; post riding these around the entire country like they went faster than 35 mph.",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
@@ -576,7 +576,7 @@ var bike2 = [{
         newid: "b2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "s",
@@ -584,7 +584,7 @@ var bike2 = [{
         newid: "b2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "s",
@@ -592,7 +592,7 @@ var bike2 = [{
         id: "slide-3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "u",
@@ -601,7 +601,7 @@ var bike2 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -610,7 +610,7 @@ var bike2 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -619,7 +619,7 @@ var bike2 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
@@ -629,7 +629,7 @@ var bike3 = [{
         newid: "b3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "s",
@@ -637,7 +637,7 @@ var bike3 = [{
         newid: "b3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "s",
@@ -645,7 +645,7 @@ var bike3 = [{
         newid: "b3-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/pending.jpg"
+        img: "./../../img/pending.jpg"
     },
     {
         card: "u",
@@ -654,7 +654,7 @@ var bike3 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -663,7 +663,7 @@ var bike3 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
     {
         card: "u",
@@ -672,7 +672,7 @@ var bike3 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "---",
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../../img/motorcycle1.jpg"
     },
 ];
 
