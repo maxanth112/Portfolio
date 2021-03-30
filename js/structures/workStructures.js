@@ -79,7 +79,7 @@ var workToolsArray = [{
         contract: 10,
         lab: 0
     },
-    image: './../../img/sql.png',
+    image: './../img/sql.png',
     position: [toolPos[2], toolPos[2], toolPos[0], toolPos[0]]
 },
 {
@@ -91,7 +91,7 @@ var workToolsArray = [{
         contract: 10,
         lab: 0
     },
-    image: './../../img/powerbi.png',
+    image: './../img/powerbi.png',
     position: [toolPos[1], toolPos[0], toolPos[1], toolPos[1]]
 },
 {
@@ -103,7 +103,7 @@ var workToolsArray = [{
         contract: 0,
         lab: 10
     },
-    image: './../../img/python.png',
+    image: './../img/python.png',
     position: [0, toolPos[1], 0, toolPos[0]]
 },
 {
@@ -115,7 +115,7 @@ var workToolsArray = [{
         contract: 5,
         lab: 0
     },
-    image: './../../img/powerapps.png',
+    image: './../img/powerapps.png',
     position: [0, 0, toolPos[3], 0]
 },
 {
@@ -127,7 +127,7 @@ var workToolsArray = [{
         contract: 5,
         lab: 0
     },
-    image: './../../img/excel.png',
+    image: './../img/excel.png',
     position: [toolPos[0], toolPos[3], toolPos[2], toolPos[2]]
 },
 {
@@ -139,7 +139,7 @@ var workToolsArray = [{
         contract: 0,
         lab: 8
     },
-    image: './../../img/jslogo.png',
+    image: './../img/jslogo.png',
     position: [toolPos[0], toolPos[3], toolPos[2], toolPos[1]]
 }
 ];

@@ -98,6 +98,7 @@ function createEducHeadersButtons() {
             } else {
 
                 setMotionAndToggleFalse();
+                
                 stopRotationSetTrue(arrElement.setTrue);
                 updateLinkedThreesClass(['education-header-selected'], arrElement.headerLinked, 'last-two');
                 updateLinkedThreesClass(['education-header-active'], arrElement.headerLinked, 'first');
