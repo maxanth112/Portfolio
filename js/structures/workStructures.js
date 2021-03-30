@@ -167,7 +167,7 @@ var workTimelineDisplayArray = [
 },
 {
     title: 'timeline',
-    position: [-1.65, timelineY]
+    position: [-1.7, timelineY]
 },
 {
     title: 'home-button',
