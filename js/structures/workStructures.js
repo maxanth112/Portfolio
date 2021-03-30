@@ -167,7 +167,7 @@ var workTimelineDisplayArray = [
 },
 {
     title: 'timeline',
-    position: [-1.93, timelineY]
+    position: [-1.75, timelineY]
 },
 {
     title: 'home-button',
@@ -229,8 +229,8 @@ var workDefaultArray = [{
 },
 {
     header: "Current Experience: ",
-    description: "Thus far in my career I have been primarily a statistician, mathematical programmer, and \
-        a consultant for ad hoc business decisions. I currently work with Frontier Airlines as a independant \
+    description: "Thus far in my career I have primarily been a statistician, mathematical programmer, and \
+        a consultant for ad hoc business decisions. I currently work with Frontier Airlines as an independant \
         contractor within the engineering and maintenance division. I have been able to work on problems ranging from regressional demand planning,\
          to building key point indicators for the maintenance department using longitudal big data programming.\
          Outside of my work in industry, I have been pursuing my computer science and mathematics degrees from \
@@ -243,11 +243,11 @@ var workDefaultArray = [{
 {
     header: "My Next Role: ",
     description: "I am interested in computer networks, cloud computing, back end development, \
-    machine learning and artificial intelligence. With those interests pertaining to 90% of roles withing the \
-    software engineering and computer science community, for my next role I really want to be able to keep \
+    machine learning and artificial intelligence. Since those interests apply to 80% of roles withing the \
+    software engineering and computer science community, I am most focused on finding a position where I am able to keep \
     learning and wearing multiple hats as I have been. I am interested in seeing projects through from start\
     to finish, and not just focusing on perfecting 10%. I am moving to San Diego at the end of the year, and \
-    am currently looking for a company/team that I would fit on doing impactful and meaningful work. ",
+    am currently looking for a company/team doing impactful and meaningful work. ",
     id: "going",
     position: [defMid, defHeight]
 }
