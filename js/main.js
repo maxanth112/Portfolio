@@ -151,19 +151,19 @@ function createGroupRotations() {
        
         if (groupName == 'course') {
             sizeX = sizeY = 1200;
-            addX = addZ = 0.004;
+            addX = addZ = -0.0025;
         } else if (groupName == 'pic') {
             sizeX = sizeY = 1000;
-            addZ = addY = 0.003;
+            addZ = addY = 0.0015;
         } else if (groupName == 'default') {
             sizeX = sizeY = 1700;
-            addX = addY = 0.003;
+            addX = addY = -0.003;
         } else if (groupName == 'work') {
             sizeX = sizeY = 1500;
-            addX = addY = 0.003;
+            addX = addY = 0.0015;
         } else if (groupName == 'educDefault') {
             sizeX = sizeY = 700;
-            addX = addY = 0.002;
+            addZ = addY = -0.002;
         }
 
         var group = groups[groupName];

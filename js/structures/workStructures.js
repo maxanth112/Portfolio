@@ -100,11 +100,11 @@ var workToolsArray = [{
     score: {
         intern: 0,
         matops: 8,
-        contract: 0,
+        contract: 7,
         lab: 10
     },
     image: './img/python.png',
-    position: [0, toolPos[1], 0, toolPos[0]]
+    position: [0, toolPos[1], toolPos[0], toolPos[0]]
 },
 {
     tool: "PowerApps",

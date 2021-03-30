@@ -426,7 +426,7 @@ var wood2 = [{
         newid: "w2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./img/bed2.jpg"
+        img: "./img/bed2.JPG"
     },
     {
         card: "s",
@@ -539,7 +539,7 @@ var bike1 = [{
         newid: "b1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./img/moped1.jpg"
+        img: "./img/moped1.JPG"
     },
     {
         card: "u",
