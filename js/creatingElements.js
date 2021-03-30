@@ -151,7 +151,8 @@ function createEducationSummary() {
 
             element.classList.add('summary-card', 'education-main-color');
             element.innerHTML =
-                '<div class="summary-flip ' + elementSummary.id + `" onclick='flip("` + elementSummary.id + `")'>` +
+                '<div class="summary-flip ' + elementSummary.id + `"'>` +
+                // '<div class="summary-flip ' + elementSummary.id + `" onclick='flip("` + elementSummary.id + `")'>` +
                 '<div class="front">' +
                 '<h4 class="club-header">' + elementSummary.clubName + '</h4>' +
                 '<p class="club-position">' + elementSummary.role + '</p>' +
@@ -214,6 +215,8 @@ function createMenuButtons() {
         pushRootandObjArr('stationary', button);
     });
 }
+
+
 
 
 function createWorkHeaderCards() {
@@ -473,3 +476,16 @@ function createImgCards(arr, saveRoot) {
         pushRootandObjArr(saveRoot, element);
     });
 }
+
+
+// function createNamedSocial() {
+
+//     var firstName = document.createElement('div');
+//     firstName.id = 'firstName';
+//     firstName.classList.add('name-container');
+//     firstName.innerHTML = '<h1 class="name" id="shrink-name" data-text="Max-Wiesner" contenteditable>MAX-WIESNER</h1>' +
+//     '<div class="gradient"></div>' +
+//     '<div class="spotlight"></div>';
+
+//     pushRootandObjArr('stationary', firstName);
+// }

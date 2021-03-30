@@ -47,7 +47,7 @@
 .summary-flip {
   height: 100%;
   width: 100%;
-  cursor: pointer;  
+  /* cursor: pointer;   */
   transition: transform 1s;
   transform-style: preserve-3d;
 }
@@ -55,7 +55,7 @@
 .summary-flip div {
   height: 100%;
   width: 100%;
-  cursor: pointer;
+  /* cursor: pointer; */
   position: absolute;
   backface-visibility: hidden;
 }

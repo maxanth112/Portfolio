@@ -79,7 +79,7 @@ var educationSummaryArray = [{
             in the opening week of games acrosse the entire MCLA - D1 league. Opening week we took on two top teams defeating the University of \
             Arizona, and loosing by one against the former national champions, Grand Canyon University; I had hat-tricks in both games (3 goals a piece). \
             CU Mens Lacrosse was a full time team, practices were six days a week during season and on occasion seven days when traveling on the weekends. \
-            During off season we had four days a week practices which included two-a-days which required   =>",
+            During off season we had four days a week practices. Helped with learning time management. ",
         descriptionBack: '6AM morning weight training three times weekly. '
     },
     {
@@ -89,7 +89,10 @@ var educationSummaryArray = [{
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
         position: [educSummaryLeftX, educSummaryY - educSummaryLeftY],
-        descriptionFront: "Photo Contest Winner, student farting around in europe. Here is the photo you filthy animals  ",
+        descriptionFront: "Participated in an overseas program in Florance, Italy for four months. During this interval, I experienced \
+            many new cultures, and got to travel to 10 different countries. Also, while in Florence, I won the CAPA photo contest held\
+             for the entire student community, the victory came from renting cherry red mopeds with some friends and taking a photo overlooking \
+             the city. ",
         descriptionBack: "",
     },
     {

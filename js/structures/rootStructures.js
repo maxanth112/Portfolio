@@ -1,6 +1,6 @@
 // tweening globals 
-var toInterval = 300;
-var backInterval = 300;
+var toInterval = 500;
+var backInterval = 500;
 var timeoutTime = 0;
 var sphereSizeX = 10;
 

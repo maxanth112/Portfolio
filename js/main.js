@@ -228,6 +228,9 @@ function createViewCoordinates(arr, saveRoot, x = 500, y = 200, z = 1800) {
         obj.position.x = element.position[0] * x;
         obj.position.y = element.position[1] * y;
         obj.position.z = z;
+        if (element.title == 'timeline') {
+            obj.position.z = z - 1;
+        }
 
         obj.name = saveRoot + '-view';
 
@@ -257,6 +260,7 @@ function createAllViewCoordinates() {
 
     // stationary
     createViewCoordinates(menuButtonArray, "stationary", 1000, 5, 1800);
+    // createViewCoordinates(nameSocialArray, "stationary", 1000, 5, 1000);
 
     // education
     ["math", "computer", "econ"].forEach(element => {
@@ -296,6 +300,7 @@ function createAllViewCoordinates() {
 function createAllCards() {
    
     createMenuButtons();
+    // createNamedSocial();
 
     ["math", "computer", "econ"].forEach(element => {
         createCourseCards(courseArray[element], element);

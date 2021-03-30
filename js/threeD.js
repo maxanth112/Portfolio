@@ -142,7 +142,7 @@ function animate() {
 
     requestAnimationFrame(animate);
     updateIntroSphere();
-    // updateRotations();
+    updateRotations();
 }
 
 

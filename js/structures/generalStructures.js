@@ -39,3 +39,10 @@ var menuButtonArray = [{
         position: [0.2, stationaryButtonY]
     }
 ];
+
+var nameSocialArray = [
+    {
+        title: 'name',
+        position: [-0.5, stationaryButtonY]
+    }
+]

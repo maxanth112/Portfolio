@@ -13,21 +13,21 @@ var bioDefaultArray = [{
     {
         id: "bio-main",
         position: [0.47, 1.5],
-        inner: "<p>I am a builder, an athelete, a thinker, and an explorer. I was born and raised in Orange County, California; \
-        right where they kept the real housewives. I moved with my family to the Denver area in 2011 where I attended highschool and later college. \
-        While in school I was a (2x) varsity lacrosse captain, a mathelete/computer nerd, that kid that went abroad for a semester, a frat star, \
+        inner: "<p>I am a builder, an athelete, a thinker, and an explorer. I was born and raised in Orange County, California, \
+        and moved with my family to the Denver area in 2011 where I attended highschool and later college. \
+        While in school I was a (2x) varsity lacrosse captain, a mathelete/computer nerd, that kid that went abroad for a semester,\
         and the slowest kid on the cross country team clocking a 19 minute 5k (which ain't bad). \
         I worked in restraunts from the time I turned 16 until I received my bachelors degree, which gave me leathery skin that has followed me since. \
         <br><br>\
-        I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age that I seldom supress; \
+        I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age and seldom supress; \
         you can see some of my favorite trips below. \
         Next, helping my father with countless home improvement projects taught me that you \
         can build anything you can picture, which got me interested in craftsmanship and creating things in general. Finally I should mention my notable \
         attraction toward anything that is fast and has two wheels. I am a \
         mountain biker in the summers, a former motorcyclist, and a current e-biker. \
         <br><br>\
-        I currently live in downtown Denver right next to my favorite places to eat; \
-        King Soopers and Whole Foods. I strive for originality in everything I do, and find passion contageous and motivating. I am always looking for \
+        I currently live in downtown Denver beside union station, and am planning to move back to California later this year. \
+        I strive for originality in everything I do, and find passion contageous and motivating. I am always looking for \
         new and exciting opportunities to learn, or just generally broaden my domain. </p>",
     },
     {
@@ -171,7 +171,7 @@ var travel2 = [{
         position: [slide1X, slideY - uSlideDiff],
         header: "Nara Park - Kyoto, Japan",
         description: "A national park and sacred temple, where the deer are integrated into \
-            normal life. There was probably a 1:1 ratio of deer to people.",
+            normal life. ",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -180,7 +180,7 @@ var travel2 = [{
         newid: "t2-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "Cabo San Lucas, Mexico",
-        description: "Snorkling at Lovers Beach. I accidenally dropped the goPro \
+        description: "I accidenally dropped the goPro \
             which ended up taking the best photos of the entire trip. ",
         img: "./../img/motorcycle1.jpg"
     },
@@ -191,7 +191,7 @@ var travel2 = [{
         position: [slide3X, slideY - uSlideDiff],
         header: "San Quirico d'Orcia, Italy",
         description: "The fields where Maximus Desimous Meridious finally got to meet his \
-            family in the afterlife. Gladiator. Russell Crowe. ",
+            family in the afterlife. Gladiator.",
         img: "./../img/motorcycle1.jpg"
     },
 ];
@@ -291,8 +291,8 @@ var travel4 = [{
         newid: "t4-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "Haiku Stairs - Oahu, Hawaii",
-        description: "Know as the 'Stairway to Heaven', a now illegal hike to the top of Oahu. Unfortunately \
-            it was cloudy at the top so I couldn't get the shot facing down the stairs. ",
+        description: "Know as the 'Stairway to Heaven', a hike to the top of Oahu. Unfortunately \
+            I went when it was cloudy. ",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -301,8 +301,7 @@ var travel4 = [{
         newid: "t4-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "Hiroshima, Japan",
-        description: "Genbaku Dome in Hiroshima Peace Memorial Park, one of the few structures left standing \
-            near the bomb's hypocenter.",
+        description: "Genbaku Dome in Hiroshima Peace Memorial Park, one of few structures that survived the bomb.",
         img: "./../img/motorcycle1.jpg"
     },
 ];
@@ -356,8 +355,7 @@ var travel5 = [{
         newid: "t5-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "Abbey Road, London",
-        description: "Was next to impossible to get a photo without strangers. \
-        After a hour of trying this is my friend Brandon ruining this group of girls near perfect photo.",
+        description: "Was next to impossible to get a photo with just our group after hours of trying, still cool for Beatles fans.",
         img: "./../img/motorcycle1.jpg"
     },
 ];
@@ -391,8 +389,8 @@ var wood1 = [{
         id: "uslide-1",
         newid: "w1-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
-        description: "",
+        header: "Pt. 1",
+        description: "For this project I started with a 14-ish ft. Russian Artic Pine Slab, which they halved for me.",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -400,8 +398,8 @@ var wood1 = [{
         id: "uslide-2",
         newid: "w1-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
-        description: "",
+        header: "Pt. 2",
+        description: "Then, I constructed a mould, and gathered 12 gallons of epoxy resin to fill in the middle of the desk.",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -409,8 +407,8 @@ var wood1 = [{
         id: "uslide-3",
         newid: "w1-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "travle 1",
-        description: "wood first page",
+        header: "Pt. 3",
+        description: "The final product, which I mounted to some cast iron legs. ",
         img: "./../img/motorcycle1.jpg"
     },
 ];
@@ -443,8 +441,8 @@ var wood2 = [{
         id: "uslide-1",
         newid: "w2-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
-        description: "",
+        header: "Pt. 1",
+        description: "Building the frame of a bed, while fixing a storage drawer on the left side. ",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -452,8 +450,8 @@ var wood2 = [{
         id: "uslide-2",
         newid: "w2-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
-        description: "",
+        header: "Pt. 2",
+        description: "Then fixed weathered barn wood on the sides, before ceiling it with clear stain. ",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -461,8 +459,8 @@ var wood2 = [{
         id: "uslide-3",
         newid: "w2-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "travle 1",
-        description: "wood2",
+        header: "Pt. 3",
+        description: "The final product. ",
         img: "./../img/motorcycle1.jpg"
     },
 ];
@@ -472,7 +470,7 @@ var wood3 = [{
         newid: "w3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "s",
@@ -480,7 +478,7 @@ var wood3 = [{
         newid: "w3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "s",
@@ -488,14 +486,14 @@ var wood3 = [{
         newid: "w3-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "u",
         id: "uslide-1",
         newid: "w3-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -504,7 +502,7 @@ var wood3 = [{
         id: "uslide-2",
         newid: "w3-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -513,7 +511,7 @@ var wood3 = [{
         id: "uslide-3",
         newid: "w3-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "wood3",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -533,7 +531,7 @@ var bike1 = [{
         newid: "b1-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/bike3.jfif"
     },
     {
         card: "s",
@@ -541,15 +539,15 @@ var bike1 = [{
         newid: "b1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/moped1.jpg"
     },
     {
         card: "u",
         id: "uslide-1",
         newid: "b1-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
-        description: "",
+        header: "Kawasaki Ninja ZX-6R",
+        description: "My previous flame. No longer in my life, dont cry because its over, smile because it happened. ",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -557,8 +555,8 @@ var bike1 = [{
         id: "uslide-2",
         newid: "b1-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
-        description: "",
+        header: "Super 73 - S1",
+        description: "My current flame. More eco-friendly and 'safer'. ",
         img: "./../img/motorcycle1.jpg"
     },
     {
@@ -566,8 +564,8 @@ var bike1 = [{
         id: "uslide-3",
         newid: "b1-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "bike1",
-        description: "",
+        header: "Cherry Red Mopeds",
+        description: "Photo contest winning photo; post riding these around the entire country like they went faster than 35 mph.",
         img: "./../img/motorcycle1.jpg"
     },
 ];
@@ -578,7 +576,7 @@ var bike2 = [{
         newid: "b2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "s",
@@ -586,7 +584,7 @@ var bike2 = [{
         newid: "b2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "s",
@@ -594,14 +592,14 @@ var bike2 = [{
         id: "slide-3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "u",
         id: "uslide-1",
         newid: "b2-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -610,7 +608,7 @@ var bike2 = [{
         id: "uslide-2",
         newid: "b2-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -619,7 +617,7 @@ var bike2 = [{
         id: "uslide-3",
         newid: "b2-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "bike2",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -631,7 +629,7 @@ var bike3 = [{
         newid: "b3-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "s",
@@ -639,7 +637,7 @@ var bike3 = [{
         newid: "b3-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "s",
@@ -647,14 +645,14 @@ var bike3 = [{
         newid: "b3-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./../img/motorcycle1.jpg"
+        img: "./../img/pending.jpg"
     },
     {
         card: "u",
         id: "uslide-1",
         newid: "b3-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "dfg",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -663,7 +661,7 @@ var bike3 = [{
         id: "uslide-2",
         newid: "b3-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "dfgda",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },
@@ -672,7 +670,7 @@ var bike3 = [{
         id: "uslide-3",
         newid: "b3-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "bike3",
+        header: "---",
         description: "",
         img: "./../img/motorcycle1.jpg"
     },

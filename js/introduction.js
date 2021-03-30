@@ -87,7 +87,7 @@ function createNames() {
     var lastName = document.createElement('div');
     lastName.id = 'lastName';
     lastName.classList.add('name-container', 'hide');
-    lastName.innerHTML = '<h1 class="name" data-text="Wiesner" contenteditable>WIESNER</h1>' +
+    lastName.innerHTML = '<h1 class="name" data-text="Max Wiesner" contenteditable>WIESNER</h1>' +
     '<div class="gradient"></div>' +
     '<div class="spotlight"></div>';
 

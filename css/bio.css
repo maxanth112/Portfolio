@@ -54,10 +54,6 @@ br {
     border: 4px solid rgba(127, 255, 255, 0.25);
 } */
 
-#interests {
-    height: calc(var(--multiplier) * 5);
-}
-
 #interests h3 {
     margin: 
         calc(var(--multiplier) * .8)
@@ -148,4 +144,8 @@ br {
 #bio-button-down {
     border: none;   
     box-shadow: none;
+}
+
+#interests.bioDefault-color-active {
+    height: calc(var(--multiplier) * 4.5);
 }
