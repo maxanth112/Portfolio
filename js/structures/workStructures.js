@@ -112,7 +112,7 @@ var workToolsArray = [{
     score: {
         intern: 0,
         matops: 0,
-        contract: 2,
+        contract: 0,
         lab: 0
     },
     image: './img/powerapps.png',
@@ -123,8 +123,8 @@ var workToolsArray = [{
     id: "excel",
     score: {
         intern: 3,
-        matops: 4,
-        contract: 2,
+        matops: 0,
+        contract: 0,
         lab: 0
     },
     image: './img/excel.png',
