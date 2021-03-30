@@ -30,7 +30,7 @@ function updateInterestPage(pageChange, reset = "no") {
         }
     }
     if (reset == 'no') {
-        transform(allObjects, roots[toSceneToggle].coordinates.viewFinal, toInterval);
+        transform(allObjects, roots[toSceneToggle].coordinates.viewFinal, toInterval + 600);
         setMotionAndToggleFalse();
         stopRotationSetTrue([toSceneToggle, "bioDefault"]);
     }

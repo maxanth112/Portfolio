@@ -275,7 +275,7 @@ function createWorkToolsContainer() {
                 '<span class="tool-left">' + '<img class="tool-row-img ' + arrElement.id + '" src="' + arrElement.image + '">' + '</span>' + 
                 '<span class="tool-right">' + '<ul class="tool-row ' + hide + '">' + '</span>';
 
-            for (var j = 0; j < 10; j++) {
+            for (var j = 0; j < 7; j++) {
                 if (j < arrElement.score[tool]) {
                     toolHtml += '<li class="active ' + tool + '-color">' + '</li>';
                 } else {
