@@ -74,9 +74,9 @@ var workToolsArray = [{
     tool: "SQL",
     id: "sql",
     score: {
-        intern: 6,
-        matops: 10,
-        contract: 10,
+        intern: 3,
+        matops: 5,
+        contract: 5,
         lab: 0
     },
     image: './img/sql.png',
@@ -86,9 +86,9 @@ var workToolsArray = [{
     tool: "Power BI",
     id: "powerbi",
     score: {
-        intern: 6,
-        matops: 8,
-        contract: 10,
+        intern: 3,
+        matops: 4,
+        contract: 5,
         lab: 0
     },
     image: './img/powerbi.png',
@@ -99,9 +99,9 @@ var workToolsArray = [{
     id: "python",
     score: {
         intern: 0,
-        matops: 8,
-        contract: 7,
-        lab: 10
+        matops: 4,
+        contract: 4,
+        lab: 5
     },
     image: './img/python.png',
     position: [0, toolPos[1], toolPos[0], toolPos[0]]
@@ -112,7 +112,7 @@ var workToolsArray = [{
     score: {
         intern: 0,
         matops: 0,
-        contract: 5,
+        contract: 2,
         lab: 0
     },
     image: './img/powerapps.png',
@@ -122,9 +122,9 @@ var workToolsArray = [{
     tool: "Excel",
     id: "excel",
     score: {
-        intern: 6,
-        matops: 7,
-        contract: 5,
+        intern: 3,
+        matops: 4,
+        contract: 2,
         lab: 0
     },
     image: './img/excel.png',
@@ -137,7 +137,7 @@ var workToolsArray = [{
         intern: 0,
         matops: 0,
         contract: 0,
-        lab: 8
+        lab: 4
     },
     image: './img/jslogo.png',
     position: [toolPos[0], toolPos[3], toolPos[2], toolPos[1]]
