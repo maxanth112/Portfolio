@@ -25,7 +25,7 @@
 .contract-color, 
 .lab-color,
 .bioDefault-color {
-    box-shadow: 0px 0px 12px var(--all-color);
+    box-shadow: 0 0 calc(var(--multiplier) * 2) var(--all-color);
     border: calc(var(--multiplier) * .1) solid var(--all-color);
     color: var(--all-color);
     background-color: rgba(0, 0, 0, .7);

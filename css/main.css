@@ -57,7 +57,7 @@ body {
 }
 
 .name {
-  border: 15px solid black;
+  border: calc(var(--multiplier) * 1.9) solid black;
   justify-content: center;
   align-content: center;
   align-items: center;
