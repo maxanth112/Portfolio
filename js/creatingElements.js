@@ -282,7 +282,7 @@ function createWorkToolsContainer() {
                     toolHtml += '<li></li>';
                 }
             }
-            toolHtml += '</ul>';
+            toolHtml += '</ul><br/>';
             element.innerHTML = toolHtml;
 
             if (arrElement.score[tool] != 0) {
