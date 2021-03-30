@@ -74,6 +74,7 @@ br {
 }
 
 .bio-button {
+    font-weight: 600;
     background-color: transparent;
     height: calc(var(--multiplier) * 3);
     width: calc(var(--multiplier) * 9);
@@ -81,6 +82,9 @@ br {
         calc(var(--multiplier) * 0)
         calc(var(--multiplier) * 1.5);
     font-size: calc(var(--multiplier) * 1.4);
+    cursor: pointer;
+  color: white;
+  border: solid calc(var(--multiplier) * 0.15) white;
 }
 
 .interest-cards {
@@ -138,4 +142,10 @@ br {
         calc(var(--multiplier) * .25)
         calc(var(--multiplier) * 1);
     font-size: calc(var(--multiplier) * 1.2);
+}
+
+#bio-button-up,
+#bio-button-down {
+    border: none;   
+    box-shadow: none;
 }

@@ -196,14 +196,7 @@
   margin: calc(var(--multiplier) * 0.3) calc(var(--multiplier) * 1.5);
   cursor: pointer;
   background: transparent;
-}
-
-.menu-button {
-  color: red;
-}
-
-.menu-button-active {
-  color: blue;
-  background: transparent;
+  color: white;
+  border: solid calc(var(--multiplier) * 0.15) white;
 }
 
