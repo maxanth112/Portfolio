@@ -6,30 +6,31 @@ var interestsButtonX = 1.8;
 var interestButtonMid = -1.78
 var interestButtonDist = 1.1;
 var bioDefaultArray = [{
-        id: "bio-header",
-        position: [0, 3.2],
-        inner: "<h3>About Me</h3>",
-    },
-    {
-        id: "bio-main",
-        position: [0.47, 1.5],
-        inner: "<p>I am a builder, an athelete, a thinker, and an explorer. I was born and raised in Orange County, California, \
-        and moved with my family to the Denver area in 2011 where I attended highschool and later college. \
-        While in school I was a (2x) varsity lacrosse captain, a mathelete/computer nerd, that kid that went abroad for a semester,\
-        and the slowest kid on the cross country team clocking a 19 minute 5k (which ain't bad). \
-        I worked in restraunts from the time I turned 16 until I received my bachelors degree, which gave me leathery skin that has followed me since. \
-        <br><br>\
-        I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age and seldom supress; \
-        you can see some of my favorite trips below. \
-        Next, helping my father with countless home improvement projects taught me that you \
-        can build anything you can picture, which got me interested in craftsmanship and creating things in general. Finally I should mention my notable \
-        attraction toward anything that is fast and has two wheels. I am a \
-        mountain biker in the summers, a former motorcyclist, and a current e-biker. \
-        <br><br>\
-        I currently live in downtown Denver beside union station, and am planning to move back to California later this year. \
-        I strive for originality in everything I do, and find passion contageous and motivating. I am always looking for \
-        new and exciting opportunities to learn, or just generally broaden my domain. </p>",
-    },
+    id: "bio-header",
+    position: [0, 3.2],
+    inner: "<h3>About Me</h3>",
+},
+{
+    id: "bio-main",
+    position: [0.47, 1.5],
+    inner: "<p>I am a builder, an athlete, a thinker, and an explorer. I was born and raised in Orange County, California, \
+    and moved with my family to the Denver area in 2011 where I attended high school and later college. \
+    While in school I was a (2x) varsity lacrosse captain, a mathelete/computer nerd, that kid that went abroad for a semester, \
+    and the slowest kid on the cross-country team clocking a 19 minute 5k (which isn’t bad). \
+    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which gave me leathery skin that has followed me since. \
+    <br><br>\
+    I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age and seldom suppress; \
+    you can see some of my favorite trips below. \
+    Next, helping my father with countless home improvement projects taught me that you \
+    can build anything you can picture, which got me interested in craftsmanship and creating things in general. Finally I should mention my notable \
+    attraction toward anything that is fast and has two wheels. I am a \
+    mountain biker in the summers, a former motorcyclist, and a current e-biker. \
+    <br><br>\
+    I currently live-in downtown Denver beside union station, and am planning to move back to California later this year. \
+    I strive for originality in everything I do and find passion contagious and motivating. I am always looking for \
+    new and exciting opportunities to learn, or just generally broaden my domain. </p>",
+},
+
     {
         id: "bio-pic",
         position: [-1.45, 1.5],

@@ -1,4 +1,3 @@
-
 var workContentArray = [{
     title: "Technical Operations Analyst",
     timeline: "Jan '19 - May '19",
@@ -35,14 +34,14 @@ var workContentArray = [{
     company: "Contractor",
     id: "contract",
     description: "For the last year plus, I have been doing data and analytics contract work for the \
-    maintenance and engineering department within Frontier Airlines. I quit my previous full time employee \
+    maintenance and engineering department within Frontier Airlines. I quit my previous full-time employee \
     role in January 2020 to re-enroll in school because I wanted a more involved role in software \
     engineering. Upon this, I was offered a contracted role focusing on software and reporting \
     development, ironic right? I develop automated PowerBI reports, start to finish for different \
     teams within the department. Half of my job is developing KPI’s, data visualizations, high to \
     low level dashboards, and user facing functionality for these. The other half is working inside\
-     our Microsoft SQL Server database, writing and optimizing queries for the before mentioned reports,\
-      and the team. This also includes data wrangling and cleaning; I also use Python with the Pandas, \
+     our Microsoft SQL Server database, writing and optimizing queries for the before mentioned reports, \
+     and the team. This also includes data wrangling and cleaning; I also use Python with the Pandas, \
       NumPy, SymPy, and Matplotlib among others. Besides myself, the BI department, and a select few \
       others, the rest of the company uses Trax; a onetime query and export data application, thus the\
        need for me to develop automated reports and live dataflows."
@@ -65,7 +64,8 @@ var workContentArray = [{
           This is a really dangerous problem, people become obsessed with it, it really is impossible.”\
            – Jeffrey Lagarias, a leading expert on the conjecture."
 }
-]
+];
+
 
 var toolsX = -1.46;
 var toolPos = _.range(4).map(x => 1.65 - x * 0.86);
@@ -230,9 +230,9 @@ var workDefaultArray = [{
 {
     header: "Current Experience: ",
     description: "Thus far in my career I have primarily been a statistician, mathematical programmer, and \
-        a consultant for ad hoc business decisions. I currently work with Frontier Airlines as an independant \
-        contractor within the engineering and maintenance division. I have been able to work on problems ranging from regressional demand planning,\
-         to building key point indicators for the maintenance department using longitudal big data programming.\
+        a consultant for ad hoc business decisions. I currently work with Frontier Airlines as an independent \
+        contractor within the engineering and maintenance division. I have been able to work on problems ranging from regression demand planning, \
+        to building key point indicators for the maintenance department using longitudinal big data programming.\
          Outside of my work in industry, I have been pursuing my computer science and mathematics degrees from \
         the University of Colorado Boulder, where I have been on a research team within the Experimental \
         Mathematics Lab; focusing on the Collatz \
@@ -242,15 +242,17 @@ var workDefaultArray = [{
 },
 {
     header: "My Next Role: ",
-    description: "I am interested in computer networks, cloud computing, back end development, \
+    description: "I am interested in computer networks, cloud computing, back-end development, \
     machine learning and artificial intelligence. Since those interests apply to 80% of roles within the \
-    software engineering and computer science community, I am most focused on finding a position where I am able to keep \
+    software engineering and computer science community, I am most focused on finding a position where I can keep \
     learning and wearing multiple hats as I have been. I am interested in seeing projects through from start\
     to finish, and not just focusing on perfecting 10%. I am moving to San Diego at the end of the year, and \
     am currently looking for a company/team doing impactful and meaningful work. ",
     id: "going",
     position: [defMid, defHeight]
 }
+];
+
 // {
 //     id: "data-code",
 //     text: "d fjs aldkjfa lsfakjkjldf aslkdfjla lkdfgjldskfgjdf",
@@ -261,4 +263,3 @@ var workDefaultArray = [{
 //     text: "asdf fasdgasdg adgadsga",
 //     position: [-imageX, -0.4]
 // }
-];
