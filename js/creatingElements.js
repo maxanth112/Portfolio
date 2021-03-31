@@ -68,7 +68,7 @@ function createEducHeadersButtons() {
         element.innerHTML = '<div class="education-card">' +
             '<h4 class="major">' + arrElement.major + '</h4>' +
             '<p class="ba">' + 'Bachelor of Arts' + '</p>' +
-            '<h5 class="college">University of Colorado Bounder,</h5>' +
+            '<h5 class="college">University of Colorado Boulder,</h5>' +
             '<h5 class="subcollege">' + arrElement.subcollege + '</h5>' +
             '<p class="track">' + arrElement.focus + '</p>' +
             '</div>';

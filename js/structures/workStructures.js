@@ -243,7 +243,7 @@ var workDefaultArray = [{
 {
     header: "My Next Role: ",
     description: "I am interested in computer networks, cloud computing, back end development, \
-    machine learning and artificial intelligence. Since those interests apply to 80% of roles withing the \
+    machine learning and artificial intelligence. Since those interests apply to 80% of roles within the \
     software engineering and computer science community, I am most focused on finding a position where I am able to keep \
     learning and wearing multiple hats as I have been. I am interested in seeing projects through from start\
     to finish, and not just focusing on perfecting 10%. I am moving to San Diego at the end of the year, and \
