@@ -1,7 +1,13 @@
 // author: max wiesner
 // personal website portfolio
 
-init();
+window.addEventListener('load', function loader() {
+    $('.loader').fadeOut('slow');
+    setTimeout(() => $('.loader').remove(), 1000);
+    init();
+});
+
+
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));

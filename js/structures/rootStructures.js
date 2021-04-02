@@ -7,6 +7,26 @@ var sphereSizeX = 10;
 // renderers, cameras, etc.
 var controls, camera, scene, cssRenderer;
 
+var delayMultiplyer = 700;
+var introRoot;
+var nameRoot;
+var delay = 500;
+
+var introRootObjects = [];
+var cardElements = [];
+
+var introViewCoordinates = [];
+var introDropCoordinates = [];
+
+var speeds = [0, 0, 0];
+var spheres = {
+    small: [],
+    smallMed: [],
+    med: [],
+    medLarge: [],
+    large: [],
+    larger: [],
+};
 
 var toolCategories = ["intern", "matops", "contract", "lab"];
 

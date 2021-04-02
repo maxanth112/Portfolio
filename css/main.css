@@ -1,6 +1,41 @@
+
 :root {
+  
   --multiplier: 1rem;
+  --all-color: white;
+  --educ-color: white;
+  --computer-color: rgba(255, 252, 180, 0.8);
+  --math-color:  rgba(255, 252, 180, 0.8);
+  --econ-color:  rgba(255, 252, 180, 0.8);
+
+  --workDefault-color: white;
+  --intern-color: white;
+  --matops-color:  white;
+  --contract-color: white;
+} 
+
+/* EDUCATION */
+.education-main-color, 
+.computer-header-color,
+.math-header-color,
+.econ-header-color,
+.computer-color,
+.math-color,
+.econ-color, 
+.workDefault-color,
+.intern-color,
+.matops-color,
+.contract-color, 
+.lab-color,
+.bioDefault-color {
+  box-shadow: 0 0 calc(var(--multiplier) * 2) var(--all-color);
+  border: calc(var(--multiplier) * .1) solid var(--all-color);
+  color: var(--all-color);
+  background-color: rgba(0, 0, 0, .8);
+  box-shadow: 0 0 calc(var(--multiplier) * .7) rgba(255,255,255,.8),
+               0 0 calc(var(--multiplier) * 1.2) rgba(255,255,255,.8);
 }
+
 
 body {
   margin: 0;
@@ -59,8 +94,65 @@ body {
 }
 
 
-#github, #linkedin {
+#github,
+#linkedin {
   position: relative;
   top: calc(var(--multiplier) * 0.4);
   margin: calc(var(--multiplier) * 0.5) calc(var(--multiplier) * .3) 0 0;
+}
+
+/* loader */
+.loader-wrapper {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  display: inline-block;
+  position: relative;
+  width: calc(var(--multiplier) * 5);
+  height: calc(var(--multiplier) * 5);
+}
+
+.loader div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.loader div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+
+.loader div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+
+.loader div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+
+@keyframes loader {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
 }

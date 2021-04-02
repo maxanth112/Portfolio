@@ -145,6 +145,16 @@ function animate() {
     updateRotations();
 }
 
+function updateIntroSphere() {
+
+    var rot = introRoot.rotation;
+    if (speeds[3] == 1) {
+        rot.x = rot.y = rot.z = 0;
+    }
+    rot.x += speeds[0];
+    rot.y += speeds[1];
+    rot.z += speeds[2];
+}
 
 function onWindowResize() {
 
