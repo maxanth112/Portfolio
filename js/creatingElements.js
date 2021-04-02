@@ -417,7 +417,7 @@ function createBioDefaultCards() {
         } else if (arrElement.id.includes('button')) { // arrow buttons
 
             element.classList.add('bio-button', "up-arrow");
-            element.innerHTML = '<i class="fa fa-arrow-' + arrElement.direction + ' fa-5x icon-3d"></i>';
+            element.innerHTML = '<i class="fa fa-arrow-' + arrElement.direction + ' fa-4x icon-3d"></i>';
             element.addEventListener('click', function (x) {
                 updateInterestPage(arrElement.changeRate);
             }, false);
