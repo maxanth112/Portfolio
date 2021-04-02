@@ -75,11 +75,12 @@ var educationSummaryArray = [{
         dates: "August 2015 - May 2016",
         role: "Student Athelete",
         position: [educSummaryLeftX, educSummaryY],
-        descriptionFront: "All - Conference player as a freshmen in the Rocky Mountain Lacorsse Conference. Earned the Player of the Week award \
-            in the opening week of games acrosse the entire MCLA - D1 league. Opening week we took on two top teams defeating the University of \
-            Arizona, and loosing by one against the former national champions, Grand Canyon University; I had hat-tricks in both games (3 goals a piece). \
-            CU Mens Lacrosse was a full time team, practices were six days a week during season and on occasion seven days when traveling on the weekends. \
-            During off season we had four days a week practices. Helped with learning time management. ",
+        descriptionFront: "All - Conference player as a freshmen for the University of Colorado in the Rocky Mountain Lacorsse Conference. \
+            In the opening week of games, while taking on the defending national champions and another top 10 team, I earned the National Player of the Week award \
+            acrosse the entire MCLA - D1 league. \
+            CU Mens Lacrosse was a full-time team, with practices on average 40 hours per week plus travel to games throughout the United States during season. \
+            During the off season we practiced and trained around 20 hours a week, which helped me learn to efficiently time manage as a full-time student and part time employee\
+            that has transfered into my independent contracting today.",
         descriptionBack: '6AM morning weight training three times weekly. '
     },
     {
@@ -89,9 +90,9 @@ var educationSummaryArray = [{
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
         position: [educSummaryLeftX, educSummaryY - educSummaryLeftY],
-        descriptionFront: "Participated in an overseas program in Florance, Italy for four months. During this interval, I experienced \
-            many new cultures, and got to travel to 10 different countries. Also, while in Florence, I won the CAPA photo contest held\
-             for the entire student community, the victory came from renting cherry red mopeds with some friends and taking a photo overlooking \
+        descriptionFront: "Participated in an overseas program in Florance Italy for my junior year spring semester. During this time, I experienced \
+             new cultures, and got to travel to 10 different countries in and around Europe, as well as 15 different cities in Italy. I tried many new things abroad and ended up winning the CAPA culmination photo contest held\
+             for the entire student community, the victory came from renting cherry red mopeds with some friends and taking some photos overlooking \
              the city. ",
         descriptionBack: "",
     },
@@ -109,15 +110,15 @@ var educationSummaryArray = [{
         dates: "August 2016 - May 2019",
         role: "Member",
         position: [educSummaryRightX, educSummaryYStart - (1 * educSummaryRightY)],
-        description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
+        description: "Would attend weekly seminars and lectures given by faculty and various influential figures in economics, also discussed projects CU PhD students were working on."
     },
     {
         id: "mathclub",
-        clubName: "Math Club",
+        clubName: "Math Club (QED)",
         dates: "August 2020 - May 2021",
         role: "Member",
         position: [educSummaryRightX, educSummaryYStart - (2 * educSummaryRightY)],
-        description: "Would attend weekly seminars and lectures given by faculty and various guest speakers."
+        description: "At these meetings, subjects would be lectured and discussed that generally werent covered in the mathematics department curriculum. Segwayed to a MAM membership."
     },
     {
         id: "degree",
@@ -154,7 +155,7 @@ var courseArray = {
             name: "Intermediate Numerical Analysis",
             description: "Focuses on numberical solution of nonlinear equations, interpolation, methods in numerical integration, \
             numerical solution of linear systems, and matrix eigenvalue problems; using computer application in Matlab. ",
-            language: "Matlab",
+            language: "Python, Matlab",
             position: [left, firstRow]
         },
         {
@@ -173,7 +174,7 @@ var courseArray = {
             description: "Covered first/second order ODE's, systems, Dirac delta function, \
             Heavyside, discontinuities, solutions of real/complex/repeating roots. \
             Wrote my final project in solving systems of engineering circuits using Laplace Transforms.",
-            language: "LaTeX",
+            language: "MatLab, LaTeX",
             position: [right, firstRow]
         },
         {
@@ -236,8 +237,9 @@ var courseArray = {
             type: "CSCI",
             number: "4593",
             name: "Computer Organization (Architecture)",
-            description: "Implemented an entire RISC-V multicore processor in a simulated cloud enviornment. ",
-            language: "RISC-V",
+            description: "Implemented an entire RISC-V 32I multicore processor. Focused on how hardware directly interacts with software \
+            in different computing environments, and the lifecycle from high level code -> low level code -> assembly code -> maching language. ",
+            language: "C, RISC-V",
             position: [mid, firstRow]
         },
         {
@@ -246,7 +248,7 @@ var courseArray = {
             name: "Object Oriented Analysis and Design",
             description: "Applied object-oriented techniques including domain modeling, use cases, architectural design, \
             and modeling notations.",
-            language: "Java",
+            language: "Java, Python",
             position: [left, firstRow]
         },
         {

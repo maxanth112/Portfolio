@@ -248,7 +248,7 @@
 .workDefault-description {
     text-align: center;
     margin: calc(var(--multiplier) * 2);
-    font-size: calc(var(--multiplier) * 1.85);
+    font-size: calc(var(--multiplier) * 1.75);
     text-align: left;
 }
 

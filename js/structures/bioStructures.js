@@ -15,9 +15,9 @@ var bioDefaultArray = [{
     position: [0.47, 1.5],
     inner: "<p>I am a builder, an athlete, a thinker, and an explorer. I was born and raised in Orange County, California, \
     and moved with my family to the Denver area in 2011 where I attended high school and later college. \
-    While in school I was a (2x) varsity lacrosse captain, a mathelete/computer nerd, that kid that went abroad for a semester, \
-    and the slowest kid on the cross-country team clocking a 19 minute 5k (which isn’t bad). \
-    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which gave me leathery skin that has followed me since. \
+    While in school I was a (2x) varsity lacrosse captain and (2x) all-state, a mathelete/computer head, a solo and group traveler, \
+    and the slowest kid on a top-tier cross-country team. \
+    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which have me numerous interpersonal abilities that has stuch with. \
     <br><br>\
     I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age and seldom suppress; \
     you can see some of my favorite trips below. \
@@ -26,9 +26,9 @@ var bioDefaultArray = [{
     attraction toward anything that is fast and has two wheels. I am a \
     mountain biker in the summers, a former motorcyclist, and a current e-biker. \
     <br><br>\
-    I currently live-in downtown Denver beside union station, and am planning to move back to California later this year. \
+    I currently live-in downtown Denver next to Union Station, and am entertaining a move back to California later this year. \
     I strive for originality in everything I do and find passion contagious and motivating. I am always looking for \
-    new and exciting opportunities to learn, or just generally broaden my domain. </p>",
+    new and exciting opportunities to learn, create and round myself and experiences. </p>",
 },
 
     {
@@ -100,7 +100,7 @@ var travel1 = [{
         newid: "t1-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./img/elfie.JPG"
+        img: "./img/plane1.JPG"
     },
     {
         card: "s",
@@ -108,7 +108,7 @@ var travel1 = [{
         newid: "t1-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./img/plane1.JPG"
+        img: "./img/deer.jpg"
     },
     {
         card: "u",
@@ -125,8 +125,9 @@ var travel1 = [{
         id: "uslide-2",
         newid: "t1-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "Chiang Mai, Thailand",
-        description: "This is an elfie (elephant selfie), we didn't ride them, only fed them. ",
+        header: "Sólheimasandur, Iceland",
+        description: "At the site of the 1973 U.S. Navy DC plane crash on the Icelands southern \
+        coast, dubbed 'Black Sand Beach'.",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -134,9 +135,9 @@ var travel1 = [{
         id: "uslide-3",
         newid: "t1-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "Sólheimasandur, Iceland",
-        description: "At the site of the 1973 U.S. Navy DC plane crash on the Icelands southern \
-            coast, dubbed 'Black Sand Beach'.",
+        header: "Nara Park - Kyoto, Japan",
+        description: "A national park and sacred temple, where the deer are integrated into \
+        normal life.",
         img: "./img/motorcycle1.jpg"
     }
 ];
@@ -147,7 +148,7 @@ var travel2 = [{
         newid: "t2-s1",
         position: [slide1X, slideY],
         description: "",
-        img: "./img/deer.jpg"
+        img: "./img/elfie.JPG"
     },
     {
         card: "s",
@@ -155,7 +156,7 @@ var travel2 = [{
         newid: "t2-s2",
         position: [slide2X, slideY],
         description: "",
-        img: "./img/cabo.JPG"
+        img: "./img/gladiator.jpg"
     },
     {
         card: "s",
@@ -163,16 +164,15 @@ var travel2 = [{
         newid: "t2-s3",
         position: [slide3X, slideY],
         description: "",
-        img: "./img/gladiator.jpg"
+        img: "./img/cabo.JPG"
     },
     {
         card: "u",
         id: "uslide-1",
         newid: "t2-u1",
         position: [slide1X, slideY - uSlideDiff],
-        header: "Nara Park - Kyoto, Japan",
-        description: "A national park and sacred temple, where the deer are integrated into \
-            normal life. ",
+        header: "Chiang Mai, Thailand",
+        description: "This is an elfie (elephant selfie), we didn't ride them, only fed them.",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -180,9 +180,9 @@ var travel2 = [{
         id: "uslide-2",
         newid: "t2-u2",
         position: [slide2X, slideY - uSlideDiff],
-        header: "Cabo San Lucas, Mexico",
-        description: "I accidenally dropped the goPro \
-            which ended up taking the best photos of the entire trip. ",
+        header: "San Quirico d'Orcia, Italy",
+        description: "The fields where Maximus Desimous Meridious finally got to meet his \
+        family in the afterlife. Gladiator.",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -190,9 +190,9 @@ var travel2 = [{
         id: "uslide-3",
         newid: "t2-u3",
         position: [slide3X, slideY - uSlideDiff],
-        header: "San Quirico d'Orcia, Italy",
-        description: "The fields where Maximus Desimous Meridious finally got to meet his \
-            family in the afterlife. Gladiator.",
+        header: "Lovers Beach - Cabo, Mexico",
+        description: "I accidenally dropped the goPro \
+        which ended up taking the best photos of the entire trip.",
         img: "./img/motorcycle1.jpg"
     },
 ];

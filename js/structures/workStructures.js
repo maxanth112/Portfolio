@@ -6,12 +6,15 @@ var workContentArray = [{
     months: 5,
     comit: "[ Full - Time ]",
     description: "Built up common place industry skills and fluency in programs like Excel,\
-     PowerBI, and PowerApps. Mid way through the internship I was the leading PowerBI developer \
+     PowerBI, and PowerApps; also developed basic programming in SQL and Python. \
+     Midway through the internship I was the leading PowerBI developer \
      on my small team, where I was offered a full-time position soon after. The big project I worked \
-     on during this internship was a service level model for maintenance to track baseline progress.\
-      For this I used PowerBI dataflows. The report tracked and displayed overall service level statistics,\
-       and individual location service level statistics. It identified areas of improvement that would\
-        increase productivity and streamlining, and of course the overall KPI numbers. "
+     on during this internship was a service level model for the maintenance department to track baseline progress.\
+     <br><br>I developed the service level model in PowerBI, utilizing SQL for pipelining the required data from \
+     our database. The report tracked and displayed overall performance statistics,\
+     and individual location service level statistics. The project involved parsing and managing data from 10+ tables,\
+     into a clean central dashboard that gives breakouts per aircraft type, location, etc, all the way down to individual part numbers. \
+     It identified areas of improvement that would increase productivity and streamlining, and of course the overall KPI numbers. "
 },
 {
     title: "Material Operations Analyst",
@@ -20,11 +23,16 @@ var workContentArray = [{
     months: 7,
     comit: "[ Full - Time ]",
     id: "matops",
-    description: "Focused on long term forecasts for the maintenance department. My big project in \
-    this role was building an inventory allocation model for all our consumable and expendable parts. \
-    This model advised a reallocation of the current inventory in done in phases to avoid overhead \
-    costs with packing and shipping, ground transportation, and manual labor hours. The model was\
-     calculated using linear programming methods, and regression analysis implemented in Python. "
+    description: "Focused on long term demand planning and inventory forecasts for the maintenance department. My big project in \
+    this role was building an inventory (re)allocation model for all our consumable and expendable parts, which encompased \
+    nearly a hundred thousand part bundles to be advised. This was undertook primarily in Python, weighing heavily on \
+    the Numpy and Pandas libraries. With this project I got to apply linear regression and implement directed graphs to help \
+    optimize the program, which was cool to see applied to large historical data tables. \
+    <br><br>The model advised a reallocation of the current inventory, done in phases to avoid overhead \
+    costs with packing and shipping, ground transportation, and manual labor hours; all while prioritizing the essential and immediate parts first. \
+    It accounted for overstock in certain locations that could be thinned, which would be reallocated to the closest lacking station as priority. \
+    It also advised any remaining understocked parts per location to be purchased, minimizing total part travel time if said part was needed in more than one location; similar to the \
+    traveling salesmen problem, but for aircraft parts."
 },
 {
     title: "Contractor - Data Analytics",
@@ -33,18 +41,18 @@ var workContentArray = [{
     comit: "[ Full - Time ]",
     company: "Contractor",
     id: "contract",
-    description: "For the last year plus, I have been doing data and analytics contract work for the \
-    maintenance and engineering department within Frontier Airlines. I quit my previous full-time employee \
-    role in January 2020 to re-enroll in school because I wanted a more involved role in software \
-    engineering. Upon this, I was offered a contracted role focusing on software and reporting \
-    development, ironic right? I develop automated PowerBI reports, start to finish for different \
-    teams within the department. Half of my job is developing KPI’s, data visualizations, high to \
-    low level dashboards, and user facing functionality for these. The other half is working inside\
-     our Microsoft SQL Server database, writing and optimizing queries for the before mentioned reports, \
-     and the team. This also includes data wrangling and cleaning; I also use Python with the Pandas, \
-      NumPy, SymPy, and Matplotlib among others. Besides myself, the BI department, and a select few \
-      others, the rest of the company uses Trax; a onetime query and export data application, thus the\
-       need for me to develop automated reports and live dataflows."
+    description: "Since the beginning of 2020, I have been doing contracted data analytics work for the \
+    maintenance and engineering department within Frontier Airlines. Upon understanding the potential advancement of the technical knowlage \
+    I would gain at Frontier, I terminated my previous full-time employment in \
+    in December 2019 to re-enroll and seek a degree that would promote my software interests. \
+    Frontier countered with a contractor position that would suit my educational ambition and focused on \
+    Frontiers needs in software and reporting.\
+    <br><br>I develop automated PowerBI reports, start to finish for different \
+    teams within the department. Half of my responsibilities are developing KPI’s, data visualizations, high to \
+    low level dashboards, and the cooresponding user facing functionality. The rest of my responsibilities are \
+    working inside our Microsoft SQL Server database, writing and optimizing queries for the before mentioned reports, \
+    whick includes data wrangling and cleaning. This is accompanied with programming in Python for as needed ad hoc business advising, \
+    which entails the occasional Matplotlib visualizations, as well as the previously mentioned Pandas and Numpy libraries."
 },
 {
     title: "Student Researcher",
@@ -53,16 +61,17 @@ var workContentArray = [{
     comit: "[ Part - Time ]",
     company: "Experimental Math Lab",
     id: "lab",
-    description: "Currently on a team of five including myself delving deep into what is hailed as the \
-        most dangerous problem in mathematics, the Collatz Conjecture. For those that are not familiar; \
-        Pick any positive integer, if it is odd, multiply it by three and add one. If it is even, divide \
-        it by two. Now repeat this process again and again. The conjecture, will this always lead to the\
-         result of the number one? So far, we have explored this question in p-adic space, varying\
-          dimensions, mapped it to partial differential equations, proven numerous sub sequences \
-          convergent, and much more. My team will deliver an academic paper by the end of the semester \
-          regarding our findings, if we can make it that far. “It’s an occupational hazard to mathematicians. \
-          This is a really dangerous problem, people become obsessed with it, it really is impossible.”\
-           – Jeffrey Lagarias, a leading expert on the conjecture."
+    description: 'I am currently on a team of five students, and one mathematics professor, exploring what the math world has deemed one \
+        of the most dangerous problem in mathematics, the Collatz Conjecture. The problem is:\
+        <br><br> Pick a positive integer, if its parity is odd, multiply it by three and add one, if it is even, divide \
+        the number by two. Prove that this sequence converges to the number 1, for all positive integers.<br><br>\
+        So far, we have explored this question in p-adic space, an array of \
+        dimensions, and even explored a subset in partial differential equations. I am focusing on the stopping time function of the conjecture, \
+        trying to explain the supposed limiting asymptotic density. My team will deliver an academic paper by the end of the semester \
+        regarding our findings. <br/>  <br/>  <br/>\
+        <i><br>“It’s an occupational hazard to mathematicians. \
+        This is a really dangerous problem, people become obsessed with it, it really is impossible.”</i>\
+         – Jeffrey Lagarias, the leading expert on the conjecture.'
 }
 ];
 
@@ -74,37 +83,37 @@ var workToolsArray = [{
     tool: "SQL",
     id: "sql",
     score: {
-        intern: 3,
-        matops: 5,
-        contract: 5,
+        intern: 4,
+        matops: 6,
+        contract: 6,
         lab: 0
     },
     image: './img/sql.png',
     position: [toolPos[2], toolPos[2], toolPos[0], toolPos[0]]
 },
 {
+    tool: "Python",
+    id: "python",
+    score: {
+        intern: 0,
+        matops: 6,
+        contract: 5,
+        lab: 6
+    },
+    image: './img/python.png',
+    position: [0, toolPos[1], toolPos[0], toolPos[0]]
+},
+{
     tool: "Power BI",
     id: "powerbi",
     score: {
-        intern: 3,
-        matops: 4,
+        intern: 4,
+        matops: 5,
         contract: 5,
         lab: 0
     },
     image: './img/powerbi.png',
     position: [toolPos[1], toolPos[0], toolPos[1], toolPos[1]]
-},
-{
-    tool: "Python",
-    id: "python",
-    score: {
-        intern: 0,
-        matops: 4,
-        contract: 4,
-        lab: 5
-    },
-    image: './img/python.png',
-    position: [0, toolPos[1], toolPos[0], toolPos[0]]
 },
 {
     tool: "PowerApps",
@@ -122,7 +131,7 @@ var workToolsArray = [{
     tool: "Excel",
     id: "excel",
     score: {
-        intern: 3,
+        intern: 4,
         matops: 0,
         contract: 0,
         lab: 0
@@ -137,7 +146,7 @@ var workToolsArray = [{
         intern: 0,
         matops: 0,
         contract: 0,
-        lab: 4
+        lab: 5
     },
     image: './img/jslogo.png',
     position: [toolPos[0], toolPos[3], toolPos[2], toolPos[1]]
@@ -229,25 +238,32 @@ var workDefaultArray = [{
 },
 {
     header: "Current Experience: ",
-    description: "Thus far in my career I have primarily been a statistician, mathematical programmer, and \
-        a consultant for ad hoc business decisions. I currently work with Frontier Airlines as an independent \
-        contractor within the engineering and maintenance division. I have been able to work on problems ranging from regression demand planning, \
-        to building key point indicators for the maintenance department using longitudinal big data programming.\
-         Outside of my work in industry, I have been pursuing my computer science and mathematics degrees from \
+    description: "Thus far in my career I have primarily been a mathematical programmer, and \
+        a consultant for data backed business decisions. My professional familiarities have been:<br> \
+                - Statistics  &nbsp &nbsp &nbsp &nbsp - Big Data <br> \
+                - Optimization  &nbsp &nbsp &nbsp - Data Engineering <br> \
+                - Data Visualization - Project Management <br> \
+        I currently work with Frontier Airlines as an independent \
+        contractor within the engineering and maintenance division. I have been able to work on problems ranging from regressional demand planning, \
+        to building key point indicators for the department using longitudinal surveys of company descisions.\
+        In Education, I have been pursuing my computer science and mathematics degrees from \
         the University of Colorado Boulder, where I have been on a research team within the Experimental \
         Mathematics Lab; focusing on the Collatz \
-        Conjecture.   ",
+        Conjecture. ",
     id: "been",
     position: [-defMid, defHeight]
 },
 {
     header: "My Next Role: ",
-    description: "I am interested in computer networks, cloud computing, back-end development, \
-    machine learning and artificial intelligence. Since those interests apply to 80% of roles within the \
-    software engineering and computer science community, I am most focused on finding a position where I can keep \
-    learning and wearing multiple hats as I have been. I am interested in seeing projects through from start\
-    to finish, and not just focusing on perfecting 10%. I am moving to San Diego at the end of the year, and \
-    am currently looking for a company/team doing impactful and meaningful work. ",
+    description: "I am interested in a more computer science focused path, where I can build and create. \
+    Though my interests are in a wide array of fields, some of them are:<br> \
+    - Computer Networks  &nbsp - Back-End Development <br> \
+    - Cloud Computing    &nbsp &nbsp - Machine Learning <br> \
+    - Operating Systems  &nbsp - Artificial Intelligence <br>\
+    More than anything, I am interested in \
+    a position where I can continue to learn and wear multiple hats. I am interested in seeing projects through from start\
+    to finish as much as I can, and not just being responsible for a small 10%. I am not set in Colorado and relocating based on opportunity is , and am\
+    currently looking for a company/team doing impactful and leading-edge development.",
     id: "going",
     position: [defMid, defHeight]
 }
