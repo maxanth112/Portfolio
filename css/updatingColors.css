@@ -28,7 +28,7 @@
     box-shadow: 0 0 calc(var(--multiplier) * 2) var(--all-color);
     border: calc(var(--multiplier) * .1) solid var(--all-color);
     color: var(--all-color);
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 0, .8);
     box-shadow: 0 0 calc(var(--multiplier) * .7) rgba(255,255,255,.8),
                  0 0 calc(var(--multiplier) * 1.2) rgba(255,255,255,.8);
 }

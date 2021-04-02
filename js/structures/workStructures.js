@@ -61,7 +61,7 @@ var workContentArray = [{
     comit: "[ Part - Time ]",
     company: "Experimental Math Lab",
     id: "lab",
-    description: 'I am currently on a team of five students, and one mathematics professor, exploring what the math world has deemed one \
+    description: 'I am currently on a team of five students, plus one CU mathematics professor, exploring what the math world has deemed one \
         of the most dangerous problem in mathematics, the Collatz Conjecture. The problem is:\
         <br><br> >> Pick a positive integer, if its parity is odd, multiply it by three and add one, if it is even, divide \
         the number by two. Prove that this sequence converges to the number 1, for all positive integers.<br><br>\
@@ -71,7 +71,7 @@ var workContentArray = [{
         regarding our findings. <br/>  <br/>  <br/>\
         <i><br>“It’s an occupational hazard to mathematicians. \
         This is a really dangerous problem, people become obsessed with it, it really is impossible.”</i>\
-         – Jeffrey Lagarias, the leading expert on the conjecture.'
+         – Jeffrey Lagarias, the leading expert on the conjecture.<br><br><i>"It\' actually an occupational hazard when you’re a mathematician"</i> - Terence Tao, Fields Medal Holder'
 }
 ];
 
@@ -119,8 +119,8 @@ var workToolsArray = [{
     tool: "PowerApps",
     id: "powerapps",
     score: {
-        intern: 0,
-        matops: 0,
+        intern: 3,
+        matops: 3,
         contract: 0,
         lab: 0
     },
@@ -131,7 +131,7 @@ var workToolsArray = [{
     tool: "Excel",
     id: "excel",
     score: {
-        intern: 4,
+        intern: 3,
         matops: 0,
         contract: 0,
         lab: 0
@@ -257,12 +257,11 @@ var workDefaultArray = [{
     header: "My Next Role: ",
     description: "I am interested in a more computer science focused path, where I can build and create. \
     Though my interests are in a wide array of fields, some of them are:<br> \
-    - Computer Networks  &nbsp - Back-End Development <br> \
-    - Cloud Computing    &nbsp &nbsp - Machine Learning <br> \
-    - Operating Systems  &nbsp - Artificial Intelligence <br>\
+    - Computer Networks  &nbsp - Operating Systems <br> \
+    - Cloud Computing    &nbsp &nbsp - Machine Learning & AI <br> \
     More than anything, I am interested in \
     a position where I can continue to learn and wear multiple hats. I am interested in seeing projects through from start\
-    to finish as much as I can, and not just being responsible for a small 10%. I am not set in Colorado and relocating based on opportunity is, and am\
+    to finish as much as I can, and not just being responsible for a small 10%. I am not set in Colorado and relocating based on opportunity is welcome, and am\
     currently looking for a company/team doing impactful and leading-edge development.",
     id: "going",
     position: [defMid, defHeight]

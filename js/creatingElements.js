@@ -272,7 +272,7 @@ function createWorkToolsContainer() {
             element.id = tool;
             var hide = arrElement.score[tool] ? "" : "hide";
             var toolHtml = 
-                '<span class="tool-left">' + '<img class="tool-row-img ' + arrElement.id + '" src="' + arrElement.image + '">' + '</span>' + 
+                '<span class="tool-left">' + '<img title = "' + workToolsArray[i].tool +'" class="tool-row-img ' + arrElement.id + '" src="' + arrElement.image + '">' + '</span>' + 
                 '<span class="tool-right">' + '<ul class="tool-row ' + hide + '">' + '</span>';
 
             for (var j = 0; j < 7; j++) {
@@ -291,13 +291,6 @@ function createWorkToolsContainer() {
         }
         pushRootandObjArr(tool, toolCont);
     });
-}
-
-
-function createSocialMedia() {
-    var html = '<div class="flex-center">' +
-        '<i class="fa fa-github fa-4x icon-3d">' + '</i>' +
-        '</div>';
 }
 
 
@@ -479,14 +472,14 @@ function createImgCards(arr, saveRoot) {
 }
 
 
-// function createNamedSocial() {
+function createNamedSocial() {
 
-//     var firstName = document.createElement('div');
-//     firstName.id = 'firstName';
-//     firstName.classList.add('name-container');
-//     firstName.innerHTML = '<h1 class="name" id="shrink-name" data-text="Max-Wiesner" contenteditable>MAX-WIESNER</h1>' +
-//     '<div class="gradient"></div>' +
-//     '<div class="spotlight"></div>';
-
-//     pushRootandObjArr('stationary', firstName);
-// }
+    var element = document.createElement('div');
+    element.id = 'name-social';
+    element.innerHTML = '<h1 title = "Me">Max Wiesner</h1>' +
+    '<a href = "https://github.com/maxwiesner" id = "github" target="_blank" title = "GitHub">' + 
+    '<i class="fa fa-github fa-3x icon-3d">' + '</i>' + '</a>' +
+    '<a href = "https://www.linkedin.com/in/maximillian-w-470281162/" id = "linkedin" target="_blank" title = "Linkedin">' + 
+    '<i class="fa fa-linkedin fa-3x icon-3d">' + '</i>' + '</a>';
+    pushRootandObjArr('stationary', element);
+}

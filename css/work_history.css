@@ -89,24 +89,24 @@
 
 @keyframes icon3d {
     0% {
-        text-shadow: calc(var(--multiplier) * 0.4) calc(var(--multiplier) * 0.5) rgba(244, 67, 54, 1), 
-        calc(var(--multiplier) * -0.5) calc(var(--multiplier) * -0.4) rgba(33, 150, 243, 1);
+        text-shadow: calc(var(--multiplier) * 0.24) calc(var(--multiplier) * 0.25) rgba(244, 67, 54, 1), 
+        calc(var(--multiplier) * -0.15) calc(var(--multiplier) * -0.14) rgba(33, 150, 243, 1);
     }
 
     25% {
-        text-shadow: calc(var(--multiplier) * -0.5) calc(var(--multiplier) * -0.2) rgba(244, 67, 54, 1), calc(var(--multiplier) * 0.45) calc(var(--multiplier) * 0.45) rgba(33, 150, 243, 1);
+        text-shadow: calc(var(--multiplier) * -0.15) calc(var(--multiplier) * -0.12) rgba(244, 67, 54, 1), calc(var(--multiplier) * 0.125) calc(var(--multiplier) * 0.15) rgba(33, 150, 243, 1);
     }
 
     50% {
-        text-shadow: calc(var(--multiplier) * 0.4) calc(var(--multiplier) * -0.5) rgba(244, 67, 54, 1), calc(var(--multiplier) * -0.5) calc(var(--multiplier) * 0.5) rgba(33, 150, 243, 1);
+        text-shadow: calc(var(--multiplier) * 0.24) calc(var(--multiplier) * -0.15) rgba(244, 67, 54, 1), calc(var(--multiplier) * -0.25) calc(var(--multiplier) * 0.25) rgba(33, 150, 243, 1);
     }
 
     75% {
-        text-shadow: calc(var(--multiplier) * -0.3) calc(var(--multiplier) * -0.4) rgba(244, 67, 54, 1), calc(var(--multiplier) * -0.5) calc(var(--multiplier) * -0.35) rgba(33, 150, 243, 1);
+        text-shadow: calc(var(--multiplier) * -0.13) calc(var(--multiplier) * -0.24) rgba(244, 67, 54, 1), calc(var(--multiplier) * -0.15) calc(var(--multiplier) * -0.135) rgba(33, 150, 243, 1);
     }
 
     100% {
-        text-shadow: calc(var(--multiplier) * -0.4) 0 rgba(244, 67, 54, 1), calc(var(--multiplier) * 0.5) calc(var(--multiplier) * -0.3) rgba(33, 150, 243, 1);
+        text-shadow: calc(var(--multiplier) * -0.14) 0 rgba(244, 67, 54, 1), calc(var(--multiplier) * 0.5) calc(var(--multiplier) * -0.23) rgba(33, 150, 243, 1);
     }
 }
 
@@ -283,7 +283,7 @@
     position: absolute;
     bottom: calc(var(--multiplier) * -24.5);
     height: calc(var(--multiplier) * 16);
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 0, .8);
     border: none;
     box-shadow: none;
 }

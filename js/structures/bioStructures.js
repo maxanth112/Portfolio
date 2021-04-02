@@ -443,7 +443,7 @@ var wood2 = [{
         newid: "w2-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "Pt. 1",
-        description: "Building the frame of a bed, while fixing a storage drawer on the left side. ",
+        description: "Building the frame of a bed, with a storage drawer on the left side. ",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -557,7 +557,7 @@ var bike1 = [{
         newid: "b1-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "Super 73 - S1",
-        description: "My current flame. More eco-friendly and 'safer'. ",
+        description: "My current flame. More eco-friendly and <i>safer</i>'. ",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -566,7 +566,7 @@ var bike1 = [{
         newid: "b1-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "Cherry Red Mopeds",
-        description: "Photo contest winning photo; post riding these around the entire country like they went faster than 35 mph.",
+        description: "One of the CAPA photo contest winners; post riding around Tuscany treating them like motorcycles.",
         img: "./img/motorcycle1.jpg"
     },
 ];

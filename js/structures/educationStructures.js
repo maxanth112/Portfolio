@@ -118,7 +118,7 @@ var educationSummaryArray = [{
         dates: "August 2020 - May 2021",
         role: "Member",
         position: [educSummaryRightX, educSummaryYStart - (2 * educSummaryRightY)],
-        description: "At these meetings, subjects would be lectured and discussed that generally weren’t covered in the mathematics department curriculum. Segway’d to an AMA membership."
+        description: "Subjects would be lectured and discussed that generally weren’t offered in the mathematics department curriculum. Segwayed to an AMA membership."
     },
     {
         id: "degree",
@@ -190,7 +190,7 @@ var courseArray = {
         {
             type: "MATH",
             number: "3001",
-            name: "Analysis 1",
+            name: "Analysis",
             description: "A truly rigorous treatment of results in topology, sequences of numbers, continuous functions, \
             differentiable functions, and Riemann integrals.",
             language: "LaTeX",
@@ -237,8 +237,8 @@ var courseArray = {
             type: "CSCI",
             number: "4593",
             name: "Computer Organization (Architecture)",
-            description: "Implemented an entire RISC-V 32I multicore processor. Focused on how hardware directly interacts with software \
-            in different computing environments, and the lifecycle from high level code -> low level code -> assembly code -> machine language. ",
+            description: "Implemented an entire RISC-V 32I multicore processor in a independent semester long project. Focused on how hardware directly interacts with software \
+            in different computing environments, and the lifecycle of code from high level to low level to assembly to machine. ",
             language: "C, RISC-V",
             position: [mid, firstRow]
         },
@@ -247,7 +247,7 @@ var courseArray = {
             number: "4448",
             name: "Object Oriented Analysis and Design",
             description: "Applied object-oriented techniques including domain modeling, use cases, architectural design, \
-            and modeling notations.",
+            and modeling notations. Focused heavily on polymorphism and refactoring different code bases and designs. ",
             language: "Java, Python",
             position: [left, firstRow]
         },
@@ -256,7 +256,7 @@ var courseArray = {
             number: "3202",
             name: "Artificial Intelligence",
             description: "Surveyed modern AI techniques of search, knowledge representation and reasoning, probabilistic \
-            inference, machine learning, natural language processing, and a brief introduction to neural networks. ",
+            inference, machine learning, natural language processing, and a brief introduction to neural networks. A large part of the class focused on reinforcement learning. ",
             language: "Python",
             position: [right, firstRow]
         },
@@ -264,8 +264,8 @@ var courseArray = {
             type: "CSCI",
             number: "3308",
             name: "Software Development Methods and Tools",
-            description: "Covers an introduction to full-stack integration, web services, version control, cloud-based deployment \
-            agile methodologies, and other industry standard practices.",
+            description: "Covered an introduction to full-stack integration, web services, version control, cloud-based deployment, \
+            agile methodologies, and other industry standard practices. Applied these in a semester long project with a team of 4 building a social media platform.",
             language: "Js, HTML, CSS, SQL",
             position: [left, secondRow]
         },
@@ -274,7 +274,7 @@ var courseArray = {
             number: "3753",
             name: "Design and Analysis of Operating Systems",
             description: "Analyzed the software that extends computer hardware, including the role of linkers, file systems, \
-            resource sharing, security and networking. ",
+            resource sharing, security and networking. Projects focused on multi-threading, scheduling algorithms, and writing device drivers. ",
             language: "C, Linux",
             position: [mid, secondRow]
         },
@@ -302,8 +302,8 @@ var courseArray = {
             number: "2400",
             name: "Computer Systems",
             description: "Covered in depth virtual memory, exceptional control flow, linking, memory \
-            hierarchy, optimization and performance, processor architecture.",
-            language: "C, C++",
+            hierarchy, optimization and performance, processor architecture. Projects focused on the x86-64 machine language.",
+            language: "C",
             position: [mid, thirdRow]
         },
         {
@@ -311,7 +311,7 @@ var courseArray = {
             number: "2270",
             name: "Data Structures",
             description: "Implemented from scratch linked lists, binary trees, red-black trees, graphs and graph \
-            algorithms, stacks, queues, hash tables, and dynamically allocating memory at run time.",
+            algorithms, stacks, queues, hash tables, and dynamically allocating memory at run time. Final project compared access times and performance across different data structures.",
             language: "C, C++",
             position: [right, thirdRow]
         }

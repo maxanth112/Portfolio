@@ -260,7 +260,7 @@ function createAllViewCoordinates() {
 
     // stationary
     createViewCoordinates(menuButtonArray, "stationary", 1000, 5, 1800);
-    // createViewCoordinates(nameSocialArray, "stationary", 1000, 5, 1000);
+    createViewCoordinates(nameSocialArray, "stationary", 1500, 4.92, 1800);
 
     // education
     ["math", "computer", "econ"].forEach(element => {
@@ -300,7 +300,7 @@ function createAllViewCoordinates() {
 function createAllCards() {
    
     createMenuButtons();
-    // createNamedSocial();
+    createNamedSocial();
 
     ["math", "computer", "econ"].forEach(element => {
         createCourseCards(courseArray[element], element);
