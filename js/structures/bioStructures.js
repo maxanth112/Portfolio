@@ -17,16 +17,16 @@ var bioDefaultArray = [{
     and moved with my family to the Denver area in 2011 where I attended high school and later college. \
     While in school I was a (2x) varsity lacrosse captain and (2x) all-state, a mathelete/computer head, a solo and group traveler, \
     and the slowest kid on a top-tier cross-country team. \
-    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which have me numerous interpersonal abilities that has stuch with. \
+    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which have me numerous interpersonal abilities that has stuck with. \
     <br><br>\
     I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age and seldom suppress; \
     you can see some of my favorite trips below. \
     Next, helping my father with countless home improvement projects taught me that you \
-    can build anything you can picture, which got me interested in craftsmanship and creating things in general. Finally I should mention my notable \
+    can build anything you can picture, which got me interested in craftsmanship and creating things in general. Finally, I should mention my notable \
     attraction toward anything that is fast and has two wheels. I am a \
     mountain biker in the summers, a former motorcyclist, and a current e-biker. \
     <br><br>\
-    I currently live-in downtown Denver next to Union Station, and am entertaining a move back to California later this year. \
+    I currently live-in downtown Denver next to Union Station and am entertaining a move back to California later this year. \
     I strive for originality in everything I do and find passion contagious and motivating. I am always looking for \
     new and exciting opportunities to learn, create and round myself and experiences. </p>",
 },
@@ -126,7 +126,7 @@ var travel1 = [{
         newid: "t1-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "Sólheimasandur, Iceland",
-        description: "At the site of the 1973 U.S. Navy DC plane crash on the Icelands southern \
+        description: "At the site of the 1973 U.S. Navy DC plane crash on the Iceland’s southern \
         coast, dubbed 'Black Sand Beach'.",
         img: "./img/motorcycle1.jpg"
     },
@@ -191,7 +191,7 @@ var travel2 = [{
         newid: "t2-u3",
         position: [slide3X, slideY - uSlideDiff],
         header: "Lovers Beach - Cabo, Mexico",
-        description: "I accidenally dropped the goPro \
+        description: "I accidentally dropped the GoPro \
         which ended up taking the best photos of the entire trip.",
         img: "./img/motorcycle1.jpg"
     },
@@ -227,7 +227,7 @@ var travel3 = [{
         newid: "t3-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "Mekong River, Golden Triangle",
-        description: "A nautious day trip up river to the border town connecting Laos, Myanmar, and Thailand. ",
+        description: "A nauseous day trip upriver to the border town connecting Laos, Myanmar, and Thailand. ",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -237,7 +237,7 @@ var travel3 = [{
         position: [slide2X, slideY - uSlideDiff],
         header: "Cinque Terre, Italy",
         description: "A very small and quiet fishing town in southern Italy. This was the view from \
-            our one room apartment airBnB.",
+            our one room apartment Airbnb.",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -292,7 +292,7 @@ var travel4 = [{
         newid: "t4-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "Haiku Stairs - Oahu, Hawaii",
-        description: "Know as the 'Stairway to Heaven', a hike to the top of Oahu. Unfortunately \
+        description: "Know as the 'Stairway to Heaven', a hike to the top of Oahu. Unfortunately, \
             I went when it was cloudy. ",
         img: "./img/motorcycle1.jpg"
     },
@@ -337,7 +337,7 @@ var travel5 = [{
         newid: "t5-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "Poca Da Dona Beija, Azores",
-        description: "Hot springs spread accross five or so different pools. The pools deeper into the forest \
+        description: "Hot springs spread across five or so different pools. The pools deeper into the forest \
         had warmer temperatures. ",
         img: "./img/motorcycle1.jpg"
     },
@@ -347,7 +347,7 @@ var travel5 = [{
         newid: "t5-u2",
         position: [slide2X, slideY - uSlideDiff],
         header: "Budapest, Hungary",
-        description: "The Hungarian parliment building, taken from the Széchenyi Chain Bridge.",
+        description: "The Hungarian parliament building, taken from the Széchenyi Chain Bridge.",
         img: "./img/motorcycle1.jpg"
     },
     {
@@ -548,7 +548,7 @@ var bike1 = [{
         newid: "b1-u1",
         position: [slide1X, slideY - uSlideDiff],
         header: "Kawasaki Ninja ZX-6R",
-        description: "My previous flame. No longer in my life, dont cry because its over, smile because it happened. ",
+        description: "My previous flame. No longer in my life, don’t cry because it’s over, smile because it happened. ",
         img: "./img/motorcycle1.jpg"
     },
     {

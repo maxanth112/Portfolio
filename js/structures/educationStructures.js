@@ -73,14 +73,14 @@ var educationSummaryArray = [{
         clubName: "Mens Lacrosse",
         url: "https://mcla.us/player/41671/max_wiesner.html",
         dates: "August 2015 - May 2016",
-        role: "Student Athelete",
+        role: "Student Athlete",
         position: [educSummaryLeftX, educSummaryY],
-        descriptionFront: "All - Conference player as a freshmen for the University of Colorado in the Rocky Mountain Lacorsse Conference. \
+        descriptionFront: "All - Conference player as a freshman for the University of Colorado in the Rocky Mountain Lacrosse Conference. \
             In the opening week of games, while taking on the defending national champions and another top 10 team, I earned the National Player of the Week award \
-            acrosse the entire MCLA - D1 league. \
-            CU Mens Lacrosse was a full-time team, with practices on average 40 hours per week plus travel to games throughout the United States during season. \
+            across the entire MCLA - D1 league. \
+            CU Men’s Lacrosse was a full-time team, with practices on average 40 hours per week plus travel to games throughout the United States during season. \
             During the off season we practiced and trained around 20 hours a week, which helped me learn to efficiently time manage as a full-time student and part time employee\
-            that has transfered into my independent contracting today.",
+            that has transferred into my independent contracting today.",
         descriptionBack: '6AM morning weight training three times weekly. '
     },
     {
@@ -90,8 +90,8 @@ var educationSummaryArray = [{
         dates: "January 2018 - May 2018",
         role: "Study Abroad",
         position: [educSummaryLeftX, educSummaryY - educSummaryLeftY],
-        descriptionFront: "Participated in an overseas program in Florance Italy for my junior year spring semester. During this time, I experienced \
-             new cultures, and got to travel to 10 different countries in and around Europe, as well as 15 different cities in Italy. I tried many new things abroad and ended up winning the CAPA culmination photo contest held\
+        descriptionFront: "Participated in an overseas program in Florence Italy for my junior year spring semester. During this time, I experienced \
+             new cultures and got to travel to 10 different countries in and around Europe, as well as 15 different cities in Italy. I tried many new things abroad and ended up winning the CAPA culmination photo contest held\
              for the entire student community, the victory came from renting cherry red mopeds with some friends and taking some photos overlooking \
              the city. ",
         descriptionBack: "",
@@ -118,7 +118,7 @@ var educationSummaryArray = [{
         dates: "August 2020 - May 2021",
         role: "Member",
         position: [educSummaryRightX, educSummaryYStart - (2 * educSummaryRightY)],
-        description: "At these meetings, subjects would be lectured and discussed that generally werent covered in the mathematics department curriculum. Segwayed to a MAM membership."
+        description: "At these meetings, subjects would be lectured and discussed that generally weren’t covered in the mathematics department curriculum. Segway’d to an AMA membership."
     },
     {
         id: "degree",
@@ -153,8 +153,8 @@ var courseArray = {
             type: "APPM",
             number: "4650",
             name: "Intermediate Numerical Analysis",
-            description: "Focuses on numberical solution of nonlinear equations, interpolation, methods in numerical integration, \
-            numerical solution of linear systems, and matrix eigenvalue problems; using computer application in Matlab. ",
+            description: "Focuses on numerical solutions of nonlinear equations, interpolation, methods in numerical integration, \
+            numerical solution of linear systems, and matrix eigenvalue problems; using computer application in MatLab and Python. ",
             language: "Python, Matlab",
             position: [left, firstRow]
         },
@@ -183,7 +183,7 @@ var courseArray = {
             name: "Mathematics of Coding and Cryptography",
             description: "Studied the algebra/number theory behind modern coding and cryptography; topics included \
             encryption, RSA algorithms, discrete log problems, digital signatures, elliptic \
-            curves, latticies, error correctiong, and quantum computing.",
+            curves, lattices, error correcting, and quantum computing.",
             language: "Python, Sage",
             position: [left, secondRow]
         },
@@ -191,7 +191,7 @@ var courseArray = {
             type: "MATH",
             number: "3001",
             name: "Analysis 1",
-            description: "A truely RIGOROUS treatment of results in topology, sequences of numbers, continuous functions, \
+            description: "A truly rigorous treatment of results in topology, sequences of numbers, continuous functions, \
             differentiable functions, and Riemann integrals.",
             language: "LaTeX",
             position: [mid, secondRow]
@@ -209,8 +209,8 @@ var courseArray = {
             type: "MATH",
             number: "2135",
             name: "Linear Algebra for Math Majors",
-            description: "Examined the properties of systems of linear equations, vector spaces, inner products, linear independance,\
-            dimension, matricies, diagonalization, eigenvalues/vectors, matricies, and determinants.",
+            description: "Examined the properties of systems of linear equations, vector spaces, inner products, linear independence,\
+            dimension, matrices, diagonalization, eigenvalues/vectors, matrices, and determinants.",
             language: "LaTeX",
             position: [left, thirdRow]
         },
@@ -218,7 +218,7 @@ var courseArray = {
             type: "MATH",
             number: "2001",
             name: "Discrete Mathematics",
-            description: "This class was an introduction to rigorous proofs. Focused on basics of set theory, existential and universal quantifiers,\
+            description: "This class was an introduction to rigorous proofs. Focused on basics of set theory, existential and universal quantifiers, \
             discrete probability, and elementary counting.",
             language: "LaTeX",
             position: [mid, thirdRow]
@@ -228,7 +228,7 @@ var courseArray = {
             number: "2848",
             name: "Discrete Structures",
             description: "Computational discrete mathematics that covered the applications of regular discrete math in the python language. Went \
-            deeper into relations, recurrence, combinatorics, booleam algebra, and graph algorithms. ",
+            deeper into relations, recurrence, combinatorics, Boolean algebra, and graph algorithms. ",
             language: "Python",
             position: [right, thirdRow]
         }
@@ -238,7 +238,7 @@ var courseArray = {
             number: "4593",
             name: "Computer Organization (Architecture)",
             description: "Implemented an entire RISC-V 32I multicore processor. Focused on how hardware directly interacts with software \
-            in different computing environments, and the lifecycle from high level code -> low level code -> assembly code -> maching language. ",
+            in different computing environments, and the lifecycle from high level code -> low level code -> assembly code -> machine language. ",
             language: "C, RISC-V",
             position: [mid, firstRow]
         },
@@ -255,8 +255,8 @@ var courseArray = {
             type: "CSCI",
             number: "3202",
             name: "Artificial Intelligence",
-            description: "Surveyed modern AI techniques of search, knowlage representation and reasoning, probabilistic \
-            inference, maching learning, natural language processing, and a brief introduction to neural networks. ",
+            description: "Surveyed modern AI techniques of search, knowledge representation and reasoning, probabilistic \
+            inference, machine learning, natural language processing, and a brief introduction to neural networks. ",
             language: "Python",
             position: [right, firstRow]
         },
@@ -282,7 +282,7 @@ var courseArray = {
             type: "CSCI",
             number: "3104",
             name: "Algorithms",
-            description: "Time/ space complexity of algorithms; algorithms pertaining to sorting, recirrence,\
+            description: "Time/ space complexity of algorithms; algorithms pertaining to sorting, recurrence,\
              divide and conquer, greedy, dynamic, graph, linear/ and non-linear programming. ",
             language: "C++, Python",
             position: [right, secondRow]
@@ -292,7 +292,7 @@ var courseArray = {
             number: "3155",
             name: "Principals of Programming Languages",
             description: "Studied the fundamentals governing the design and analysis of languages \
-            and the excedution models underlying them. Specifically higher order functions, type systems, scoping, \
+            and the execution models underlying them. Specifically, higher order functions, type systems, scoping, \
             and control structures.",
             language: "Scala",
             position: [left, thirdRow]
@@ -301,8 +301,8 @@ var courseArray = {
             type: "CSCI",
             number: "2400",
             name: "Computer Systems",
-            description: "Covered in depth virtual memory, exeptional control flow, linking, momory \
-            heiarchy, optimization and performance, processor architecture.",
+            description: "Covered in depth virtual memory, exceptional control flow, linking, memory \
+            hierarchy, optimization and performance, processor architecture.",
             language: "C, C++",
             position: [mid, thirdRow]
         },
@@ -329,7 +329,7 @@ var courseArray = {
             type: "ECON",
             number: "3818",
             name: "Statistics with Computer Applications",
-            description: "Introduces the statistical methods for quantitative economic analysis; such as ANOVA, \
+            description: "Introduces the statistical methods for quantitative economic analysis, such as ANOVA, \
             probability theory, distributions, sampling theory, estimation, confidence intervals, hypothesis testing, and regression.",
             language: "R",
             position: [right, firstRow]
@@ -338,8 +338,8 @@ var courseArray = {
             type: "ECON",
             number: "4697",
             name: "Industrial Organization Economics",
-            description: "Explored newclassical theory of the firm, the determinants of industrial structure, and the purposes \
-            and institutions of public policy to control or maintain a competitive enviornment. ",
+            description: "Explored new classical theory of the firm, the determinants of industrial structure, and the purposes \
+            and institutions of public policy to control or maintain a competitive environment. ",
             language: "",
             position: [mid, firstRow]
         },
@@ -348,7 +348,7 @@ var courseArray = {
             number: "4423",
             name: "International Finance",
             description: "This class was taught by the former Lead Economist in Development Research Group at the World Bank, it was \
-            a really humbling semester. We looked at balance of payments, foreign exchange markets, income, and capital flows.",
+            a humbling semester. We looked at balance of payments, foreign exchange markets, income, and capital flows.",
             language: "",
             position: [left, secondRow]
         },
@@ -366,7 +366,7 @@ var courseArray = {
             number: "3070",
             name: "Intermediate Microeconomic Theory",
             description: "Explored theory and application of models of consumer choice, firm and market organization, and \
-            general equilibrium. Included imtertemporal decisions, uncertainty, externalities, and strategic integration. ",
+            general equilibrium. Included intertemporal decisions, uncertainty, externalities, and strategic integration. ",
             language: "",
             position: [left, thirdRow]
         },
@@ -384,7 +384,7 @@ var courseArray = {
             number: "2020",
             name: "Principles of Macroeconomics",
             description: "Looked at an overview of the economy, examining the flows of resources and outputs, and the factors \
-            determining the levels of income and prices. Focused on economic growth, unemployment, and infaltion. ",
+            determining the levels of income and prices. Focused on economic growth, unemployment, and inflation. ",
             language: "",
             position: [right, thirdRow]
         },
@@ -393,7 +393,7 @@ var courseArray = {
             number: "2010",
             name: "Principles of Microeconomics",
             description: "Studied basic concepts of microeconomics and the behavior and interactions of individuals, \
-            firms, and government. Looked at how consumers and businesses make descisions, how markets work, and how they fail. ",
+            firms, and government. Looked at how consumers and businesses make decisions, how markets work, and how they fail. ",
             language: "",
             position: [mid, thirdRow]
         }
