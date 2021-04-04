@@ -69,9 +69,8 @@ var workContentArray = [{
         dimensions, and even explored a subset in partial differential equations. I am focusing on the stopping time function of the conjecture, \
         trying to explain the supposed limiting asymptotic density. My team will deliver an academic paper by the end of the semester \
         regarding our findings. <br/>  <br/>  <br/>\
-        <i><br>“It’s an occupational hazard to mathematicians. \
-        This is a really dangerous problem, people become obsessed with it, it really is impossible.”</i>\
-         – Jeffrey Lagarias, the leading expert on the conjecture.<br><br><i>"It\' actually an occupational hazard when you’re a mathematician"</i> - Terence Tao, Fields Medal Holder'
+        <i><br>“This is a really dangerous problem, people become obsessed with it, it really is impossible.”</i>\
+         – Jeffrey Lagarias, the leading expert on the conjecture.<br><br><i>"It\'s actually an occupational hazard when you’re a mathematician"</i> - Terence Tao, Fields Medal Holder'
 }
 ];
 

@@ -3,8 +3,10 @@
 
 window.addEventListener('load', function loader() {
     $('.loader').fadeOut('slow');
-    setTimeout(() => $('.loader').remove(), 1000);
-    init();
+    setTimeout(() => {
+        $('.loader').remove();
+        init();
+    }, 1000);
 });
 
 
