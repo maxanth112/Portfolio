@@ -161,7 +161,7 @@ var courseArray = {
         {
             type: "APPM",
             number: "4120",
-            name: "Introduction to Operations Research",
+            name: "Operations Research (L & NL Programming)",
             language: "",
             description: "Studied linear and nonlinear programming. Focuses on the simplex method, duality, sensitivity, \
             transportation, network flow, and constrained and unconstrained optimization theory. ",
@@ -208,7 +208,7 @@ var courseArray = {
         {
             type: "MATH",
             number: "2135",
-            name: "Linear Algebra for Math Majors",
+            name: "Linear Algebra",
             description: "Examined the properties of systems of linear equations, vector spaces, inner products, linear independence,\
             dimension, matrices, diagonalization, eigenvalues/vectors, matrices, and determinants.",
             language: "LaTeX",
