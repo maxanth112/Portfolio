@@ -43,7 +43,7 @@ var workContentArray = [{
     id: "contract",
     description: "Since the beginning of 2020, I have been doing contracted data analytics work for the \
     maintenance and engineering department within Frontier Airlines. Upon understanding the potential advancement of the technical knowledge \
-    I would gain at Frontier; I terminated my previous full-time employment in \
+    I would gain at Frontier; I terminated my previous full-time employment \
     in December 2019 to re-enroll and seek a degree that would promote my software interests. \
     Frontier countered with a contractor position that would suit my educational ambition and focused on \
     Frontiers needs in software and reporting.\

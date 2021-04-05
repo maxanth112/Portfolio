@@ -17,7 +17,7 @@ var bioDefaultArray = [{
     and moved with my family to the Denver area in 2011 where I attended high school and later college. \
     While in school I was a (2x) varsity lacrosse captain and (2x) all-state, a mathelete/computer head, a solo and group traveler, \
     and the slowest kid on a top-tier cross-country team. \
-    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which have me numerous interpersonal abilities that has stuck with. \
+    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which gave me numerous interpersonal abilities that has stuck with. \
     <br><br>\
     I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age and seldom suppress; \
     you can see some of my favorite trips below. \
