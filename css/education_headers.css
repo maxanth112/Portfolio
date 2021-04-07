@@ -79,7 +79,7 @@
   calc(var(--multiplier) * 1) 
   calc(var(--multiplier) * 0) 
   calc(var(--multiplier) * 1.5);
-  font-size: calc(var(--multiplier) * 3);
+  font-size: calc(var(--multiplier) * 2.75);
   transition: font-size 1s;
 }
 
