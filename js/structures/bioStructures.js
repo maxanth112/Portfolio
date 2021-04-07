@@ -2,7 +2,7 @@ var interestsX = -1.66;
 var interestsYStart = -.85;
 var interestsStep = .933;
 
-var interestsButtonX = 1.8;
+var interestsButtonX = 1.9;
 var interestButtonMid = -1.78
 var interestButtonDist = 1.1;
 var bioDefaultArray = [{
