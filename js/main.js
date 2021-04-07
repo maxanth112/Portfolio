@@ -6,13 +6,13 @@ window.addEventListener('load', function loader() {
     setTimeout(() => {
         $('.loader').remove();
 
-        checkOrientation();
+        // checkOrientation();
         init();
     }, 1000);
 });
 
 
-window.addEventListener('orientationchange', checkOrientation);
+// window.addEventListener('orientationchange', checkOrientation);
 
 function checkOrientation() {
     var orientation = screen.orientation.type;

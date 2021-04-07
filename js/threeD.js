@@ -1,6 +1,6 @@
 function init() {
 
-    createRotater();
+    // createRotater();
 
     cssRenderer = createCssRenderer();
     initMouseSceneMenu();
