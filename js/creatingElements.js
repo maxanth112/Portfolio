@@ -519,9 +519,13 @@ function createNamedSocial() {
     var element = document.createElement('div');
     element.id = 'name-social';
     element.innerHTML = '<h1 title = "Me">Max Wiesner</h1>' +
-        '<a href = "https://github.com/maxwiesner" id = "github" target="_blank" title = "GitHub">' +
+        '<a href = "https://github.com/maxwiesner" id = "github" target="_blank" ontouchstart=\'openMedia("https://github.com/maxwiesner")\' title = "GitHub">' +
         '<i class="fa fa-github fa-3x icon-3d">' + '</i>' + '</a>' +
-        '<a href = "https://www.linkedin.com/in/maximillian-w-470281162/" id = "linkedin" target="_blank" title = "Linkedin">' +
+        '<a href = "https://www.linkedin.com/in/maximillian-w-470281162/" ontouchstart=\'openMedia("https://www.linkedin.com/in/maximillian-w-470281162/")\' id = "linkedin" target="_blank" title = "Linkedin">' +
         '<i class="fa fa-linkedin fa-3x icon-3d">' + '</i>' + '</a>';
     pushRootandObjArr('stationary', element);
+}
+
+function openMedia(website) {
+    window.open(website, "_blank");
 }
