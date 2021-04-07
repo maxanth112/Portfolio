@@ -1,5 +1,7 @@
 function init() {
 
+    createRotater();
+
     cssRenderer = createCssRenderer();
     initMouseSceneMenu();
     initRoots();

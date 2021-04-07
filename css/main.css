@@ -14,6 +14,11 @@
   --contract-color: white;
 } 
 
+
+#orientation-message h2 {
+  color: red;
+}
+
 /* EDUCATION */
 .education-main-color, 
 .computer-header-color,
@@ -101,8 +106,8 @@ body {
   margin: calc(var(--multiplier) * 0.5) calc(var(--multiplier) * .3) 0 0;
 }
 
-/* loader */
-.loader-wrapper {
+/* rotate screen message */
+#rotate-container {
   width: 100%;
   height: 100%;
   top: 0;
@@ -111,48 +116,62 @@ body {
   position: absolute;
   justify-content: center;
   align-items: center;
+  font-size: calc(var(--multiplier) * 4);
 }
 
-.loader {
-  display: inline-block;
-  position: relative;
+.panel {
+  background-color: transparent;
   width: calc(var(--multiplier) * 5);
-  height: calc(var(--multiplier) * 5);
+  height: calc(var(--multiplier) * 6);
 }
 
-.loader div {
-  display: inline-block;
+.panel-inner {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  text-align: center;
+  transform-style: preserve-3d;
+  animation: rotatescreen 5s linear forwards infinite;
+  animation-direction: normal;
+}
+
+.panel-front,
+.panel-back {
   position: absolute;
-  left: 8px;
-  width: 16px;
-  background: #fff;
-  animation: loader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-.loader div:nth-child(1) {
-  left: 8px;
-  animation-delay: -0.24s;
+.panel-front p,
+.panel-back p {
+  margin-top: calc(var(--multiplier) * -0.01);
 }
 
-.loader div:nth-child(2) {
-  left: 32px;
-  animation-delay: -0.12s;
+.panel-front {
+  background-color: rgba(0, 255, 255, 0.85);
+  color: black;
+  border: solid calc(var(--multiplier) * 0.1) black;
 }
 
-.loader div:nth-child(3) {
-  left: 56px;
-  animation-delay: 0;
+.panel-back {
+  background-color: black;
+  color: rgba(0, 255, 255, 0.85);
+  transform: rotateY(180deg);  
+  border: solid calc(var(--multiplier) * 0.1) rgba(0, 255, 255, 0.85);
 }
 
-@keyframes loader {
-  0% {
-    top: 8px;
-    height: 64px;
+@keyframes rotatescreen {
+  from {
+    transform: rotateY(0deg);
   }
-
-  50%,
-  100% {
-    top: 24px;
-    height: 32px;
+  to {
+    transform: rotateY(359deg);
   }
+}
+
+.hide {
+  display: none !important; 
+  transition: display 2s;
 }

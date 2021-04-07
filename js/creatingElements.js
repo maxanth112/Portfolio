@@ -1,3 +1,29 @@
+function createRotater() {
+    var element = document.createElement('div');
+    element.id = 'rotate-container';
+    element.classList.add('hide');
+    
+    var front = ['R', 'O', 'T', 'A', 'T', 'E'];
+    var back = ['S', 'C', 'R', 'E', 'E', 'N'];
+
+    for (var i = 0; i < front.length; i++) {
+        var panel = document.createElement('div');
+        panel.classList.add('panel');
+
+        panel.innerHTML = '<div class="panel-inner">' +
+            '<div class="panel-front">' +
+            '<p>' + front[i] + '</p>' +
+            '</div>' +
+            '<div class="panel-back">' +
+            '<p>' + back[i] + '</p>' +
+            '</div>' +
+            '</div>';
+        element.appendChild(panel);
+    }
+
+    document.body.appendChild(element);
+}
+
 
 function updateLinkedThreesClass(updateClass, idArr, update = 'first', parent = "no") {
     // first element in id array gets active added, others get removed 
@@ -41,7 +67,8 @@ function createCourseCards(arr, saveRoot) {
         var element = document.createElement('div');
         element.classList.add('course-element');
         element.innerHTML =
-            '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-color' + '" onclick="flip(' + arrElement.number + ')">' +
+            '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-color' +
+            '" onclick="flip(' + arrElement.number + ')" ontouchstart="flip(' + arrElement.number + ')">' +
             '<div class="front">' +
             '<h5 class="front-header">' + arrElement.name + '</h5>' +
             '</div>' +
@@ -80,34 +107,37 @@ function createEducHeadersButtons() {
 
         element.appendChild(button);
         pushRootandObjArr('educHeader', element);
-        button.addEventListener('click', function addButtonSpecs(x) {
 
-            revertAllFlippedCards();
-            if (roots[arrElement.id].toggle) {
+        ['click', 'touchstart'].forEach(function (eventType) {
+            button.addEventListener(eventType, function addButtonSpecs(x) {
 
-                setMotionAndToggleFalse();
-                stopRotationSetTrue(["educSummary", "educHeader"]);
-                updateLinkedThreesClass(['education-header-selected',
-                    'education-header-active'
-                ], arrElement.headerLinked, 'remove-all');
-                updateLinkedThreesText('', 'See Courses', arrElement.buttonLinked, 'default-all');
+                revertAllFlippedCards();
+                if (roots[arrElement.id].toggle) {
 
-                transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
-                removeInViewClass(educationCourseColors);
-                addInViewClass(["education-main-color"]);
-            } else {
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(["educSummary", "educHeader"]);
+                    updateLinkedThreesClass(['education-header-selected',
+                        'education-header-active'
+                    ], arrElement.headerLinked, 'remove-all');
+                    updateLinkedThreesText('', 'See Courses', arrElement.buttonLinked, 'default-all');
 
-                setMotionAndToggleFalse();
-                
-                stopRotationSetTrue(arrElement.setTrue);
-                updateLinkedThreesClass(['education-header-selected'], arrElement.headerLinked, 'last-two');
-                updateLinkedThreesClass(['education-header-active'], arrElement.headerLinked, 'first');
-                updateLinkedThreesText('Main View', 'See Courses', arrElement.buttonLinked, 'first');
+                    transform(allObjects, roots.educSummary.coordinates.viewFinal, backInterval);
+                    removeInViewClass(educationCourseColors);
+                    addInViewClass(["education-main-color"]);
+                } else {
 
-                transform(allObjects, roots[arrElement.id].coordinates.viewFinal, toInterval);
-                removeInViewClass(educationCourseColors.concat('education-main-color'));
-                addInViewClass(arrElement.add);
-            }
+                    setMotionAndToggleFalse();
+
+                    stopRotationSetTrue(arrElement.setTrue);
+                    updateLinkedThreesClass(['education-header-selected'], arrElement.headerLinked, 'last-two');
+                    updateLinkedThreesClass(['education-header-active'], arrElement.headerLinked, 'first');
+                    updateLinkedThreesText('Main View', 'See Courses', arrElement.buttonLinked, 'first');
+
+                    transform(allObjects, roots[arrElement.id].coordinates.viewFinal, toInterval);
+                    removeInViewClass(educationCourseColors.concat('education-main-color'));
+                    addInViewClass(arrElement.add);
+                }
+            }, false);
         });
     });
 }
@@ -192,26 +222,29 @@ function createMenuButtons() {
         button.classList.add("menu-button");
         button.id = arrElement.id;
         button.innerHTML = arrElement.label;
-        button.addEventListener('click', function (x) {
 
-            revertAllFlippedCards();
-            updateWorkSelected("workDefault");
-            updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
-            updateLinkedThreesClass(educationResetClasses, educationHeaderClasses, 'remove-all');
-            updateLinkedThreesText('', 'See Courses', educationButtonClasses, 'default-all');
-            removeInViewClass(allColors);
-            resetBioScenes();
-            if (roots[arrElement.toggle].toggle) {
+        ['click', 'touchstart'].forEach(function (eventType) {
+            button.addEventListener(eventType, function (x) {
 
-                setMotionAndToggleFalse();
-                transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
-            } else {
+                revertAllFlippedCards();
+                updateWorkSelected("workDefault");
+                updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
+                updateLinkedThreesClass(educationResetClasses, educationHeaderClasses, 'remove-all');
+                updateLinkedThreesText('', 'See Courses', educationButtonClasses, 'default-all');
+                removeInViewClass(allColors);
+                resetBioScenes();
+                if (roots[arrElement.toggle].toggle) {
 
-                setMotionAndToggleFalse();
-                stopRotationSetTrue(arrElement.setTrue);
-                transform(allObjects, roots[arrElement.sendTo].coordinates.viewFinal, toInterval);
-                addInViewClass(arrElement.add, "delay", 500);
-            }
+                    setMotionAndToggleFalse();
+                    transform(allObjects, roots.stationary.coordinates.viewFinal, backInterval);
+                } else {
+
+                    setMotionAndToggleFalse();
+                    stopRotationSetTrue(arrElement.setTrue);
+                    transform(allObjects, roots[arrElement.sendTo].coordinates.viewFinal, toInterval);
+                    addInViewClass(arrElement.add, "delay", 500);
+                }
+            }, false);
         });
         pushRootandObjArr('stationary', button);
     });
@@ -266,13 +299,13 @@ function createWorkToolsContainer() {
 
         for (var i = 0; i < workToolsArray.length; i++) {
             var arrElement = workToolsArray[i];
-            
+
             var element = document.createElement('div');
             element.classList.add('work-tools');
             element.id = tool;
             var hide = arrElement.score[tool] ? "" : "hide";
-            var toolHtml = 
-                '<span class="tool-left">' + '<img title = "' + workToolsArray[i].tool +'" class="tool-row-img ' + arrElement.id + '" src="' + arrElement.image + '">' + '</span>' + 
+            var toolHtml =
+                '<span class="tool-left">' + '<img title = "' + workToolsArray[i].tool + '" class="tool-row-img ' + arrElement.id + '" src="' + arrElement.image + '">' + '</span>' +
                 '<span class="tool-right">' + '<ul class="tool-row ' + hide + '">' + '</span>';
 
             for (var j = 0; j < 7; j++) {
@@ -338,30 +371,33 @@ function createWorkButtons() {
         button.classList.add(arrElement.id + '-arrow', 'flex-container');
         button.id = arrElement.id;
         button.innerHTML = '<i class="fa fa-arrow-' + arrElement.id + ' fa-5x icon-3d"></i>';
-        button.addEventListener('click', function (x) {
-            var pages = ['workDefault', 'matops', 'contract', 'intern', 'lab'];
-            for (let currPage of pages) {
-                if (roots[currPage].toggle) {
-                    setMotionAndToggleFalse();
 
-                    if (arrElement[currPage] == 'workDefault') {
+        ['click', 'touchstart'].forEach(function (eventType) {
+            button.addEventListener(eventType, function (x) {
+                var pages = ['workDefault', 'matops', 'contract', 'intern', 'lab'];
+                for (let currPage of pages) {
+                    if (roots[currPage].toggle) {
+                        setMotionAndToggleFalse();
 
-                        removeInViewClass(removeWorkColors);
-                        addInViewClass(['workDefault-color', 'workDefault-timeline-color']);
-                    } else {
+                        if (arrElement[currPage] == 'workDefault') {
 
-                        removeInViewClass(removeWorkColors);
-                        addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'),
-                            "single",
-                            timeoutTime + 1000);
+                            removeInViewClass(removeWorkColors);
+                            addInViewClass(['workDefault-color', 'workDefault-timeline-color']);
+                        } else {
+
+                            removeInViewClass(removeWorkColors);
+                            addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'),
+                                "single",
+                                timeoutTime + 1000);
+                        }
+                        updateWorkSelected(arrElement[currPage]);
+                        stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
+                        transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
+                        break;
                     }
-                    updateWorkSelected(arrElement[currPage]);
-                    stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
-                    transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
-                    break;
                 }
-            }
-        }, false);
+            }, false);
+        });
         pushRootandObjArr('workTimeline', button);
     });
 }
@@ -418,9 +454,11 @@ function createBioDefaultCards() {
 
             element.classList.add('bio-button', "up-arrow");
             element.innerHTML = '<i class="fa fa-arrow-' + arrElement.direction + ' fa-4x icon-3d"></i>';
-            element.addEventListener('click', function (x) {
-                updateInterestPage(arrElement.changeRate);
-            }, false);
+            ['click', 'touchstart'].forEach(function (eventType) {
+                element.addEventListener(eventType, function (x) {
+                    updateInterestPage(arrElement.changeRate);
+                }, false);
+            });
         } else { // new interest buttons 
             element.classList.add('interest-cards');
             element.innerHTML = arrElement.inner;
@@ -428,13 +466,17 @@ function createBioDefaultCards() {
             var button = document.createElement('button');
             button.classList.add('bio-button', arrElement.id + '-button-color');
             button.id = arrElement.id + "-button";
-            button.addEventListener('click', function (x) {
-                currentPage = 0;
-                interestPage = arrElement.interestPage;
-                updateInterestPage(0);
-                updateLinkedThreesClass(['interest-selected'], arrElement.buttonLinked, 'first', 'yes');
-                updateLinkedThreesText('Like Em\'?', 'See Pics', arrElement.buttonLinked, 'first');
+
+            ['click', 'touchstart'].forEach(function (eventType) {
+                button.addEventListener(eventType, function (x) {
+                    currentPage = 0;
+                    interestPage = arrElement.interestPage;
+                    updateInterestPage(0);
+                    updateLinkedThreesClass(['interest-selected'], arrElement.buttonLinked, 'first', 'yes');
+                    updateLinkedThreesText('Like Em\'?', 'See Pics', arrElement.buttonLinked, 'first');
+                }, false);
             });
+
             element.appendChild(button);
         }
         pushRootandObjArr('bioDefault', element);
@@ -447,7 +489,7 @@ function createImgCards(arr, saveRoot) {
     arr.forEach(arrElement => {
         var element = document.createElement('div');
         element.classList.add(arrElement.id, 'bioDefault-color');
-        
+
         if (arrElement.card == "s") {
             var elementImg = document.createElement('img');
             elementImg.src = arrElement.img;
@@ -477,9 +519,9 @@ function createNamedSocial() {
     var element = document.createElement('div');
     element.id = 'name-social';
     element.innerHTML = '<h1 title = "Me">Max Wiesner</h1>' +
-    '<a href = "https://github.com/maxwiesner" id = "github" target="_blank" title = "GitHub">' + 
-    '<i class="fa fa-github fa-3x icon-3d">' + '</i>' + '</a>' +
-    '<a href = "https://www.linkedin.com/in/maximillian-w-470281162/" id = "linkedin" target="_blank" title = "Linkedin">' + 
-    '<i class="fa fa-linkedin fa-3x icon-3d">' + '</i>' + '</a>';
+        '<a href = "https://github.com/maxwiesner" id = "github" target="_blank" title = "GitHub">' +
+        '<i class="fa fa-github fa-3x icon-3d">' + '</i>' + '</a>' +
+        '<a href = "https://www.linkedin.com/in/maximillian-w-470281162/" id = "linkedin" target="_blank" title = "Linkedin">' +
+        '<i class="fa fa-linkedin fa-3x icon-3d">' + '</i>' + '</a>';
     pushRootandObjArr('stationary', element);
 }

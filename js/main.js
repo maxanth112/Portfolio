@@ -5,12 +5,30 @@ window.addEventListener('load', function loader() {
     $('.loader').fadeOut('slow');
     setTimeout(() => {
         $('.loader').remove();
+
+        checkOrientation();
         init();
     }, 1000);
 });
 
 
+window.addEventListener('orientationchange', checkOrientation);
 
+function checkOrientation() {
+    var orientation = screen.orientation.type;
+    console.log('curr orientation: ')
+    console.log(orientation);
+    console.log('\n')
+
+    if (orientation == 'portrait-primary' || orientation == 'portrait-secondary') {
+        $('#rotate-container').removeClass('hide')
+        $('#cssContainer').addClass('hide')
+
+    } else if (orientation == 'landscape-primary' || orientation == 'landscape-secondary') {
+        $('#rotate-container').addClass('hide')
+        $('#cssContainer').removeClass('hide')
+    }
+}
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -56,7 +74,6 @@ function resetBioScenes() {
     updateInterestPage(0, 'yes');
 }
 
-
 // managing rotations and toggles 
 function stopRotationSetTrue(rootNames) {
 
@@ -87,14 +104,12 @@ function updateRotations() {
     });
 }
 
-
 function pushRootandObjArr(rootName, element) {
 
     element = new THREE.CSS3DObject(element);
     roots[rootName].objects.push(element);
     roots[rootName].root.add(element);
 }
-
 
 function setMotionAndToggleFalse(rootNameArr = "nada") {
 
@@ -113,24 +128,20 @@ function setMotionAndToggleFalse(rootNameArr = "nada") {
 
 };
 
-
 function flipToggle(toggle) {
 
     roots[toggle].toggle = true;
 }
-
 
 // managing flipping cards 
 function flip(element) {
     $('.' + element).toggleClass('flipped');
 }
 
-
 function revertAllFlippedCards() {
     $('.course-card').removeClass('flipped');
     $('.summary-flip').removeClass('flipped');
 }
-
 
 function createGroupCouts() {
 
@@ -303,8 +314,6 @@ function createAllViewCoordinates() {
     });
 }
 
-
-
 function createAllCards() {
    
     createMenuButtons();
@@ -334,8 +343,6 @@ function createAllCards() {
         }
     });
 }
-
-
 
 // initial site startup 
 function startTransformAllCourseObjects() {
