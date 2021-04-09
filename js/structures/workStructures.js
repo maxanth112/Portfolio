@@ -261,9 +261,9 @@ var workDefaultArray = [{
     More than anything, I am interested in \
     a position where I can continue to learn and wear multiple hats. I am interested in seeing projects through from start\
     to finish as much as I can, and not just being responsible for a small percentage. I have experience in high level languages, \
-    all the way down to machine and assembly, and have direct experience in C/C++, JavaScript, Java, and Python, amongst others; with significant uses of variations \
-    and libraries of the before mentioned. \
-    I am not set in Colorado and relocating based on opportunity is welcome, and am\
+    down to machine and assembly. I have done work professional/academic work in C/C++, JavaScript, Java, and Python, amongst others. Not to mention \
+    numerous variations and libraries of the previous. \
+    I am not set in Colorado and relocating based on opportunity is welcome, and am \
     currently looking for a company/team doing impactful and leading-edge development.",
     id: "going",
     position: [defMid, defHeight]
