@@ -51,8 +51,7 @@ var workContentArray = [{
     teams within the department. Half of my responsibilities are developing KPI’s, data visualizations, high to \
     low level dashboards, and the corresponding user facing functionality. The rest of my responsibilities are \
     working inside our Microsoft SQL Server database, writing and optimizing queries for the before mentioned reports, \
-    which includes data wrangling and cleaning. This is accompanied with programming in Python for as needed ad hoc business advising, \
-    which entails the occasional Matplotlib visualizations, as well as the previously mentioned Pandas and Numpy libraries."
+    which includes data wrangling and cleaning. This is accompanied with programming in Python for as needed ad hoc business advising."
 },
 {
     title: "Student Researcher",
@@ -63,14 +62,14 @@ var workContentArray = [{
     id: "lab",
     description: 'I am currently on a team of five students, plus one CU mathematics professor, exploring what the math world has deemed one \
         of the most dangerous problem in mathematics, the Collatz Conjecture. The problem is:\
-        <br><br> >> Pick a positive integer, if its parity is odd, multiply it by three and add one, if it is even, divide \
-        the number by two. Prove that this sequence converges to the number 1, for all positive integers.<br><br>\
+        <br><br> >> Pick a positive integer, if it is odd, multiply it by three and add one, if even, divide \
+        the number by two. Prove this sequence converges to the number 1, for all positive integers.<br><br>\
         So far, we have explored this question in p-adic space, an array of \
         dimensions, and even explored a subset in partial differential equations. I am focusing on the stopping time function of the conjecture, \
         trying to explain the supposed limiting asymptotic density. My team will deliver an academic paper by the end of the semester \
-        regarding our findings. <br/>  <br/>  <br/>\
+        regarding our findings. Some entertaining quotes on the subject: <br/>  <br/>  <br/>\
         <i><br>“This is a really dangerous problem, people become obsessed with it, it really is impossible.”</i>\
-         – Jeffrey Lagarias, the leading expert on the conjecture.<br><br><i>"It\'s actually an occupational hazard when you’re a mathematician"</i> - Terence Tao, Fields Medal Holder'
+         – Jeffrey Lagarias, the leading expert on the conjecture.<br><br><i>"It\'s actually an occupational hazard when you’re a mathematician"</i> - Terence Tao, Fields Medal Holder.'
 }
 ];
 
@@ -244,7 +243,7 @@ var workDefaultArray = [{
                 - Data Visualization - Project Management <br> \
         I currently work with Frontier Airlines as an independent \
         contractor within the engineering and maintenance division. I have been able to work on problems ranging from regressional demand planning, \
-        to building key point indicators for the department using longitudinal surveys of company decisions.\
+        to building key point indicators for the department using longitudinal surveys of company data.\
         In Education, I have been pursuing my computer science and mathematics degrees from \
         the University of Colorado Boulder, where I have been on a research team within the Experimental \
         Mathematics Lab; focusing on the Collatz \
@@ -258,9 +257,13 @@ var workDefaultArray = [{
     Though my interests are in a wide array of fields, some of them are:<br> \
     - Computer Networks  &nbsp - Operating Systems <br> \
     - Cloud Computing    &nbsp &nbsp - Machine Learning & AI <br> \
+    - Web Programming <br> \
     More than anything, I am interested in \
     a position where I can continue to learn and wear multiple hats. I am interested in seeing projects through from start\
-    to finish as much as I can, and not just being responsible for a small 10%. I am not set in Colorado and relocating based on opportunity is welcome, and am\
+    to finish as much as I can, and not just being responsible for a small percentage. I have experience in high level languages, \
+    all the way down to machine and assembly, and have direct experience in C/C++, JavaScript, Java, and Python, amongst others; with significant uses of variations \
+    and libraries of the before mentioned. \
+    I am not set in Colorado and relocating based on opportunity is welcome, and am\
     currently looking for a company/team doing impactful and leading-edge development.",
     id: "going",
     position: [defMid, defHeight]

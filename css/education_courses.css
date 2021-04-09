@@ -19,7 +19,7 @@
   cursor: pointer;
   position: absolute;
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  /* -webkit-backface-visibility: hidden; */
 }
 
 .front-header {
