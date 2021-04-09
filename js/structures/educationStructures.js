@@ -173,7 +173,9 @@ var courseArray = {
             name: "Ordinary Differential Equations",
             description: "Covered first/second order ODE's, systems, Dirac delta function, \
             Heavyside, discontinuities, solutions of real/complex/repeating roots. \
-            Wrote my final project in solving systems of engineering circuits using Laplace Transforms.",
+            Wrote my final project in solving systems of engineering circuits using Laplace Transforms. ",
+            // See it <a title=\"Project Link\" \
+            // href=\"https://github.com/maxwiesner/Differential-Equations-in-Circuits/blob/main/LaplaceTransforms_Circuits_WiesnerMax_FinalProject.pdf\">here</a>.",
             language: "MatLab, LaTeX",
             position: [right, firstRow]
         },

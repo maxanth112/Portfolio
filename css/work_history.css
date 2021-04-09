@@ -248,6 +248,7 @@
 .workDefault-description {
     text-align: center;
     margin: calc(var(--multiplier) * 2);
+    margin-top: calc(var(--multiplier) * 1);
     font-size: calc(var(--multiplier) * 1.75);
     text-align: left;
 }
@@ -422,6 +423,7 @@
     font-size: calc(var(--multiplier) * 2);
     margin-left: calc(var(--multiplier) * 2);
     margin-top:  calc(var(--multiplier) * 1.5);
+    margin-bottom:  calc(var(--multiplier) * 1);
 }
 
 #thusfar h3 {

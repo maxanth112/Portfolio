@@ -1,5 +1,6 @@
 
 var stationaryButtonY = -135;
+var stationaryButonXDiff = 0.25;
 
 var menuButtonArray = [{
         label: "Education",
@@ -12,7 +13,7 @@ var menuButtonArray = [{
         setTrue: ['educSummary', 'educHeader'],
         buttonLinked: ['education-button', 'work-button', 'bio-button'],
         toggleFalse: ["workTimeline", "workDefault", "bioDefault", "pic1", "pic2"],
-        position: [-0.2, stationaryButtonY]
+        position: [-stationaryButonXDiff, stationaryButtonY]
     },
     {
         label: "Professional",
@@ -36,7 +37,7 @@ var menuButtonArray = [{
         setTrue: ["pic1", "bioDefault"],
         buttonLinked: ['bio-button', 'education-button', 'work-button'],
         toggleFalse: ["workTimeline", "educSummary", "educHeader", "workDefault"],
-        position: [0.2, stationaryButtonY]
+        position: [stationaryButonXDiff, stationaryButtonY]
     }
 ];
 
