@@ -2,22 +2,21 @@
 // personal website portfolio
 
 window.addEventListener('load', function loader() {
+    init();
     // $('.loader').fadeOut('slow');
+
     setTimeout(() => {
         $('.loader').remove();
-        checkOrientation();
-        init();
+        $('#cssContainer').removeClass('hide');
+        // checkOrientation();
     }, 1000);
 });
 
 
-window.addEventListener('orientationchange', checkOrientation);
+// window.addEventListener('orientationchange', checkOrientation);
 
 function checkOrientation() {
     var orientation = screen.orientation.type;
-    // console.log('curr orientation: ')
-    // console.log(orientation);
-    // console.log('\n')
 
     if (orientation == 'portrait-primary' || orientation == 'portrait-secondary') {
         $('#rotate-container').removeClass('hide')
@@ -28,6 +27,7 @@ function checkOrientation() {
         $('#cssContainer').removeClass('hide')
     }
 }
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
