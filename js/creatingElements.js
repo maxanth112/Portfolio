@@ -374,6 +374,7 @@ function createWorkButtons() {
 
         ['click', 'touchstart'].forEach(function (eventType) {
             button.addEventListener(eventType, function (x) {
+                
                 var pages = ['workDefault', 'matops', 'contract', 'intern', 'lab'];
                 for (let currPage of pages) {
                     if (roots[currPage].toggle) {
@@ -386,13 +387,17 @@ function createWorkButtons() {
                         } else {
 
                             removeInViewClass(removeWorkColors);
+                            
                             addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'),
-                                "single",
-                                timeoutTime + 1000);
+                            "single",
+                            timeoutTime + 1000);
                         }
                         updateWorkSelected(arrElement[currPage]);
                         stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
+
+
                         transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
+                        checkToggles();
                         break;
                     }
                 }

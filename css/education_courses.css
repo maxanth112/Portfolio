@@ -13,17 +13,11 @@
   -webkit-transform-style: preserve-3d;
 }
 
- a {
-   z-index: 3;
- }
-
  .course-card div {
   height: 100%;
   width: 100%;
   cursor: pointer;
   position: absolute;
-  backface-visibility: hidden;
-  /* -webkit-backface-visibility: hidden; */
 }
 
 .front-header {
@@ -81,10 +75,13 @@
 }
 
 .course-front,
-.course-back {
+.course-back,
+.front,
+.back {
   height: 100%;
   width: 100%;
   position: absolute;
-  /* backface-visibility: hidden; */
-  /* -webkit-backface-visibility: hidden; */
+  z-index: 2;
+  backface-visibility: hidden; 
+  -webkit-backface-visibility: hidden;
 }

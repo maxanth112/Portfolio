@@ -260,15 +260,6 @@
 
 /* TIMELINE */
 
-.timelines-years {
-    margin: calc(var(--multiplier) * 21) 0 0 0;
-    width: calc(var(--multiplier) * 115);
-    position: absolute;
-    white-space: nowrap;
-    list-style: none;
-    align-self: flex-end;
-}
-
 .tyears {
     font-size: calc(var(--multiplier) * 2);
     margin: 0 calc(var(--multiplier) * 20) 
@@ -278,7 +269,7 @@
     display: inline-block;
 }
 
-.timeline-years div{
+.timeline-years.workDefault-timeline-color-active div {
     margin-left: 100;
     border: solid calc(var(--multiplier) * 2) white;
     position: absolute;
@@ -289,19 +280,19 @@
     box-shadow: none;
 }
 
-.timeline-years div li:first-child {
+.timeline-years li:first-child {
     bottom: 0;
     left: calc(var(--multiplier) * -4);
     position: absolute;
 }
 
-.timeline-years div li:nth-child(2) {
+.timeline-years li:nth-child(2) {
     bottom: 0;
     left: calc(var(--multiplier) * 30);
     position: absolute;
 }
 
-.timeline-years div li:last-child {
+.timeline-years li:last-child {
     bottom: 0;
     right: calc(var(--multiplier) * 14.5);
     position: absolute;
@@ -391,34 +382,6 @@
     margin: calc(var(--multiplier) * 1) calc(var(--multiplier) * 1) 0 calc(var(--multiplier) * 1);
 }
 
-
-/* TYPEWRITERS */
-
-#data-code p,
-#comp-code p {
-    font-size: calc(var(--multiplier) * 1.4);
-    color: rgb(255, 255, 255);
-}
-
-.data-cover,
-#data-code,
-#comp-code {
-    width: calc(var(--multiplier) * 30);
-    height: calc(var(--multiplier) * 20);
-    padding: calc(var(--multiplier) * 1.5);
-    transition: width 1s, height 1s;
-}
-
-.data-cover,
-#data-code.workDefault-color-active,
-#comp-code.workDefault-color-active {
-    width: calc(var(--multiplier) * 150);
-    height: calc(var(--multiplier) * 16);
-    box-shadow: none;
-    border: none;
-}
-
-
 .workDefault-header {
     font-size: calc(var(--multiplier) * 2);
     margin-left: calc(var(--multiplier) * 2);
@@ -430,4 +393,24 @@
     font-size: calc(var(--multiplier) * 3);
     margin-left: calc(var(--multiplier) * 2);
     margin-top:  calc(var(--multiplier) * 0.8);
+}
+
+.timeline-years.workDefault-timeline-color div {
+    margin: calc(var(--multiplier) * 21) 0 0 0;
+    width: calc(var(--multiplier) * 20);
+    position: absolute;
+    white-space: nowrap;
+    list-style: none;
+    align-self: flex-end;
+    overflow: hidden;
+}
+
+.timeline-years.workDefault-timeline-color-active div {
+    margin: calc(var(--multiplier) * 21) 0 0 0;
+    width: calc(var(--multiplier) * 115);
+    position: absolute;
+    white-space: nowrap;
+    list-style: none;
+    align-self: flex-end;
+    overflow: visible;
 }
