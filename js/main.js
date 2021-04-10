@@ -135,12 +135,32 @@ function flipToggle(toggle) {
 
 // managing flipping cards 
 function flip(element) {
-    $('.' + element).toggleClass('flipped');
+
+    const flipDelay = 300;
+    if ($('.' + element).hasClass('flipped')) {
+        // back going to front
+        $('.' + element).removeClass('flipped');
+        setTimeout(function flipIt() {
+            $('.' + element + ' .back').addClass('not-showing');
+            $('.' + element + ' .front').removeClass('not-showing');
+        }, flipDelay);
+
+    } else {
+        // front going to back
+        $('.' + element).addClass('flipped');
+        setTimeout(function flipIt() {
+            $('.' + element + ' .front').addClass('not-showing');
+            $('.' + element + ' .back').removeClass('not-showing');
+        }, flipDelay);
+    }
 }
 
 function revertAllFlippedCards() {
     $('.course-card').removeClass('flipped');
-    $('.summary-flip').removeClass('flipped');
+    $('.course-card .back').addClass('not-showing');
+    $('.course-card .front').removeClass('not-showing');
+    
+    // $('.summary-flip').removeClass('flipped');
 }
 
 function createGroupCouts() {
@@ -350,10 +370,5 @@ function startTransformAllCourseObjects() {
     setMotionAndToggleFalse();
     transform(allObjects, roots.stationary.coordinates.viewFinal, 500);
     // console.log(allObjects);
-}
-
-function createRootsArray() {
-
-    // tbd
 }
 

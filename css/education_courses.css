@@ -5,6 +5,61 @@
   height: calc(var(--multiplier) * 24);
 }
 
+
+.front-header {
+  margin:
+  calc(var(--multiplier) * 8.7) 
+  calc(var(--multiplier) * 1.5) 
+  calc(var(--multiplier) * 0) 
+  calc(var(--multiplier) * 1.5);
+  font-size: calc(var(--multiplier) * 2);
+}
+
+.course-card .front {
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.course-card .back {
+  transform: rotateY(180deg);
+}
+
+.course-header {
+  margin:
+  calc(var(--multiplier) * 1.6) 
+  calc(var(--multiplier) * 1) 
+  calc(var(--multiplier) * 0) 
+  calc(var(--multiplier) * 1.6);
+  font-size: calc(var(--multiplier) * 1.4);
+  float: left;
+}
+
+.course-description {
+  margin:
+  calc(var(--multiplier) * 4) 
+  calc(var(--multiplier) * 1.6) 
+  calc(var(--multiplier) * 1.6) 
+  calc(var(--multiplier) * 1.6);
+  font-size: calc(var(--multiplier) * 1.4);
+  align-content: center;
+  overflow: hidden;
+  
+}
+
+.languages {
+  margin:
+  calc(var(--multiplier) * 1.6) 
+  calc(var(--multiplier) * 1.6) 
+  calc(var(--multiplier) * 0) 
+  calc(var(--multiplier) * 0);
+  font-size: calc(var(--multiplier) * 1.4);
+  float: right;
+}
+
+.course-card.flipped {
+  transform: rotateY(180deg);
+}
+
 .course-card {
   width: 100%;
   height: 100%;
@@ -20,68 +75,16 @@
   position: absolute;
 }
 
-.front-header {
-  margin:
-    calc(var(--multiplier) * 8.7) 
-    calc(var(--multiplier) * 1.5) 
-    calc(var(--multiplier) * 0) 
-    calc(var(--multiplier) * 1.5);
-  font-size: calc(var(--multiplier) * 2);
-}
-
-.course-card .front {
-  text-align: center;
-  word-wrap: break-word;
-}
-
-.course-card .back {
-  transform: rotateY(180deg);
-}
-
-.course-header {
-  margin:
-    calc(var(--multiplier) * 1.6) 
-    calc(var(--multiplier) * 1) 
-    calc(var(--multiplier) * 0) 
-    calc(var(--multiplier) * 1.6);
-    font-size: calc(var(--multiplier) * 1.4);
-  float: left;
-}
-
-.course-description {
-  margin:
-    calc(var(--multiplier) * 4) 
-    calc(var(--multiplier) * 1.6) 
-    calc(var(--multiplier) * 1.6) 
-    calc(var(--multiplier) * 1.6);
-    font-size: calc(var(--multiplier) * 1.4);
-  align-content: center;
-  overflow: hidden;
-
-}
-
-.languages {
-  margin:
-    calc(var(--multiplier) * 1.6) 
-    calc(var(--multiplier) * 1.6) 
-    calc(var(--multiplier) * 0) 
-    calc(var(--multiplier) * 0);
-    font-size: calc(var(--multiplier) * 1.4);
-  float: right;
-}
-
-.course-card.flipped {
-  transform: rotateY(180deg);
-}
-
-.course-front,
-.course-back,
 .front,
 .back {
   height: 100%;
   width: 100%;
   position: absolute;
-  z-index: 2;
-  backface-visibility: hidden; 
-  -webkit-backface-visibility: hidden;
+  /* z-index: 2; */
+  /* backface-visibility: hidden;  */
+  /* -webkit-backface-visibility: hidden; */
+}
+
+.not-showing {
+  visibility: hidden;
 }

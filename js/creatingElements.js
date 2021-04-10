@@ -72,7 +72,7 @@ function createCourseCards(arr, saveRoot) {
             '<div class="front">' +
             '<h5 class="front-header">' + arrElement.name + '</h5>' +
             '</div>' +
-            '<div class="back">' +
+            '<div class="back not-showing">' +
             '<div class="align-me">' +
             '<p class="course-header">' + arrElement.type + arrElement.number + '</p>' +
             '<p class="languages">' + arrElement.language + '</p>' +
@@ -439,7 +439,9 @@ function createWorkDefaultCards() {
 
         element = new THREE.CSS3DObject(element);
         roots["workDefault"].objects.push(element);
-        roots["workTimeline"].root.add(element);
+        
+        roots["workDefault"].root.add(element);
+        // roots["workTimeline"].root.add(element);
     });
 }
 

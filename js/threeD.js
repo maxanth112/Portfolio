@@ -28,9 +28,8 @@ function startStatic() {
 function checkToggles() {
 
     console.clear();
-    rootNames.forEach(rootName => {
-        console.log(rootName + ": " + roots[rootName].motion);
-    });
+    
+    console.log(roots);
 }
 
 
