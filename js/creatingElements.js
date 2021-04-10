@@ -397,7 +397,7 @@ function createWorkButtons() {
 
 
                         transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
-                        checkToggles();
+                      
                         break;
                     }
                 }
@@ -410,7 +410,7 @@ function createWorkButtons() {
 
 function updateWorkSelected(newSelected) {
 
-    document.getElementById(newSelected + '-timeline-event').classList.toggle('selected-timeline');
+    document.getElementById(newSelected + '-timeline-event').classList.add('selected-timeline');
     var notSelected = ['contract', 'workDefault', 'matops', 'intern', 'lab'].filter(x => x != newSelected);
     notSelected.forEach(id => {
         document.getElementById(id + '-timeline-event').classList.remove('selected-timeline');

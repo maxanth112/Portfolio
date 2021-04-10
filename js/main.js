@@ -2,23 +2,22 @@
 // personal website portfolio
 
 window.addEventListener('load', function loader() {
-    $('.loader').fadeOut('slow');
+    // $('.loader').fadeOut('slow');
     setTimeout(() => {
         $('.loader').remove();
-
-        // checkOrientation();
+        checkOrientation();
         init();
     }, 1000);
 });
 
 
-// window.addEventListener('orientationchange', checkOrientation);
+window.addEventListener('orientationchange', checkOrientation);
 
 function checkOrientation() {
     var orientation = screen.orientation.type;
-    console.log('curr orientation: ')
-    console.log(orientation);
-    console.log('\n')
+    // console.log('curr orientation: ')
+    // console.log(orientation);
+    // console.log('\n')
 
     if (orientation == 'portrait-primary' || orientation == 'portrait-secondary') {
         $('#rotate-container').removeClass('hide')

@@ -70,8 +70,12 @@ body {
   margin: calc(var(--multiplier) * 0.3) calc(var(--multiplier) * 1.5);
   cursor: pointer;
   font-family: 'IBM Plex Mono', monospace;
-  background-color: rgba(0, 0, 0. 0.8);
+}
 
+#education-button,
+#work-button,
+#bio-button {
+  background-color: rgba(0, 0, 0, .8);
 }
 
 .menu-button-active {

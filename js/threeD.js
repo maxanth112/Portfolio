@@ -1,6 +1,6 @@
 function init() {
 
-    // createRotater();
+    createRotater();
 
     cssRenderer = createCssRenderer();
     initMouseSceneMenu();
@@ -28,7 +28,6 @@ function startStatic() {
 function checkToggles() {
 
     console.clear();
-    
     console.log(roots);
 }
 
