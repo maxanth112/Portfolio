@@ -10,7 +10,6 @@ function init() {
 
     window.addEventListener('resize', onWindowResize, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    // addButton();
     startStatic();
 }
 
