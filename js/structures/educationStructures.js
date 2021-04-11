@@ -118,7 +118,7 @@ var educationSummaryArray = [{
         dates: "August 2020 - May 2021",
         role: "Member",
         position: [educSummaryRightX, educSummaryYStart - (2 * educSummaryRightY)],
-        description: "Subjects would be lectured and discussed that generally weren’t offered in the mathematics department curriculum. Segwayed to an AMA membership."
+        description: "Subjects would be lectured and discussed that generally weren’t offered in the mathematics department curriculum. Segwayed to an MAA membership."
     },
     {
         id: "degree",
@@ -161,7 +161,7 @@ var courseArray = {
         {
             type: "APPM",
             number: "4120",
-            name: "Operations Research (L and NL Programming)",
+            name: "Operations Research (L & NL Programming)",
             language: "",
             description: "Studied linear and nonlinear programming. Focuses on the simplex method, duality, sensitivity, \
             transportation, network flow, and constrained and unconstrained optimization theory. ",

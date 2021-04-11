@@ -1,7 +1,6 @@
 function createRotater() {
     var element = document.createElement('div');
     element.id = 'rotate-container';
-    element.classList.add('hide');
     
     var front = ['R', 'O', 'T', 'A', 'T', 'E'];
     var back = ['S', 'C', 'R', 'E', 'E', 'N'];
