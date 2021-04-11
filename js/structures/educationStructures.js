@@ -161,7 +161,7 @@ var courseArray = {
         {
             type: "APPM",
             number: "4120",
-            name: "Operations Research (L & NL Programming)",
+            name: "Operations Research (L and NL Programming)",
             language: "",
             description: "Studied linear and nonlinear programming. Focuses on the simplex method, duality, sensitivity, \
             transportation, network flow, and constrained and unconstrained optimization theory. ",
