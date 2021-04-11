@@ -81,7 +81,7 @@ var educationSummaryArray = [{
             CU Men’s Lacrosse was a full-time team, with practices on average 40 hours per week plus travel to games throughout the United States during season. \
             During the off season we practiced and trained around 20 hours a week, which helped me learn to efficiently time manage as a full-time student and part time employee\
             that has transferred into my independent contracting today.",
-        descriptionBack: '6AM morning weight training three times weekly. '
+        descriptionBack: ''
     },
     {
         id: "capa",

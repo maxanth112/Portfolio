@@ -44,30 +44,6 @@
   height: calc(var(--multiplier) * 24);
 }
 
-.summary-flip {
-  height: 100%;
-  width: 100%;
-  /* cursor: pointer;   */
-  transition: transform 1s;
-  transform-style: preserve-3d;
-}
-
-.summary-flip div {
-  height: 100%;
-  width: 100%;
-  /* cursor: pointer; */
-  position: absolute;
-  backface-visibility: hidden;
-}
-
-.summary-flip .back {
-  transform: rotateY(180deg);
-}
-
-.summary-flip.flipped {
-  transform: rotateY(180deg);
-}
-
 #sigep, #mathclub, #econclub {
   width: calc(var(--multiplier) * 40);
   height: calc(var(--multiplier) * 16);
@@ -80,7 +56,7 @@
   calc(var(--multiplier) * 0) 
   calc(var(--multiplier) * 1.5);
   font-size: calc(var(--multiplier) * 2.75);
-  transition: font-size 1s;
+  transition: font-size 1.5s;
 }
 
 .ba,
@@ -92,7 +68,7 @@
     calc(var(--multiplier) * 1.5);
   font-style: italic;
   font-size: calc(var(--multiplier) * 1.5);
-  transition: font-size 1s;
+  transition: font-size 1.5s;
 }
 
 .college {
@@ -102,7 +78,7 @@
     calc(var(--multiplier) * 0) 
     calc(var(--multiplier) * 1.45);
   font-size: calc(var(--multiplier) * 1.6);
-  transition: font-size 1s;
+  transition: font-size 1.5s;
 }
 
 .club-header {
@@ -112,7 +88,7 @@
     calc(var(--multiplier) * 0) 
     calc(var(--multiplier) * 1.45);
   font-size: calc(var(--multiplier) * 1.8);
-  transition: font-size 1s;
+  transition: font-size 1.5s;
 }
 
 .subcollege,
@@ -124,7 +100,7 @@
     calc(var(--multiplier) * 0) 
     calc(var(--multiplier) * 1.45);
   font-size: calc(var(--multiplier) * 1.4);
-  transition: font-size 1s;
+  transition: font-size 1.5s;
 }
 
 .subcollege {
@@ -142,7 +118,7 @@
     calc(var(--multiplier) * 0.5) 
     calc(var(--multiplier) * 1.45);
   font-size: calc(var(--multiplier) * 1.3);
-  transition: font-size 1s;
+  transition: font-size 1.5s;
 }
 
 #computer-header .track {

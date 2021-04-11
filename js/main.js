@@ -3,31 +3,11 @@
 
 window.addEventListener('load', function loader() {
     init();
-    // $('.loader').fadeOut('slow');
 
     setTimeout(() => {
         $('.loader').remove();
-        // checkResize();
-        // checkOrientation();
     }, 1000);
 });
-
-
-// window.addEventListener('orientationchange', checkOrientation, false);
-// window.addEventListener('resize', checkResize, false);  
-
-// function checkOrientation() {
-//     var orientation = window.orientation;
-
-//     if (orientation == 'portrait-primary' || orientation == 'portrait-secondary') {
-//         $('#rotate-container').removeClass('hide');
-//         $('#cssContainer').addClass('hide');
-
-//     } else if (orientation == 'landscape-primary' || orientation == 'landscape-secondary') {
-//         $('#rotate-container').addClass('hide');
-//         $('#cssContainer').removeClass('hide');
-//     }
-// }
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));

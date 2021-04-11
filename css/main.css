@@ -14,26 +14,18 @@
   --contract-color: white;
 } 
 
-/* portrait */
 @media screen and (orientation:portrait) {
-	/* portrait-specific styles */
   #cssContainer {
     visibility: hidden;
   }
 }
-/* landscape */
+
 @media screen and (orientation:landscape) {
-	/* landscape-specific styles */
   #rotate-container {
     visibility: hidden;
   }
 }
 
-#orientation-message h2 {
-  color: red;
-}
-
-/* EDUCATION */
 .education-main-color, 
 .computer-header-color,
 .math-header-color,
