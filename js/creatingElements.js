@@ -19,7 +19,7 @@ function createRotater() {
             '</div>';
         element.appendChild(panel);
     }
-
+    
     document.body.appendChild(element);
 }
 

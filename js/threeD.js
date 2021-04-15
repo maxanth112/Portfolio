@@ -117,6 +117,7 @@ function transform(start, end, duration) {
 function createCssRenderer() {
 
     var cssRenderer = new THREE.CSS3DRenderer();
+    
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
     cssRenderer.domElement.style.position = 'absolute';
     cssRenderer.domElement.style.top = 0;

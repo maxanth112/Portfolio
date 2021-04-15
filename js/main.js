@@ -3,7 +3,7 @@
 
 window.addEventListener('load', function loader() {
     init();
-
+    
     setTimeout(() => {
         $('.loader').remove();
     }, 1000);
