@@ -71,12 +71,42 @@ function updateRotations() {
     rootNames.forEach(rootName => {
         if (!roots[rootName].motion) {
             var rotate = roots[rootName].root.rotation;
-            var group = groups[roots[rootName].group];
+            var groupName = roots[rootName].group;
+            var group = groups[groupName];
+           
 
-            group.rotX += group.addX;
-            group.rotY += group.addY;
-            group.rotZ += group.addZ;
-                        
+            switch (groupName) {
+                case 'educDefault':
+                    group.rotX += 0.00015;
+                    group.rotY = 1;
+                    group.rotZ += 0.00115;
+                    break;
+
+                case 'course':
+                    group.rotX = 0;
+                    group.rotY -= 0.0003;
+                    group.rotZ -= 0.0013;
+                    break;
+
+                case 'default':
+                    group.rotX -= 0.0003;
+                    group.rotY = 5;
+                    group.rotZ -= 0.001;
+                    break;
+
+                case 'pic':
+                    group.rotX = 1.5;
+                    group.rotY += 0.001;
+                    group.rotZ -= 0.002;
+                    break;
+
+                case 'work':
+                    group.rotX += 0.00025;
+                    group.rotY = 1;
+                    group.rotZ += 0.00075;   
+                    break;                                        
+            }
+
             rotate.x = group.rotX;
             rotate.y = group.rotY;
             rotate.z = group.rotZ;
@@ -151,6 +181,7 @@ function createGroupCouts() {
         } else {
 
             groups[roots[rootName].group] = {
+                
                 count: roots[rootName].objects.length,
                 iterator: 0,
                 sizeX: 0, sizeY: 0,
@@ -165,29 +196,25 @@ function createGroupRotations() {
 
     groupNames = ['course', 'pic', 'default', 'work', 'educDefault', 'none', 'menu'];
     groupNames.forEach(groupName => {
-        var addX = addY = addZ = sizeX = sizeY = 0;
        
-        if (groupName == 'course') {
-            sizeX = sizeY = 1200;
-            addX = addZ = -0.0025;
-        } else if (groupName == 'pic') {
-            sizeX = sizeY = 1000;
-            addZ = addY = 0.0015;
-        } else if (groupName == 'default') {
-            sizeX = sizeY = 1700;
-            addX = addY = -0.003;
-        } else if (groupName == 'work') {
-            sizeX = sizeY = 1500;
-            addX = addY = 0.0015;
-        } else if (groupName == 'educDefault') {
-            sizeX = sizeY = 700;
-            addZ = addY = -0.002;
+        switch (groupName) {
+            case 'educDefault':
+                sizeX = sizeY = 1000;
+                break;
+            case 'course':
+                sizeX = sizeY = 1200;
+                break;
+            case 'default':
+                sizeX = sizeY = 1550;
+                break;
+            case 'pic':
+                sizeX = sizeY = 800;
+                break;
+            case 'work':
+                sizeX = sizeY = 1400;   
+                break;                                        
         }
-
         var group = groups[groupName];
-        group.addX = addX;
-        group.addY = addY;
-        group.addZ = addZ;
         group.sizeX = sizeX;
         group.sizeY = sizeY;
     });

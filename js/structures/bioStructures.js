@@ -15,14 +15,14 @@ var bioDefaultArray = [{
     position: [0.47, 1.5],
     inner: "<p>I am a builder, an athlete, a thinker, and an explorer. I was born and raised in Orange County, California, \
     and moved with my family to the Denver area in 2011 where I attended high school and later college. \
-    While in school I was a (2x) varsity lacrosse captain and (2x) all-state, a mathelete/computer head, a solo and group traveler, \
-    and the slowest kid on a top-tier cross-country team. \
-    I worked in restaurants from the time I turned 16 until I received my bachelor’s degree, which gave me numerous interpersonal abilities that has stuck with. \
+    While in school I was a (2x) varsity lacrosse captain, a mathelete/computer head, a solo and group traveler, \
+    a research team member, and the slowest kid on a top-tier cross country team. \
+    After school, I moved onto coaching lacrosse, working as a mathematical programmer, and more school.   \
     <br><br>\
     I enjoy a multitude of things in my free time but narrowing them down I will start with the travel bug that I caught at a young age and seldom suppress; \
     you can see some of my favorite trips below. \
     Next, helping my father with countless home improvement projects taught me that you \
-    can build anything you can picture, which got me interested in craftsmanship and creating things in general. Finally, I should mention my notable \
+    can create anything you can picture. This got me interested in building with wood, electronics, and later building with software. Finally, I should mention my notable \
     attraction toward anything that is fast and has two wheels. I am a \
     mountain biker in the summers, a former motorcyclist, and a current e-biker. \
     <br><br>\
