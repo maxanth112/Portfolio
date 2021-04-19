@@ -56,6 +56,49 @@ body {
   background-color: black;
 }
 
+#menu-msg,
+.course-msg {
+  color:rgba(0, 255, 255, 0.85);
+}
+
+.course-msg {
+  font-size: calc(var(--multiplier) * 1.8);
+  animation: large-small 1.5s ease-in-out infinite;
+}
+
+#menu-msg h2 {
+  margin: 0 calc(var(--multiplier) * 1);
+  position: relative;
+}
+
+#menu-msg i {
+  position: absolute;
+  top: calc(var(--multiplier) * 1);
+  animation: slide-right 1s ease-in-out infinite;
+}
+
+@keyframes large-small {
+  0%,
+  100% {
+    font-size: calc(var(--multiplier) * 2.2);
+  }
+  50% {
+    font-size: calc(var(--multiplier) * 2.6);
+  }
+}
+
+@keyframes slide-right {
+  0%,
+  100% {
+    margin-left: calc(var(--multiplier) * 0);
+  }
+
+  50% {
+    margin-left: calc(var(--multiplier) * 1.5);
+  }
+}
+
+
 #cssContainer {
   width: 100%;
   height: 100%;

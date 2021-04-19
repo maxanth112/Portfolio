@@ -133,6 +133,7 @@ function flip(element) {
             $('.' + element + ' .back').removeClass('not-showing');
         }, flipDelay);
     }
+    removeClassMsg();
 }
 
 function revertAllFlippedCards() {

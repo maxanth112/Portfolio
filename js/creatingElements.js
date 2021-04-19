@@ -1,7 +1,7 @@
 function createRotater() {
     var element = document.createElement('div');
     element.id = 'rotate-container';
-    
+
     var front = ['R', 'O', 'T', 'A', 'T', 'E'];
     var back = ['S', 'C', 'R', 'E', 'E', 'N'];
 
@@ -19,8 +19,33 @@ function createRotater() {
             '</div>';
         element.appendChild(panel);
     }
-    
+
     document.body.appendChild(element);
+}
+
+
+function createNamedSocial() {
+
+    var element = document.createElement('div');
+    element.id = 'name-social';
+    element.innerHTML = '<h1 title = "Me">Max Wiesner</h1>' +
+        '<a href = "https://github.com/maxwiesner" id = "github" target="_blank" ontouchstart=\'openMedia("https://github.com/maxwiesner")\' title = "GitHub">' +
+        '<i class="fa fa-github fa-3x icon-3d">' + '</i>' + '</a>' +
+        '<a href = "https://www.linkedin.com/in/maximillian-w-470281162/" ontouchstart=\'openMedia("https://www.linkedin.com/in/maximillian-w-470281162/")\' id = "linkedin" target="_blank" title = "Linkedin">' +
+        '<i class="fa fa-linkedin fa-3x icon-3d">' + '</i>' + '</a>';
+
+    msg = document.createElement('div');
+    msg.id = 'menu-msg';
+    msg.innerHTML = '<h2>Navigate by page!</h2>' +
+        '<i class="fa fa-long-arrow-right fa-2x" id="msg-arrow" aria-hidden="true"></i>';
+
+    element.appendChild(msg);
+    pushRootandObjArr('stationary', element);
+}
+
+
+function openMedia(website) {
+    window.open(website, "_blank");
 }
 
 
@@ -63,22 +88,42 @@ function updateLinkedThreesText(updateText, defaultText, idArr, update = 'first'
 function createCourseCards(arr, saveRoot) {
 
     arr.forEach(arrElement => {
+        var msg = ['3753', '3001', '3374'];
         var element = document.createElement('div');
         element.classList.add('course-element');
-        element.innerHTML =
-            '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-color' +
-            '" onclick="flip(' + arrElement.number + ')" ontouchstart="flip(' + arrElement.number + ')">' +
-            '<div class="front">' +
-            '<h5 class="front-header">' + arrElement.name + '</h5>' +
-            '</div>' +
-            '<div class="back not-showing">' +
-            '<div class="align-me">' +
-            '<p class="course-header">' + arrElement.type + arrElement.number + '</p>' +
-            '<p class="languages">' + arrElement.language + '</p>' +
-            '</div>' +
-            '<p class="course-description">' + arrElement.description + '</p>' +
-            '</div>' +
-            '</div>';
+        if (msg.includes(arrElement.number)) {
+            element.innerHTML =
+                '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-color' +
+                '" onclick="flip(' + arrElement.number + ')" ontouchstart="flip(' + arrElement.number + ')">' +
+                '<div class="front">' +
+                '<h5 class="front-header">' + arrElement.name + '</h5>' +
+                '<div class="course-msg" id="' + arrElement.number + '-msg">Flip for descriptions!</div>' +
+                '</div>' +
+                '<div class="back not-showing">' +
+                '<div class="align-me">' +
+                '<p class="course-header">' + arrElement.type + arrElement.number + '</p>' +
+                '<p class="languages">' + arrElement.language + '</p>' +
+                '</div>' +
+                '<p class="course-description">' + arrElement.description + '</p>' +
+                '</div>' +
+                '</div>';
+        } else {
+
+            element.innerHTML =
+                '<div class="course-card ' + arrElement.number + ' ' + saveRoot + '-color' +
+                '" onclick="flip(' + arrElement.number + ')" ontouchstart="flip(' + arrElement.number + ')">' +
+                '<div class="front">' +
+                '<h5 class="front-header">' + arrElement.name + '</h5>' +
+                '</div>' +
+                '<div class="back not-showing">' +
+                '<div class="align-me">' +
+                '<p class="course-header">' + arrElement.type + arrElement.number + '</p>' +
+                '<p class="languages">' + arrElement.language + '</p>' +
+                '</div>' +
+                '<p class="course-description">' + arrElement.description + '</p>' +
+                '</div>' +
+                '</div>';
+        }
         pushRootandObjArr(saveRoot, element);
     });
 }
@@ -214,6 +259,30 @@ function createEducationSummary() {
 }
 
 
+const removeMenuMsg = (function () {
+    var executed = false;
+    return function () {
+        if (!executed) {
+            executed = true;
+            document.getElementById('menu-msg').remove();
+        }
+    };
+})();
+
+
+const removeClassMsg = (function () {
+    var executed = false;
+    return function () {
+        if (!executed) {
+            executed = true;
+            document.getElementById('3001-msg').remove();
+            document.getElementById('3753-msg').remove();
+            document.getElementById('3374-msg').remove();
+        }
+    };
+})();
+
+
 function createMenuButtons() {
 
     menuButtonArray.forEach(arrElement => {
@@ -225,6 +294,7 @@ function createMenuButtons() {
         ['click', 'touchstart'].forEach(function (eventType) {
             button.addEventListener(eventType, function (x) {
 
+                removeMenuMsg();
                 revertAllFlippedCards();
                 updateWorkSelected("workDefault");
                 updateLinkedThreesClass(['menu-button-active'], arrElement.buttonLinked, 'first');
@@ -248,8 +318,6 @@ function createMenuButtons() {
         pushRootandObjArr('stationary', button);
     });
 }
-
-
 
 
 function createWorkHeaderCards() {
@@ -373,7 +441,7 @@ function createWorkButtons() {
 
         ['click', 'touchstart'].forEach(function (eventType) {
             button.addEventListener(eventType, function (x) {
-                
+
                 var pages = ['workDefault', 'matops', 'contract', 'intern', 'lab'];
                 for (let currPage of pages) {
                     if (roots[currPage].toggle) {
@@ -386,17 +454,17 @@ function createWorkButtons() {
                         } else {
 
                             removeInViewClass(removeWorkColors);
-                            
+
                             addInViewClass(workTimelineColors.concat(arrElement[currPage] + '-color'),
-                            "single",
-                            timeoutTime + 1000);
+                                "single",
+                                timeoutTime + 1000);
                         }
                         updateWorkSelected(arrElement[currPage]);
                         stopRotationSetTrue([arrElement[currPage], 'workTimeline']);
 
 
                         transform(allObjects, roots[arrElement[currPage]].coordinates.viewFinal, backInterval);
-                      
+
                         break;
                     }
                 }
@@ -438,7 +506,7 @@ function createWorkDefaultCards() {
 
         element = new THREE.CSS3DObject(element);
         roots["workDefault"].objects.push(element);
-        
+
         roots["workDefault"].root.add(element);
         // roots["workTimeline"].root.add(element);
     });
@@ -517,21 +585,4 @@ function createImgCards(arr, saveRoot) {
         }
         pushRootandObjArr(saveRoot, element);
     });
-}
-
-
-function createNamedSocial() {
-
-    var element = document.createElement('div');
-    element.id = 'name-social';
-    element.innerHTML = '<h1 title = "Me">Max Wiesner</h1>' +
-        '<a href = "https://github.com/maxwiesner" id = "github" target="_blank" ontouchstart=\'openMedia("https://github.com/maxwiesner")\' title = "GitHub">' +
-        '<i class="fa fa-github fa-3x icon-3d">' + '</i>' + '</a>' +
-        '<a href = "https://www.linkedin.com/in/maximillian-w-470281162/" ontouchstart=\'openMedia("https://www.linkedin.com/in/maximillian-w-470281162/")\' id = "linkedin" target="_blank" title = "Linkedin">' +
-        '<i class="fa fa-linkedin fa-3x icon-3d">' + '</i>' + '</a>';
-    pushRootandObjArr('stationary', element);
-}
-
-function openMedia(website) {
-    window.open(website, "_blank");
 }
