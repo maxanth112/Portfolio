@@ -192,9 +192,10 @@ var courseArray = {
         {
             type: "MATH",
             number: "3001",
-            name: "Analysis",
-            description: "A truly rigorous treatment of results in topology, sequences of numbers, continuous functions, \
-            differentiable functions, and Riemann integrals.",
+            name: "Real Analysis",
+            description: "A rigorous treatment of the results in topology, set theory, continuous and \
+            differentiable functions, and Riemann integrals. Develops critique in proofs further, and helps construct theories, propositions, \
+           and solutions. ",
             language: "LaTeX",
             position: [mid, secondRow]
         },
