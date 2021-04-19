@@ -61,7 +61,7 @@ var workContentArray = [{
     company: "Experimental Math Lab",
     id: "lab",
     description: 'I am currently on a team of five students, plus one CU mathematics professor, exploring what the math world has deemed one \
-        of the most dangerous problem in mathematics, the Collatz Conjecture. The problem is:\
+        of the most dangerous problems in mathematics, the Collatz Conjecture. The problem is:\
         <br><br> >> Pick a positive integer, if it is odd, multiply it by three and add one, if even, divide \
         the number by two. Prove this sequence converges to the number 1, for all positive integers.<br><br>\
         So far, we have explored this question in p-adic space, an array of \
