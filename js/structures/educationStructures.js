@@ -75,7 +75,7 @@ var educationSummaryArray = [{
         dates: "August 2015 - May 2016",
         role: "Student Athlete",
         position: [educSummaryLeftX, educSummaryY],
-        descriptionFront: "Starting offensive mid-fielder as a freshman for the University of Colorado in the Rocky Mountain Lacrosse Conference. \
+        descriptionFront: "Starting offensive mid-fielder as a freshman for the University of Colorado Boulder, in the Rocky Mountain Lacrosse Conference. \
             In the opening week of games, while taking on the defending national champions and another top 10 team, I earned the National Player of the Week award \
             across the entire MCLA - D1 league. \
             CU Men’s Lacrosse was a full-time team, with practices on average 40 hours per week plus travel to games throughout the United States during season. \
