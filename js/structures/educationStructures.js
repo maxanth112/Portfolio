@@ -269,7 +269,7 @@ var courseArray = {
             name: "Software Development Methods and Tools",
             description: "Covered an introduction to full-stack integration, web services, version control, cloud-based deployment, \
             agile methodologies, and other industry standard practices. Applied these in a semester long project with a team of 4 building a social media platform.",
-            language: "Js, HTML, CSS, SQL",
+            language: "Js, Linux, SQL",
             position: [left, secondRow]
         },
         {
@@ -306,7 +306,7 @@ var courseArray = {
             name: "Computer Systems",
             description: "Covered in depth virtual memory, exceptional control flow, linking, memory \
             hierarchy, optimization and performance, processor architecture. Projects focused on the x86-64 machine language.",
-            language: "C",
+            language: "C, Linux",
             position: [mid, thirdRow]
         },
         {
