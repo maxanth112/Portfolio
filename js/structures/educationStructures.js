@@ -75,7 +75,7 @@ var educationSummaryArray = [{
         dates: "August 2015 - May 2016",
         role: "Student Athlete",
         position: [educSummaryLeftX, educSummaryY],
-        descriptionFront: "All - Conference player as a freshman for the University of Colorado in the Rocky Mountain Lacrosse Conference. \
+        descriptionFront: "Starting offensive mid-fielder as a freshman for the University of Colorado in the Rocky Mountain Lacrosse Conference. \
             In the opening week of games, while taking on the defending national champions and another top 10 team, I earned the National Player of the Week award \
             across the entire MCLA - D1 league. \
             CU Men’s Lacrosse was a full-time team, with practices on average 40 hours per week plus travel to games throughout the United States during season. \
@@ -176,7 +176,7 @@ var courseArray = {
             Wrote my final project in solving systems of engineering circuits using Laplace Transforms. ",
             // See it <a title=\"Project Link\" \
             // href=\"https://github.com/maxwiesner/Differential-Equations-in-Circuits/blob/main/LaplaceTransforms_Circuits_WiesnerMax_FinalProject.pdf\">here</a>.",
-            language: "MatLab, LaTeX",
+            language: "MatLab, LaTex",
             position: [right, firstRow]
         },
         {
