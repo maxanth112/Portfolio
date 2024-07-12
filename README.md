@@ -10,4 +10,4 @@ science degrees; so, the code may be messy in places. But creating it was a lot 
     <li>CSS</li>
     <li>Some good ole-fashion elbow grease</li>
 </ul>
-<p>You can visit my site hosted on github-pages here: </p>([https://maxanth112.github.io/Portfolio/](https://maxanth112.github.io/Portfolio/))
+<p>You can visit my site hosted on github-pages here: </p>https://maxanth112.github.io/Portfolio/
